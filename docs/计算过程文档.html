@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KELKCalCv 计算过程文档</title>
+<style>
+:root{
+  --primary:#2563eb; --primary-dark:#1d4ed8; --accent:#0ea5e9;
+  --bg:#f8fafc; --card:#ffffff; --text:#1e293b; --text-2:#475569; --text-3:#94a3b8;
+  --border:#e2e8f0; --border-2:#cbd5e1; --success:#16a34a; --warn:#d97706; --danger:#dc2626;
+  --code-bg:#0f172a; --code-text:#e2e8f0;
+  --shadow:0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei','Helvetica Neue',sans-serif;
+  background:var(--bg); color:var(--text); margin:0; line-height:1.75; font-size:14.5px;
+}
+.layout{display:grid; grid-template-columns:270px 1fr; min-height:100vh}
+
+/* 侧边栏目录 */
+.sidebar{
+  background:linear-gradient(180deg,#1e293b 0%,#0f172a 100%); color:#cbd5e1;
+  padding:28px 0; position:sticky; top:0; height:100vh; overflow-y:auto;
+  border-right:1px solid #0f172a;
+}
+.sidebar::-webkit-scrollbar{width:6px}
+.sidebar::-webkit-scrollbar-thumb{background:#334155; border-radius:3px}
+.sidebar::-webkit-scrollbar-track{background:transparent}
+.sidebar .brand{padding:0 24px 20px; border-bottom:1px solid #334155; margin-bottom:16px}
+.sidebar .brand h1{font-size:16px; margin:0 0 4px; color:#fff; font-weight:700; letter-spacing:.5px}
+.sidebar .brand .sub{font-size:11px; color:#94a3b8}
+.sidebar .brand .badge{
+  display:inline-block; margin-top:10px; padding:3px 10px; font-size:11px;
+  background:rgba(59,130,246,.2); color:#93c5fd; border-radius:4px; border:1px solid rgba(59,130,246,.3);
+}
+.toc{padding:0 12px}
+.toc ul{list-style:none; padding-left:12px; margin:4px 0}
+.toc > ul{padding-left:0}
+.toc li{margin:2px 0}
+.toc a{
+  display:block; padding:5px 10px; font-size:13px; color:#cbd5e1;
+  text-decoration:none; border-radius:4px; border-left:2px solid transparent;
+  transition:all .15s;
+}
+.toc a:hover{background:rgba(59,130,246,.15); color:#fff; border-left-color:#3b82f6}
+.toc > ul > li > a{font-weight:600; color:#e2e8f0; padding-left:10px}
+.toc ul ul ul a{font-size:12px; padding-left:22px; color:#94a3b8}
+
+/* 主内容 */
+.content{max-width:960px; margin:0 auto; padding:40px 48px 120px}
+
+/* 标题 */
+.content h1{
+  font-size:28px; margin:0 0 12px; color:#0f172a;
+  padding-bottom:14px; border-bottom:3px solid var(--primary);
+}
+.content h2{
+  font-size:20px; margin:40px 0 18px; color:#0f172a;
+  padding:10px 16px; background:linear-gradient(90deg,#eff6ff 0%,transparent 100%);
+  border-left:4px solid var(--primary); border-radius:0 6px 6px 0;
+}
+.content h3{
+  font-size:16px; margin:28px 0 12px; color:#1e40af;
+  padding-bottom:6px; border-bottom:1px dashed var(--border-2);
+}
+.content h4{font-size:14px; margin:20px 0 8px; color:#334155}
+
+/* 引用块 */
+.content blockquote{
+  margin:16px 0; padding:12px 18px; border-left:4px solid var(--accent);
+  background:#ecfeff; border-radius:0 6px 6px 0; color:#0c4a6e; font-size:13.5px;
+}
+.content blockquote strong{color:#075985}
+
+/* 段落 */
+.content p{margin:10px 0}
+
+/* 公式 */
+.content code{
+  font-family:'JetBrains Mono','Fira Code','Consolas',monospace;
+  background:#f1f5f9; color:#db2777; padding:2px 6px; border-radius:3px;
+  font-size:13px; border:1px solid #e2e8f0;
+}
+.content pre{
+  background:var(--code-bg); color:var(--code-text); padding:16px 20px;
+  border-radius:8px; overflow-x:auto; font-size:13px; line-height:1.6;
+  margin:14px 0; box-shadow:var(--shadow); border:1px solid #1e293b;
+}
+.content pre code{background:transparent; border:none; color:inherit; padding:0; font-size:inherit}
+
+/* 表格 */
+.content table{
+  border-collapse:collapse; width:100%; margin:14px 0;
+  font-size:13px; box-shadow:var(--shadow); border-radius:6px; overflow:hidden;
+}
+.content thead tr{background:linear-gradient(180deg,#f1f5f9 0%,#e2e8f0 100%)}
+.content th{padding:10px 14px; text-align:left; font-weight:600; color:#334155; border:1px solid var(--border)}
+.content td{padding:9px 14px; border:1px solid var(--border); color:var(--text-2)}
+.content tbody tr:nth-child(even){background:#fafbfc}
+.content tbody tr:hover{background:#eff6ff}
+.content td:first-child{font-weight:500; color:#1e293b; white-space:nowrap}
+
+/* 分隔线 */
+.content hr{
+  border:none; height:1px; background:linear-gradient(90deg,transparent,var(--border-2),transparent);
+  margin:40px 0;
+}
+
+/* 列表 */
+.content ul, .content ol{margin:8px 0; padding-left:24px}
+.content li{margin:4px 0}
+
+/* 链接 */
+.content a{color:var(--primary); text-decoration:none; border-bottom:1px dashed var(--primary)}
+.content a:hover{color:var(--primary-dark); border-bottom-style:solid}
+
+/* 打印 */
+@media print{
+  .layout{display:block}
+  .sidebar{display:none}
+  .content{max-width:100%; padding:0}
+  body{background:#fff}
+}
+
+/* 响应式 */
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:relative; height:auto}
+}
+
+/* 修订标记 */
+.revision-hint{
+  display:inline-block; margin-top:6px; padding:4px 10px; font-size:12px;
+  background:#fef3c7; color:#92400e; border-radius:4px; border:1px solid #fde68a;
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand">
+    <h1>KELKCalCv</h1>
+    <div class="sub">调节阀 Cv 计算 &amp; 噪音预测</div>
+    <span class="badge">计算过程文档 v1.1</span>
+  </div>
+  <nav class="toc"></nav>
+</aside>
+<main class="content"><h1 id="kelkcalcv"><a class="toclink" href="#kelkcalcv">KELKCalCv 计算过程文档</a><a class="headerlink" href="#kelkcalcv" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>本文档作为调节阀 Cv 计算与噪音预测引擎的<strong>修订依据</strong>，完整记录单位体系、数值常数、公式、判定准则、系数取值、计算流程与代码对应关系。后续如需调整算法或修正系数，应以此文档为基线进行版本化变更。</p>
+</blockquote>
+<hr />
+<h2 id="_1"><a class="toclink" href="#_1">目录</a><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#1-单位体系与数值常数">单位体系与数值常数</a></li>
+<li><a href="#2-标准依据">标准依据</a></li>
+<li><a href="#3-介质物性计算">介质物性计算</a></li>
+<li><a href="#4-阀门系数工具">阀门系数工具</a></li>
+<li><a href="#5-液体-cv-计算">液体 Cv 计算</a></li>
+<li><a href="#6-气体蒸汽-cv-计算">气体/蒸汽 Cv 计算</a></li>
+<li><a href="#7-两相流-cv-计算">两相流 Cv 计算</a></li>
+<li><a href="#8-气体气动噪音预测">气体气动噪音预测</a></li>
+<li><a href="#9-液体水动力噪音预测">液体水动力噪音预测</a></li>
+<li><a href="#10-计算引擎编排流程">计算引擎编排流程</a></li>
+<li><a href="#11-算例验证">算例验证</a></li>
+<li><a href="#12-noise-23-excel-与当前引擎差异分析">Noise 2.3 Excel 与当前引擎差异分析（修订基线 v1.1）</a></li>
+<li><a href="#13-修订记录表">修订记录表</a></li>
+<li><a href="#_2">修订检查清单</a></li>
+<li><a href="#_3">附录：关键文件索引</a></li>
+</ol>
+<hr />
+<h2 id="1"><a class="toclink" href="#1">1. 单位体系与数值常数</a><a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<h3 id="11"><a class="toclink" href="#11">1.1 统一单位约定</a><a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>物理量</th>
+<th>单位</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>压力 P</td>
+<td>kPa(abs)</td>
+<td>绝压，全引擎统一</td>
+</tr>
+<tr>
+<td>压差 ΔP</td>
+<td>kPa</td>
+<td><br /></td>
+</tr>
+<tr>
+<td>温度 T</td>
+<td>℃</td>
+<td>输入与显示；内部计算转 K</td>
+</tr>
+<tr>
+<td>密度 ρ</td>
+<td>kg/m³</td>
+<td>工况密度</td>
+</tr>
+<tr>
+<td>质量流量 W</td>
+<td>kg/h</td>
+<td><br /></td>
+</tr>
+<tr>
+<td>体积流量 Q</td>
+<td>m³/h（液体）或 Nm³/h（气体标况 0℃,101.325kPa）</td>
+<td><br /></td>
+</tr>
+<tr>
+<td>口径 d/D</td>
+<td>mm</td>
+<td>阀座口径/管道内径</td>
+</tr>
+<tr>
+<td>动力粘度 μ</td>
+<td>cP（= mPa·s）</td>
+<td><br /></td>
+</tr>
+<tr>
+<td>Cv</td>
+<td>美制</td>
+<td>US gpm / psi（1 Cv ≈ 1.156 Kv）</td>
+</tr>
+<tr>
+<td>声压级</td>
+<td>dB(A)</td>
+<td>A 计权，距管壁 1 m</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12-cv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l23-25"><a class="toclink" href="#12-cv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l23-25">1.2 数值常数（[cv_core.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_core.py) L23-25）</a><a class="headerlink" href="#12-cv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l23-25" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>常数</th>
+<th>值</th>
+<th>用途</th>
+<th>推导依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>K_LIQ</code></td>
+<td>2.7351</td>
+<td>液体 Cv 流量方程系数（kPa 体系，Cv 美制）</td>
+<td>由 IEC N1=0.865 经单位换算：1 psi=6.895 kPa，1 USgpm=0.2271 m³/h → K_LIQ = N1×√(6.895)×0.2271⁻¹ ≈ 2.735。算例验证：水 Q=120 m³/h, ΔP=460 kPa, ρ=1000 → Cv=120/(2.7351×√(460/1000))=64.7 ✓</td>
+</tr>
+<tr>
+<td><code>K_GAS</code></td>
+<td>2.7330</td>
+<td>气体质量流量 Cv 方程系数（kPa 体系，Cv 美制）</td>
+<td>由 ISA N6=63.3 量纲换算：N6 对应 kg/h, kPa, kg/m³ → K_GAS = N6/3600 × √(1000) × 单位比 ≈ 2.733。经空气算例验证</td>
+</tr>
+<tr>
+<td><code>N2</code></td>
+<td>0.00214</td>
+<td>Fp 管件几何系数计算（d 单位 mm）</td>
+<td>IEC N2=0.00214（d 单位 mm）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>修订要点</strong>：若切换为 SI 国际单位（Pa、kg/s），需重新推导 K_LIQ、K_GAS。当前常数已通过算例锁定，未经核算请勿修改。</p>
+</blockquote>
+<hr />
+<h2 id="2"><a class="toclink" href="#2">2. 标准依据</a><a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>标准</th>
+<th>适用范围</th>
+<th>代码对应</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IEC 60534-2-1</td>
+<td>调节阀口径计算（液体/气体/两相流基本方程）</td>
+<td>[cv_liquid.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_liquid.py)、[cv_gas.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_gas.py)</td>
+</tr>
+<tr>
+<td>IEC 60534-8-3</td>
+<td>气动噪音预测（声功率法）</td>
+<td>[noise.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/noise.py) <code>predict_gas_noise</code></td>
+</tr>
+<tr>
+<td>IEC 60534-8-4</td>
+<td>水动力噪音预测（空化/闪蒸）</td>
+<td>[noise.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/noise.py) <code>predict_liquid_noise</code></td>
+</tr>
+<tr>
+<td>GB/T 17213.2</td>
+<td>工业过程控制阀（等同 IEC 60534-2-1）</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>ISA-75.01.01</td>
+<td>控制阀口径计算（与 IEC 等效）</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>IAPWS-IF97</td>
+<td>水和水蒸汽热力学性质</td>
+<td>[properties.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/properties.py) <code>water_properties</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3"><a class="toclink" href="#3">3. 介质物性计算</a><a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="31-iapws-if97propertiespyfiledkelk207-kelkcalcvbackendappcalcpropertiespy-l64-124"><a class="toclink" href="#31-iapws-if97propertiespyfiledkelk207-kelkcalcvbackendappcalcpropertiespy-l64-124">3.1 水/水蒸汽（IAPWS-IF97，[properties.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/properties.py) L64-124）</a><a class="headerlink" href="#31-iapws-if97propertiespyfiledkelk207-kelkcalcvbackendappcalcpropertiespy-l64-124" title="Permanent link">&para;</a></h3>
+<p><strong>相态自动判定逻辑</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="nl">输入</span><span class="p">:</span><span class="w"> </span><span class="n">温度</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="err">℃</span><span class="p">),</span><span class="w"> </span><span class="n">压力</span><span class="w"> </span><span class="n">P</span><span class="p">(</span><span class="n">kPa</span><span class="w"> </span><span class="nf">abs</span><span class="p">)</span>
+<span class="mf">1.</span><span class="w"> </span><span class="n">计算饱和蒸汽压</span><span class="w"> </span><span class="n">Psat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_PSat_T</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mf">273.15</span><span class="p">)</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="mi">1000</span><span class="w">   </span><span class="o">[</span><span class="n">kPa</span><span class="o">]</span><span class="w">   </span><span class="p">(</span><span class="n">IAPWS</span><span class="o">-</span><span class="n">IF97</span><span class="w"> </span><span class="n">Region</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">容差</span><span class="w"> </span><span class="n">tol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">Psat</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="mf">0.002</span><span class="p">)</span>
+<span class="mf">3.</span><span class="w"> </span><span class="nl">判定</span><span class="p">:</span>
+<span class="w">     </span><span class="o">|</span><span class="n">P</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Psat</span><span class="o">|</span><span class="w"> </span><span class="err">≤</span><span class="w"> </span><span class="n">tol</span><span class="w">  </span><span class="err">→</span><span class="w">  </span><span class="n">saturated</span><span class="err">（</span><span class="n">饱和</span><span class="err">）</span>
+<span class="w">     </span><span class="n">P</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">Psat</span><span class="w">          </span><span class="err">→</span><span class="w">  </span><span class="n">liquid</span><span class="err">（</span><span class="n">液态</span><span class="err">，</span><span class="n">过冷水</span><span class="err">）</span>
+<span class="w">     </span><span class="n">P</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">Psat</span><span class="w">          </span><span class="err">→</span><span class="w">  </span><span class="n">gas</span><span class="err">（</span><span class="n">过热蒸汽</span><span class="err">）</span>
+</code></pre></div>
+
+<p><strong>物性取值</strong>：</p>
+<ul>
+<li>
+<p>液态/过热蒸汽：调用 <code>IAPWS97(P=P/1000, T=T+273.15)</code> 取 ρ、μ、γ=cp/cv、w（声速）</p>
+</li>
+<li>
+<p>饱和：取气相代表性值 <code>IAPWS97(P=P/1000, x=0.5).Vapor</code>（密度、粘度、比热比、声速）</p>
+</li>
+<li>
+<p>粘度单位转换：Pa·s → cP（×1000）</p>
+</li>
+<li>
+<p>兜底：iapws 库不可用时使用近似公式（L147-184），精度较低</p>
+</li>
+</ul>
+<p><strong>关键常数</strong>：</p>
+<ul>
+<li>
+<p>水临界压力 Pc = 22064 kPa(abs)</p>
+</li>
+<li>
+<p>水临界温度 Tc = 373.946 ℃</p>
+</li>
+<li>
+<p>水摩尔质量 M = 18.015 kg/kmol</p>
+</li>
+</ul>
+<h3 id="32-propertiespyfiledkelk207-kelkcalcvbackendappcalcpropertiespy-l130-134"><a class="toclink" href="#32-propertiespyfiledkelk207-kelkcalcvbackendappcalcpropertiespy-l130-134">3.2 通用气体密度（[properties.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/properties.py) L130-134）</a><a class="headerlink" href="#32-propertiespyfiledkelk207-kelkcalcvbackendappcalcpropertiespy-l130-134" title="Permanent link">&para;</a></h3>
+<p>理想气体状态方程：</p>
+<div class="highlight"><pre><span></span><code>ρ = P × M / (Z × R × T)
+
+其中:
+  P: kPa(abs)
+  M: kg/kmol
+  R = 8.314 kPa·m³/(kmol·K)
+  T = t + 273.15 K
+  Z: 压缩因子（默认 1.0）
+</code></pre></div>
+
+<h3 id="33-propertiespyfiledkelk207-kelkcalcvbackendappcalcpropertiespy-l137-141"><a class="toclink" href="#33-propertiespyfiledkelk207-kelkcalcvbackendappcalcpropertiespy-l137-141">3.3 气体声速（[properties.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/properties.py) L137-141）</a><a class="headerlink" href="#33-propertiespyfiledkelk207-kelkcalcvbackendappcalcpropertiespy-l137-141" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>c = √(γ × R' × T)
+
+其中:
+  R' = 8314 / M   J/(kg·K)
+  T = t + 273.15 K
+  γ: 比热比 cp/cv
+</code></pre></div>
+
+<h3 id="34-propertiespyfiledkelk207-kelkcalcvbackendappcalcpropertiespy-l192-214"><a class="toclink" href="#34-propertiespyfiledkelk207-kelkcalcvbackendappcalcpropertiespy-l192-214">3.4 介质库默认值（[properties.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/properties.py) L192-214）</a><a class="headerlink" href="#34-propertiespyfiledkelk207-kelkcalcvbackendappcalcpropertiespy-l192-214" title="Permanent link">&para;</a></h3>
+<p>20 种预置介质，关键字段：<code>fluid_name, formula, default_state, density_liquid, density_gas, molecular_weight, cp_cv_ratio, critical_pressure, critical_temp, vapor_pressure, viscosity, is_water</code></p>
+<blockquote>
+<p><strong>修订要点</strong>：新增介质需补全 critical_pressure（用于液体阻塞流判定 FF）与 vapor_pressure（用于空化/闪蒸判定）。水类介质 <code>is_water=True</code> 走 IAPWS 自动判定。</p>
+</blockquote>
+<hr />
+<h2 id="4"><a class="toclink" href="#4">4. 阀门系数工具</a><a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="41-fpcv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l76-99"><a class="toclink" href="#41-fpcv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l76-99">4.1 管件几何系数 Fp（[cv_core.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_core.py) L76-99）</a><a class="headerlink" href="#41-fpcv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l76-99" title="Permanent link">&para;</a></h3>
+<p><strong>IEC 60534-2-1 Eq.5/6</strong>：</p>
+<div class="highlight"><pre><span></span><code>Fp = 1 / √(1 + ζ × (Cv / (N2 × d²))²)
+
+其中:
+  ζ = ζ1 + ζ2          (进出口管件阻力系数之和)
+  ζ1 = 1.5 × (1 - β²)²  (进口缩径，突变缩阻力系数近似)
+  ζ2 = 1.0 × (1 - β²)²  (出口扩径，突变扩阻力系数近似)
+  β = d / D             (阀座口径/管道内径)
+  N2 = 0.00214          (d 单位 mm)
+</code></pre></div>
+
+<p><strong>取值规则</strong>：</p>
+<ul>
+<li>
+<p>用户直接提供 <code>fp</code> → 采用录入值</p>
+</li>
+<li>
+<p>非缩径（<code>reduced_port=False</code>）或缺少几何尺寸 → Fp = 1.0</p>
+</li>
+<li>
+<p>β ≥ 0.999 → Fp = 1.0</p>
+</li>
+<li>
+<p>Fp 限幅 [0.1, 1.0]</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>修订要点</strong>：当前 ζ1/ζ2 采用突变缩/扩近似，IEC 标准对渐缩 reducer 有更精确公式。若需精化，替换 L95-97 的 ζ 计算。</p>
+</blockquote>
+<h3 id="42-flcv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l102-107"><a class="toclink" href="#42-flcv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l102-107">4.2 有效液体压力恢复系数 FL（[cv_core.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_core.py) L102-107）</a><a class="headerlink" href="#42-flcv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l102-107" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>带附件: FL_eff = FLp   (用户提供时采用)
+无附件: FL_eff = FL    (默认 0.9)
+</code></pre></div>
+
+<h3 id="43-xtcv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l110-114"><a class="toclink" href="#43-xtcv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l110-114">4.3 有效临界压差比 xT（[cv_core.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_core.py) L110-114）</a><a class="headerlink" href="#43-xtcv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l110-114" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>带附件: xT_eff = xTp   (用户提供时采用)
+无附件: xT_eff = xT    (默认 0.72)
+</code></pre></div>
+
+<h3 id="44-cv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l117-130"><a class="toclink" href="#44-cv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l117-130">4.4 雷诺数（[cv_core.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_core.py) L117-130）</a><a class="headerlink" href="#44-cv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l117-130" title="Permanent link">&para;</a></h3>
+<p>基于阀座口径特征流速：</p>
+<div class="highlight"><pre><span></span><code><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">π</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">d²</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="mi">10</span><span class="err">⁻</span><span class="n">⁶</span><span class="w">        </span><span class="o">[</span><span class="n">m²</span><span class="o">]</span><span class="w">   </span><span class="p">(</span><span class="n">mm²</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">m²</span><span class="p">)</span>
+<span class="n">U</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ṁ</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3600</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">ρ</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">A</span><span class="p">)</span><span class="w">      </span><span class="o">[</span><span class="n">m/s</span><span class="o">]</span><span class="w">  </span><span class="p">(</span><span class="n">kg</span><span class="o">/</span><span class="n">h</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">kg</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>
+<span class="n">Rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ρ</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="p">(</span><span class="n">d</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">μ</span><span class="w">    </span><span class="o">[</span><span class="n">无量纲</span><span class="o">]</span>
+
+<span class="nl">其中</span><span class="p">:</span>
+<span class="w">  </span><span class="nl">d</span><span class="p">:</span><span class="w"> </span><span class="n">阀座口径</span><span class="w"> </span><span class="n">mm</span>
+<span class="w">  </span><span class="nl">ṁ</span><span class="p">:</span><span class="w"> </span><span class="n">质量流量</span><span class="w"> </span><span class="n">kg</span><span class="o">/</span><span class="n">h</span>
+<span class="w">  </span><span class="nl">μ</span><span class="p">:</span><span class="w"> </span><span class="n">动力粘度</span><span class="w"> </span><span class="n">Pa</span><span class="err">·</span><span class="n">s</span><span class="w"> </span><span class="p">(</span><span class="o">=</span><span class="w"> </span><span class="n">cP</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="mi">10</span><span class="err">⁻</span><span class="n">³</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="45-cv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l133-141"><a class="toclink" href="#45-cv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l133-141">4.5 雷诺数修正判定（[cv_core.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_core.py) L133-141）</a><a class="headerlink" href="#45-cv_corepyfiledkelk207-kelkcalcvbackendappcalccv_corepy-l133-141" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>雷诺数范围</th>
+<th>判定</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rev &lt; 40</td>
+<td>层流区</td>
+<td>提示需 IEC 粘度修正 Fr</td>
+</tr>
+<tr>
+<td>40 ≤ Rev &lt; 3000</td>
+<td>过渡区</td>
+<td>提示 Fr 可能有效</td>
+</tr>
+<tr>
+<td>Rev ≥ 3000</td>
+<td>湍流区</td>
+<td>无需修正</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>修订要点</strong>：当前仅给出提示，未实际执行 Fr 修正。如需实现，参考 IEC 60534-2-1 Eq.1 Fr 计算式。</p>
+</blockquote>
+<hr />
+<h2 id="5-cv"><a class="toclink" href="#5-cv">5. 液体 Cv 计算</a><a class="headerlink" href="#5-cv" title="Permanent link">&para;</a></h2>
+<p><strong>源码</strong>：[cv_liquid.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_liquid.py)
+<strong>标准</strong>：IEC 60534-2-1 / GB/T 17213.2</p>
+<h3 id="51"><a class="toclink" href="#51">5.1 基本方程（非阻塞湍流）</a><a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<p>体积流量形式：</p>
+<div class="highlight"><pre><span></span><code>Q = K_LIQ × Fp × Cv × √(ΔP / ρ)                         ... (IEC Eq.6)
+</code></pre></div>
+
+<p>质量流量形式（引擎实际使用）：</p>
+<div class="highlight"><pre><span></span><code>W = K_LIQ × Fp × Cv × √(ΔP × ρ)                         ... (IEC Eq.7)
+→ Cv = W / (K_LIQ × Fp × √(ΔP × ρ))
+</code></pre></div>
+
+<h3 id="52-iec-eq3"><a class="toclink" href="#52-iec-eq3">5.2 阻塞流判定（IEC Eq.3）</a><a class="headerlink" href="#52-iec-eq3" title="Permanent link">&para;</a></h3>
+<p><strong>液体临界压力比系数</strong>：</p>
+<div class="highlight"><pre><span></span><code>FF = 0.96 - 0.28 × √(Pv / Pc)                           ... (IEC Eq.4)
+
+其中:
+  Pv: 介质饱和蒸汽压 kPa(abs)
+  Pc: 介质临界压力 kPa(abs)（水 22064）
+  FF 限幅 [0, 1]
+</code></pre></div>
+
+<p><strong>临界压差</strong>：</p>
+<div class="highlight"><pre><span></span><code>ΔPch = FL² × (P1 - FF × Pv)                              ... (IEC Eq.3)
+</code></pre></div>
+
+<p><strong>阻塞判定</strong>：</p>
+<div class="highlight"><pre><span></span><code>若 ΔP ≥ ΔPch → 阻塞流，计算采用 ΔP_eff = ΔPch
+否则         → 非阻塞，ΔP_eff = ΔP
+</code></pre></div>
+
+<h3 id="53-cv-cv_liquidpyfiledkelk207-kelkcalcvbackendappcalccv_liquidpy-l79-86"><a class="toclink" href="#53-cv-cv_liquidpyfiledkelk207-kelkcalcvbackendappcalccv_liquidpy-l79-86">5.3 Cv 计算（[cv_liquid.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_liquid.py) L79-86）</a><a class="headerlink" href="#53-cv-cv_liquidpyfiledkelk207-kelkcalcvbackendappcalccv_liquidpy-l79-86" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Cv = W / (K_LIQ × Fp × √(ΔP_eff × ρ))
+</code></pre></div>
+
+<h3 id="54-cv_liquidpyfiledkelk207-kelkcalcvbackendappcalccv_liquidpy-l114-122"><a class="toclink" href="#54-cv_liquidpyfiledkelk207-kelkcalcvbackendappcalccv_liquidpy-l114-122">5.4 流态判定（[cv_liquid.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_liquid.py) L114-122）</a><a class="headerlink" href="#54-cv_liquidpyfiledkelk207-kelkcalcvbackendappcalccv_liquidpy-l114-122" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th>流态</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>非阻塞</td>
+<td>非阻塞(湍流)</td>
+<td>正常流动</td>
+</tr>
+<tr>
+<td>阻塞 + P2 ≤ Pv</td>
+<td>阻塞流-闪蒸</td>
+<td>阀后压力低于饱和蒸汽压，液体闪蒸为气体</td>
+</tr>
+<tr>
+<td>阻塞 + P2 &gt; Pv</td>
+<td>阻塞流-空化</td>
+<td>阀内喉部压力低于 Pv 产生气泡，阀外 P2&gt;Pv 气泡溃灭</td>
+</tr>
+</tbody>
+</table>
+<h3 id="55"><a class="toclink" href="#55">5.5 开度计算</a><a class="headerlink" href="#55" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>开度% = (Cv_required / Cv_rated) × 100%
+</code></pre></div>
+
+<ul>
+<li>
+<p><code>Cv_rated</code> = 用户选用额定 Cv（<code>rated_cv_select</code>）或阀门额定 Cv</p>
+</li>
+<li>
+<p>若开度 &gt; 100% → 警告"阀门偏小"</p>
+</li>
+</ul>
+<h3 id="56-"><a class="toclink" href="#56-">5.6 算例（水-正常工况）</a><a class="headerlink" href="#56-" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>输入: P1=680, P2=220 kPa, T=25℃, W=120000 kg/h, ρ=1000, FL=0.9
+计算:
+  ΔP = 460 kPa
+  Pv(25℃) ≈ 3.17 kPa, Pc=22064 kPa
+  FF = 0.96 - 0.28×√(3.17/22064) = 0.950
+  ΔPch = 0.9² × (680 - 0.950×3.17) = 551.4 kPa
+  ΔP(460) &lt; ΔPch(551.4) → 非阻塞
+  Cv = 120000 / (2.7351 × 1.0 × √(460 × 1000)) = 64.78 ✓
+</code></pre></div>
+
+<hr />
+<h2 id="6-cv"><a class="toclink" href="#6-cv">6. 气体/蒸汽 Cv 计算</a><a class="headerlink" href="#6-cv" title="Permanent link">&para;</a></h2>
+<p><strong>源码</strong>：[cv_gas.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_gas.py)
+<strong>标准</strong>：IEC 60534-2-1 膨胀系数法</p>
+<h3 id="61"><a class="toclink" href="#61">6.1 基本方程（质量流量）</a><a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>W = K_GAS × Fp × Cv × Y × √(x × P1 × ρ1)               ... (IEC Eq.11)
+→ Cv = W / (K_GAS × Fp × Y × √(x × P1 × ρ1))
+</code></pre></div>
+
+<h3 id="62"><a class="toclink" href="#62">6.2 压差比与膨胀系数</a><a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>x = ΔP / P1                                              压差比
+Fγ = γ / 1.4                                             比热比系数
+xT_eff = Fγ × xT                                         有效临界压差比
+Y = 1 - x / (3 × Fγ × xT)                               膨胀系数
+</code></pre></div>
+
+<ul>
+<li>
+<p>Y 下限 = 0.667（临界状态）</p>
+</li>
+<li>
+<p>γ: 比热比 cp/cv（空气 1.4，过热蒸汽 1.327，饱和蒸汽 1.135）</p>
+</li>
+</ul>
+<h3 id="63"><a class="toclink" href="#63">6.3 临界（阻塞）流判定</a><a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>若 x ≥ Fγ × xT → 临界(阻塞)，取 x_eff = Fγ × xT, Y = 0.667
+否则           → 亚临界(非阻塞)，x_eff = x
+</code></pre></div>
+
+<h3 id="64-cv-cv_gaspyfiledkelk207-kelkcalcvbackendappcalccv_gaspy-l69-81"><a class="toclink" href="#64-cv-cv_gaspyfiledkelk207-kelkcalcvbackendappcalccv_gaspy-l69-81">6.4 Cv 计算（[cv_gas.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_gas.py) L69-81）</a><a class="headerlink" href="#64-cv-cv_gaspyfiledkelk207-kelkcalcvbackendappcalccv_gaspy-l69-81" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Cv = W / (K_GAS × Fp × Y × √(x_eff × P1 × ρ1))
+</code></pre></div>
+
+<h3 id="65"><a class="toclink" href="#65">6.5 算例（过热蒸汽工况）</a><a class="headerlink" href="#65" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>输入: P1=1500, P2=800 kPa, T=200℃, W=5000 kg/h
+      水(IAPWS自动判定为gas), ρ1≈3.96 kg/m³(由IF97), γ≈1.327, xT=0.72
+计算:
+  ΔP = 700 kPa
+  x = 700/1500 = 0.4667
+  Fγ = 1.327/1.4 = 0.9479
+  xT_eff = 0.9479 × 0.72 = 0.6825
+  x(0.4667) &lt; xT_eff(0.6825) → 亚临界
+  Y = 1 - 0.4667/(3×0.6825) = 0.790
+  Cv = 5000 / (2.7330 × 1.0 × 0.790 × √(0.4667×1500×3.96)) = 31.86 ✓
+</code></pre></div>
+
+<hr />
+<h2 id="7-cv"><a class="toclink" href="#7-cv">7. 两相流 Cv 计算</a><a class="headerlink" href="#7-cv" title="Permanent link">&para;</a></h2>
+<p><strong>源码</strong>：[cv_twophase.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_twophase.py)
+<strong>说明</strong>：IEC 60534-2-1 未给出单一标准方程，本系统提供两种工程方法。</p>
+<h3 id="71"><a class="toclink" href="#71">7.1 质量含气率</a><a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>x_g = m_gas / (m_gas + m_liquid)
+</code></pre></div>
+
+<h3 id="72-aadditive"><a class="toclink" href="#72-aadditive">7.2 方法 A：叠加法（默认，additive）</a><a class="headerlink" href="#72-aadditive" title="Permanent link">&para;</a></h3>
+<p>气相与液相分别按各自公式计算 Cv，再相加：</p>
+<div class="highlight"><pre><span></span><code>Cv_gas = m_gas / (K_GAS × Fp × Y × √(x_eff × P1 × ρ_gas))
+Cv_liquid = m_liquid / (K_LIQ × Fp × √(ΔP × ρ_liquid))
+Cv = Cv_gas + Cv_liquid
+</code></pre></div>
+
+<ul>
+<li>
+<p>气相：用膨胀系数法（Y、x_eff 同气体计算）</p>
+</li>
+<li>
+<p>液相：用非阻塞近似（全 ΔP）</p>
+</li>
+<li>
+<p>适用：气液混合、不凝气夹带液体；保守、工程常用</p>
+</li>
+</ul>
+<h3 id="73-bhomogeneous"><a class="toclink" href="#73-bhomogeneous">7.3 方法 B：均相膨胀系数法（homogeneous）</a><a class="headerlink" href="#73-bhomogeneous" title="Permanent link">&para;</a></h3>
+<p>按均相混合密度处理，采用气体方程：</p>
+<div class="highlight"><pre><span></span><code>ρ_mix = 1 / (x_g/ρ_gas + (1-x_g)/ρ_liquid)              均相混合密度
+Cv = (m_gas + m_liquid) / (K_GAS × Fp × Y × √(x_eff × P1 × ρ_mix))
+</code></pre></div>
+
+<ul>
+<li>
+<p>Y 与 xT 取气相参数</p>
+</li>
+<li>
+<p>适用：湿气为主、相间平衡的工况</p>
+</li>
+</ul>
+<h3 id="74"><a class="toclink" href="#74">7.4 流态判定</a><a class="headerlink" href="#74" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th>流态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x ≥ Fγ×xT</td>
+<td>临界(阻塞)-叠加 / 临界(阻塞)-均相</td>
+</tr>
+<tr>
+<td>x &lt; Fγ×xT</td>
+<td>亚临界-叠加 / 亚临界-均相</td>
+</tr>
+</tbody>
+</table>
+<h3 id="75"><a class="toclink" href="#75">7.5 算例（气液两相）</a><a class="headerlink" href="#75" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>输入: P1=600, P2=400 kPa, m_gas=5000, m_liquid=2000 kg/h
+      ρ_gas=6.96, ρ_liquid=1000, γ=1.4, xT=0.72
+方法: additive
+计算:
+  x = 200/600 = 0.3333
+  Fγ = 1.4/1.4 = 1.0
+  xT_eff = 0.72, x(0.333) &lt; 0.72 → 亚临界
+  Y = 1 - 0.333/(3×0.72) = 0.846
+  Cv_gas = 5000/(2.733×1×0.846×√(0.333×600×6.96)) = 50.51
+  Cv_liquid = 2000/(2.7351×1×√(200×1000)) = 16.24
+  Cv = 50.51 + 16.24 = 59.62 ✓（代码输出 59.62，亚临界-叠加）
+</code></pre></div>
+
+<blockquote>
+<p><strong>修订要点</strong>：叠加法为保守估算，对闪蒸流动（液体减压闪蒸为蒸汽）不适用。如需精确，应实现 IEC 60534-2-1 Mod 1/Mod 2 闪蒸流计算或引入专门的两相流模型。</p>
+</blockquote>
+<hr />
+<h2 id="8"><a class="toclink" href="#8">8. 气体气动噪音预测</a><a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<p><strong>源码</strong>：[noise.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/noise.py) <code>predict_gas_noise</code> (L69-171)
+<strong>标准</strong>：IEC 60534-8-3</p>
+<h3 id="81"><a class="toclink" href="#81">8.1 五步法流程</a><a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>步骤1: 等熵膨胀至阀后 → 求T2, ρ2, c2
+步骤2: 阀后流速与马赫数
+步骤3: 喉部射流机械功率
+步骤4: 声效率 → 声功率 → 内部声功率级
+步骤5: 管壁传声损失 + 距离衰减 + A计权 → 外部声压级
+</code></pre></div>
+
+<h3 id="82-1noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l92-99"><a class="toclink" href="#82-1noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l92-99">8.2 步骤1：等熵膨胀（[noise.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/noise.py) L92-99）</a><a class="headerlink" href="#82-1noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l92-99" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8314</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">M</span><span class="w">                       </span><span class="o">[</span><span class="n">J/(kg·K)</span><span class="o">]</span>
+<span class="n">T1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">273.15</span><span class="w">                   </span><span class="o">[</span><span class="n">K</span><span class="o">]</span>
+<span class="n">T2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T1</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="p">(</span><span class="n">P2</span><span class="o">/</span><span class="n">P1</span><span class="p">)</span><span class="o">^</span><span class="p">((</span><span class="n">γ</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">γ</span><span class="p">)</span><span class="w">       </span><span class="o">[</span><span class="n">K</span><span class="o">]</span><span class="w">   </span><span class="n">等熵膨胀</span>
+<span class="n">ρ2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">P2</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mf">8.314</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">T2</span><span class="p">)</span><span class="w">        </span><span class="o">[</span><span class="n">kg/m³</span><span class="o">]</span><span class="w">  </span><span class="n">理想气体</span>
+<span class="n">c2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">√</span><span class="p">(</span><span class="n">γ</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">T2</span><span class="p">)</span><span class="w">                </span><span class="o">[</span><span class="n">m/s</span><span class="o">]</span><span class="w">   </span><span class="n">阀后声速</span>
+</code></pre></div>
+
+<h3 id="83-2noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l102-106"><a class="toclink" href="#83-2noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l102-106">8.3 步骤2：阀后流速与马赫（[noise.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/noise.py) L102-106）</a><a class="headerlink" href="#83-2noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l102-106" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">π</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="p">(</span><span class="n">D</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span><span class="n">²</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">4</span><span class="w">              </span><span class="o">[</span><span class="n">m²</span><span class="o">]</span><span class="w">   </span><span class="n">管道截面积</span>
+<span class="n">ṁ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">W</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3600</span><span class="w">                      </span><span class="o">[</span><span class="n">kg/s</span><span class="o">]</span>
+<span class="n">U2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ṁ</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">ρ2</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">A</span><span class="p">)</span><span class="w">                 </span><span class="o">[</span><span class="n">m/s</span><span class="o">]</span><span class="w">  </span><span class="n">阀后流速</span>
+<span class="n">Ma2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">U2</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">c2</span><span class="w">                      </span><span class="n">马赫数</span>
+</code></pre></div>
+
+<h3 id="84-3noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l108-116"><a class="toclink" href="#84-3noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l108-116">8.4 步骤3：喉部射流机械功率（[noise.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/noise.py) L108-116）</a><a class="headerlink" href="#84-3noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l108-116" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">U_vc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">U2</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">FL</span><span class="w">                     </span><span class="n">喉部射流速度</span><span class="err">（</span><span class="n">用FL关联</span><span class="err">）</span>
+<span class="n">U_vc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">U_vc</span><span class="p">,</span><span class="w"> </span><span class="err">√</span><span class="p">(</span><span class="n">γ</span><span class="err">×</span><span class="n">R</span><span class="err">×</span><span class="n">T1</span><span class="p">))</span><span class="w">        </span><span class="n">不超过声速量级</span>
+<span class="n">Pow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">½</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">ṁ</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">U_vc²</span><span class="w">                </span><span class="o">[</span><span class="n">W</span><span class="o">]</span><span class="w">    </span><span class="n">机械功率</span>
+</code></pre></div>
+
+<h3 id="85-4noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l118-131"><a class="toclink" href="#85-4noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l118-131">8.5 步骤4：声效率与声功率级（[noise.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/noise.py) L118-131）</a><a class="headerlink" href="#85-4noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l118-131" title="Permanent link">&para;</a></h3>
+<p><strong>声效率 η</strong>（关键系数，见 [NOISE_CFG](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/noise.py) L58-66）：</p>
+<table>
+<thead>
+<tr>
+<th>流态</th>
+<th>η 计算式</th>
+<th>系数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>临界/超临界 (x ≥ Fγ×xT)</td>
+<td>η = <code>eta_sonic</code></td>
+<td>1.0×10⁻²</td>
+</tr>
+<tr>
+<td>亚临界</td>
+<td>η = <code>eta_subsonic</code> × Ma^<code>ma_exp</code></td>
+<td>1.2×10⁻³ × Ma^3.5</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>η 限幅 [1×10⁻⁸, 0.5]</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">Wa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">η</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">Pow</span><span class="w">                      </span><span class="o">[</span><span class="n">W</span><span class="o">]</span><span class="w">    </span><span class="n">声功率</span>
+<span class="n">L_Wi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="nf">log10</span><span class="p">(</span><span class="n">Wa</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">W_ref</span><span class="p">)</span><span class="w">     </span><span class="o">[</span><span class="n">dB</span><span class="o">]</span><span class="w">   </span><span class="n">内部声功率级</span>
+<span class="n">W_ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="err">×</span><span class="mi">10</span><span class="err">⁻</span><span class="n">¹²</span><span class="w"> </span><span class="n">W</span>
+</code></pre></div>
+
+<h3 id="86-5noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l133-152"><a class="toclink" href="#86-5noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l133-152">8.6 步骤5：峰值频率与传声损失（[noise.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/noise.py) L133-152）</a><a class="headerlink" href="#86-5noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l133-152" title="Permanent link">&para;</a></h3>
+<p><strong>峰值频率</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="n">d_vc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.6</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">D</span><span class="w">                    </span><span class="o">[</span><span class="n">mm</span><span class="o">]</span><span class="w">   </span><span class="n">喉部直径近似</span><span class="err">（</span><span class="mf">0.6</span><span class="n">倍管径</span><span class="err">）</span>
+<span class="n">f_p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">St</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">U_vc</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">d_vc</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span><span class="w">     </span><span class="o">[</span><span class="n">Hz</span><span class="o">]</span><span class="w">   </span><span class="n">St</span><span class="o">=</span><span class="mf">0.20</span><span class="err">（</span><span class="n">斯特鲁哈尔数</span><span class="err">）</span>
+</code></pre></div>
+
+<p><strong>管壁传声损失</strong>（钢制圆管简化）：</p>
+<div class="highlight"><pre><span></span><code><span class="n">f_r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">π</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">d_i</span><span class="p">)</span><span class="w">              </span><span class="o">[</span><span class="n">Hz</span><span class="o">]</span><span class="w">   </span><span class="n">环频</span>
+<span class="n">m</span><span class="s1">''</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ρ_steel</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">t</span><span class="w">                 </span><span class="o">[</span><span class="n">kg/m²</span><span class="o">]</span><span class="w"> </span><span class="n">面密度</span><span class="err">（</span><span class="n">ρ_steel</span><span class="o">=</span><span class="mi">7850</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="o">=</span><span class="n">壁厚m</span><span class="err">）</span>
+<span class="n">z_g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ρ2</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">c2</span><span class="w">                     </span><span class="o">[</span><span class="n">Pa·s/m</span><span class="o">]</span><span class="w"> </span><span class="n">气体声阻抗</span>
+<span class="n">ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="s1">''</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="mi">2</span><span class="n">π</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">f_p</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">z_g</span>
+<span class="n">TL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="err">×</span><span class="nf">log10</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ratio²</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="err">×</span><span class="nf">log10</span><span class="p">(</span><span class="n">m</span><span class="s1">''</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">z_g</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">d_i</span><span class="p">))</span>
+<span class="n">TL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">TL</span><span class="p">,</span><span class="w"> </span><span class="n">tl_floor</span><span class="p">)</span><span class="w">            </span><span class="n">tl_floor</span><span class="o">=</span><span class="mf">6.0</span><span class="w"> </span><span class="n">dB</span>
+</code></pre></div>
+
+<h3 id="87-noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l154-159"><a class="toclink" href="#87-noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l154-159">8.7 外部声压级（[noise.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/noise.py) L154-159）</a><a class="headerlink" href="#87-noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l154-159" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">rad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="nf">log10</span><span class="p">(</span><span class="n">d_i</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">4</span><span class="w"> </span><span class="err">×</span><span class="w"> </span><span class="n">r</span><span class="p">))</span><span class="w">   </span><span class="o">[</span><span class="n">dB</span><span class="o">]</span><span class="w">   </span><span class="n">距离辐射项</span><span class="err">（</span><span class="n">r</span><span class="o">=</span><span class="n">测点距离m</span><span class="err">）</span>
+<span class="n">LpA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">L_Wi</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">TL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rad</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a_weight_correction</span>
+</code></pre></div>
+
+<ul>
+<li><code>a_weight_correction</code> = -2.0 dB（A 计权整体修正）</li>
+</ul>
+<h3 id="88-noise_cfgfiledkelk207-kelkcalcvbackendappcalcnoisepy-l58-66"><a class="toclink" href="#88-noise_cfgfiledkelk207-kelkcalcvbackendappcalcnoisepy-l58-66">8.8 噪音系数表（[NOISE_CFG](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/noise.py) L58-66)）</a><a class="headerlink" href="#88-noise_cfgfiledkelk207-kelkcalcvbackendappcalcnoisepy-l58-66" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>系数</th>
+<th>值</th>
+<th>含义</th>
+<th>修订指引</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>eta_subsonic</code></td>
+<td>1.2×10⁻³</td>
+<td>亚临界声效率前因子</td>
+<td>按厂家样本或实测 Aη 精化</td>
+</tr>
+<tr>
+<td><code>eta_sonic</code></td>
+<td>1.0×10⁻²</td>
+<td>临界声效率</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>ma_exp</code></td>
+<td>3.5</td>
+<td>声效率马赫数幂次</td>
+<td>IEC 典型 3\~4</td>
+</tr>
+<tr>
+<td><code>strouhal</code></td>
+<td>0.20</td>
+<td>斯特鲁哈尔数</td>
+<td>IEC 典型 0.2</td>
+</tr>
+<tr>
+<td><code>tl_floor</code></td>
+<td>6.0</td>
+<td>传声损失下限 dB</td>
+<td>按管壁材料调整</td>
+</tr>
+<tr>
+<td><code>a_weight_correction</code></td>
+<td>-2.0</td>
+<td>A 计权修正 dB</td>
+<td>按频谱精化</td>
+</tr>
+</tbody>
+</table>
+<h3 id="89"><a class="toclink" href="#89">8.9 警告触发</a><a class="headerlink" href="#89" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th>警告</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ma2 &gt; 0.3</td>
+<td>阀后流速偏高，建议复核管径</td>
+</tr>
+<tr>
+<td>LpA &gt; 85 dB(A)</td>
+<td>需考虑降噪措施</td>
+</tr>
+</tbody>
+</table>
+<h3 id="810-"><a class="toclink" href="#810-">8.10 算例（空气-正常工况）</a><a class="headerlink" href="#810-" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>输入: P1=600, P2=400, T=27℃, W=8627 kg/h, D=80mm, t=4mm, FL=0.9, xT=0.72
+计算:
+  ρ1=6.96, γ=1.4, M=28.965
+  T2=300×(400/600)^0.286=263.5K, ρ2=5.22, c2=325.1 m/s
+  U2=8627/3600/(5.22×π×0.08²/4)=27.3 m/s, Ma2=0.084
+  U_vc=27.3/0.9=30.3, Pow=0.5×2.396×30.3²=1099 W
+  x=0.333&lt;Fγ×xT=0.72 → 亚临界
+  η=1.2e-3×0.084^3.5=2.7e-8 → Wa=2.97e-5 W
+  L_Wi=10×log10(2.97e-5/1e-12)=74.7 dB
+  f_p=0.2×30.3/(0.048)=126 Hz
+  TL≈16.7 dB, rad=-10.8 dB
+  LpA=74.7-16.7-10.8-2.0=65.9 dB(A) ✓
+</code></pre></div>
+
+<hr />
+<h2 id="9"><a class="toclink" href="#9">9. 液体水动力噪音预测</a><a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
+<p><strong>源码</strong>：[noise.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/noise.py) <code>predict_liquid_noise</code> (L174-267)
+<strong>标准</strong>：IEC 60534-8-4</p>
+<h3 id="91-noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l199-207"><a class="toclink" href="#91-noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l199-207">9.1 临界压差与空化/闪蒸判定（[noise.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/noise.py) L199-207)</a><a class="headerlink" href="#91-noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l199-207" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>FF = 0.96 - 0.28 × √(Pv/Pc)
+ΔPch = FL² × (P1 - FF × Pv)
+choked = ΔP ≥ ΔPch
+cavitating = choked AND P2 &gt; Pv      空化
+flashing = P2 ≤ Pv                   闪蒸
+</code></pre></div>
+
+<h3 id="92-noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l210-217"><a class="toclink" href="#92-noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l210-217">9.2 阀后流速与机械功率（[noise.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/noise.py) L210-217）</a><a class="headerlink" href="#92-noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l210-217" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>U2 = ṁ / (ρ × A)                  阀后流速
+U_vc = U2 / FL                     喉部射流速度
+Pow = ½ × ṁ × U_vc²               机械功率
+</code></pre></div>
+
+<h3 id="93-noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l219-229"><a class="toclink" href="#93-noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l219-229">9.3 声效率（[noise.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/noise.py) L219-229)</a><a class="headerlink" href="#93-noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l219-229" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>流态</th>
+<th>η 计算式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>闪蒸</td>
+<td>η = 1.0×10⁻³</td>
+<td>声效率最高</td>
+</tr>
+<tr>
+<td>空化</td>
+<td>η = 3.0×10⁻⁴</td>
+<td>气泡溃灭产生强噪音</td>
+</tr>
+<tr>
+<td>单相湍流</td>
+<td>η = 5.0×10⁻⁶ × max(ΔP/100, 1.0)</td>
+<td>湍流噪音较低</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>η 限幅 [1×10⁻⁹, 0.5]</li>
+</ul>
+<h3 id="94-noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l230-252"><a class="toclink" href="#94-noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l230-252">9.4 声功率级与传声损失（[noise.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/noise.py) L230-252)</a><a class="headerlink" href="#94-noisepyfiledkelk207-kelkcalcvbackendappcalcnoisepy-l230-252" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Wa = η × Pow
+L_Wi = 10 × log10(Wa / W_ref)
+f_p = St × U_vc / (D/1000)         St=0.20
+</code></pre></div>
+
+<p><strong>液体管壁传声损失</strong>（声阻抗更大，TL 更高）：</p>
+<div class="highlight"><pre><span></span><code>c_liq = 1400 m/s                   水中声速近似
+z_l = ρ × c_liq                    液体声阻抗
+ratio = (m'' × 2π × f_p) / z_l
+TL = 10×log10(1 + ratio²) + 10×log10(m'' / (z_l × d_i))
+TL = max(TL + 6.0, tl_floor)       液体附加 6 dB（介质声阻抗大）
+</code></pre></div>
+
+<h3 id="95"><a class="toclink" href="#95">9.5 外部声压级</a><a class="headerlink" href="#95" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>rad = 10 × log10(d_i / (4 × r))
+LpA = L_Wi - TL + rad + a_weight_correction
+</code></pre></div>
+
+<h3 id="96"><a class="toclink" href="#96">9.6 警告触发</a><a class="headerlink" href="#96" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th>警告</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>空化或闪蒸</td>
+<td>噪音及冲刷风险高</td>
+</tr>
+<tr>
+<td>LpA &gt; 85 dB(A)</td>
+<td>需考虑降噪措施</td>
+</tr>
+</tbody>
+</table>
+<h3 id="97-"><a class="toclink" href="#97-">9.7 算例（水-正常工况）</a><a class="headerlink" href="#97-" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>输入: P1=680, P2=220, W=120000 kg/h, ρ=1000, D=80mm, t=4mm, FL=0.9
+      Pv(25℃)=3.17, Pc=22064
+计算:
+  ΔP=460, ΔPch=551.4 → 非阻塞(无空化/闪蒸)
+  U2=120000/3600/(1000×π×0.08²/4)=6.63 m/s
+  U_vc=6.63/0.9=7.37, Pow=0.5×33.3×7.37²=905 W
+  η=5e-6×460/100=2.3e-5 → Wa=0.0208 W
+  L_Wi=10×log10(0.0208/1e-12)=103.2 dB
+  f_p=0.2×7.37/0.08=18.4 Hz
+  TL≈27.0 dB(含液体+6), rad=-10.8 dB
+  LpA=103.2-27.0-10.8-2.0=78.2 dB(A) ✓
+</code></pre></div>
+
+<hr />
+<h2 id="10"><a class="toclink" href="#10">10. 计算引擎编排流程</a><a class="headerlink" href="#10" title="Permanent link">&para;</a></h2>
+<p><strong>源码</strong>：[engine.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/engine.py) <code>calculate_case</code></p>
+<h3 id="101"><a class="toclink" href="#101">10.1 总体流程</a><a class="headerlink" href="#101" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>输入: case_no, fluid, valve_coeffs, P1, P2, T1, 流量, 管道参数
+  │
+  ├─1. 物性解析 _resolve_fluid_properties()
+  │    ├─ 水介质(is_water=True) → IAPWS-IF97 自动判定相态
+  │    ├─ 其它介质 → 介质库默认值 + 理想气体密度
+  │    └─ 应用用户覆盖(density/viscosity/mw/gamma override)
+  │
+  ├─2. 相态路由
+  │    ├─ 两相流(m_gas&gt;0 AND m_liquid&gt;0) → calculate_cv_twophase()
+  │    ├─ gas/steam/saturated → calculate_cv_gas()
+  │    └─ liquid → calculate_cv_liquid()
+  │
+  ├─3. 噪音预测
+  │    ├─ 气体(gas/steam/saturated, 非两相) → predict_gas_noise()
+  │    └─ 液体 → predict_liquid_noise()
+  │
+  └─4. 汇总结果 CalcCaseResult
+       ├─ cv: CvResult
+       ├─ noise: NoiseResult
+       ├─ resolved_properties: 物性快照
+       └─ status: 成功/警告/失败, message: 警告汇总
+</code></pre></div>
+
+<h3 id="102-enginepyfiledkelk207-kelkcalcvbackendappcalcenginepy-l146-176"><a class="toclink" href="#102-enginepyfiledkelk207-kelkcalcvbackendappcalcenginepy-l146-176">10.2 相态判定优先级（[engine.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/engine.py) L146-176)</a><a class="headerlink" href="#102-enginepyfiledkelk207-kelkcalcvbackendappcalcenginepy-l146-176" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>两相流优先</strong>：<code>mass_flow_gas &gt; 0 AND mass_flow_liquid &gt; 0</code> → 两相计算</li>
+<li><strong>气体/蒸汽</strong>：<code>phase in ("gas", "steam", "saturated")</code> → 气体计算</li>
+<li><strong>液体</strong>：其余 → 液体计算</li>
+</ol>
+<blockquote>
+<p>饱和水蒸汽（saturated）按气体方程处理。</p>
+</blockquote>
+<h3 id="103-enginepyfiledkelk207-kelkcalcvbackendappcalcenginepy-l53-104"><a class="toclink" href="#103-enginepyfiledkelk207-kelkcalcvbackendappcalcenginepy-l53-104">10.3 物性覆盖优先级（[engine.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/engine.py) L53-104）</a><a class="headerlink" href="#103-enginepyfiledkelk207-kelkcalcvbackendappcalcenginepy-l53-104" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>水介质:
+  1. IAPWS-IF97 计算基础物性
+  2. fluid_state_override 覆盖相态（liquid/gas）
+  3. density_override 覆盖密度
+  4. viscosity_override 覆盖粘度
+  5. gamma_override 覆盖比热比
+
+非水介质:
+  1. 介质库默认值
+  2. fluid_state_override 或 default_state 决定相态
+  3. mw_override / gamma_override 覆盖摩尔质量/比热比
+  4. density_override 覆盖密度（气相优先用理想气体计算）
+  5. viscosity_override 覆盖粘度
+</code></pre></div>
+
+<hr />
+<h2 id="11_1"><a class="toclink" href="#11_1">11. 算例验证</a><a class="headerlink" href="#11_1" title="Permanent link">&para;</a></h2>
+<h3 id="111-verify_enginepyfiledkelk207-kelkcalcvverify_enginepy"><a class="toclink" href="#111-verify_enginepyfiledkelk207-kelkcalcvverify_enginepy">11.1 引擎验证（[verify_engine.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/verify_engine.py)）</a><a class="headerlink" href="#111-verify_enginepyfiledkelk207-kelkcalcvverify_enginepy" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>工况</th>
+<th>介质</th>
+<th>相态</th>
+<th>Cv</th>
+<th>流态</th>
+<th>噪音 dB(A)</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>水-正常</td>
+<td>水</td>
+<td>liquid（自动）</td>
+<td>64.78</td>
+<td>非阻塞(湍流)</td>
+<td>78.2</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>过热蒸汽</td>
+<td>水</td>
+<td>gas（自动）</td>
+<td>31.86</td>
+<td>亚临界(非阻塞)</td>
+<td>48.8</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>空气</td>
+<td>空气</td>
+<td>gas</td>
+<td>100.01</td>
+<td>亚临界(非阻塞)</td>
+<td>65.9</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>气液两相</td>
+<td>水+空气</td>
+<td>twophase</td>
+<td>59.62</td>
+<td>亚临界-叠加</td>
+<td>-</td>
+<td>成功</td>
+</tr>
+</tbody>
+</table>
+<h3 id="112-api-verify_apipyfiledkelk207-kelkcalcvverify_apipy"><a class="toclink" href="#112-api-verify_apipyfiledkelk207-kelkcalcvverify_apipy">11.2 API 端到端验证（[verify_api.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/verify_api.py)）</a><a class="headerlink" href="#112-api-verify_apipyfiledkelk207-kelkcalcvverify_apipy" title="Permanent link">&para;</a></h3>
+<p>5 组工况并行计算结果：</p>
+<table>
+<thead>
+<tr>
+<th>工况</th>
+<th>介质</th>
+<th>相态</th>
+<th>Cv</th>
+<th>噪音 dB(A)</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>水-正常</td>
+<td>水</td>
+<td>liquid</td>
+<td>64.78</td>
+<td>78.2</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>水-最大</td>
+<td>水</td>
+<td>liquid</td>
+<td>77.85</td>
+<td>81.5</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>水蒸汽</td>
+<td>水</td>
+<td>gas（自动）</td>
+<td>31.86</td>
+<td>48.8</td>
+<td>成功</td>
+</tr>
+<tr>
+<td>空气-正常</td>
+<td>空气</td>
+<td>gas</td>
+<td>100.01</td>
+<td>65.9</td>
+<td>警告</td>
+</tr>
+<tr>
+<td>空气-最小</td>
+<td>空气</td>
+<td>gas</td>
+<td>62.51</td>
+<td>50.7</td>
+<td>成功</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="12"><a class="toclink" href="#12">12. Noise 2.3 Excel 与当前引擎差异分析（修订基线 v1.1）</a><a class="headerlink" href="#12" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>目的</strong>：逐条对比 VALTEK Noise 2.3.xlsm 计算表（FluidData / PipeData / ValveData / Noise 四个页签）与系统当前实现的<strong>数据来源、单位体系、公式步骤与判定准则</strong>，作为以后修订计算引擎的依据。标注为 P0 / P1 / P2 的差异项为建议优先级。</p>
+</blockquote>
+<h3 id="121"><a class="toclink" href="#121">12.1 数据来源与数据字典（Excel → 数据库）</a><a class="headerlink" href="#121" title="Permanent link">&para;</a></h3>
+<p>Excel 原始 <code>Noise 2.3.xlsm</code> 三张数据页签已按 v1.1 迁移到 SQL Server 三张新表：</p>
+<table>
+<thead>
+<tr>
+<th>页签</th><th>区段</th><th>新表</th><th>记录数</th><th>关键字段</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FluidData</td><td>Row 103-150 Fluid Properties</td><td><code>fluids</code>（扩展列，50+列）</td><td>48（合并原有 20 条后共 58 条）</td><td>fluid_name / fluid_name_cn / formula / molecular_weight / critical_temp(K) / critical_pressure(barA→kPa abs) / antoine_a,b,c,antoine_tmin_k / boiling_point(K) / cp_cv_ratio(k) / acentric_factor(ω) / gf_constant(GFB) / cp_a..d(Kyle 型) / savage_c1..c9 / shomate_a..h</td>
+</tr>
+<tr>
+<td>FluidData</td><td>Row 9-101 Fluid Synonyms</td><td><code>fluids.specific_name / fluid_name_cn / valtek_no</code></td><td>-</td><td>specific_name 保留 Valtek 别名列；fluid_name_cn 由「介质名称对照中英文.xlsx」规范化匹配补齐，常见介质 7 条手工修正；valtek_no 为 FluidData 列 C 编号</td>
+</tr>
+<tr>
+<td>PipeData</td><td>Row 6-302 NPS×Sch 组合</td><td><code>pipe_data</code></td><td>251</td><td>lookup_key / nps_label / dn_mm / schedule / od_in &amp; od_mm / thk_in &amp; thk_mm / id_in &amp; id_mm（两套单位同时保留）</td>
+</tr>
+<tr>
+<td>ValveData</td><td>Row 4-23 Table 1. Sizing Indices</td><td><code>valve_sizing_indices</code></td><td>20</td><td>valve_type / cv_per_d2 / fl / xt / fd / kc / opt_pn(1 或 2) / no_coefficient(varchar) / aeta_db / stp / d_spl_sw_db / fd_flag</td>
+</tr>
+<tr>
+<td>ValveData</td><td>Row 28-51 Nominal Valve Size（NVS 矩阵）</td><td><code>valve_nominal_sizes</code></td><td>24</td><td>size_label / nps_in / dn_mm / id_class_150,300,600,900,1500,2500,4500（7 级压力等级的额定阀腔内径 mm）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>已完成的基础数据迁移工作</strong>（详见 [import_noise_data.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/import_noise_data.py)）：</p>
+<ul>
+<li>所有介质 English Name → 中文 Name 通过规范化（去空格/短横线/括号）键匹配；7 条常见介质手动补齐。</li>
+<li>Pc 单位：Excel 为 barA，入库统一乘 100 转为 kPa(abs)。</li>
+<li>PipeData 自动按 1 in = 25.4 mm 换算并存入两套单位列。</li>
+<li>ValveData 上半段 20 种阀型系数与下半段 24×7 额定通径矩阵分表存放，避免混淆。</li>
+</ul>
+
+<h3 id="122"><a class="toclink" href="#122">12.2 单位体系对比</a><a class="headerlink" href="#122" title="Permanent link">&para;</a></h3>
+<table>
+<thead><tr><th>物理量</th><th>Noise Excel 主单位</th><th>当前系统内部单位</th><th>差异</th></tr></thead>
+<tbody>
+<tr><td>压力 P</td><td>barA (rows 101, 128, 170)</td><td>kPa(abs)</td><td>1 barA = 100 kPa(abs)；入库 fluids.critical_pressure 已转换；计算时 P1/P2/Pc 若来源于 Excel 数据需 ×100</td></tr>
+<tr><td>温度 T</td><td>℃（deg C，row 102）但 Tc/TB 以 K 存储</td><td>℃（输入/输出），内部转 K</td><td>一致；Antoine 方程 Excel 使用 T(K)+C 下限温度列 T(LowerLimit) = LmLim 存 K，需保持一致</td></tr>
+<tr><td>流量 W</td><td>kg/h（row 109/111）</td><td>kg/h</td><td>一致</td></tr>
+<tr><td>体积流量 Qg</td><td>Nm³/h</td><td>Nm³/h</td><td>一致；理想气体换算 W = Qg·1.01325·MW/(0.083143·273.15)（row 111）</td></tr>
+<tr><td>管径 OD/Thk/ID</td><td>in.（row 4-5 PipeData）</td><td>mm</td><td>Excel 在 row 88-90 使用 Conv 单位函数转换；系统直接存 mm 值即可</td></tr>
+<tr><td>Cv / Kv</td><td>美制 Cv（row 142 公式）</td><td>美制 Cv</td><td>一致；Kv = 0.865·Cv 换算</td></tr>
+<tr><td>动能 KE</td><td>bar（row 54/60/73）</td><td>kPa 或 bar（尚未完整支持）</td><td>Excel 广泛使用动能指标（<strong>P0</strong> 建议新增 KE 计算模块）</td></tr>
+</tbody>
+</table>
+
+<h3 id="123"><a class="toclink" href="#123">12.3 Cv 计算差异（气体/蒸汽重点）</a><a class="headerlink" href="#123" title="Permanent link">&para;</a></h3>
+<table>
+<thead><tr><th>步骤</th><th>Noise Excel（Noise 页签公式）</th><th>当前 KELKCalCv 引擎</th><th>级别 / 建议</th></tr></thead>
+<tbody>
+<tr>
+<td>Fk 比热比系数</td>
+<td>row 104: <code>Fk = k / 1.4</code></td>
+<td><a href="cv_gas.py">cv_gas.py</a> 使用 <code>Fγ = γ / 1.4</code></td>
+<td>✅ 一致</td>
+</tr>
+<tr>
+<td>Z 压缩因子</td>
+<td>row 106: 水/蒸汽使用 wtr* 函数，其它介质按公式（含 Option 5）</td>
+<td>始终取 Z=1（理想气体）</td>
+<td><strong>P1</strong> 建议按介质库 GF 常数/对比态实现 Z</td>
+</tr>
+<tr>
+<td>ρ1 密度</td>
+<td>row 107: 水使用 IAPWS；非水 FluidNameρ1() 函数</td>
+<td>properties.py gas_density 使用 P·MW/(Z·R·T)</td>
+<td>✅ 主体一致；建议补充 Antoine 蒸汽压</td>
+</tr>
+<tr>
+<td>c1 进口声速</td>
+<td>row 108: <code>c1 = GasPRhokc(P1, ρ1, k, 1) = √(10⁵·k·P1/ρ1)</code></td>
+<td>properties.py gas_speed_of_sound = √(γ·R·T/M)</td>
+<td>✅ 两式等价</td>
+</tr>
+<tr>
+<td>阻塞压差判定</td>
+<td>row 158 按 5 级分区间（详见 12.4 噪音分段）；Cv 侧 row 142 用 <code>Cv = 38·d²_Core·/√(2·K_GAS²)</code> 等 GasCv / GasCvP1 函数族</td>
+<td>cv_gas.py 按 x / Fγ·xT 判阻塞 / 非阻塞，使用 Y = 1 - x/(3·Fγ·xT)</td>
+<td><strong>P0</strong> 当前 Cv 公式与 IEC 主公式一致；但缺少 Excel 中 <code>GasCvP1</code>（由 W、ρ2、T、k、xT、Cv 反推阀前压力）迭代，对涡轮旁路/减温减压必须（row 143/190 CHOOSE OptPn 路径）</td>
+</tr>
+<tr>
+<td>管件修正 Fp / FLp / xTp</td>
+<td>rows 93-98：完整实现 K1、K2、KB 与 Fp = 1/√(1 + ΣK·Cd²/0.00214)、FLp = FL/√(1 + ΣK·FL²·Cd²/0.00214)、xTp = xT/Fp²·(1 + ΣK·xT·Cd²/0.00241)</td>
+<td>已实现但需用户手工输入 flp/fp/xtp；未按 NVS vs D1 自动计算 K/KB</td>
+<td><strong>P0</strong> 建议按 Excel row 92 取 NVS（即 valve_nominal_sizes 表）按 Class 压力等级、通径 自动算 K1、KB1、FLp、Fp、xTp</td>
+</tr>
+<tr>
+<td>Cv_required → 阀座直径</td>
+<td>row 117: Dplgcv = √(4·Cv·(1+OCM) / (21/25.4²·π)) (BF); 通用 d(in) = √(Cv/(Cv_per_d2))，再 ×25.4 → mm</td>
+<td>ValveConfig.port_diameter 用户手工输入</td>
+<td><strong>P1</strong> 可用 valve_sizing_indices.cv_per_d2 给出推荐阀芯直径</td>
+</tr>
+<tr>
+<td>液体 Re 修正</td>
+<td>Excel 无显式修正；但节流噪声部分包含 FD 射流修正</td>
+<td>cv_core.py 仅给出 FL、xT</td>
+<td>P2</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="124"><a class="toclink" href="#124">12.4 气体气动噪音预测差异（重点）</a><a class="headerlink" href="#124" title="Permanent link">&para;</a></h3>
+<p>Noise 页签核心部分 R128-R186 构成 5 区段判定 + 2 级声音传播模型，当前系统为简化单峰模型：</p>
+<h4 id="1241">12.4.1 压力区域分段（Excel R158 五区模型，已按 E 列精确公式核对）</h4>
+<p><strong>中间压力参数（统一单位 barA，再入库按 ×100 → kPa(abs)）</strong>：</p>
+<ul>
+<li>R143 <code>P1' (Pn)</code>：CHOOSE(OptPn, P1, <em>GasCvP1 迭代反推</em>)；OptPn 从 valve_sizing_indices.opt_pn 读取（1=直取 P1，2=涡轮旁路迭代）。</li>
+<li>R152 <code>Pvc（喉部静压，区段 1/2）</code>：P1' - (P1' - P2) / (FLp/Fp)²  — 注意：<strong>分母是 (FLp/Fp)² 而非 FLp²</strong>（R97 = FLp/Fp）。</li>
+<li>R153 <code>Pvc_crit（临界喉部压力，区段 3/4/5）</code>：P1' · (2/(k+1))^(k/(k-1))  （等熵临界声速状态）。</li>
+<li>R154 <code>P2C（区段1↔2分界，P2_crit）</code>：P1' - (FLp/Fp)² · (P1' - Pvc_crit)。</li>
+<li>R155 <code>α</code>：Pvc_crit / P2C（2-3 区膨胀比，后续 fp 使用）。</li>
+<li>R156 <code>P2B（区段2↔3↔4分界，Breakpoint）</code>：P1' / α · (1/k)^(k/(k-1))。</li>
+<li>R157 <code>P2CE（区段4↔5分界，恒声效起点）</code>：P1' / (22 · α)。</li>
+</ul>
+<p><strong>区段判定（R158）</strong>：<code>Regime = IF(P2 &gt; P2C, 1, IF(P2 &gt; Pvc_crit, 2, IF(P2 &gt; P2B, 3, IF(P2 &gt; P2CE, 4, 5))))</code>。</p>
+<table>
+<thead><tr><th>区段</th><th>物理含义（P2 范围）</th><th>Pvc 取法</th><th>机械功率取法（R177 外层 IF）</th><th>声效率 η 因子（R177 CHOOSE × 10^Aeta）</th></tr></thead>
+<tbody>
+<tr><td>1 亚临界</td><td>P2 &gt; P2C</td><td>R152: P1'-(P1'-P2)/(FLp/Fp)²</td><td>Wm(区段1动能) = W/3600 · Uvc² / 2 (R160)</td><td>(FLp/Fp)² · Ma_vc^3.6</td></tr>
+<tr><td>2 中等阻塞</td><td>P2C ≥ P2 &gt; Pvc_crit</td><td>同区段 1（仍亚临界膨胀）</td><td>Wms(临界动能) = W/3600 · Uvc_crit_sat² / 2 (R168)</td><td>(P1'-P2)/(P1'-Pvc_crit) · Mj^(6.6·(FLp/Fp)²)</td></tr>
+<tr><td>3 强阻塞前半段</td><td>Pvc_crit ≥ P2 &gt; P2B</td><td>R153 Pvc_crit（等熵临界）</td><td>Wms (R168)</td><td>Mj^(6.6·(FLp/Fp)²)</td></tr>
+<tr><td>4 恒声效段起点</td><td>P2B ≥ P2 &gt; P2CE</td><td>Pvc_crit</td><td>Wms (R168)</td><td>Mj²/2 · √2^(6.6·(FLp/Fp)²)</td></tr>
+<tr><td>5 恒声效/超自由膨胀</td><td>P2CE ≥ P2</td><td>Pvc_crit</td><td>Wms (R168)</td><td>同区段 4</td></tr>
+</tbody>
+</table>
+<p>R177 综合：<code>Wa = IF(Reg=1, Wm, Wms) · 10^Aeta · CHOOSE(Reg, …)</code>；Aeta 从 valve_sizing_indices.aeta_db 读取（Standard Vector Choke=-4.8dB，Top guided=-4dB，Cage Guided Flow to Close=-3.6dB …）。</p>
+<blockquote>
+<p><strong>P0 差异项</strong>：当前系统 <code>noise.predict_gas_noise</code> 仅以 <code>choked = x ≥ Fγ·xT</code> 为亚/临界两段。建议按 Excel 五区模型重构，并引入 aeta_db、stp、d_spl_sw_db（valve_sizing_indices 第 9/10/11 列）取代当前 NOISE_CFG 中的硬编码 eta_subsonic、eta_sonic 与 strouhal。</p>
+</blockquote>
+
+<h4 id="1242">12.4.2 喉部马赫、自由膨胀马赫、峰值频率（Excel R159/R167/R169/R178 精确式）</h4>
+<ul>
+<li>R159 <code>Uvc（m/s，区段1/2实际喉部速度）</code>：Uvc = √( 2·k/(k-1) · (1-(Pvc/P1')^((k-1)/k)) · P1'×10⁵ / ρ1' )。P1' 单位 bar → ×10⁵ 转 Pa；ρ1' 单位 kg/m³。</li>
+<li>R167 <code>Uvc_crit_sat（m/s，临界声速喉部，区段 2~5）</code>：√( 2·k/(k+1) · P1'×10⁵ / ρ1' )，即等熵膨胀至 M=1 对应的动能速度。</li>
+<li>R162 <code>c_vc 喉部声速</code>：√(10⁵·k·P1/ρ1)（进口声速近似）。Ma_vc = Uvc / c_vc（R163）。</li>
+<li>R169 <code>Mj（自由射流马赫，区段 2~5 核心量）</code>：√( 2/(k-1) · ( MIN(22, P1'/(α·P2))^((k-1)/k) - 1 ) )。当 P1'/(α·P2) ≥ 22 时，<strong>Excel 强行按 22 封顶</strong>（限制膨胀上限），避免 Mj 异常放大。此为实现关键。</li>
+<li>R178 <code>fp（峰值频率 Hz）= CHOOSE(Reg, Ma_vc·c1, Mj·Uvc_crit_sat, Mj·Uvc_crit_sat, 1.4·Uvc_crit_sat/√(Mj²-1), 1.4·Uvc_crit_sat/√(Mj²-1)) × Stp / Dj</code>；Dj（R151）= 4.9e-3 · FD · √(Cv · (FLp/Fp))  （单位 m）。Stp 从 valve_sizing_indices.stp 读取。</li>
+<li>当前引擎：<code>U_vc ≈ U2 / FL</code> 并被声速上限截断；<code>f_p ≈ 0.2·U_vc / (0.6·D)</code> — 均与 Excel 能量守恒式、5 区段 CHOOSE 不符，导致 Uvc/Mj/fp 估计系统性偏差。<strong>P0</strong>：按上述精确式替换。</li>
+</ul>
+
+<h4 id="1243">12.4.3 声功率级 → 外部声压级（Excel R176/R179/R180/R181/R186）</h4>
+<p>Excel 的 5 步外部声压级传播：</p>
+<ol>
+<li>R177 <strong>声功率 Wa (W)</strong> = IF(Reg=1,Wm,Wms) · 10^Aeta · CHOOSE(Reg, η因子) — 详见 12.4.1。</li>
+<li>R176 <strong>Ma 修正 Lg (dB)</strong>：16 · log10( 1/(1 - MIN(M2, 0.3)) )，M2 为出口马赫（R175=Up/c2）；当 M2 ≥ 0.3 时修正封顶 16·log10(1/0.7) ≈ 1.5 dB。</li>
+<li>R179 <strong>EarlyAdder (dB)</strong>：ValveData OptPn=2（涡轮旁路型），若多级降压 StgNeeded≥2 则附加 dB，否则为 0；常规阀 (OptPn=1) 恒为 0。</li>
+<li>R180 <strong>内部声压级 Lpi (dB)</strong> = 10·log10( 3.2×10⁹ · Wa · ρ2 · c2 / D_ID(m)² ) + Lg + EarlyAdder。<code>3.2×10⁹</code> 为 VAX 风格声强→声压级常数（IEC 典型值 4ρc/π≈ 4·1.2·340/3.14≈520；此处 3.2e9 为 W→p² 的内建尺度，不建议随意改动）。</li>
+<li>管壁传声损失（R181~R184）→ <code>NoiseLpe1m(D_ID_m, D_Thk_m, ρ2, c2, fpeak, Lpi, PDamp, fRing, fCi, fCe)</code> 黑盒函数（R186 直接调用）。<br />其中 R181 PDamp（管径阻尼）：D&gt;0.15m 时 0dB，D&lt;0.05m 时 +9dB，中间 -16660·D³；R182 RingFreq=5000/(π·D)；R183/R184 为内/外吻合频率。</li>
+</ol>
+<p>当前引擎差异：</p>
+<table>
+<thead><tr><th>模块</th><th>Noise Excel</th><th>noise.py（现行）</th><th>优先级</th></tr></thead>
+<tbody>
+<tr><td>η 效率</td><td>Aeta(dB) × 5 区段 × FLp² 幂函数</td><td>eta_subsonic=1.2e-3, eta_sonic=1e-2，按 Ma^3.5</td><td><strong>P0</strong>：改用 Aeta_db + 区段 CHOOSE 公式</td></tr>
+<tr><td>马赫修正</td><td>R176：16·log(1/(1-min(Ma, 0.3)))</td><td>NOISE_CFG a_weight_correction -2dB</td><td><strong>P1</strong>：引入 R176 公式 + A 计权谱修正</td></tr>
+<tr><td>峰值频率 fp</td><td>CHOOSE(Regime, Ma_vc·c1, Ma_free·c_vc_sat, ...) × Stp / D_jet_m</td><td>0.2·Uvc / (0.6·D_mm)</td><td><strong>P1</strong>：按 5 区段 CHOSSE 公式；Stp 从 valve_sizing_indices.stp 读取</td></tr>
+<tr><td>管壁传声 TL</td><td>R181/182/183/184 + NoiseLpe1m 黑盒</td><td>质量-弹簧近似：10·log(1 + (m''·ω/ρc)²) + ...</td><td><strong>P0</strong>：若不反编译 NoiseLpe1m 宏，建议以 IEC 60534-8-3:2019 中 TL 的 Table 7 分段查表法替代</td></tr>
+<tr><td>小阀修正</td><td>Aeta = -4.8 且 NVS &lt; 178 → 0.08(NVS-200)</td><td>未实现</td><td>P2</td></tr>
+<tr><td>dSPLsw 管壁/路径修正</td><td>ValveData 表列 11 直接加入（R77 喷嘴水修正 -5dB；R76 涡轮旁路 -10dB）</td><td>未实现</td><td>P1</td></tr>
+</tbody>
+</table>
+
+<h3 id="125"><a class="toclink" href="#125">12.5 液体水动力噪音预测差异</a><a class="headerlink" href="#125" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Excel Noise 表按应用类型（常规 / Turbine Bypass / Steam Conditioning）分别套用 Allowable KE：row 82 KEaplg = 4.85 bar（或 10.35 bar 旁路）；row 83 KEavr = 3.45 / 6.9 bar。</li>
+<li>当前系统 predict_liquid_noise 仅基于 Pow·η，尚未区分空化/闪蒸/纯湍流三路 η。<strong>P1</strong>：引入 Excel 中的 CavIndex σ = (P2-Pv)/(P1-Pv) 与 σ/σcrit 分区的 η 公式。</li>
+<li>液体 Kc：ValveData 表第 6 列 Kc 已导入 valve_sizing_indices，当前引擎未引用；<strong>P1</strong>：空化判定 σ &lt; Kc·FL² 时开始 Cavitation；σ &lt; FL² 时开始 choked cavitation（Flashing）。</li>
+</ul>
+
+<h3 id="126"><a class="toclink" href="#126">12.6 计算步骤对照表：Excel Row 编号 ↔ 引擎函数</a><a class="headerlink" href="#126" title="Permanent link">&para;</a></h3>
+<table>
+<thead><tr><th>计算阶段</th><th>Excel Noise 页 row</th><th>当前代码位置</th><th>状态</th></tr></thead>
+<tbody>
+<tr><td>P1 / T1 / k / MW / Z / ρ1 / c1 入口条件</td><td>101-108</td><td>engine._resolve_fluid_properties → properties</td><td>✅ 主要一致（缺 Z；Excel 水/蒸汽使用 wtrPTD 系列 IAPWS 函数）</td></tr>
+<tr><td>流量类型转换（体积→质量）</td><td>109-111</td><td>engine.calculate_case 前段</td><td>✅ 一致；Qg Nm³/h→kg/h 的公式 row111 与 properties 等价</td></tr>
+<tr><td>管道 OD/Thk/ID 取 NPS/Sch (VLOOKUP PipeData)</td><td>88-90</td><td>用户手工输入（ProcessCase.line_size / line_schedule / wall_thickness）</td><td>P1：可直接 pipe_data 查 (nps_label, schedule) → od_mm, thk_mm, id_mm 自动回填</td></tr>
+<tr><td>阀门 NVS 通径查表（VLOOKUP ValveData 下半段 row28-51 × Class 列）</td><td>92 (NVS1/NVS2)</td><td>未使用</td><td>P0：接入 valve_nominal_sizes；按压力等级 150~4500 取 id_class_xxx → dv1/dv2 用于 K1/KB</td></tr>
+<tr><td>K1、K2、KB1、KB2 → Fp、FLp、(FLp/Fp)、xTp</td><td>93-98 (公式列 E93:E98)</td><td>ValveConfig 由用户输入 flp/fp/xtp，未自动算</td><td>P0：按 row 93-98 自动算；K1=0.5(1-(dv1/D1)²)², KB1=1-(dv1/D1)^4</td></tr>
+<tr><td>Cv_required / Kv（IEC 公式族）</td><td>142（含 CHOOSE OptPn 第2分支 GasCv）</td><td>cv_gas / cv_liquid / cv_twophase</td><td>✅ 主体一致；但缺 GasCvP1 反推 P1' 的迭代（OptPn=2 必须）</td></tr>
+<tr><td>Effective Pressure P1' / Pn（CHOOSE OptPn 迭代）</td><td>143</td><td>未做</td><td>P0：涡轮旁路 / Custom Vector Choke 等 OptPn=2 阀型必须</td></tr>
+<tr><td>do / dh → Fd（射流直径系数，FD）</td><td>148(do=√(4·CoreArea/π))→149(dh=4A/P)→150(FD=dh/do 或 1/FD_input²)</td><td>未做；用户手工输入 ValveConfig.fd</td><td>P1：按 core area / wetted perimeter 自动估 FD；对常规阀可直接取 valve_sizing_indices.fd 表值</td></tr>
+<tr><td>Dj（射流直径 m）× Cv</td><td>151 Dj = 4.9e-3 · FD · √(Cv · (FLp/Fp))</td><td>未做；当前使用 0.6·D_pipe 近似</td><td>P0：直接影响 fp（斯特劳哈尔基准直径），应替换</td></tr>
+<tr><td>Pvc / Pvc_crit / P2C / α / P2B / P2CE → Regime 1..5</td><td>152-158</td><td>仅 2 段阻塞/非阻塞 choked 判定</td><td>P0：补齐 5 段；注意分母 (FLp/Fp)² 以及 P1'/(α·P2) MIN(22) 封顶</td></tr>
+<tr><td>Uvc / Uvc_crit_sat / Ma_vc / Mj</td><td>159-169</td><td>Uvc ≈ U2 / FL</td><td>P0：替换为 R159/R167/R169 精确式；Mj 的 MIN(22, P1'/(α·P2)) 不能漏</td></tr>
+<tr><td>Wa 声功率（CHOOSE regime × 10^Aeta × η幂因子）</td><td>177</td><td>eta_subsonic/sonic × Pow</td><td>P0：改 Aeta + 5 区段 CHOOSE 公式</td></tr>
+<tr><td>fp 峰值频率 × Stp / Dj</td><td>178 × R164/R165/R151</td><td>0.2 × Uvc / 0.6D</td><td>P1：5 区段 CHOOSE + Stp(从表取) + Dj(R151)</td></tr>
+<tr><td>内部 Lpi + Ma修正 + EarlyAdder</td><td>176/179/180</td><td>Lwi = 10log(Wa/Wref)</td><td>P0：Lpi = 10log(3.2e9·Wa·ρ2·c2/D²) + 16log(1/(1-min(M2,0.3))) + Early</td></tr>
+<tr><td>管壁传声 TL → NoiseLpe1m → 距管壁 1m LpAe1m</td><td>181-184 → R186</td><td>当前 TL 简化公式 + A_weight_correction=-2dB</td><td>P0：实现 IEC Annex D/E 或厂家实测；至少补充 R181 PDamp 管径阻尼 + R182 RingFreq</td></tr>
+<tr><td>Dplg_KE / Dplg_Cv → 阀芯直径推荐 vs KE 阈值</td><td>115-119 vs 82/83 KEaplg/KEavr</td><td>未做</td><td>P1：TurboBypass KE 阈值高(10.35/6.9 bar)，常规 4.85/3.45 bar；避免阀芯/管道过度冲击</td></tr>
+<tr><td>液体 KE（Allowable Kinetic Energy）校核 vs Kc / σ</td><td>54/60/73 vs 82/83</td><td>未做</td><td>P1：液体 σ/Kc 分区 + Kc（valve_sizing_indices.kc 第 6 列）引用</td></tr>
+<tr><td>外部出口管道二次噪音 / FlowDistributor / Outlet Expander</td><td>187-198</td><td>未实现</td><td>P2</td></tr>
+<tr><td>最小 / 多级降压 StgNeeded</td><td>52-53 StgNeeded()</td><td>未实现</td><td>P2：高 ΔP 工况必需；与 R179 EarlyAdder 关联</td></tr>
+</tbody>
+</table>
+
+<h3 id="127"><a class="toclink" href="#127">12.7 阀门系数来源：valve_sizing_indices 与 valve_types 的对应</a><a class="headerlink" href="#127" title="Permanent link">&para;</a></h3>
+<p>ValveData 表 20 条记录中，按大类可与 valve_types 三类对应（Globe / Ball / Butterfly），但<strong>具体系列名仍需工程手动映射</strong>（GC120 等 KELK 产品系列 → Excel 中的 "Cage Guided, Drilled Hole, =%, Full" 等）。建议在 valve_types 新增 <code>sizing_index_id</code> 外键，<strong>P1</strong> 级。</p>
+
+<h3 id="128"><a class="toclink" href="#128">12.8 实施优先级路线图</a><a class="headerlink" href="#128" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>P0 必改项（2026-Q4 前完成）</strong>
+<ul>
+<li>噪音 5 区段 Regime + Aeta + Stp + NVS→K1/KB/Fp/FLp/xTp 自动化。</li>
+<li>Effective P1' 迭代（涡轮旁路 / 高降压阀门）。</li>
+<li>液体 σ/Kc 分区与 FD、Kc 引用 valve_sizing_indices。</li>
+<li>Excel R159 Uvc 能量公式替换现行简化近似。</li>
+</ul>
+</li>
+<li><strong>P1 建议项（下一版本）</strong>
+<ul>
+<li>Z 压缩因子（GFB、ω 对比态）、Antoine 蒸汽压用于 Pv、水外介质的真实比热 Cp(T)（Kyle/Savage 多项式）。</li>
+<li>PipeData 接入工艺工况录入（NPS/Sch 下拉 → OD/Thk/ID 自动回填）。</li>
+<li>Cv_required → 阀芯直径推荐（Dplgcv/Dplgke）。</li>
+<li>噪音：小阀修正 + dSPLsw 应用级修正 + Ma 修正。</li>
+</ul>
+</li>
+<li><strong>P2 增强项（长期）</strong>
+<ul>
+<li>多级降压 / FlowDistributor / Expander 计算、StgNeeded。</li>
+<li>雷诺数 Fr、开度曲线 Cv(h) 与实际行程-噪音修正。</li>
+<li>NoiseLpe1m 反编译或更完整的 IEC 倍频程法。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="13"><a class="toclink" href="#13">13. 修订记录表</a><a class="headerlink" href="#13" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>后续对计算引擎的任何修改，请在此表登记版本、修改内容、影响范围、修改人、日期。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>修改内容</th>
+<th>影响文件</th>
+<th>修改人</th>
+<th>日期</th>
+<th>验证方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v1.0</td>
+<td>初始版本，实现 IEC 60534 Cv 计算 + 噪音预测（简化单峰模型）、单位转换、项目/位号/工况管理、SQL Server 存储。</td>
+<td>cv_core / cv_liquid / cv_gas / cv_twophase / noise / properties / engine / units</td>
+<td>-</td>
+<td>2026-08-31</td>
+<td>verify_engine.py + verify_api.py</td>
+</tr>
+<tr>
+<td>v1.1</td>
+<td>① 从 Noise 2.3.xlsm FluidData 合并 48 条介质（50+ 物性列）并补齐中文（fluids 共 58 条）；② 新增 pipe_data（251 条 NPS×Sch）、valve_sizing_indices（20 条阀型系数 Aeta/Stp/Kc/FL/xT…）、valve_nominal_sizes（24 条×7 级压力 NVS 通径）；③ 新增 §12 差异分析，逐条核对 Excel 五区段 Regime / Wa / Uvc / Mj / fp / Lpi 公式并对照现行 noise.py 指出 16 项 P0/P1/P2 修改点；④ 建立 §12.8 实施路线图（P0: 2026-Q4 必改：Regime×Aeta+NVS→Fp/FLp/xTp 自动化 + P1' 迭代 + Uvc/R159 + σ/Kc 液体分区；P1/P2 下版本增强）。</td>
+<td>models / schemas / import_noise_data.py / 本计算过程文档.html §12</td>
+<td>zhaorong</td>
+<td>2026-09-02</td>
+<td>导入脚本跑完 fluids=58 / pipe_data=251 / valve_sizing_indices=20 / valve_nominal_sizes=24；Excel 公式 R93-98, R143, R152-159, R167, R169, R176-181, R186 人工核对。</td>
+</tr>
+<tr>
+<td><br /></td>
+<td><br /></td>
+<td><br /></td>
+<td><br /></td>
+<td><br /></td>
+<td><br /></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_2"><a class="toclink" href="#_2">修订检查清单</a><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>修改计算引擎时，请逐项确认：</p>
+<ul>
+<li>
+<p>[ ] <strong>数值常数</strong>：K_LIQ、K_GAS、N2 是否需要调整？（当前经算例锁定）</p>
+</li>
+<li>
+<p>[ ] <strong>阀门系数</strong>：FL、xT、FD 默认值是否符合当前阀门类型？（默认 FL=0.9, xT=0.72, FD=0.46 为单座柱塞阀典型值）</p>
+</li>
+<li>
+<p>[ ] <strong>噪音系数</strong>：NOISE_CFG 中的 eta/strouhal/tl_floor 是否按厂家样本或实测更新？</p>
+</li>
+<li>
+<p>[ ] <strong>物性来源</strong>：水介质是否仍用 IAPWS-IF97？其它介质理想气体假设是否成立？</p>
+</li>
+<li>
+<p>[ ] <strong>两相流方法</strong>：叠加法/均相法选择是否适用于实际工况？是否需实现闪蒸流模型？</p>
+</li>
+<li>
+<p>[ ] <strong>雷诺数修正</strong>：当前仅提示未执行 Fr 修正，低雷诺数工况是否需要实际修正？</p>
+</li>
+<li>
+<p>[ ] <strong>算例验证</strong>：修改后是否通过 verify_engine.py 与 verify_api.py？</p>
+</li>
+<li>
+<p>[ ] <strong>文档同步</strong>：修改后是否更新本文档对应章节与修订记录表？</p>
+</li>
+</ul>
+<hr />
+<h2 id="_3"><a class="toclink" href="#_3">附录：关键文件索引</a><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>职责</th>
+<th>关键函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[cv_core.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_core.py)</td>
+<td>共享常数、数据结构、阀门系数工具</td>
+<td><code>compute_fp</code>, <code>fl_effective</code>, <code>xt_effective</code>, <code>reynolds_number</code></td>
+</tr>
+<tr>
+<td>[cv_liquid.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_liquid.py)</td>
+<td>液体 Cv 计算</td>
+<td><code>calculate_cv_liquid</code>, <code>_liquid_regime</code></td>
+</tr>
+<tr>
+<td>[cv_gas.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_gas.py)</td>
+<td>气体/蒸汽 Cv 计算</td>
+<td><code>calculate_cv_gas</code></td>
+</tr>
+<tr>
+<td>[cv_twophase.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/cv_twophase.py)</td>
+<td>两相流 Cv 计算</td>
+<td><code>calculate_cv_twophase</code></td>
+</tr>
+<tr>
+<td>[noise.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/noise.py)</td>
+<td>噪音预测</td>
+<td><code>predict_gas_noise</code>, <code>predict_liquid_noise</code></td>
+</tr>
+<tr>
+<td>[properties.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/properties.py)</td>
+<td>介质物性</td>
+<td><code>water_properties</code>, <code>gas_density</code>, <code>gas_speed_of_sound</code></td>
+</tr>
+<tr>
+<td>[engine.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/backend/app/calc/engine.py)</td>
+<td>引擎编排</td>
+<td><code>calculate_case</code>, <code>_resolve_fluid_properties</code></td>
+</tr>
+<tr>
+<td>[verify_engine.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/verify_engine.py)</td>
+<td>引擎验证</td>
+<td>-</td>
+</tr>
+<tr>
+<td>[verify_api.py](file:///d:/KELK办公/信息化工作/207 自研系统/KELKCalCv/verify_api.py)</td>
+<td>API 联调验证</td>
+<td>-</td>
+</tr>
+</tbody>
+</table></main>
+</div>
+</body>
+</html>

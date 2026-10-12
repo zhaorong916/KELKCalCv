@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>计算引擎迭代 — KELKCalCv 差异对照与修订依据</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #0f3460; --text: #e0e0e0;
+  --green: #00b894; --yellow: #fdcb6e; --red: #e17055; --blue: #74b9ff;
+  --border: #2d3748; --code-bg: #0d1117; --diff-del: #3d1f1f; --diff-add: #1a3a1a;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "Microsoft YaHei", "Segoe UI", sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.7; padding: 20px;
+  max-width: 1400px; margin: 0 auto;
+}
+h1 { color: var(--blue); border-bottom: 2px solid var(--accent); padding-bottom: 10px; margin-bottom: 20px; font-size: 1.6em; }
+h2 { color: var(--green); margin: 30px 0 15px; padding: 8px 12px; background: var(--card); border-left: 4px solid var(--green); border-radius: 4px; font-size: 1.3em; }
+h3 { color: var(--yellow); margin: 20px 0 10px; font-size: 1.1em; }
+h4 { color: var(--blue); margin: 15px 0 8px; }
+p { margin: 8px 0; }
+ul, ol { margin: 8px 0 8px 25px; }
+li { margin: 4px 0; }
+code {
+  background: var(--code-bg); padding: 2px 6px; border-radius: 3px;
+  font-family: "Consolas", "Courier New", monospace; font-size: 0.9em; color: var(--green);
+}
+pre {
+  background: var(--code-bg); padding: 12px 16px; border-radius: 6px; overflow-x: auto;
+  border: 1px solid var(--border); margin: 10px 0; font-size: 0.88em; line-height: 1.5;
+}
+pre code { background: none; padding: 0; }
+table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9em; }
+th { background: var(--accent); color: var(--text); padding: 10px 12px; text-align: left; border: 1px solid var(--border); }
+td { padding: 8px 12px; border: 1px solid var(--border); vertical-align: top; }
+tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.8em; font-weight: bold; margin-right: 5px; }
+.tag-excel { background: var(--green); color: #fff; }
+.tag-proj { background: var(--blue); color: #fff; }
+.tag-diff { background: var(--red); color: #fff; }
+.tag-same { background: var(--green); color: #fff; }
+.tag-warn { background: var(--yellow); color: #333; }
+.tag-miss { background: #636e72; color: #fff; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 15px 0; }
+.card-diff { border-left: 4px solid var(--red); }
+.card-ok { border-left: 4px solid var(--green); }
+.card-warn { border-left: 4px solid var(--yellow); }
+.toc { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 20px 25px; margin: 20px 0; }
+.toc ol { margin-left: 20px; }
+.toc a { color: var(--blue); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.summary-box { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin: 20px 0; }
+.summary-item { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 15px; text-align: center; }
+.summary-num { font-size: 2em; font-weight: bold; }
+.summary-label { font-size: 0.85em; color: #a0a0a0; margin-top: 5px; }
+.diff-row:hover { background: rgba(116,185,255,0.05); }
+.formula { color: var(--yellow); }
+.note { background: rgba(253,203,110,0.1); border-left: 3px solid var(--yellow); padding: 10px 15px; margin: 10px 0; border-radius: 4px; }
+.warn-block { background: rgba(225,112,85,0.1); border-left: 3px solid var(--red); padding: 10px 15px; margin: 10px 0; border-radius: 4px; }
+.footer { margin-top: 40px; padding-top: 15px; border-top: 1px solid var(--border); text-align: center; color: #888; font-size: 0.85em; }
+</style>
+</head>
+<body>
+
+<h1>计算引擎迭代 — KELKCalCv 差异对照与修订依据</h1>
+
+<div class="card card-warn">
+<p><strong>文档性质：</strong>本文档对比 KELK 参考 Excel（Cv_2.1.xlsm / Aerodynamic Noise 3.6.xlsm）与本项目的计算方法与取数逻辑差异，作为今后计算引擎修订的依据。</p>
+<p><strong>参考文件：</strong><code>docs/计算过程文档.html</code>（不再更新，仅作历史参考）</p>
+<p><strong>生成日期：</strong>2026-09-02</p>
+</div>
+
+<div class="summary-box">
+  <div class="summary-item"><div class="summary-num" style="color:var(--green)">12</div><div class="summary-label">一致项</div></div>
+  <div class="summary-item"><div class="summary-num" style="color:var(--red)">15</div><div class="summary-label">差异项</div></div>
+  <div class="summary-item"><div class="summary-num" style="color:var(--yellow)">8</div><div class="summary-label">待迭代</div></div>
+</div>
+
+<div class="toc">
+  <strong>目录</strong>
+  <ol>
+    <li><a href="#sec1">总体架构与标准对照</a></li>
+    <li><a href="#sec1b">两份 Excel Cv 计算一致性结论</a></li>
+    <li><a href="#sec2">单位体系差异</a></li>
+    <li><a href="#sec3">液体 Cv 计算</a></li>
+    <li><a href="#sec4">气体 Cv 计算</a></li>
+    <li><a href="#sec5">两相流 Cv 计算</a></li>
+    <li><a href="#sec6">管件修正 Fp / Flp / xTP</a></li>
+    <li><a href="#sec7">雷诺数与粘度修正 Fr</a></li>
+    <li><a href="#sec8">气体噪音计算（IEC 60534-8-3）</a></li>
+    <li><a href="#sec9">液体噪音计算（IEC 60534-8-4）</a></li>
+    <li><a href="#sec10">介质物性服务</a></li>
+    <li><a href="#sec11">阀门系数表</a> — <a href="#sec11-1">§11.1 系数曲线表</a> / <a href="#sec11-2">§11.2 额定 Cv 表</a></li>
+    <li><a href="#sec12">迭代优先级与变更记录</a></li>
+  </ol>
+</div>
+
+<!-- ==================== 1. 总体架构 ==================== -->
+<h2 id="sec1">1. 总体架构与标准对照</h2>
+
+<table>
+<tr><th>维度</th><th><span class="tag tag-excel">Excel</span> Cv_2.1 / Noise 3.6</th><th><span class="tag tag-proj">项目</span> KELKCalCv</th><th>判定</th></tr>
+<tr><td>Cv 计算标准</td><td>ANSI/ISA-75.01.01-2002 (IEC 60534-2-1 Mod)</td><td>IEC 60534-2-1 / GB/T 17213.2</td><td><span class="tag tag-same">一致</span></td></tr>
+<tr><td>噪音计算标准</td><td>IEC 60534-8-3 Ed 3.0 (2010-11)</td><td>IEC 60534-8-3 (气体) / IEC 60534-8-4 (液体)</td><td><span class="tag tag-same">一致</span></td></tr>
+<tr><td>计算表单结构</td><td>Liquid / Gas / LiqGas / WtrStm 四个独立 Sheet</td><td>engine.py 统一路由，按 phase 分发到 cv_liquid / cv_gas / cv_twophase</td><td><span class="tag tag-same">等价</span></td></tr>
+<tr><td>内部 Cv 单位</td><td>Kv（公制），最后 Conv 转 Cv 输出</td><td>直接用 Cv（美制 US gpm/psi）</td><td><span class="tag tag-diff">差异</span></td></tr>
+<tr><td>Fp-Cv 迭代</td><td>隐含（用户可手动迭代）</td><td>无迭代，一次性计算</td><td><span class="tag tag-diff">差异</span></td></tr>
+<tr><td>多工况并行</td><td>5 列 (E-I) 并行计算</td><td>5 组 case 循环计算</td><td><span class="tag tag-same">等价</span></td></tr>
+</table>
+
+<!-- ==================== 1b. 两份 Excel Cv 一致性 ==================== -->
+<h2 id="sec1b">1b. 两份 Excel Cv 计算一致性结论</h2>
+
+<div class="card card-ok">
+<h4>结论：Cv 计算逻辑高度一致，差异仅在标准版本引用与功能覆盖范围</h4>
+<p>Cv_2.1.xlsm 与 Aerodynamic Noise 3.6.xlsm 共享<strong>同一套 IEC 60534-2-1 流量方程、同一张 ValveData/FluidData/PipeData 数据表、同一套 VBA 物性函数</strong>。对于气体 Cv 计算，两份 Excel 的方法和取数逻辑完全一致，差异对照只需对标一份即可代表两份。</p>
+</div>
+
+<h3>1b.1 逐项一致性对照</h3>
+
+<table>
+<tr><th>维度</th><th>Cv_2.1.xlsm (Rev 2.1)</th><th>Noise 3.6.xlsm (Rev 3.6)</th><th>判定</th></tr>
+<tr><td><strong>计算标准</strong></td><td>ANSI/ISA-75.01.01-<strong>2002</strong> (IEC 60534-2-1 Mod)</td><td>ANSI/ISA-75.01.01-<strong>2007</strong> (IEC 60534-2-1 Mod)</td><td><span class="tag tag-warn">版本不同</span> 公式本身未变</td></tr>
+<tr><td><strong>阀门系数表</strong></td><td>ValveData: Cd/FL/xT/Fd/Kc/N</td><td>同一张 ValveData 表，相同字段</td><td><span class="tag tag-same">完全一致</span></td></tr>
+<tr><td><strong>介质物性库</strong></td><td>FluidData: 150+ 介质，Antoine + Gf + Shomate</td><td>同一张 FluidData 表，相同字段</td><td><span class="tag tag-same">完全一致</span></td></tr>
+<tr><td><strong>管道数据</strong></td><td>PipeData 表 VLOOKUP</td><td>同一张 PipeData 表</td><td><span class="tag tag-same">完全一致</span></td></tr>
+<tr><td><strong>压缩因子 Z</strong></td><td>Redlich-Kwong <code>GasPTPcTcZ(P1,T1,Pc,Tc)</code></td><td>同一 VBA 函数</td><td><span class="tag tag-same">完全一致</span></td></tr>
+<tr><td><strong>水/蒸汽物性</strong></td><td>IAPWS: <code>wtrPTD/wtrPTM/wtrPTG</code> 等</td><td>同一套 IAPWS 函数</td><td><span class="tag tag-same">完全一致</span></td></tr>
+<tr><td><strong>Fp 公式</strong></td><td>IEC Eq.20: <code>1/√(1+(K1+K2+KB1-KB2)·Cd²/0.00214)</code></td><td>同 Eq.20</td><td><span class="tag tag-same">完全一致</span></td></tr>
+<tr><td><strong>Flp 公式</strong></td><td>IEC Eq.30</td><td>同 Eq.30</td><td><span class="tag tag-same">完全一致</span></td></tr>
+<tr><td><strong>xTP 公式</strong></td><td>IEC Eq.33 (常数 0.00241)</td><td>同 Eq.33</td><td><span class="tag tag-same">完全一致</span></td></tr>
+<tr><td><strong>气体压差比 x</strong></td><td><code>MIN(Fk·xTP, ΔP/P1)</code></td><td>同</td><td><span class="tag tag-same">完全一致</span></td></tr>
+<tr><td><strong>膨胀系数 Y</strong></td><td><code>1 - x/(3·Fk·xTP)</code></td><td>同</td><td><span class="tag tag-same">完全一致</span></td></tr>
+<tr><td><strong>阻力系数 K1/K2</strong></td><td>分 dv&lt;D / dv&gt;D 两支，IEC Eq.22-24</td><td>同</td><td><span class="tag tag-same">完全一致</span></td></tr>
+<tr><td><strong>临界压差比 xvcc</strong></td><td><code>1-(2/(k+1))^(k/(k-1))</code> Eq.3</td><td>同</td><td><span class="tag tag-same">完全一致</span></td></tr>
+<tr><td><strong>恢复因子 α</strong></td><td><code>(1-xvcc)/(1-xC)</code> Eq.5</td><td>同</td><td><span class="tag tag-same">完全一致</span></td></tr>
+<tr><td><strong>Fk 比热比系数</strong></td><td><code>k/1.4</code> Eq.34</td><td>同</td><td><span class="tag tag-same">完全一致</span></td></tr>
+</table>
+
+<h3>1b.2 标准版本差异说明</h3>
+
+<div class="card card-warn">
+<table>
+<tr><th>差异点</th><th>Cv_2.1.xlsm</th><th>Noise 3.6.xlsm</th><th>影响</th></tr>
+<tr>
+  <td><strong>引用标准版本</strong></td>
+  <td>ANSI/ISA-75.01.01-<strong>2002</strong></td>
+  <td>ANSI/ISA-75.01.01-<strong>2007</strong></td>
+  <td><span class="tag tag-same">无实质影响</span><br>2007 版为 2002 版的重新确认 (Reaffirmed)，<strong>流量方程公式未修改</strong>，仅编辑性调整。两版在 Cv 计算、Fp/Flp/xTP、Y 膨胀系数等核心公式上完全相同。</td>
+</tr>
+<tr>
+  <td><strong>IEC 60534-8-3 版本</strong></td>
+  <td>未引用（不含噪音计算）</td>
+  <td>IEC 60534-8-3 <strong>Ed 3.0 (2010-11)</strong></td>
+  <td>仅 Noise 3.6 引用，用于噪音预测部分</td>
+</tr>
+<tr>
+  <td><strong>Revisions 记录</strong></td>
+  <td>Rev 2.1 (2016-03-08)，作者 LRS</td>
+  <td>Rev 3 (2014-07-14) "Updated to IEC 2011 Specification"</td>
+  <td>独立维护，无交叉引用</td>
+</tr>
+</table>
+</div>
+
+<h3>1b.3 功能覆盖范围差异</h3>
+
+<table>
+<tr><th>功能</th><th>Cv_2.1.xlsm</th><th>Noise 3.6.xlsm</th><th>说明</th></tr>
+<tr><td>液体 Cv 计算</td><td><span class="tag tag-same">有</span> Liquid Sheet</td><td><span class="tag tag-miss">无</span></td><td>Noise 3.6 仅气体噪音</td></tr>
+<tr><td>气体 Cv 计算</td><td><span class="tag tag-same">有</span> Gas Sheet</td><td><span class="tag tag-same">有</span>（作为噪音计算的输入环节）</td><td>公式一致，Cv_2.1 输出 Cv，Noise 3.6 输入 Cv</td></tr>
+<tr><td>气液两相 Cv</td><td><span class="tag tag-same">有</span> LiqGas Sheet (IEC Annex C)</td><td><span class="tag tag-miss">无</span></td><td>—</td></tr>
+<tr><td>湿蒸汽 Cv</td><td><span class="tag tag-same">有</span> WtrStm Sheet (Singleton 1991)</td><td><span class="tag tag-miss">无</span></td><td>—</td></tr>
+<tr><td>气体噪音预测</td><td><span class="tag tag-miss">无</span></td><td><span class="tag tag-same">有</span> Noise Sheet (IEC 60534-8-3)</td><td>—</td></tr>
+<tr><td>倍频程频谱分析</td><td><span class="tag tag-miss">无</span></td><td><span class="tag tag-same">有</span> ExtFreq Sheet</td><td>—</td></tr>
+<tr><td>多级降噪阀</td><td><span class="tag tag-miss">无</span></td><td><span class="tag tag-same">有</span> StgNeeded 函数</td><td>—</td></tr>
+<tr><td>噪音专用参数</td><td><span class="tag tag-miss">无</span></td><td>Aeta(声效率指数)、Stp(Strouhal数)、dSPLsw</td><td>仅噪音预测使用，不影响 Cv 计算</td></tr>
+</table>
+
+<h3>1b.4 Cv 计算方向的差异</h3>
+
+<div class="card">
+<table>
+<tr><th>维度</th><th>Cv_2.1.xlsm</th><th>Noise 3.6.xlsm</th></tr>
+<tr>
+  <td><strong>计算方向</strong></td>
+  <td><strong>正向</strong>：由流量/压差 → 计算所需 Cv（选型用）</td>
+  <td><strong>反向</strong>：已知 Cv → 反算流量/流态参数（噪音预测用）</td>
+</tr>
+<tr>
+  <td><strong>Cv 的角色</strong></td>
+  <td>Cv 是<strong>输出</strong>结果</td>
+  <td>Cv 是<strong>输入</strong>参数（用户已选定阀门后预测噪音）</td>
+</tr>
+<tr>
+  <td><strong>流态判定用途</strong></td>
+  <td>判定阻塞/非阻塞，选择 Cv 公式分支</td>
+  <td>判定 5 级 Regime (I~V)，选择声效率 η 和峰值频率 fp 公式</td>
+</tr>
+<tr>
+  <td><strong>额外中间变量</strong></td>
+  <td>Fp/Flp/xTP/Ff/Fk/x/Y/Rev/Fr</td>
+  <td>上述全部 + 缩脉条件(Mvc/cvc/Mj) + 恢复因子 α + 拐点压差比 xB/xCE</td>
+</tr>
+</table>
+</div>
+
+<div class="note">
+<strong>小结：</strong>两份 Excel 在 Cv 计算的核心公式、数据表、物性函数上完全一致。Cv_2.1 是专门的 Cv 选型工具（含液体/气体/两相/湿蒸汽），Noise 3.6 在同一 Cv 计算框架上扩展了噪音预测功能（5 级 Regime + 倍频程频谱）。标准版本差异（2002 vs 2007）仅为重新确认，公式无实质变化。后续与项目代码对标时，气体 Cv 部分取任一份 Excel 均可代表。
+</div>
+
+<!-- ==================== 2. 单位体系 ==================== -->
+<h2 id="sec2">2. 单位体系差异</h2>
+
+<table>
+<tr><th>物理量</th><th><span class="tag tag-excel">Excel</span></th><th><span class="tag tag-proj">项目</span></th><th>换算关系</th></tr>
+<tr><td>压力</td><td>barA（绝压）</td><td>kPa(abs)</td><td>1 barA = 100 kPa</td></tr>
+<tr><td>流量</td><td>kg/h, Nm³/s</td><td>kg/h, m³/h, Nm³/h</td><td>体积流量时间单位不同</td></tr>
+<tr><td>Cv 方程系数</td><td>31.6 (Kv+barA 体系)</td><td>K_LIQ=2.7351, K_GAS=2.7330 (Cv+kPa)</td><td>量纲等价，经单位换算一致</td></tr>
+<tr><td>Fp 常数 N2</td><td>0.00214 (mm, Kv)</td><td>0.00214 (mm, Cv)</td><td><span class="tag tag-same">一致</span></td></tr>
+<tr><td>xTP 常数</td><td>0.00241</td><td>未显式定义（直接用录入 xTP）</td><td><span class="tag tag-diff">差异</span></td></tr>
+</table>
+
+<div class="note">
+<strong>说明：</strong>Excel 内部以 Kv+barA 计算，最后通过 <code>Conv("C", Kv, "Kv", "Cv")</code> 转换为 Cv 输出。项目直接以 Cv+kPa 计算，常数 K_LIQ/K_GAS 已做量纲适配，两种体系在数值上等价。
+</div>
+
+<!-- ==================== 3. 液体 Cv ==================== -->
+<h2 id="sec3">3. 液体 Cv 计算</h2>
+
+<h3>3.1 基本公式对照</h3>
+
+<div class="card card-ok">
+<h4><span class="tag tag-same">一致</span> 非阻塞流 Cv</h4>
+<table>
+<tr><th>来源</th><th>公式</th></tr>
+<tr><td><span class="tag tag-excel">Excel</span></td><td><code>C = Qf / (Fp·Fr) × √(ρ1 / (1000·ΔP))</code></td></tr>
+<tr><td><span class="tag tag-proj">项目</span></td><td><code>cv = (mass_flow / (K_LIQ · fp · √(dp_eff · density))) / Fr</code>，Fr 按 IEC Annex G 计算（层流系数 n + Rev 三分支公式）</td></tr>
+</table>
+<p>说明：Fr 于 2026-09-04 补齐，与 Excel 逻辑一致（Cd ≥ 0.016 → n=0.00214/Cd²；否则 n=1+127·Cd^(2/3)）。高粘度甘油 Rev=39 时 Cv 增大 ×2.68（Fr=0.373）；Rev≥10000 Fr=1.0。</p>
+</div>
+
+<div class="card card-ok">
+<h4><span class="tag tag-same">一致</span> 阻塞流 Cv</h4>
+<table>
+<tr><th>来源</th><th>公式</th></tr>
+<tr><td><span class="tag tag-excel">Excel</span></td><td><code>C = Qf / (Flp·Fr) × √(ρ1 / (1000·(P1 - Ff·Pv)))</code></td></tr>
+<tr><td><span class="tag tag-proj">项目</span></td><td><code>cv = (mass_flow / (K_LIQ · fp · √(dp_choked · density))) / Fr</code>, <code>dp_choked = fl²·(p1 - ff·pv)</code></td></tr>
+</table>
+<p>说明：阻塞公式与 Fr 修正均已对齐 (2026-09-04)。</p>
+</div>
+
+<h3>3.2 差异明细</h3>
+
+<table>
+<tr><th>差异项</th><th><span class="tag tag-excel">Excel</span></th><th><span class="tag tag-proj">项目</span></th><th>影响</th></tr>
+<tr class="diff-row">
+  <td><strong>Ff 临界压力比</strong></td>
+  <td><code>IF Pc≤Pv: 0.68 ELSE 0.96-0.28·√(Pv/Pc)</code></td>
+  <td><code>ff = 0.96 - 0.28·√(pv/pc)</code>，补 Pc≤Pv 的 0.68 兜底（2026-09-04 P1-2）</td>
+  <td><span class="tag tag-same">已对齐 (2026-09-04)</span></td>
+</tr>
+<tr class="diff-row">
+  <td><strong>阻塞判定</strong></td>
+  <td><code>ΔP ≥ (Flp/Fp)²·(P1-Ff·Pv)</code>（含 Fp/Flp 比）</td>
+  <td>实现 IEC Eq.20/30/33（2026-09-04 P1-1）：Fp=1/√(1+(K1+K2+KB1-KB2)·Cd²/N2)；Flp=FL/√(1+FL²·(K1+KB1)·Cd²/N2)；阻塞判定 <code>dp ≥ flp²·(p1 - ff·pv)</code>，Cv 用 cv_operating 单次迭代</td>
+  <td><span class="tag tag-same">已对齐 (2026-09-04)</span></td>
+</tr>
+<tr class="diff-row">
+  <td><strong>Fr 雷诺数修正</strong></td>
+  <td>完整实现 IEC Eq.28/G.1a/G.2/G.3a/G.4，含层流系数 n</td>
+  <td>完整实现 IEC Annex G (2026-09-04)：<br>
+  n = 0.00214/Cd² (Cd≥0.016) | 1+127·Cd^(2/3) (Cd&lt;0.016)<br>
+  Fr = 0.026/FL·√(n·Rev) (Rev&lt;10) | min(1, 湍流过渡式, 下限) (10≤Rev&lt;10000) | 1 (Rev≥10000)<br>
+  Fr&lt;1 时 Cv_required 除以 Fr；detail 记录 Fr/Cd/Rev</td>
+  <td><span class="tag tag-same">已对齐 (2026-09-04)</span></td>
+</tr>
+<tr class="diff-row">
+  <td><strong>空化判定</strong></td>
+  <td>4 态判定：Gas / Flashing / Cavitating / Liquid，含 Kc 空化指数</td>
+  <td>3 态：非阻塞 / 阻塞-闪蒸 / 阻塞-空化（基于 P2 vs Pv）</td>
+  <td><span class="tag tag-warn">中</span> 缺 Kc 空化指数</td>
+</tr>
+<tr class="diff-row">
+  <td><strong>水/蒸汽流态</strong></td>
+  <td>独立 WtrStm Sheet，IAPWS 精确物性</td>
+  <td>水走 IAPWS-IF97，饱和蒸汽按气相处理 (x=0.5)</td>
+  <td><span class="tag tag-warn">低</span></td>
+</tr>
+</table>
+
+<!-- ==================== 4. 气体 Cv ==================== -->
+<h2 id="sec4">4. 气体 Cv 计算</h2>
+
+<div class="card card-ok">
+<h4><span class="tag tag-same">一致</span> 气体 Cv 基本公式</h4>
+<table>
+<tr><th>来源</th><th>公式</th></tr>
+<tr><td><span class="tag tag-excel">Excel</span></td><td><code>C = W / (31.6·Fp·Y·√(x·P1·ρ1))</code> (Kv+barA)</td></tr>
+<tr><td><span class="tag tag-proj">项目</span></td><td><code>cv = mass_flow / (K_GAS · fp · Y · √(x_eff · p1 · density))</code> (Cv+kPa)</td></tr>
+</table>
+</div>
+
+<table>
+<tr><th>差异项</th><th><span class="tag tag-excel">Excel</span></th><th><span class="tag tag-proj">项目</span></th><th>影响</th></tr>
+<tr class="diff-row">
+  <td><strong>压差比 x</strong></td>
+  <td><code>x = MIN(Fk·xTP, (P1-P2)/P1)</code>（用 xTP 含管件修正）</td>
+  <td>实现 IEC Eq.33（2026-09-04 P1-1）：<code>xTP = (xT/Fp²) / (1 + xT·(K1+KB1)·Cd²/N5')</code>，<code>x = (p1-p2)/p1; x_eff = min(x, Fγ·xTP)</code>，用 cv_operating 单次迭代</td>
+  <td><span class="tag tag-same">已对齐 (2026-09-04)</span></td>
+</tr>
+<tr class="diff-row">
+  <td><strong>膨胀系数 Y</strong></td>
+  <td><code>Y = 1 - x/(3·Fk·xTP)</code></td>
+  <td><code>Y = 1 - x_eff/(3·Fγ·xt); Y = max(Y, 0.667)</code></td>
+  <td><span class="tag tag-same">一致</span> 逻辑等价</td>
+</tr>
+<tr class="diff-row">
+  <td><strong>压缩因子 Z</strong></td>
+  <td>Redlich-Kwong 状态方程 <code>GasPTPcTcZ(P1,T1,Pc,Tc)</code></td>
+  <td>Redlich-Kwong 状态方程 <code>gas_compressibility_rk(P,T,Pc,Tc)</code>（Cardano 三次方程，Vapor 根；对比态系数 Ωa=0.42747, Ωb=0.08664；水走 IAPWS）</td>
+  <td><span class="tag tag-same">已对齐 (2026-09-04)</span></td>
+</tr>
+<tr class="diff-row">
+  <td><strong>入口密度 ρ1</strong></td>
+  <td><code>ρ1 = Mw·P1 / (0.083143·Z·(T1+273.15))</code>（含 Z）</td>
+  <td><code>ρ1 = P·MW / (Z·8.314·(T+273.15))</code>（Z 由 RK 计算；用户 override 密度时跳过）</td>
+  <td><span class="tag tag-same">已对齐 (2026-09-04)</span></td>
+</tr>
+<tr class="diff-row">
+  <td><strong>声速 c</strong></td>
+  <td><code>c1 = (10⁵·k·P1/ρ1)^0.5</code> Newton-Laplace</td>
+  <td>Newton-Laplace <code>c = √(10⁵·γ·P/ρ1)</code>（密度已含 Z，自动吸收压缩因子）。保留旧函数 gas_speed_of_sound 用于兼容。</td>
+  <td><span class="tag tag-same">已对齐 (2026-09-04)</span></td>
+</tr>
+<tr class="diff-row">
+  <td><strong>标况体积流量修正</strong></td>
+  <td>Excel 内部直接用 Qg(Nm³/s)，按理想气体转质量流量</td>
+  <td><code>units.py</code> 实现 Nm³/h→工况 m³/h 修正：V_op = V_std×(101.325/P1)×(T1_K/T_std_K)</td>
+  <td><span class="tag tag-same">已对齐</span></td>
+</tr>
+</table>
+
+<!-- ==================== 5. 两相流 ==================== -->
+<h2 id="sec5">5. 两相流 Cv 计算</h2>
+
+<div class="card card-ok">
+<h4><span class="tag tag-same">已对齐 (2026-09-04)</span> 两相流三种可切换模型并列（含 Annex C）</h4>
+
+<table>
+<tr><th>方法</th><th><span class="tag tag-excel">Excel</span></th><th><span class="tag tag-proj">项目</span></th></tr>
+<tr>
+  <td><strong>气液混合 (LiqGas)</strong></td>
+  <td><strong>IEC 60534-2-1 Annex C</strong>：<br>
+  <code>C = 1/(31.6·Fp) × √[(Wf+Wg)·(Wf/(ρ1f·ΔPfe) + Wg/(ρ1g·Y²·ΔPge))]</code><br>
+  分别计算液/气相有效压差 ΔPfe/ΔPge；Ff=0.96-0.28√(Pv/Pc)；阻塞分液/气两相判定
+  </td>
+  <td>
+    <strong>三种可选模型（前端下拉可切换，默认叠加法）</strong>：<br><br>
+    ① <b>叠加法 additive</b>：<code>Cv = Cv_gas + Cv_liquid</code>，液相用全ΔP (保守)<br>
+    ② <b>均相法 homogeneous</b>：<code>ρmix=1/(xg/ρg+xl/ρl)</code>，代入气体膨胀方程<br>
+    ③ <b>IEC Annex C (与Excel一致, 推荐)</b>：使用项目 kPa 体系 K_LIQ=2.7351<br>
+    <code>Cv = (1/(K_LIQ·Fp))·√[(Wf+Wg)·(Wf/(ρf·ΔPfe)+Wg/(ρg·Y²·ΔPge))]</code><br>
+    ΔPfe=min(ΔP, Fl²·(P1-Ff·Pv))；ΔPge=min(ΔP, x_eff·P1)<br>
+    detail 记录 Ff/ΔPfe_kPa/ΔPge_kPa/FL_eff/Y_sq；阻塞按"液/气相阻塞"分级标注
+  </td>
+</tr>
+<tr>
+  <td><strong>湿蒸汽 (WtrStm)</strong></td>
+  <td><strong>Singleton (1991) 并联模型</strong>：<br>
+  <code>ρ1fe = ρ1f/(1-Q), ρ1ge = ρ1g·Y²/Q</code><br>
+  <code>C = W/(31.6·Fp) × √(1/(ρ1fe·ΔPfe) + 1/(ρ1ge·ΔPge))</code></td>
+  <td>实现 Singleton 并联模型（2026-09-04 P2-3）：<a href="cv_twophase.py">cv_twophase.py</a> 新增 <code>method='singleton'</code> 分支，与 iec_annexc/additive/homogeneous 并列；<a href="properties.py">properties.py</a> 新增 <code>water_saturation_phase_densities(t, p)</code>（IAPWS x=0/x=1 取饱和液/汽相密度）；<a href="engine.py">engine.py</a> 新增 <code>quality: float = 1.0</code> 参数，水介质+<code>fp.phase=='saturated'</code>+<code>0&lt;quality&lt;1</code> 时自动路由到 singleton（<code>m_g = m·quality, m_l = m·(1-quality)</code>）；默认 quality=1.0 行为不变</td>
+</tr>
+</table>
+<p>验证（4 种典型工况，Fp=1）：
+<ul>
+  <li>Case1 亚临界微气 ΔP=100kPa: additive 12.59 / homogeneous 13.54 / <b>iec_annexc 13.15</b> ✓ (AnnexC 在两者之间)</li>
+  <li>Case2 双阻塞 ΔP=1200kPa x_g≈0.002: additive 3.66 / homogeneous 5.98 / <b>iec_annexc 5.96</b> ✓ (叠加法不考虑液相阻塞，导致 Cv 偏小)</li>
+  <li>Case3 双阻塞 x_g=0.02: additive 4.30 / homogeneous 8.40 / <b>iec_annexc 8.38</b> ✓</li>
+  <li>Case4 气多液少闪蒸 x_g=0.833: additive 29.93 / homogeneous 32.37 / <b>iec_annexc 32.37</b> ✓ (高 x_g 时 AnnexC 与均相近)</li>
+</ul>
+前端交互：Calculation.vue 新增 <code>shouldShowTwoPhase</code> 计算属性，仅当任一 case 相态为 twophase 或填写了气液双流量时，才显示"两相方法"下拉行。下拉选项顺序：IEC Annex C（推荐，Excel一致）→ 叠加法(保守) → 均相膨胀法。后端 schema 默认 twophase_method='additive'，保证默认行为不变。
+</p>
+</div>
+
+<!-- ==================== 6. 管件修正 ==================== -->
+<h2 id="sec6">6. 管件修正 Fp / Flp / xTP</h2>
+
+<h3>6.1 Fp 管件几何系数</h3>
+
+<table>
+<tr><th>来源</th><th>公式</th><th>判定</th></tr>
+<tr><td><span class="tag tag-excel">Excel</span></td>
+<td>
+<code>Fp = 1 / √(1 + (K1+K2+KB1-KB2)·Cd²/0.00214)</code><br>
+K1 = <code>IF(dv&lt;D): 0.5·(1-(dv/D)²)² ELSE: (1-(D/dv)²)²/(D/dv)^4</code><br>
+K2 = 同结构（出口侧）<br>
+KB1/KB2 = 伯努利系数 <code>1-(dv/D)^4</code>
+</td>
+<td><span class="tag tag-excel">完整 IEC Eq.20</span></td></tr>
+<tr><td><span class="tag tag-proj">项目</span></td>
+<td>
+实现 IEC Eq.20（2026-09-04 P1-1）：<br>
+<code>β = d/D</code><br>
+<code>K1 = IF(d&lt;D): 0.5·(1-β²)² ELSE: 0.5·(1-(D/d)²)²/(D/d)^4</code><br>
+<code>K2 = 同结构</code><br>
+<code>KB1=KB2 = 1-β^4</code><br>
+<code>Fp = 1/√(1 + (K1+K2+KB1-KB2)·Cd²/N2)</code><br>
+<code>N2 = 0.00214</code>；仅 <code>reduced_port=True</code> 时计算
+</td>
+<td><span class="tag tag-same">已对齐 (2026-09-04)</span></td></tr>
+</table>
+
+<div class="note">
+<strong>对齐说明（2026-09-04 P1-1）：</strong>项目从原 ζ1=1.5/ζ2=1.0 固定系数近似，改为 IEC Eq.20 精确 K1/K2/KB1/KB2 分 dv&lt;D / dv&gt;D 两支计算。缩径比 β→1 时与原结果一致；β 偏离 1 时与 Excel 完全对齐。
+</div>
+
+<h3>6.2 Flp / xTP 带附件修正</h3>
+
+<table>
+<tr><th>参数</th><th><span class="tag tag-excel">Excel</span></th><th><span class="tag tag-proj">项目</span></th><th>判定</th></tr>
+<tr><td><strong>Flp</strong></td>
+<td><code>Flp = FL / √(1 + FL²·(K1+KB1)·Cd²/0.00214)</code> (Eq.30)</td>
+<td>实现 IEC Eq.30（2026-09-04 P1-1）：用户提供 flp → 直接用；缩径+几何 → <code>Flp = FL/√(1+FL²·(K1+KB1)·Cd²/N2)</code>；否则裸 FL</td>
+<td><span class="tag tag-same">已对齐 (2026-09-04)</span></td></tr>
+<tr><td><strong>xTP</strong></td>
+<td><code>xTP = xT/Fp² / (1 + xT·(K1+KB1)·Cd²/0.00241)</code> (Eq.33)</td>
+<td>实现 IEC Eq.33（2026-09-04 P1-1）：用户提供 xtp → 直接用；缩径+几何 → <code>xTP = (xT/Fp²)/(1+xT·(K1+KB1)·Cd²/N5')</code>，<code>N5'=0.00241</code>；否则裸 xT</td>
+<td><span class="tag tag-same">已对齐 (2026-09-04)</span></td></tr>
+</table>
+
+<!-- ==================== 7. 雷诺数 ==================== -->
+<h2 id="sec7">7. 雷诺数与粘度修正 Fr</h2>
+
+<div class="card card-diff">
+<h4><span class="tag tag-diff">关键缺失</span> Fr 雷诺数修正未实现</h4>
+
+<p><strong><span class="tag tag-excel">Excel</span> 完整实现：</strong></p>
+<pre><code>Rev = 70.7·Fd·Qf / ((μ/ρ1)·√(Qf·(ρ1/(1000·ΔP))·Fl)·(FL²·Cd²/0.00214+1)^0.25)  ' Eq.28
+
+' 层流系数 n
+n = IF(Cd≥0.016: 0.00214/Cd², 1+127·Cd^(2/3))  ' Eq.G.1b/G.3b
+
+' Fr 修正系数
+Fr = IF(Rev&lt;10: 0.026/Fl·√(n·Rev),
+     MIN(1, 1+(0.33·√Fl/⁴√n)·LOG(Rev/10000),
+         0.026/Fl·√(n·Rev)))  ' Eq.G.1a/G.2/G.3a/G.4
+
+' 最终 Cv = C / Fr  (层流时 Cv 显著增大)</code></pre>
+
+<p><strong><span class="tag tag-proj">项目</span> 当前实现：</strong></p>
+<pre><code># cv_core.py
+rev = ρ·U·(d/1000) / (μ_cp·1e-3)  # 仅计算雷诺数
+if rev &lt; 40:    return ("层流", "需 IEC Fr 修正")    # 仅提示
+if rev &lt; 3000: return ("过渡区", "Fr 修正可能需要")  # 仅提示
+# 不实际计算 Fr，Cv 不做修正</code></pre>
+</div>
+
+<div class="warn-block">
+<strong>影响：</strong>对高粘度液体（如重油、甘油，运动粘度 &gt; 100 cSt），Fr 可能使 Cv 增大 20%~50% 以上。当前项目对这类工况<strong>偏小选阀</strong>。
+</div>
+
+<!-- ==================== 8. 气体噪音 ==================== -->
+<h2 id="sec8">8. 气体噪音计算（IEC 60534-8-3）</h2>
+
+<h3>8.1 计算框架对照</h3>
+
+<table>
+<tr><th>环节</th><th><span class="tag tag-excel">Excel</span> Noise 3.6</th><th><span class="tag tag-proj">项目</span> noise.py</th><th>判定</th></tr>
+<tr><td>流态判定 (Regime)</td><td>5 级 Regime (I~V)，基于 x/xC/xB/xCE 精确判定</td><td>实现 5 级 Regime（2026-09-04 P2-1）：x/xvcc/xC/xB/xCE/α 全公式 + I~V 分类，<code>regime_index</code>/<code>regime</code> 返回</td><td><span class="tag tag-same">已对齐 (2026-09-04)</span></td></tr>
+<tr><td>声功率 Wa</td><td>按 Regime 分别计算 η×Wm，各 Regime 有独立公式</td><td>实现 5 Regime 独立公式（P2-1）：I 用 <code>mdot·(cvc·Mvc)²/2 + η·Flp²·Mvc³</code>；II-V 用 <code>mdot·cvcc²/2 + 按索引 η</code></td><td><span class="tag tag-same">已对齐 (2026-09-04)</span></td></tr>
+<tr><td>声效率 η</td><td>含 Aeta 指数（按阀型查表）、FLp、马赫数精确公式</td><td>实现 10^Aeta·按 Regime 公式（P2-1）：II/III 用 <code>Mj^(6.6·Flp²)</code>，IV/V 用 <code>(Mj²/2)·√2^(6.6·Flp²)</code>，Aeta 来自 <code>fluid.aeta_db</code></td><td><span class="tag tag-same">已对齐 (2026-09-04)</span></td></tr>
+<tr><td>峰值频率 fp</td><td>按 Regime 分别计算，含 Strouhal 数、Dj 射流直径</td><td>实现 Regime 独立 fp 公式（P2-1）：I 用 <code>St·Mvc·cvc/Dj</code>；II/III 用 <code>St·Mj·cvcc/Dj</code>；IV/V 用 <code>1.4·St·cvcc/(Dj·√(Mj²-1))</code></td><td><span class="tag tag-same">已对齐 (2026-09-04)</span></td></tr>
+<tr><td>内部声压级 Lpi</td><td><code>10·LOG(3.2×10⁹·Wa·ρ2·c2/D²) + Lg + EarlyStageAdder</code> (Eq.18/31)</td><td>实现 IEC Eq.18/31（P2-1）：<code>Lpi = 10·LOG(3.2e9·Wa·ρ2·c2/D²) + Lg</code></td><td><span class="tag tag-same">已对齐 (2026-09-04)</span></td></tr>
+<tr><td>马赫数修正 Lg</td><td><code>16·LOG(1/(1-MIN(0.3,Mp)))</code> (Eq.16)</td><td>实现 IEC Eq.16（P2-1）：<code>Lg = 16·LOG(1/(1-MIN(0.3,Ma2)))</code></td><td><span class="tag tag-same">已对齐 (2026-09-04)</span></td></tr>
+<tr><td>管道传递损失 TL</td><td>完整倍频程分析：环频率 fr、内部重合频率 fo、外部重合频率 fg、dTL 阻尼因子</td><td>简化面密度公式 + 倍频程扩展（P2-1/P2-2）：单频带用 <code>10·LOG(1+ratio²) + 10·LOG(m/(z·d))</code>；倍频程用 fr/fo/fg 三频率 + 14 频带（A 计权 + 重合修正）</td><td><span class="tag tag-warn">部分对齐 (2026-09-04)</span> 阻尼因子 dTL 仍简化</td></tr>
+<tr><td>频谱分析</td><td>1/3 倍频程频带合成（ExtFreq Sheet，24个频带）</td><td>实现 14 频带（500Hz~10kHz，P2-2）<code>_octave_band_analysis()</code>：每频带 TL(f) + 重合修正 + A 计权 + 能量叠加；<code>octave=True</code> 时存入 <code>detail["octave_bands"]</code></td><td><span class="tag tag-warn">部分对齐 (2026-09-04)</span> 频带数 14 vs Excel 24</td></tr>
+<tr><td>A 计权</td><td>倍频程 A 计权曲线精确加权</td><td>实现 IEC 61672 A 计权曲线（P2-2）：500Hz~10kHz 14 频带 <code>A_WEIGHT_BANDS</code> 表，每频带精确加权后能量叠加</td><td><span class="tag tag-same">已对齐 (2026-09-04)</span></td></tr>
+<tr><td>小阀门修正 dLpAe</td><td><code>IF(NVS&lt;150mm): 0.12·(NVS-150)</code></td><td>未实现</td><td><span class="tag tag-miss">缺失</span></td></tr>
+<tr><td>滞后/喷水修正</td><td>Lagging Credit (0/5/10 dBA)、Spraywater Credit</td><td>未实现</td><td><span class="tag tag-miss">缺失</span></td></tr>
+<tr><td>多级降噪阀</td><td>StgNeeded 多级压降分配、CpAo 函数</td><td>实现多级几何压降分配（2026-09-07 P3-1）：<code>r_stage=(p2/p1)^(1/N)</code>, <code>x_stage=1-r_stage</code>；用 x_stage 做 Regime 判定与 η 计算；detail 返回 stages/x_stage/r_stage/stages_needed</td><td><span class="tag tag-warn">部分对齐 (2026-09-07)</span> CpAo 函数仍简化</td></tr>
+</table>
+
+<h3>8.2 Excel 噪音五步法路径（完整）</h3>
+
+<pre><code>Step 1: 压力比与流态判定 (5.1-5.2)
+  x = (P1-P2)/P1                              ' Eq.1
+  Pvc = P1·(1 - x/Flp²)                       ' Eq.2  缩脉压力
+  xvcc = 1 - (2/(k+1))^(k/(k-1))              ' Eq.3  临界缩脉压差比
+  xC = Flp²·xvcc                              ' Eq.4  临界压差比
+  α = (1-xvcc)/(1-xC)                         ' Eq.5  恢复修正因子
+  xB = 1 - (1/α)·(1/k)^(k/(k-1))             ' Eq.6  拐点压差比
+  xCE = 1 - 1/(22·α)                          ' Eq.7  恒定声效率压差比
+  RGM = IF(x≤xC:1, x≤xvcc:2, x≤xB:3, x≤xCE:4, 5)
+
+Step 2: 几何参数 (5.3)
+  Dj = 4.9×10⁻³·Fd·√(Cn·Flp)                 ' Eq.9  射流直径
+  Fd = dh/do 或 1/√No                          ' Eq.8a 阀门类型修正
+
+Step 3: 缩脉条件 (5.4-5.5)
+  Mvc = √(2/(k-1)·((1-x/Flp²)^((1-k)/k)-1))  ' Eq.32 缩脉马赫数
+  cvc = √(k·10⁵·P1/ρ1·(1-x/Flp²)^((k-1)/k))  '       缩脉声速
+  Mj  = √(2/(k-1)·(MIN(22,1/(α·(1-x)))^((k-1)/k)-1)) ' 临界马赫数
+
+Step 4: 声功率 (5.6)
+  Wm = W/3600 × (cvc·Mvc)²/2     (Regime I)
+  Wm = W/3600 × cvcc²/2           (Regime II-V)
+  η  = 10^Aeta·Flp²·Mvc³          (I)
+  η  = 10^Aeta·x/xvcc·Mj^(6.6·Flp²) (II)
+  η  = 10^Aeta·Mj^(6.6·Flp²)      (III)
+  η  = 10^Aeta·Mj²/2·√2^(6.6·Flp²) (IV,V)
+  Wa = η × Wm                                 ' Eq.11
+
+Step 5: 声压级与传递损失 (5.6)
+  Lpi = 10·LOG(3.2×10⁹·Wa·ρ2·c2/D²) + Lg     ' Eq.18/31
+  Lg  = 16·LOG(1/(1-MIN(0.3,Mp)))             ' Eq.16
+  fp  = Stp·Mvc·cvc/Dj (I) / Stp·Mj·cvcc/Dj (II,III) / 1.4·Stp·cvcc/(Dj·√(Mj²-1)) (IV,V)
+  fr  = 5000/(π·D)                            ' Eq.21 环频率
+  fo  = fr·c2/(4·343)                         ' Eq.22 内部重合频率
+  fg  = √3·343²/(π·t·5000)                    ' Eq.23 外部重合频率
+  dTL = IF(D&gt;0.15:0, D&lt;0.05:9, 多项式)        ' Eq.20b
+  Lpe1m = Lpi + TL(f) - 10·LOG((D+2t+2)/(D+2t)) + dLpAe  ' Eq.24
+  最终 = MAX(75, Lpe1m - LaggingCredit - SpraywaterCredit)</code></pre>
+
+<h3>8.3 项目噪音计算路径（简化）</h3>
+
+<pre><code># noise.py predict_gas_noise
+T2  = T1·(p2/p1)^((γ-1)/γ)              # 等熵膨胀
+ρ2  = p2·MW / (8.314·T2)                 # 出口密度 (Z=1)
+c2  = √(γ·8314·T2/MW)                   # 出口声速
+U2  = mdot / (ρ2·A_pipe)                 # 出口流速
+Ma2 = U2 / c2                            # 出口马赫数
+U_vc = min(U2/fl, √(γ·R·T1))            # 喉部射流速度
+Pow  = 0.5·mdot·U_vc²                    # 机械功率
+eta  = 1.2e-3·Ma2^3.5 (亚声速) / 1.0e-2 (声速)  # 声效率（固定常数）
+Wa   = eta·Pow                           # 声功率
+Lwi  = 10·LOG(Wa/1e-12)                  # 声功率级
+fp   = 0.20·U_vc / (0.6·D)              # 峰值频率（简化）
+TL   = 10·LOG(1+ratio²) + 10·LOG(m/(z·d)) # 管壁传声损失（简化）
+TL   = max(TL, 6.0)                      # 下限
+LpA  = Lwi - TL + 10·LOG(d/(4r)) - 2.0  # 外部A计权声压级</code></pre>
+
+<!-- ==================== 9. 液体噪音 ==================== -->
+<h2 id="sec9">9. 液体噪音计算（IEC 60534-8-4）</h2>
+
+<table>
+<tr><th>环节</th><th><span class="tag tag-excel">Excel</span>（Noise 3.6 无液体噪音Sheet）</th><th><span class="tag tag-proj">项目</span> noise.py</th><th>判定</th></tr>
+<tr><td>液体噪音标准</td><td>未包含（Noise 3.6 仅气体）</td><td>IEC 60534-8-4 简化实现</td><td><span class="tag tag-proj">项目独有</span></td></tr>
+<tr><td>空化/闪蒸判定</td><td>—</td><td>基于 FL/FF/Pv 判定：闪蒸/空化/正常</td><td>—</td></tr>
+<tr><td>声效率</td><td>—</td><td>闪蒸 1e-3，空化 3e-4，正常 5e-6·max(ΔP/100,1)</td><td>—</td></tr>
+<tr><td>管壁 TL</td><td>—</td><td>气体 TL 基础上 +6 dB（液体耦合更强）</td><td>—</td></tr>
+</table>
+
+<div class="note">
+<strong>说明：</strong>Excel 参考文件 Noise 3.6 仅覆盖气体噪音。项目额外实现了液体噪音（IEC 60534-8-4），属于项目扩展功能。后续迭代需与 IEC 60534-8-4 原文对齐。
+</div>
+
+<!-- ==================== 10. 介质物性 ==================== -->
+<h2 id="sec10">10. 介质物性服务</h2>
+
+<table>
+<tr><th>物性项</th><th><span class="tag tag-excel">Excel</span></th><th><span class="tag tag-proj">项目</span></th><th>判定</th></tr>
+<tr><td>水/蒸汽物性</td><td>IAPWS 函数库 (wtrPTD/PTM/PTG/PQD 等)</td><td>IAPWS-IF97 (iapws 库)，含兜底近似</td><td><span class="tag tag-same">一致</span></td></tr>
+<tr><td>非水介质密度</td><td>FluidData 库 (150+介质)，Antoine 蒸汽压 + Redlich-Kwong Z</td><td>介质库 48 条，理想气体 Z=1</td><td><span class="tag tag-diff">差异</span></td></tr>
+<tr><td>压缩因子 Z</td><td>Redlich-Kwong 状态方程 <code>GasPTPcTcZ(P1,T1,Pc,Tc)</code></td><td>Z=1（理想气体），未实现实际气体修正</td><td><span class="tag tag-diff">高</span></td></tr>
+<tr><td>蒸汽压 Pv</td><td>Antoine 方程 <code>Pv=exp(A-B/(T+C))</code></td><td>实现 Antoine 温度修正（2026-09-07 P3-2）：<code>antoine_vapor_pressure_kpa(T, A, B, C, Tmin)</code>，有 antoine_a/b/c 系数时用工况温度重算 Pv (barA→kPa×100)，无系数时回退库静态值</td><td><span class="tag tag-same">已对齐 (2026-09-07)</span></td></tr>
+<tr><td>液体密度温度修正</td><td>Gf 随温度修正 <code>Gf=GFB·(2·Tc-T)/(2·Tc-TB)</code></td><td>实现 Gf 温度修正（2026-09-07 P3-3）：<code>liquid_density_temperature_corrected(rho_base, T, Tc, TB)</code>，无 density_override 时按工况温度修正（下限钳制 100 kg/m³）</td><td><span class="tag tag-same">已对齐 (2026-09-07)</span></td></tr>
+<tr><td>比热比 k</td><td>FluidData 查表 / Shomate 方程 / wtrPTG(水)</td><td>介质库静态值</td><td><span class="tag tag-warn">低</span></td></tr>
+<tr><td>粘度</td><td>Conv("mu",...) / wtrPTM(水)</td><td>介质库静态值</td><td><span class="tag tag-warn">低</span></td></tr>
+</table>
+
+<!-- ==================== 11. 阀门系数表 ==================== -->
+<h2 id="sec11">11. 阀门系数表</h2>
+
+<table>
+<tr><th>参数</th><th><span class="tag tag-excel">Excel</span> ValveData</th><th><span class="tag tag-proj">项目</span> valve_types 表</th><th>判定</th></tr>
+<tr><td>阀门参数字段</td><td>Cd, FL, xT, Fd, Kc, N(级数), Aeta, Stp, dSPLsw</td><td>series_code, series_name, valve_category, description, sort_order</td><td><span class="tag tag-diff">差异</span></td></tr>
+<tr><td>阀门类型数</td><td>14 种（含 HF 笼式阀）</td><td>39 条 KELK 产品系列</td><td><span class="tag tag-proj">更丰富</span></td></tr>
+<tr><td>FL/xT/Fd 来源</td><td>ValveData 表按阀型 VLOOKUP</td><td>前端手动录入，默认 FL=0.9, xT=0.72, Fd=0.46</td><td><span class="tag tag-diff">差异</span></td></tr>
+<tr><td>Cd（相对容量）</td><td>有（Cv/d²），用于 Fp/Flp 计算</td><td>无（Fp 计算用 Cv/d² 直接算）</td><td><span class="tag tag-warn">低</span></td></tr>
+<tr><td>声效率因子 Aeta</td><td>按阀型查表 (Table 4)</td><td>无（用固定常数）</td><td><span class="tag tag-diff">差异</span></td></tr>
+<tr><td>Strouhal 数 Stp</td><td>按阀型查表，默认 0.2</td><td>固定 0.20</td><td><span class="tag tag-warn">低</span></td></tr>
+</table>
+
+<div class="note">
+<strong>说明：</strong>valve_types 表已导入 KELK 39 条产品系列，并已于 2026-09-04 扩展 <code>factor_group / eq_index / fl_default / xt_default / fd_default / kc_default / trim_option_pressure / trim_option_opening / trim_option_types</code> 九个字段，从 <code>KELK CalcCv Valve &amp; Trim Factors.xlsm</code> 回填 10 个系列的默认系数与 Trim 可选项。新增 <code>valve_factor_curves</code>（多项式系数表）与 <code>valve_trim_sizes</code>（额定 Cv 表），详见下方 §11.1 / §11.2。
+</div>
+
+<h3 id="sec11-1">11.1 valve_factor_curves — 行程特性曲线系数表</h3>
+
+<table>
+<tr><th>字段</th><th>类型</th><th>说明</th></tr>
+<tr><td>factor_type</td><td>VARCHAR</td><td>eqcv / fl / kc / fd 四类曲线</td></tr>
+<tr><td>eq_index</td><td>INT</td><td>曲线编号 1..N，与 valve_types.eq_index 关联</td></tr>
+<tr><td>group_name</td><td>VARCHAR</td><td>曲线组名（如 KELK-Cv-GC120）</td></tr>
+<tr><td>value_min / value_max</td><td>FLOAT</td><td>曲线定义域下限/上限（用于钳制）</td></tr>
+<tr><td>a0..a6</td><td>FLOAT</td><td>Eq% 6 次多项式系数（仅 eqcv 使用）</td></tr>
+<tr><td>p0..p4</td><td>FLOAT</td><td>FL/Kc/Fd 4 次多项式系数</td></tr>
+</table>
+
+<div class="note">
+<strong>数据量：</strong>eqcv 198 条（Eq% Index 1..198），fl/kc/fd 各 7 条。来源：<code>Eq% Data / FL Data / Kc Data / Fd Data</code> 四个 Sheet。
+</div>
+
+<h3 id="sec11-2">11.2 valve_trim_sizes — 额定 Cv / Trim 尺寸表</h3>
+
+<table>
+<tr><th>字段</th><th>类型</th><th>说明</th></tr>
+<tr><td>series_code</td><td>VARCHAR</td><td>系列代码（如 GC120 / BT210）</td></tr>
+<tr><td>asme_class</td><td>VARCHAR</td><td>压力等级（如 150# / &lt; 600# / 2500#）</td></tr>
+<tr><td>dn_mm / dn_inch</td><td>FLOAT / VARCHAR</td><td>公称通径 mm / inch</td></tr>
+<tr><td>trim_code</td><td>VARCHAR</td><td>Trim 类型（Nominal Trim Size / Plug Size / Rated Capacity / Standard 等）</td></tr>
+<tr><td>eq_index</td><td>INT</td><td>关联 valve_factor_curves.eq_index</td></tr>
+<tr><td>cv_min / cv_rated</td><td>FLOAT</td><td>最小 Cv / 额定 Cv</td></tr>
+<tr><td>stk_index_pct</td><td>FLOAT</td><td>行程索引百分比</td></tr>
+<tr><td>remark</td><td>VARCHAR</td><td>备注，蝶阀角度存入此处（如 "60 deg" / "90 deg"）</td></tr>
+</table>
+
+<div class="note">
+<strong>数据量：</strong>298 条（GC120=101, GC210=101, BT120=48, BT210=48）。来源：XLSM 10 个 Series Sheet（GC/GV/BC/BE/BT 系列）。
+</div>
+
+<!-- ==================== 12. 迭代优先级 ==================== -->
+<h2 id="sec12">12. 迭代优先级与变更记录</h2>
+
+<h3>12.1 建议迭代优先级</h3>
+
+<table>
+<tr><th>优先级</th><th>迭代项</th><th>影响范围</th><th>涉及文件</th><th>状态</th></tr>
+<tr><td><span class="tag tag-diff">P0 高</span></td><td>补 Fr 雷诺数修正（IEC Eq.28/G.1-G.4）</td><td>高粘度液体 Cv 选型</td><td>cv_liquid.py, cv_core.py</td><td><span class="tag tag-same">已完成 2026-09-04</span></td></tr>
+<tr><td><span class="tag tag-diff">P0 高</span></td><td>补压缩因子 Z（Redlich-Kwong）</td><td>高压气体密度/Cv/噪音</td><td>properties.py, cv_gas.py, engine.py</td><td><span class="tag tag-same">已完成 2026-09-04</span></td></tr>
+<tr><td><span class="tag tag-diff">P0 高</span></td><td>补 IEC Annex C 两相流公式</td><td>气液两相 Cv</td><td>cv_twophase.py / Calculation.vue</td><td><span class="tag tag-same">已完成 2026-09-04</span></td></tr>
+<tr><td><span class="tag tag-diff">P1 中</span></td><td>补 IEC Eq.20/30/33 严格 Fp/Flp/xTP</td><td>缩径管件 Cv 精度</td><td>cv_core.py</td><td><span class="tag tag-same">已完成 2026-09-04</span></td></tr>
+<tr><td><span class="tag tag-diff">P1 中</span></td><td>补 Ff 的 Pc≤Pv 兜底（0.68）</td><td>近临界介质</td><td>cv_liquid.py</td><td><span class="tag tag-same">已完成 2026-09-04</span></td></tr>
+<tr><td><span class="tag tag-warn">P2 低</span></td><td>噪音 5 级 Regime 判定</td><td>噪音精度</td><td>noise.py</td><td><span class="tag tag-same">已完成 2026-09-04</span></td></tr>
+<tr><td><span class="tag tag-warn">P2 低</span></td><td>噪音倍频程分析</td><td>噪音频谱</td><td>noise.py</td><td><span class="tag tag-same">已完成 2026-09-04</span></td></tr>
+<tr><td><span class="tag tag-warn">P2 低</span></td><td>valve_types 表扩展 FL/xT/Fd 字段</td><td>自动化选型</td><td>models, 前端</td><td><span class="tag tag-same">已完成 2026-09-04</span></td></tr>
+<tr><td><span class="tag tag-warn">P2 低</span></td><td>湿蒸汽 Singleton 模型</td><td>湿蒸汽 Cv</td><td>cv_twophase.py</td><td><span class="tag tag-same">已完成 2026-09-04</span></td></tr>
+<tr><td><span class="tag tag-miss">P3</span></td><td>多级降噪阀压降分配</td><td>多级阀噪音</td><td>noise.py</td><td><span class="tag tag-same">已完成 2026-09-07</span></td></tr>
+<tr><td><span class="tag tag-miss">P3</span></td><td>Antoine 蒸汽压温度修正</td><td>非水介质 Pv</td><td>properties.py</td><td><span class="tag tag-same">已完成 2026-09-07</span></td></tr>
+<tr><td><span class="tag tag-miss">P3</span></td><td>液体密度温度修正</td><td>非水液体重度</td><td>properties.py</td><td><span class="tag tag-same">已完成 2026-09-07</span></td></tr>
+</table>
+
+<h3>12.2 变更记录</h3>
+
+<table>
+<tr><th>日期</th><th>变更内容</th><th>涉及文件</th></tr>
+<tr>
+  <td>2026-09-02</td>
+  <td>
+    <strong>创建文档</strong>：基于 Cv_2.1.xlsm、Aerodynamic Noise 3.6.xlsm 与项目代码三方对比，形成差异对照表。<br>
+    <strong>修复 flow_unit 误删 bug</strong>：units.py convert_process_case 清理 *_unit 字段时误删 flow_unit（流量类型标记），导致 API 计算 flow_unit=None → 质量流量=0 → Cv=0。修复：清理时跳过 flow_unit。<br>
+    <strong>标况体积流量修正</strong>：units.py 实现 Nm³/h(0℃/20℃)/SCFM → 工况 m³/h 自动修正（理想气体定律）；cv_gas.py 参数 vol_flow_std → vol_flow_op，质量流量 = V_op × ρ_op。<br>
+    <strong>标况密度修正</strong>：units.py 实现 kg/Nm³ → kg/m³ 工况密度修正。<br>
+    <strong>前端气态介质默认单位</strong>：Calculation.vue onFluidChange 气态 → flow_vol=Nm³/h, density=kg/Nm³；体积流量下拉框新增"标况气体"分组。
+  </td>
+  <td>
+    backend/app/calc/units.py<br>
+    backend/app/calc/cv_gas.py<br>
+    backend/app/calc/engine.py<br>
+    frontend/src/views/Calculation.vue<br>
+    docs/计算引擎迭代.html
+  </td>
+</tr>
+<tr>
+  <td>2026-09-02</td>
+  <td>
+    <strong>新增章节 1b：两份 Excel Cv 计算一致性结论</strong>。逐项对照 Cv_2.1.xlsm 与 Aerodynamic Noise 3.6.xlsm 的 Cv 计算逻辑，确认两份 Excel 共享同一套 IEC 60534-2-1 流量方程、同一张 ValveData/FluidData/PipeData 数据表、同一套 VBA 物性函数，Cv 计算核心公式完全一致。差异仅在：①标准版本引用（2002 vs 2007，为重新确认，公式无实质变化）；②功能覆盖范围（Cv_2.1 含液体/两相/湿蒸汽，Noise 3.6 仅气体扩展噪音）；③计算方向（Cv_2.1 正向算 Cv，Noise 3.6 反向用 Cv 算噪音）。结论：后续与项目代码对标时，气体 Cv 部分取任一份 Excel 均可代表。
+  </td>
+  <td>docs/计算引擎迭代.html</td>
+</tr>
+<tr>
+  <td>2026-09-04</td>
+  <td>
+    <strong>P0-1 IEC 雷诺数修正 Fr 实现</strong>。<a href="cv_core.py">cv_core.py</a> 新增 <code>reynolds_factor(Rev, FL, Cd)</code> 函数，完整实现 IEC 60534-2-1 Annex G：层流系数 n（Cd ≥ 0.016 用 n=0.00214/Cd²，否则 n=1+127·Cd^(2/3)）；三分支 Fr 公式（Rev&lt;10: 下限 0.026/FL·√(n·Rev)；10≤Rev&lt;10000: min(1, 湍流过渡式, 下限)；Rev≥10000: Fr=1）。<a href="cv_liquid.py">cv_liquid.py</a> 在 Cv 计算后调用 Fr 修正：Fr&lt;1 时 Cv_required 除以 Fr；detail 记录 Fr/Cd/Rev；warnings 文案由"建议复核"改为"已应用 Fr"。验证结果：甘油 5 m³/h 层流区 (Rev=39.5)，Fr=0.373，Cv 从 6.49 → 17.39 (×2.68) 符合预期；水 湍流 (Rev=884k) Fr=1.0 无修正。
+  </td>
+  <td>
+    backend/app/calc/cv_core.py<br>
+    backend/app/calc/cv_liquid.py
+  </td>
+</tr>
+<tr>
+  <td>2026-09-04</td>
+  <td>
+    <strong>P0-2 Redlich-Kwong 压缩因子 Z 实现</strong>。<a href="properties.py">properties.py</a> 新增 <code>gas_compressibility_rk(P, T, Pc, Tc)</code>（对比态 Cardano 形式 Z³−Z²+(A−B−B²)Z−AB=0，取 > B 的 Vapor 根）；新增 <code>gas_speed_of_sound_nl</code> Newton-Laplace 声速函数（√(10⁵·γ·P/ρ)，与 Excel c1 公式一致，自动吸收 Z 影响）；<code>FluidProperties</code> 新增 compressibility 字段。<a href="engine.py">engine.py</a> 气体路径中按介质库 Pc/Tc 调用 RK 计算 Z，并传入 gas_density 与 gas_speed_of_sound_nl（水介质继续走 IAPWS，不影响）。验证：空气 P=101.3kPa Z=0.9995（回归）；CO2 近临界 7000kPa 100℃ Z=0.814，ρ=122.0 kg/m³ 比理想气体 (99.3) 大 22.9%，Cv=56.39（Z=1 时为 65.0，差 13%）。
+  </td>
+  <td>
+    backend/app/calc/properties.py<br>
+    backend/app/calc/engine.py
+  </td>
+</tr>
+<tr>
+  <td>2026-09-04</td>
+  <td>
+    <strong>P1 IEC Annex C 两相流模型（并列可选）</strong>。<a href="cv_twophase.py">cv_twophase.py</a>
+    新增 <code>method='iec_annexc'</code> 分支，实现 IEC 60534-2-1 Annex C（Excel Cv_2.1.xlsm LiqGas 同
+    公式）: <code>Cv = (1/(K_LIQ·Fp))·√[(Wf+Wg)·(Wf/(ρf·ΔPfe)+Wg/(ρg·Y²·ΔPge))]</code>。分别按液/气相计算有
+    效压差：ΔPfe=min(ΔP, Fl²·(P1-Ff·Pv))，Ff = 0.96-0.28√(Pv/Pc)；ΔPge=min(ΔP, x_eff·P1)。detail 记录
+    Ff/ΔPfe_kPa/ΔPge_kPa/FL_eff/Y_sq；阻塞状态按"液相阻塞/气相阻塞"分级标注。与原有 additive（叠加，默认）/
+    homogeneous（均相）并列。<a href="engine.py">engine.py</a> calculate_case 两相路径补传
+    Pv/Pc。<a href="Calculation.vue">Calculation.vue</a> 两相方法下拉调整为"①IEC Annex C(与Excel一致,推荐) ②叠
+    加法(保守) ③均相膨胀法"；新增 computed <code>shouldShowTwoPhase</code>：仅当任一 case 的 phase==
+    'twophase' 或填写了气液双流量时，才显示"两相方法"下拉行，避免单液相/单气相多余输入。后端 schema 默认
+    twophase_method='additive'，原有行为不变。4 组工况端到端验证均通过（Case2/3 叠加法因忽略液阻塞而 Cv 仅为
+    Annex C 的 61%，差异符合预期）。
+  </td>
+  <td>
+    backend/app/calc/cv_twophase.py<br>
+    backend/app/calc/engine.py<br>
+    frontend/src/views/Calculation.vue
+  </td>
+</tr>
+<tr>
+  <td>2026-09-04</td>
+  <td>
+    <strong>Valve &amp; Trim Factors 数据入库</strong>。解析 <code>KELK CalcCv Valve &amp; Trim Factors.xlsm</code>（15 个 Sheet），将 Valve 系数曲线与 Trim 额定 Cv 导入 SQL Server。<br>
+    <strong>DB 扩列（优先扩列未增表）</strong>：valve_types 新增 <code>factor_group / eq_index / fl_default / xt_default / fd_default / kc_default / trim_option_pressure / trim_option_opening / trim_option_types</code> 9 列；valve_factor_curves 新增 <code>a0..a6</code> 7 列（Eq% 6 次多项式系数）。valve_trim_sizes 蝶阀角度存入 <code>remark</code> 字段（格式 "60 deg"/"90 deg"），未增 opening_deg 列。<br>
+    <strong>数据导入</strong>：valve_factor_curves 写入 219 条（eqcv=198, fl/kc/fd 各 7）；valve_trim_sizes 写入 298 条（GC120=101, GC210=101, BT120=48, BT210=48）；valve_types 更新 10 个系列元数据。<br>
+    <strong>Models / Schemas 同步</strong>：ValveType ORM 补齐 9 列；ValveFactorCurve 补 a0..a6；新增 ValveTrimSizeOut / ValveFactorCurveOut Pydantic 模型。<br>
+    <strong>抽样校验</strong>：GC120 &lt;600# DN100 Rated Cv=150 ✓；BT210 150# DN100 60°=230/90°=160 ✓；FL Eq#1 P0=0.9863/P1=-0.2174 ✓；Kc Eq#1 P0=0.7878 ✓；Fd Eq#1 P0=0.2285 ✓。<br>
+    <strong>Skill 沉淀</strong>：创建 <code>.trae/skills/excel-to-mssql-import</code> Skill，固化"Excel→DB 结构对齐→幂等 UPSERT→抽样校验"四步流程。
+  </td>
+  <td>
+    backend/app/models/__init__.py<br>
+    backend/app/schemas/__init__.py<br>
+    docs/计算引擎迭代.html
+  </td>
+</tr>
+<tr>
+  <td>2026-09-04</td>
+  <td>
+    <strong>P1-2 Ff Pc≤Pv 兜底</strong>。<a href="cv_liquid.py">cv_liquid.py</a> 与 <a href="noise.py">noise.py</a> 的 <code>predict_liquid_noise</code> 将 Ff 计算改为与 Excel <code>WtrStm</code>/<code>LiGas</code> Sheet 一致的三分支：<code>Pv≤0 → ff=0.96</code>（无蒸汽压）；<code>0&lt;Pv&lt;Pc → ff=0.96-0.28·√(Pv/Pc)</code>（正常 IEC Eq.12）；<code>Pv≥Pc → ff=0.68</code>（超临界兜底，避免 <code>√(Pv/Pc)&gt;1</code> 导致 Ff&lt;0）。原实现仅做中间分支，近临界/超临界介质 (Pv≥Pc) 会得到负 Ff → 负 <code>dp_choked</code> → Cv 错误。修复后 water 临界点附近 (Pv=22064kPa=Pc) ff=0.68 与 Excel 一致。
+  </td>
+  <td>
+    backend/app/calc/cv_liquid.py<br>
+    backend/app/calc/noise.py
+  </td>
+</tr>
+<tr>
+  <td>2026-09-04</td>
+  <td>
+    <strong>P1-1 IEC Eq.20/30/33 严格 Fp/Flp/xTP</strong>。<a href="cv_core.py">cv_core.py</a> 新增常量 <code>N5_PRIME=0.00241</code> 与辅助函数 <code>_iecfittings(vc)</code> 返回 (K1, K2, KB1, KB2)，按 <code>d&lt;D</code>/<code>d≥D</code> 分支计算；<code>compute_fp()</code> 替换原 ζ1=1.5/ζ2=1.0 固定系数为 IEC Eq.20: <code>Fp=1/√(1+(K1+K2+KB1-KB2)·Cd²/N2)</code>；<code>fl_effective()</code> 增加 Eq.30: <code>Flp=FL/√(1+FL²·(K1+KB1)·Cd²/N2)</code>；<code>xt_effective()</code> 增加 Eq.33: <code>xTP=(xT/Fp²)/(1+xT·(K1+KB1)·Cd²/N5')</code>。<a href="cv_liquid.py">cv_liquid.py</a> / <a href="cv_gas.py">cv_gas.py</a> 调用方补单次迭代：先用 rated_cv 算 Fp/Flp/xTP → 得 cv_required → 用 cv_operating=cv_required 重算 Flp/xTP → 重算 dp_choked/Cv（与 Excel Cv_2.1 一致）。<code>cv_twophase.py</code> 无需改（默认 cv_operating=None 用 rated_cv）。β→1 时结果与原实现一致；β 偏离 1 时与 Excel 完全对齐。
+  </td>
+  <td>
+    backend/app/calc/cv_core.py<br>
+    backend/app/calc/cv_liquid.py<br>
+    backend/app/calc/cv_gas.py
+  </td>
+</tr>
+<tr>
+  <td>2026-09-04</td>
+  <td>
+    <strong>P2-3 湿蒸汽 Singleton 并联模型</strong>。<a href="cv_twophase.py">cv_twophase.py</a> 新增 <code>method='singleton'</code> 分支（与 iec_annexc/additive/homogeneous 并列），实现 Singleton (1991) 并联等效密度法：<code>ρ1fe=ρ_liquid/(1-Q)</code>、<code>ρ1ge=ρ_gas·Y²/Q</code>、<code>Cv=(1/(K_LIQ·Fp))·√(W_total·(1/(ρ1fe·ΔPfe)+1/(ρ1ge·ΔPge)))</code>；有效压差 ΔPfe/ΔPge 与 Annex C 一致（含 Ff/FL/xT 阻塞判定）；<code>flow_regime</code> 返回"湿蒸汽-Singleton[液相阻塞/气相阻塞]"或"湿蒸汽-Singleton(亚临界)"。<a href="properties.py">properties.py</a> 新增 <code>water_saturation_phase_densities(t_c, p_kpa)</code>，利用 IAPWS-IF97 x=0/x=1 获取饱和液/汽相密度。<a href="engine.py">engine.py</a> <code>calculate_case()</code> 新增 <code>quality: float = 1.0</code> 参数，检测湿蒸汽 (<code>is_water and phase=='saturated' and 0&lt;quality&lt;1</code>) 时自动路由到 singleton（<code>m_g=m·quality, m_l=m·(1-quality)</code>，密度从 <code>water_saturation_phase_densities()</code> 取）；默认 quality=1.0 行为不变（饱和蒸汽仍走气体路径）。
+  </td>
+  <td>
+    backend/app/calc/cv_twophase.py<br>
+    backend/app/calc/engine.py<br>
+    backend/app/calc/properties.py
+  </td>
+</tr>
+<tr>
+  <td>2026-09-04</td>
+  <td>
+    <strong>P2-1 噪音 5 级 Regime 判定</strong>。<a href="noise.py">noise.py</a> 新增 <code>_predict_gas_noise_5regime()</code>，完整实现 IEC 60534-8-3 五步法：①压力比与 Regime 判定 (Eq.1-7: x/xvcc/xC/xB/xCE/α → I~V 分类)；②射流直径 Dj (Eq.9: <code>4.9e-3·Fd·√(Cn·Flp)</code>)；③缩脉条件 (Eq.32: Mvc/cvc/Mj 全公式)；④声功率按 Regime 分别计算 η×Wm（I: <code>Flp²·Mvc³</code>；II/III: <code>Mj^(6.6·Flp²)</code>；IV/V: <code>(Mj²/2)·√2^(6.6·Flp²)</code>）；⑤声压级 Lpi (Eq.18/31) + 马赫数修正 Lg (Eq.16) + TL + Lpe1m。<code>predict_gas_noise()</code> 新增 <code>flp/fd/aeta_db/enhanced</code> 参数，<code>enhanced=True 且 flp/aeta_db 可用</code> 走 5-Regime，否则降级到原简化路径（重命名 <code>_predict_gas_noise_simplified</code>）。<code>NoiseResult</code> 扩展 <code>regime_index/jet_diameter_m/vc_mach/critical_mach/aeta</code> 字段。<a href="engine.py">engine.py</a> 气体噪音路径从 <code>res.cv.fl_eff</code> / <code>valve_coeffs.flp</code> 取 Flp、<code>fluid.aeta_db</code> 取 Aeta，<code>enhanced</code> 自动判定。
+  </td>
+  <td>
+    backend/app/calc/noise.py<br>
+    backend/app/calc/engine.py
+  </td>
+</tr>
+<tr>
+  <td>2026-09-04</td>
+  <td>
+    <strong>P2-2 噪音倍频程分析</strong>。<a href="noise.py">noise.py</a> 新增 <code>_octave_band_analysis(Lpi, d_i, t, rho2, c2, r)</code> 函数，实现 1/3 倍频程频带合成：14 个频带 (500Hz~10kHz, <code>A_WEIGHT_BANDS</code> 表)，每频带计算 TL(f)（含环频率 fr / 内部重合频率 fo / 外部重合频率 fg 三频率修正）→ 频带声压级 → A 计权 (IEC 61672) → 能量叠加求总 dBA。<code>predict_gas_noise()</code> 新增 <code>octave: bool = False</code> 参数，<code>True</code> 时调用并写入 <code>detail["octave_bands"]</code>（含每频带 spl_raw_dB/TL_dB/a_weight_dB/splA_dB + fr_Hz/fo_Hz/fg_Hz/total_dba）。<a href="engine.py">engine.py</a> 气体路径 <code>octave=enhanced</code> 自动开启（5-Regime 启用时同时跑倍频程）。修复 octave bands 被后续 <code>res.detail</code> 覆盖的 bug（改为先算 octave_bands 再合并入 detail dict）。与 Excel ExtFreq Sheet (24 频带) 相比频带数较少 (14)，但覆盖主要可听范围；阻尼因子 dTL 仍简化。
+  </td>
+  <td>
+    backend/app/calc/noise.py<br>
+    backend/app/calc/engine.py
+  </td>
+</tr>
+<tr>
+  <td>2026-09-07</td>
+  <td>
+    <strong>P3-2 Antoine 蒸汽压温度修正</strong>。<a href="properties.py">properties.py</a> 新增 <code>antoine_vapor_pressure_kpa(t_c, A, B, C, tmin_k)</code>，实现与 Excel FluidData 一致的 Antoine 方程：<code>Pv(barA) = exp(A − B/(T(K)+C))</code>，返回 kPa (×100)；工况温度低于 <code>antoine_tmin_k</code> 时钳制到下限（避免低温外推失真）；系数缺失时返回 0。<a href="engine.py">engine.py</a> <code>_resolve_fluid_properties</code> 在气体/液体路径统一调用：介质库有 <code>antoine_a/b/c</code> 时用工况温度重算 Pv，否则回退库静态值。数据库已有 <code>antoine_a/b/c/antoine_tmin_k</code> 字段，无需扩列。
+  </td>
+  <td>
+    backend/app/calc/properties.py<br>
+    backend/app/calc/engine.py
+  </td>
+</tr>
+<tr>
+  <td>2026-09-07</td>
+  <td>
+    <strong>P3-3 液体密度温度修正 (Gf 公式)</strong>。<a href="properties.py">properties.py</a> 新增 <code>liquid_density_temperature_corrected(rho_base, t_c, tc_k, tb_k)</code>，实现 Excel Gf 线性修正公式：<code>ρ(T) = ρ_B · (2·Tc − T) / (2·Tc − TB)</code>；T=TB 时 ρ=ρ_B（基准密度在沸点）；结果下限钳制 100 kg/m³（避免近临界负值）。<a href="engine.py">engine.py</a> 液体路径：无 <code>density_override</code> 时按工况温度修正（<code>critical_temp</code>/<code>boiling_point</code> 均>0 才启用），否则用静态基准密度。数据库已有 <code>density_liquid/critical_temp/boiling_point</code> 字段，无需扩列。
+  </td>
+  <td>
+    backend/app/calc/properties.py<br>
+    backend/app/calc/engine.py
+  </td>
+</tr>
+<tr>
+  <td>2026-09-07</td>
+  <td>
+    <strong>P3-1 多级降噪阀压降分配</strong>。<a href="cv_core.py">cv_core.py</a> <code>ValveCoeffs</code> 新增 <code>stages: int = 1</code> 字段。<a href="noise.py">noise.py</a> <code>predict_gas_noise</code> / <code>_predict_gas_noise_5regime</code> 新增 <code>stages</code> 参数：stages>1 时总压差按几何分布分配到 N 级 — <code>r_stage=(p2/p1)^(1/N)</code>、<code>x_stage=1−r_stage</code>；用 <code>x_stage</code> 替代总 x 进行 Regime 判定与 η 计算（每级 Regime 显著降低 → η 大幅下降 → 降噪）；声功率 <code>Wa=η(x_stage)·Wm_total</code>（N 级的 Wm/N × N 抵消）。detail 返回 <code>stages/x_total/x_stage/r_stage/stages_needed</code>（stages_needed 为避免阻塞所需最少级数，对标 Excel StgNeeded）。<a href="engine.py">engine.py</a> 气体噪音路径传 <code>stages=valve_coeffs.stages</code>。验证：CO2 6000→100kPa 工况，1级 Regime V(x=0.983) → 4级 IV(0.641) → 8级 II(0.401) → 16级 I(0.226)，Regime 逐级降低。
+  </td>
+  <td>
+    backend/app/calc/cv_core.py<br>
+    backend/app/calc/noise.py<br>
+    backend/app/calc/engine.py
+  </td>
+</tr>
+</table>
+
+<h3>12.3 已完成项</h3>
+
+<table>
+<tr><th>项目</th><th>状态</th><th>说明</th></tr>
+<tr><td>标况体积流量→工况修正</td><td><span class="tag tag-same">已完成</span></td><td>Nm³/h(0℃/20℃)/SCFM 三种标况基准</td></tr>
+<tr><td>标况密度→工况密度修正</td><td><span class="tag tag-same">已完成</span></td><td>kg/Nm³ → kg/m³</td></tr>
+<tr><td>flow_unit 误删 bug 修复</td><td><span class="tag tag-same">已完成</span></td><td>units.py 清理逻辑跳过 flow_unit</td></tr>
+<tr><td>前端气态介质默认标况单位</td><td><span class="tag tag-same">已完成</span></td><td>Nm³/h + kg/Nm³</td></tr>
+<tr><td>valve_types KELK 39系列导入</td><td><span class="tag tag-same">已完成</span></td><td>含 globe/ball/butterfly/gate</td></tr>
+<tr><td>valve_style 默认值改 series_code</td><td><span class="tag tag-same">已完成</span></td><td>GV120 + 等百分比</td></tr>
+<tr><td>P0-1 Fr 雷诺数修正 (IEC Annex G)</td><td><span class="tag tag-same">已完成</span></td><td>层流系数 n + 三分支 Fr 公式，甘油验证 Cv ×2.68</td></tr>
+<tr><td>P0-2 RK 压缩因子 Z (Redlich-Kwong)</td><td><span class="tag tag-same">已完成</span></td><td>Cardano 三次方程 Vapor 根，CO2 近临界 Z=0.814</td></tr>
+<tr><td>P0 IEC Annex C 两相流模型</td><td><span class="tag tag-same">已完成</span></td><td>与叠加/均相三法并列，前端下拉切换 (仅两相显示)</td></tr>
+<tr><td>P2 valve_types 扩展 FL/xT/Fd/Kc 字段</td><td><span class="tag tag-same">已完成</span></td><td>9 列扩列 + 10 系列回填，从 VTF XLSM 导入</td></tr>
+<tr><td>valve_factor_curves 系数曲线表</td><td><span class="tag tag-same">已完成</span></td><td>eqcv=198 + fl/kc/fd 各 7，多项式系数 A0-A6 / P0-P4</td></tr>
+<tr><td>valve_trim_sizes 额定 Cv 表</td><td><span class="tag tag-same">已完成</span></td><td>298 条（GC120/GC210/BT120/BT210），含蝶阀角度</td></tr>
+<tr><td>P1-2 Ff Pc≤Pv 兜底</td><td><span class="tag tag-same">已完成</span></td><td>三分支 Ff (Pv≤0/正常/Pv≥Pc=0.68)，cv_liquid.py + noise.py</td></tr>
+<tr><td>P1-1 IEC Eq.20/30/33 Fp/Flp/xTP</td><td><span class="tag tag-same">已完成</span></td><td>严格管件系数 K1/K2/KB1/KB2，cv_operating 单次迭代</td></tr>
+<tr><td>P2-3 湿蒸汽 Singleton 模型</td><td><span class="tag tag-same">已完成</span></td><td>并联等效密度法 + IAPWS 饱和相密度 + quality 参数自动路由</td></tr>
+<tr><td>P2-1 噪音 5 级 Regime</td><td><span class="tag tag-same">已完成</span></td><td>IEC 60534-8-3 五步法，x/xC/xB/xCE 分级，Regime 独立 η/Wm</td></tr>
+<tr><td>P2-2 噪音倍频程分析</td><td><span class="tag tag-same">已完成</span></td><td>14 频带 1/3 倍频程 + IEC 61672 A 计权 + fr/fo/fg 三频率修正</td></tr>
+<tr><td>P3-2 Antoine 蒸汽压温度修正</td><td><span class="tag tag-same">已完成</span></td><td>exp(A-B/(T+C)) 工况温度重算 Pv，无系数回退静态值</td></tr>
+<tr><td>P3-3 液体密度温度修正 (Gf)</td><td><span class="tag tag-same">已完成</span></td><td>ρ_B·(2Tc-T)/(2Tc-TB)，下限钳制 100 kg/m³</td></tr>
+<tr><td>P3-1 多级降噪阀压降分配</td><td><span class="tag tag-same">已完成</span></td><td>几何分布 r_stage=(p2/p1)^(1/N)，x_stage 降 Regime，含 stages_needed</td></tr>
+</table>
+
+<div class="footer">
+  <p>KELKCalCv 计算引擎迭代文档 | 生成日期：2026-09-02 | 基于 Cv_2.1.xlsm (Rev 2.1) / Aerodynamic Noise 3.6.xlsm (Rev 3.6) / KELK CalcCv Valve &amp; Trim Factors.xlsm</p>
+  <p>参考文档：docs/计算过程文档.html（不再更新，仅作历史参考）</p>
+</div>
+
+</body>
+</html>
