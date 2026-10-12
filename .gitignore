@@ -25,3 +25,6 @@ dist/
 Thumbs.db
 
 # Build artifacts (static/ is committed for deployment convenience)
+
+# Reference files (internal documents, not for repository)
+参考文件/
