@@ -12,11 +12,11 @@ class Settings(BaseSettings):
     )
 
     # 数据库（统一使用 SQL Server）
-    DB_HOST: str = "192.168.1.112"
+    DB_HOST: str = ""
     DB_PORT: int = 1433
     DB_NAME: str = "KELKCalCv"
-    DB_USER: str = "Sa"
-    DB_PASSWORD: str = "QraLBZngRU0PipBmIun4"
+    DB_USER: str = ""
+    DB_PASSWORD: str = ""
 
     # 应用
     APP_NAME: str = "KELKCalCv调节阀Cv计算与噪音分析系统"
@@ -28,7 +28,7 @@ class Settings(BaseSettings):
     ]
 
     # 安全
-    SECRET_KEY: str = "kelk-calcv-secret-change-in-production-2026"
+    SECRET_KEY: str = ""
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440
 
     @field_validator("BACKEND_CORS_ORIGINS", mode="before")
