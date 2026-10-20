@@ -8,11 +8,16 @@ rem   KELKCalCv 一键首次部署
 rem     a) 部署包模式: bootstrap.bat 在目标目录
 rem        -> 环境检查 -> 克隆仓库到当前目录 -> 生成 .env -> 启动
 rem     b) 仓库内模式: bootstrap.bat 在 deploy\ 子目录
-rem        -> 自动跳过克隆，仅检查/配置/启动
+rem        -> 自动跳过克隆, 仅检查/配置/启动
 rem   详细说明见同目录 部署说明.md
 rem ============================================================
 
 cd /d "%~dp0"
+
+rem 统一路径变量: %~dp0 自带尾部反斜杠, robocopy/copy 等命令不能直接引号包裹
+rem 因为 "D:\xxx\" 会把闭合引号转义, 必须去掉尾部 \ 再用
+set "CUR_DIR=%~dp0"
+set "CUR_DIR_NS=!CUR_DIR:~0,-1!"
 
 rem 检测是否在盘符根目录直接运行
 if "%~dp0"=="%~d0\" (
@@ -35,8 +40,8 @@ echo [1/5] 定位仓库 ...
 set "REPO_DIR="
 
 rem 模式 b: 当前位于仓库 deploy 目录
-if exist "%~dp0..\backend\app\main.py" (
-    set "REPO_DIR=%~dp0..\"
+if exist "!CUR_DIR!..\backend\app\main.py" (
+    set "REPO_DIR=!CUR_DIR!.."
     echo        检测到当前位于仓库 deploy 目录, 跳过克隆
     goto :PRECHECK
 )
@@ -49,12 +54,12 @@ if errorlevel 1 (
 )
 
 rem 模式 a: 当前目录已是 Git 仓库
-if exist "%~dp0.git" (
+if exist "!CUR_DIR!.git" (
     rem 校验仓库完整性: backend\app\main.py 必须存在
-    if exist "%~dp0backend\app\main.py" (
+    if exist "!CUR_DIR!backend\app\main.py" (
         echo        当前目录已是 Git 仓库, 跳过克隆
         echo        日常更新请运行 deploy\update.bat
-        set "REPO_DIR=%~dp0"
+        set "REPO_DIR=!CUR_DIR_NS!"
         goto :PRECHECK
     )
     echo        检测到 .git 目录但项目文件不完整
@@ -69,17 +74,17 @@ if exist "%~dp0.git" (
             pause
             exit /b 1
         )
-        if not exist "%~dp0backend\app\main.py" (
+        if not exist "!CUR_DIR!backend\app\main.py" (
             echo [错误] git pull 后项目文件仍不完整, 请手工排查.
             pause
             exit /b 1
         )
-        set "REPO_DIR=%~dp0"
+        set "REPO_DIR=!CUR_DIR_NS!"
         goto :PRECHECK
     )
     if /i "!FIX_REPO!"=="N" (
         echo        正在删除 .git 并重新克隆 ...
-        rmdir /s /q "%~dp0.git"
+        rmdir /s /q "!CUR_DIR!.git"
         if errorlevel 1 (
             echo [错误] 无法删除 .git 目录, 可能被占用.
             pause
@@ -93,10 +98,10 @@ if exist "%~dp0.git" (
 )
 
 rem 当前目录存在 backend\app\main.py 但无 .git: 可能是解压的源码包
-if exist "%~dp0backend\app\main.py" (
+if exist "!CUR_DIR!backend\app\main.py" (
     echo        检测到当前目录包含项目文件但非 Git 仓库
     echo        可能是源码包解压或不完整复制
-    if not exist "%~dp0backend\.env.example" (
+    if not exist "!CUR_DIR!backend\.env.example" (
         echo        [警告] 项目文件不完整: 缺少 backend\.env.example
         echo        建议重新克隆以确保完整性.
         set "RECLONE="
@@ -112,20 +117,20 @@ if exist "%~dp0backend\app\main.py" (
         )
         echo        继续使用当前目录.
         echo        后续可运行 git init + git remote add origin + git pull 补全版本控制.
-        set "REPO_DIR=%~dp0"
+        set "REPO_DIR=!CUR_DIR_NS!"
         goto :PRECHECK
     )
     echo        项目文件完整, 使用当前目录
     echo        建议后续运行 git init + git remote add origin + git pull 补全版本控制.
-    set "REPO_DIR=%~dp0"
+    set "REPO_DIR=!CUR_DIR_NS!"
     goto :PRECHECK
 )
 
 rem 当前目录非空且非项目文件: 警告
-dir /b "%~dp0" 2>nul | findstr /r /c:"." >nul
+dir /b "!CUR_DIR_NS!" 2>nul | findstr /r /c:"." >nul
 if not errorlevel 1 (
     echo        警告: 当前目录不为空:
-    dir /b "%~dp0"
+    dir /b "!CUR_DIR_NS!"
     echo.
     set "FORCE="
     set /p FORCE=       输入 Y 强制在此目录克隆, 其他键退出:
@@ -141,9 +146,9 @@ echo        从 Gitee 克隆仓库到当前目录, 私有仓库会提示输入�
 
 rem git clone 到当前目录在目录非空时会报错
 rem 方案: 克隆到临时子目录, 再用 robocopy 移动所有内容到当前目录
-set "TEMP_DIR=%~dp0kelkcalcv-temp-%RANDOM%"
-echo        目录非空, 先克隆到临时目录 %TEMP_DIR% ...
-git clone https://gitee.com/KELKzhao/kelkcalcv.git "%TEMP_DIR%"
+set "TEMP_DIR=!CUR_DIR!kelkcalcv-temp-%RANDOM%"
+echo        目录非空, 先克隆到临时目录 !TEMP_DIR! ...
+git clone https://gitee.com/KELKzhao/kelkcalcv.git "!TEMP_DIR!"
 if errorlevel 1 (
     echo.
     echo [错误] 克隆失败. 常见原因:
@@ -151,28 +156,28 @@ if errorlevel 1 (
     echo          2. 私有仓库未输入正确的账号或个人访问令牌
     echo          3. 代理未配置, 如需代理请执行: git config --global http.proxy http://host:port
     echo        请根据上方 git 报错信息处理后重试.
-    rmdir /s /q "%TEMP_DIR%" >nul 2>&1
+    rmdir /s /q "!TEMP_DIR!" >nul 2>&1
     pause
     exit /b 1
 )
 
 echo        克隆完成, 正在移动文件到当前目录 ...
-robocopy "%TEMP_DIR%" "%~dp0" /E /MOVE /NFL /NDL /NJH /NJS
+robocopy "!TEMP_DIR!" "!CUR_DIR_NS!" /E /MOVE /NFL /NDL /NJH /NJS
 if errorlevel 8 (
-    echo [错误] 移动文件失败, 请手工将 %TEMP_DIR% 内容复制到 %~dp0
+    echo [错误] 移动文件失败, 请手工将 !TEMP_DIR! 内容复制到 !CUR_DIR_NS!
     pause
     exit /b 1
 )
-rmdir /s /q "%TEMP_DIR%" >nul 2>&1
+rmdir /s /q "!TEMP_DIR!" >nul 2>&1
 
 rem 二次校验: 确认 .git 真实存在
-if not exist "%~dp0.git" (
+if not exist "!CUR_DIR!.git" (
     echo [错误] 克隆命令返回成功但 .git 不存在, 目录为空.
     echo        请检查 git 输出并手工排查.
     pause
     exit /b 1
 )
-set "REPO_DIR=%~dp0"
+set "REPO_DIR=!CUR_DIR_NS!"
 
 :PRECHECK
 echo.
@@ -193,16 +198,16 @@ if errorlevel 1 (
 
 echo.
 echo [3/5] 准备配置文件 backend\.env ...
-if exist "%REPO_DIR%backend\.env" (
+if exist "!REPO_DIR!\backend\.env" (
     echo        backend\.env 已存在, 保留现有配置
     goto :CONFIRM
 )
-if not exist "%REPO_DIR%backend\.env.example" (
-    echo [错误] 未找到 "%REPO_DIR%backend\.env.example", 仓库可能不完整.
+if not exist "!REPO_DIR!\backend\.env.example" (
+    echo [错误] 未找到 "!REPO_DIR!\backend\.env.example", 仓库可能不完整.
     pause
     exit /b 1
 )
-copy "%REPO_DIR%backend\.env.example" "%REPO_DIR%backend\.env" >nul
+copy "!REPO_DIR!\backend\.env.example" "!REPO_DIR!\backend\.env" >nul
 if errorlevel 1 (
     echo [错误] 生成 backend\.env 失败, 请检查目录权限.
     pause
@@ -210,24 +215,24 @@ if errorlevel 1 (
 )
 echo        已生成 backend\.env 占位符模板, 请在打开的记事本中填写:
 echo          DB_HOST / DB_USER / DB_PASSWORD / SECRET_KEY
-notepad "%REPO_DIR%backend\.env"
+notepad "!REPO_DIR!\backend\.env"
 echo        检测到记事本已关闭, 继续...
 
 :CONFIRM
 echo.
 echo [4/5] 启动确认
-echo   仓库位置: %REPO_DIR%
+echo   仓库位置: !REPO_DIR!
 set "CONFIRM="
 set /p CONFIRM=  输入 Y 立即启动服务, 其他键退出:
-if /i not "%CONFIRM%"=="Y" (
+if /i not "!CONFIRM!"=="Y" (
     echo   已退出. 稍后可运行:
-    echo     "%REPO_DIR%deploy\start-server.bat"
+    echo     "!REPO_DIR!\deploy\start-server.bat"
     pause
     exit /b 0
 )
 
 echo.
 echo [5/5] 启动服务 ...
-call "%REPO_DIR%deploy\start-server.bat"
+call "!REPO_DIR!\deploy\start-server.bat"
 
 endlocal
