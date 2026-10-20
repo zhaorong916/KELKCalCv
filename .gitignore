@@ -28,3 +28,6 @@ Thumbs.db
 
 # Reference files (internal documents, not for repository)
 参考文件/
+
+# Deployment package artifact (regenerate from deploy/)
+KELKCalCv-部署包.zip

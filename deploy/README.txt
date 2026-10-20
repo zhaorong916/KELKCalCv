@@ -4,12 +4,15 @@ KELKCalCv 服务器部署说明
 目录结构
 --------
 deploy/
+  bootstrap.bat       一键首次部署（环境检查/克隆仓库/生成.env/启动）
   update.bat          从 Gitee 拉取最新代码 + 更新依赖
   start-server.bat    启动后端服务（uvicorn + 静态前端）
   stop-server.bat     停止服务（清理 8000 端口）
+  部署说明.md          完整部署文档（环境要求/常见问题/安全须知）
 
 首次部署步骤
 ------------
+0. 推荐: 运行 bootstrap.bat 一键完成下述步骤 3~5
 1. 在服务器上安装 Python 3.10+ 和 Git
 2. 安装 ODBC Driver 17 for SQL Server（pyodbc 连接 SQL Server 必需）
 3. 克隆仓库:

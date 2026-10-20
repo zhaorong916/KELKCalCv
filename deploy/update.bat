@@ -44,7 +44,7 @@ echo   更新完成
 echo ============================================================
 echo.
 echo   代码来源: https://gitee.com/KELKzhao/kelkcalcv
-echo   服务器配置: deploy\backend\.env  (不受 git 覆盖)
+echo   服务器配置: backend\.env  (不受 git 覆盖)
 echo.
 echo   下一步:
 echo     1. 停止当前服务 (如有运行)
