@@ -95,14 +95,27 @@ if exist "%~dp0.git" (
 rem 当前目录存在 backend\app\main.py 但无 .git: 可能是解压的源码包
 if exist "%~dp0backend\app\main.py" (
     echo        检测到当前目录包含项目文件但非 Git 仓库
-    echo        (可能是源码包解压，建议用 git clone 获取完整版本控制)
-    set "USE_CURRENT="
-    set /p USE_CURRENT=       输入 Y 使用当前目录，其他键退出并重新克隆:
-    if /i not "!USE_CURRENT!"=="Y" (
-        echo        已退出。请清空目录后重试，或手工执行 git clone。
-        pause
-        exit /b 1
+    echo        可能是源码包解压或不完整复制
+    if not exist "%~dp0backend\.env.example" (
+        echo        [警告] 项目文件不完整: 缺少 backend\.env.example
+        echo        建议重新克隆以确保完整性。
+        set "RECLONE="
+        set /p RECLONE=       输入 Y 重新克隆，输入 N 继续使用当前目录，其他键退出:
+        if /i "!RECLONE!"=="Y" (
+            echo        正在准备重新克隆 ...
+            goto :DO_CLONE
+        )
+        if /i not "!RECLONE!"=="N" (
+            echo        已退出。请手工处理目录后重试。
+            pause
+            exit /b 1
+        )
+        echo        继续使用当前目录(可能后续报错) ...
+        set "REPO_DIR=%~dp0"
+        goto :PRECHECK
     )
+    echo        项目文件完整，使用当前目录
+    echo        (建议后续用 git init + git remote add origin + git pull 补全版本控制)
     set "REPO_DIR=%~dp0"
     goto :PRECHECK
 )
