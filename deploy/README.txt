@@ -38,6 +38,7 @@ backend/.env  包含以下关键项（完整列表见 backend/.env.example）:
 
 注意事项
 --------
-- 批处理文件编码为 UTF-8 with BOM，头部已设 chcp 65001，可正确显示中文
+- 批处理文件编码为 UTF-8（无 BOM）+ CRLF 行尾，@echo off 后紧跟 chcp 65001，可正确显示中文
+  请勿给 .bat 加 BOM 或改用 LF 行尾（部分 cmd 会首行报错 / goto 解析异常）
 - 服务器本地 backend/.env 不会被 git 覆盖，每次更新安全
 - .env.example 中已脱敏为占位符，禁止提交真实密码到仓库
