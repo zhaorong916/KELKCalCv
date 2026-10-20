@@ -124,7 +124,12 @@ if not errorlevel 1 (
 
 :DO_CLONE
 echo        从 Gitee 克隆仓库到当前目录，私有仓库会提示输入账号/访问令牌 ...
-git clone https://gitee.com/KELKzhao/kelkcalcv.git .
+
+rem git clone 到当前目录(.)在目录非空时会报错
+rem 方案: 克隆到临时子目录，再用 robocopy 移动所有内容到当前目录
+set "TEMP_DIR=%~dp0kelkcalcv-temp-%RANDOM%"
+echo        目录非空，先克隆到临时目录 %TEMP_DIR% ...
+git clone https://gitee.com/KELKzhao/kelkcalcv.git "%TEMP_DIR%"
 if errorlevel 1 (
     echo.
     echo [错误] 克隆失败。常见原因:
@@ -132,9 +137,20 @@ if errorlevel 1 (
     echo          2. 私有仓库未输入正确的账号/个人访问令牌
     echo          3. 代理未配置，如需代理请执行: git config --global http.proxy http://host:port
     echo        请根据上方 git 报错信息处理后重试。
+    rmdir /s /q "%TEMP_DIR%" >nul 2>&1
     pause
     exit /b 1
 )
+
+echo        克隆完成，正在移动文件到当前目录 ...
+rem robocopy /E 复制所有子目录(包括空目录) /MOVE 移动(复制后删除源) /NFL /NDL 不列文件/目录
+robocopy "%TEMP_DIR%" "%~dp0" /E /MOVE /NFL /NDL /NJH /NJS
+if errorlevel 8 (
+    echo [错误] 移动文件失败，请手工将 %TEMP_DIR% 内容复制到 %~dp0
+    pause
+    exit /b 1
+)
+rmdir /s /q "%TEMP_DIR%" >nul 2>&1
 
 rem 二次校验:确认 .git 真实存在
 if not exist "%~dp0.git" (
