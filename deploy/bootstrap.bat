@@ -1,5 +1,6 @@
-@echo off
+﻿@echo off
 chcp 65001 >nul
+setlocal EnableDelayedExpansion
 title KELKCalCv - 首次部署引导
 
 rem ============================================================
@@ -9,7 +10,6 @@ rem     b) 仓库 deploy 目录运行: 自动跳过克隆，仅检查/配置/启
 rem   详细说明见同目录《部署说明.md》
 rem ============================================================
 
-setlocal
 cd /d "%~dp0"
 
 echo.
@@ -33,15 +33,57 @@ if errorlevel 1 (
     pause
     exit /b 1
 )
-if exist "kelkcalcv\.git" (
-    echo        目录 kelkcalcv 已存在，跳过克隆（日常更新请在仓库内运行 update.bat）
+
+rem 已存在完整仓库：跳过克隆
+if exist "%~dp0kelkcalcv\.git" (
+    echo        目录 kelkcalcv 已是 Git 仓库，跳过克隆
+    echo        （日常更新请运行 kelkcalcv\deploy\update.bat）
     set "REPO_DIR=%~dp0kelkcalcv"
     goto :PRECHECK
 )
+
+rem 目录存在但非 Git 仓库（空目录或上次克隆中断的残留）：清理后重克隆
+if exist "%~dp0kelkcalcv" (
+    echo        检测到 kelkcalcv 目录已存在但不是 Git 仓库
+    echo        （可能为空目录或上次克隆中断的残留）
+    set "CLEAN="
+    set /p CLEAN=       输入 Y 删除该目录并重新克隆，其他键退出:
+    if /i not "!CLEAN!"=="Y" (
+        echo        已退出。请手工处理 kelkcalcv 目录后重试。
+        pause
+        exit /b 1
+    )
+    rmdir /s /q "%~dp0kelkcalcv"
+    if errorlevel 1 (
+        echo [错误] 无法删除 kelkcalcv 目录，可能被占用。请关闭占用程序后重试。
+        pause
+        exit /b 1
+    )
+)
+
 echo        从 Gitee 克隆仓库（私有仓库会提示输入账号/访问令牌）...
-git clone https://gitee.com/KELKzhao/kelkcalcv.git
+git clone https://gitee.com/KELKzhao/kelkcalcv.git "%~dp0kelkcalcv"
 if errorlevel 1 (
-    echo [错误] 克隆失败。检查网络后重试。
+    echo.
+    echo [错误] 克隆失败。常见原因:
+    echo          1. 网络无法访问 gitee.com
+    echo          2. 私有仓库未输入正确的账号/个人访问令牌
+    echo          3. 代理未配置（如需代理: git config --global http.proxy http://host:port）
+    echo        请根据上方 git 报错信息处理后重试。
+    rem 清理克隆失败可能留下的空目录
+    if exist "%~dp0kelkcalcv\.git" (
+        echo        克隆部分完成，保留现有目录。
+    ) else (
+        if exist "%~dp0kelkcalcv" rmdir /s /q "%~dp0kelkcalcv" >nul 2>&1
+    )
+    pause
+    exit /b 1
+)
+
+rem 二次校验：确认 .git 真实存在
+if not exist "%~dp0kelkcalcv\.git" (
+    echo [错误] 克隆命令返回成功但 kelkcalcv\.git 不存在，目录为空。
+    echo        请检查 git 输出并手工排查。
     pause
     exit /b 1
 )
@@ -64,14 +106,23 @@ if errorlevel 1 (
     python -c "import pyodbc; d=[x for x in pyodbc.drivers() if 'SQL Server' in x]; print('       ODBC 驱动:', ','.join(d) if d else '未检测到 SQL Server 驱动!')"
 )
 
-:ENVCHECK
 echo.
 echo [3/5] 准备配置文件 backend\.env ...
 if exist "%REPO_DIR%\backend\.env" (
     echo        backend\.env 已存在，保留现有配置
     goto :CONFIRM
 )
+if not exist "%REPO_DIR%\backend\.env.example" (
+    echo [错误] 未找到 "%REPO_DIR%\backend\.env.example"，仓库可能不完整。
+    pause
+    exit /b 1
+)
 copy "%REPO_DIR%\backend\.env.example" "%REPO_DIR%\backend\.env" >nul
+if errorlevel 1 (
+    echo [错误] 生成 backend\.env 失败，请检查目录权限。
+    pause
+    exit /b 1
+)
 echo        已生成 backend\.env（占位符模板），请在打开的记事本中填写:
 echo          DB_HOST / DB_USER / DB_PASSWORD / SECRET_KEY
 notepad "%REPO_DIR%\backend\.env"
@@ -85,7 +136,7 @@ set "CONFIRM="
 set /p CONFIRM=  输入 Y 立即启动服务，其他键退出:
 if /i not "%CONFIRM%"=="Y" (
     echo   已退出。稍后可运行:
-    echo     %REPO_DIR%\deploy\start-server.bat
+    echo     "%REPO_DIR%\deploy\start-server.bat"
     pause
     exit /b 0
 )
