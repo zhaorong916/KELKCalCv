@@ -50,10 +50,46 @@ if errorlevel 1 (
 
 rem 模式 a: 当前目录已是 Git 仓库(如 D:\KELKCalCv\)
 if exist "%~dp0.git" (
-    echo        当前目录已是 Git 仓库，跳过克隆
-    echo        日常更新请运行 deploy\update.bat
-    set "REPO_DIR=%~dp0"
-    goto :PRECHECK
+    rem 校验仓库完整性: backend\app\main.py 必须存在
+    if exist "%~dp0backend\app\main.py" (
+        echo        当前目录已是 Git 仓库，跳过克隆
+        echo        日常更新请运行 deploy\update.bat
+        set "REPO_DIR=%~dp0"
+        goto :PRECHECK
+    )
+    echo        检测到 .git 目录但项目文件不完整
+    echo        可能原因: 1. git init 后未拉取代码  2. 上次克隆中断
+    set "FIX_REPO="
+    set /p FIX_REPO=       输入 Y 尝试 git pull 补全，输入 N 删除 .git 重新克隆，其他键退出:
+    if /i "!FIX_REPO!"=="Y" (
+        echo        正在 git pull ...
+        git pull origin main
+        if errorlevel 1 (
+            echo [错误] git pull 失败，请检查网络或手工修复。
+            pause
+            exit /b 1
+        )
+        if not exist "%~dp0backend\app\main.py" (
+            echo [错误] git pull 后项目文件仍不完整，请手工排查。
+            pause
+            exit /b 1
+        )
+        set "REPO_DIR=%~dp0"
+        goto :PRECHECK
+    )
+    if /i "!FIX_REPO!"=="N" (
+        echo        正在删除 .git 并重新克隆 ...
+        rmdir /s /q "%~dp0.git"
+        if errorlevel 1 (
+            echo [错误] 无法删除 .git 目录，可能被占用。
+            pause
+            exit /b 1
+        )
+        goto :DO_CLONE
+    )
+    echo        已退出。请手工处理 .git 目录后重试。
+    pause
+    exit /b 1
 )
 
 rem 当前目录存在 backend\app\main.py 但无 .git: 可能是解压的源码包
@@ -86,6 +122,7 @@ if not errorlevel 1 (
     )
 )
 
+:DO_CLONE
 echo        从 Gitee 克隆仓库到当前目录，私有仓库会提示输入账号/访问令牌 ...
 git clone https://gitee.com/KELKzhao/kelkcalcv.git .
 if errorlevel 1 (
