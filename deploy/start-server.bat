@@ -1,4 +1,4 @@
-﻿﻿@echo off
+﻿@echo off
 chcp 65001 >nul
 title KELKCalCv Server
 
@@ -42,10 +42,23 @@ if errorlevel 1 (
 if not exist "venv\Scripts\activate.bat" (
     echo        未检测到 venv，创建虚拟环境 ...
     python -m venv venv
-    call venv\Scripts\activate.bat
-    pip install -r requirements.txt -q
+    if errorlevel 1 (
+        echo [错误] 创建虚拟环境失败.
+        pause
+        exit /b 1
+    )
+)
+call venv\Scripts\activate.bat
+python -c "import uvicorn" >nul 2>&1
+if errorlevel 1 (
+    echo        安装依赖 ...
+    pip install -r requirements.txt
+    if errorlevel 1 (
+        echo [错误] 依赖安装失败, 请检查网络或代理后重试.
+        pause
+        exit /b 1
+    )
 ) else (
-    call venv\Scripts\activate.bat
     echo        venv 已就绪
 )
 
