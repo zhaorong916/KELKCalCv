@@ -62,9 +62,24 @@ if errorlevel 1 (
     echo        venv 已就绪
 )
 
-rem ----- Step 3: 启动服务 -----
+rem ----- Step 3: 防火墙放行 8000 -----
+echo [3/4] 配置防火墙放行 8000 端口 ...
+netsh advfirewall firewall show rule name="KELKCalCv 8000" >nul 2>&1
+if errorlevel 1 (
+    netsh advfirewall firewall add rule name="KELKCalCv 8000" dir=in action=allow protocol=TCP localport=8000 >nul 2>&1
+    if errorlevel 1 (
+        echo [警告] 防火墙规则添加失败. 请以管理员身份运行:
+        echo          netsh advfirewall firewall add rule name="KELKCalCv 8000" dir=in action=allow protocol=TCP localport=8000
+    ) else (
+        echo        已添加入站规则 KELKCalCv 8000
+    )
+) else (
+    echo        防火墙规则已存在, 跳过
+)
+
+rem ----- Step 4: 启动服务 -----
 echo.
-echo [3/3] 启动服务器 ...
+echo [4/4] 启动服务器 ...
 echo.
 echo   访问地址: http://localhost:8000
 echo   接口文档: http://localhost:8000/docs
