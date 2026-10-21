@@ -366,8 +366,8 @@
                     <th v-if="showCol('pressure_rating')">Pressure Rating</th>
                     <th v-if="showCol('seat_type')">Seat Type</th>
                     <th v-if="showCol('rated_cv')" class="col-cv">Rated Cv</th>
-                    <th v-if="showCol('stroke')">Stroke</th>
-                    <th v-if="showCol('stroke_mm')">Stroke (mm)</th>
+                    <th v-if="showCol('stroke_unit')">Stroke Unit</th>
+                    <th v-if="showCol('stroke_value')">Stroke Value</th>
                     <th v-if="showCol('plug_mm')">Plug (mm)</th>
                     <th v-if="showCol('stk_index')">%Stk Index</th>
                     <th v-if="showCol('kfd')">Kfd</th>
@@ -384,8 +384,8 @@
                     <td v-if="showCol('pressure_rating')">{{ r.pressure_rating ?? '' }}</td>
                     <td v-if="showCol('seat_type')">{{ r.seat_type ?? '' }}</td>
                     <td v-if="showCol('rated_cv')" class="cell-cv">{{ fmtNum(r.rated_cv) }}</td>
-                    <td v-if="showCol('stroke')">{{ r.stroke ?? '' }}</td>
-                    <td v-if="showCol('stroke_mm')">{{ fmtNum(r.stroke_mm) }}</td>
+                    <td v-if="showCol('stroke_unit')">{{ r.stroke_unit ?? '' }}</td>
+                    <td v-if="showCol('stroke_value')">{{ fmtNum(r.stroke_value) }}</td>
                     <td v-if="showCol('plug_mm')">{{ fmtNum(r.plug_mm) }}</td>
                     <td v-if="showCol('stk_index')">{{ fmtNum(r.stk_index) }}</td>
                     <td v-if="showCol('kfd')">{{ fmtNum(r.kfd) }}</td>
@@ -981,8 +981,8 @@ const ALL_TRIM_COLS = [
   'pressure_rating',// Pressure Rating
   'seat_type',      // Seat Type
   'rated_cv',       // Rated Cv
-  'stroke',         // Stroke (raw string)
-  'stroke_mm',      // Stroke (mm)
+  'stroke_unit',    // Stroke Unit (mm / °)
+  'stroke_value',   // Stroke Value
   'plug_mm',        // Plug Size (mm)
   'stk_index',      // %Stk Index
   'kfd',            // Kfd
@@ -1035,10 +1035,10 @@ const trimSizesFiltered = computed(() => {
   // Opening Angle (开启角度) — BT 系列关键过滤条件 (60 Deg / 90 Deg 有不同 Cv)
   const openingAngle = fv.opening_angle
   if (openingAngle && openingAngle !== 'all') {
-    // 后端 opening_angle options 的 code 是数字字符串 "60"/"90"，需匹配 stroke_mm
+    // 后端 opening_angle options 的 code 是数字字符串 "60"/"90"，需匹配 stroke_value
     const strokeDeg = String(openingAngle).trim()
-    // row.stroke_mm 是数值, 转字符串后比较
-    conditions.push({ key: 'stroke_mm', val: Number(strokeDeg) || strokeDeg })
+    // row.stroke_value 是数值, 转字符串后比较
+    conditions.push({ key: 'stroke_value', val: Number(strokeDeg) || strokeDeg })
   }
 
   // 无有效条件 → 返回全部

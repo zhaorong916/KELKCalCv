@@ -148,7 +148,7 @@
               <el-input v-model="config.rated_cv" size="small" placeholder="自动填充" />
             </div>
             <div class="form-row"><label>行程</label>
-              <el-input v-model="config.stroke_mm" size="small" placeholder="自动填充" /><!-- <span class="unit-inline">mm</span>-->
+              <el-input v-model="config.stroke_value" size="small" placeholder="自动填充" /><span class="unit-inline">{{ config.stroke_unit || '' }}</span>
             </div>
             <div class="form-row"><label>可调比</label>
               <el-input-number v-model="config.rangeability" :min="1" :precision="0" size="small" controls-position="right" style="width:100%" />
@@ -999,7 +999,8 @@ const curveInfo = reactive({
   eqcv: null,          // { eq_index, a0..a6, divisor? }
   fstk: null,          // ln_eqn 模式的等比分值
   rated_cv: null,
-  stroke_mm: null,
+  stroke_value: null,
+  stroke_unit: null,
   seat_type: null,
   fl: null, fd: null, xt: null, kc: null,
 })
@@ -1387,7 +1388,8 @@ async function onTrimChange() {
       curveInfo.eqcv = data.eqcv || data.stroke_info?.coeffs || null
       curveInfo.fstk = data.fstk ?? data.stroke_info?.fstk ?? null
       curveInfo.rated_cv = data.stroke_info?.rated_cv ?? null
-      curveInfo.stroke_mm = data.stroke_info?.stroke_mm ?? null
+      curveInfo.stroke_value = data.stroke_info?.stroke_value ?? null
+      curveInfo.stroke_unit = data.stroke_info?.stroke_unit ?? null
       curveInfo.seat_type = data.seat_type ?? data.stroke_info?.seat_type ?? null
       curveInfo.fl = data.fl?.value ?? null
       curveInfo.fd = data.fd?.value ?? null
@@ -1399,7 +1401,8 @@ async function onTrimChange() {
       config.value.fstk = curveInfo.fstk
       // 自动填充到 config (el-input 需要字符串)
       if (curveInfo.rated_cv != null) config.value.rated_cv = String(curveInfo.rated_cv)
-      if (curveInfo.stroke_mm != null) config.value.stroke_mm = String(curveInfo.stroke_mm)
+      if (curveInfo.stroke_value != null) config.value.stroke_value = String(curveInfo.stroke_value)
+      if (curveInfo.stroke_unit) config.value.stroke_unit = curveInfo.stroke_unit
       if (curveInfo.seat_type) config.value.seat_type_front = curveInfo.seat_type
       if (curveInfo.fl != null) config.value.fl = curveInfo.fl
       if (curveInfo.fd != null) config.value.fd = curveInfo.fd
@@ -1501,7 +1504,8 @@ async function loadCalc() {
   curveInfo.eqcv = config.value.eqcv || null
   curveInfo.fstk = config.value.fstk ?? null
   curveInfo.rated_cv = config.value.rated_cv ?? null
-  curveInfo.stroke_mm = config.value.stroke_mm ?? null
+  curveInfo.stroke_value = config.value.stroke_value ?? null
+  curveInfo.stroke_unit = config.value.stroke_unit ?? null
   curveInfo.seat_type = config.value.seat_type_front ?? null
   curveInfo.fl = config.value.fl ?? null
   curveInfo.fd = config.value.fd ?? null
@@ -1512,7 +1516,7 @@ async function loadCalc() {
   // skipClear=true 防止覆盖已恢复的 config 下游字段
   if (config.value.valve_style) {
     await onValveStyleChange(true)
-    // 如果有 nomina_dn, 从后端获取最新曲线参数 (rated_cv/stroke_mm/eqcv/fd/fl 等)
+    // 如果有 nomina_dn, 从后端获取最新曲线参数 (rated_cv/stroke_value/eqcv/fd/fl 等)
     if (config.value.nominal_dn) {
       await onTrimChange()
     }
@@ -1556,7 +1560,8 @@ function defaultConfig() {
     trim_characteristics: null,
     trim_seat_type: null,
     pressure_rating: null,
-    stroke_mm: null,
+    stroke_value: null,
+    stroke_unit: null,
     rangeability: 50,
     design_pressure: null,
     design_temp: null,

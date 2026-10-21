@@ -109,7 +109,7 @@ class ValveConfig(Base):
     xt = Column(Float, comment="无附件临界压差比系数 xT")
     xtp = Column(Float, comment="带附件临界压差比系数 xTp")
     fd = Column(Float, comment="阀门类型修正系数 FD")
-    stages = Column(Integer, default=1, comment="降噪级数 (1=单级, >1=多级降噪阀)")
+    stages = Column(Integer, nullable=False, default=1, comment="降噪级数 (1=单级, >1=多级降噪阀)")
     cv_table = Column(Text, comment="可选: 行程-Cv 特性曲线 JSON")
     curve_coeffs = Column(Text, comment="开度修正因子曲线多项式系数 JSON (FL/Kc/Fd vs φ)")
     # === 阀门选型字段 ===
@@ -540,7 +540,7 @@ class NominalSizeRef(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     nps_in = Column(String(16), nullable=False, index=True, comment="公称尺寸英制 in 标签: 1/4, 1, 1 1/2, 4")
     nps_in_decimal = Column(Float, comment="nps_in 换算为小数, 如 1/4→0.25, 1 1/2→1.5")
-    dn_mm = Column(Float, nullable=False, index=True, comment="公称直径 mm: 6, 25, 100, 1.6")
+    dn_mm = Column(Float, nullable=True, index=True, comment="公称直径 mm: 6, 25, 100, 1.6")
     jis_a = Column(String(16), comment="JIS A 标注: 25A, 100A")
     dn_label = Column(String(16), comment="DN 标注: DN25, DN100 (部分小尺寸无 DN)")
     sort_order = Column(Integer, default=0, comment="按 nps_in_decimal 升序")
@@ -754,13 +754,14 @@ class ValveCvStk(Base):
     pressure_rating = Column(String(20), nullable=True, comment="压力等级: 150#, 300#, 600# 等")
     seat_type = Column(String(50), nullable=True, comment="阀座形式: Soft, Metal, Damper, 15 Deg Sealed 等")
     rated_cv = Column(Float, nullable=True, comment="额定Cv (计算用目标输出)")
-    stroke = Column(String(20), nullable=True, comment="行程原始字符串: 12mm, 90 Deg, 90º 等")
-    stroke_mm = Column(Float, nullable=True, comment="行程数值(mm 或度)")
+    stroke_value = Column(Float, nullable=True, comment="行程数值 (mm 或度)")
+    stroke_unit = Column(String(10), nullable=True, comment="行程单位: mm (直行程) 或 ° (角行程)")
     plug_mm = Column(Float, nullable=True, comment="阀芯直径 mm (有阀芯尺寸的型号才填)")
     stk_index = Column(Integer, nullable=True, comment="%Stk Index (GV120 Large Cv P-port)")
     kfd = Column(Float, nullable=True, comment="GC210 Fd公式: KFd (型式修正系数)")
     kfo = Column(Float, nullable=True, comment="GC210 Fd公式: KFo (Flow-to-Open方向额定Cv)")
     kfb = Column(Float, nullable=True, comment="GC210 Fd公式: KFb (Flow-to-Close方向额定Cv)")
+    cv_min = Column(Float, nullable=True, comment="最小 Cv")
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
 
@@ -785,3 +786,99 @@ class PublicOption(Base):
     is_active = Column(Boolean, nullable=False, default=True, comment="是否启用")
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
+
+
+# ---------------------------------------------------------------------------
+# 选型模块新增表 (P0 基础设施)
+# 依据: docs/选型模块优化方案.md v2.0 §2.1 ~ §2.4
+# ---------------------------------------------------------------------------
+
+
+class SelectionRule(Base):
+    """选型规则库
+
+    规则分四阶段执行:
+      scope(10) → constraint(20) → preference(30) → post_filter(40)
+    规则更新采用软删+新插模式，支持版本追溯。
+    """
+    __tablename__ = "selection_rules"
+    __table_args__ = (
+        Index("ix_selection_rule_category", "category", "target_series", "is_active"),
+        Index("ix_selection_rule_priority", "priority"),
+    )
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    rule_code = Column(String(64), unique=True, nullable=False, comment="规则编号 R-GV120-001")
+    rule_name = Column(String(128), nullable=False, comment="规则名称")
+    category = Column(String(32), nullable=False, comment="scope / constraint / preference / post_filter")
+    target_series = Column(String(32), nullable=False, default="*", comment="目标系列，* 表示全局规则")
+    condition_expr = Column(Text, nullable=True, comment="JSON 条件表达式")
+    condition_op = Column(String(16), nullable=False, default="and", comment="and / or 条件组合方式")
+    action = Column(String(32), nullable=False, comment="exclude / require / boost / set_field / flag / penalty")
+    action_payload = Column(Text, nullable=True, comment="JSON 动作参数")
+    priority = Column(Integer, nullable=False, default=10, comment="优先级: scope=10 / constraint=20 / preference=30 / post_filter=40")
+    source_ref = Column(String(128), nullable=True, comment="来源（如 GV120_structured_data.json:p4）")
+    is_active = Column(Boolean, nullable=False, default=True, comment="是否启用")
+    created_at = Column(DateTime, default=datetime.now)
+    updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
+
+
+class BodyPtRating(Base):
+    """阀体材质温压限制
+
+    查询方式: (material_grade, pressure_class) 线性插值，与 source_series 无关
+    """
+    __tablename__ = "body_pt_ratings"
+    __table_args__ = (
+        UniqueConstraint("standard", "pressure_class", "material_grade", "temp_c", name="uq_body_pt_rating"),
+    )
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    standard = Column(String(16), nullable=False, comment="ANSI / PN")
+    pressure_class = Column(String(16), nullable=False, comment="150# / 300# / PN16 等")
+    material_grade = Column(String(32), nullable=False, comment="A216-WCB / A352-LCB / ZG230-450 等")
+    temp_c = Column(Float, nullable=False, comment="温度 ℃")
+    pressure_mpa_g = Column(Float, nullable=False, comment="允许压力 MPa(G)")
+    source_series = Column(String(32), nullable=True, comment="数据来源系列（如 GC120/GA510/BV130）")
+    created_at = Column(DateTime, default=datetime.now)
+
+
+class AllowablePressureDrop(Base):
+    """最大允许压差
+
+    唯一约束: (series_code, actuator_family, actuator_size, packing,
+              seat_type, plug_inch, air_supply)
+    注: 同一组合在不同气源压力 (air_supply) 下允许压差不同, 气源压力必须入键
+    """
+    __tablename__ = "allowable_pressure_drops"
+    __table_args__ = (
+        UniqueConstraint("series_code", "actuator_family", "actuator_size", "packing", "seat_type", "plug_inch", "air_supply", name="uq_allowable_dp"),
+    )
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    series_code = Column(String(32), nullable=False, comment="GC120 / GC210 / GC320 / BT110 / GV120 等")
+    actuator_family = Column(String(32), nullable=True, comment="PD3000LA / PC3200LA 等")
+    actuator_size = Column(String(16), nullable=True, comment="270 / 350 / 450 / 650 等")
+    spring_range = Column(String(32), nullable=True, comment="80~200 / 120~300 等")
+    packing = Column(String(32), nullable=True, comment="R.TFE / Grafoil 等")
+    seat_type = Column(String(16), nullable=True, comment="Metal / Soft 等")
+    plug_inch = Column(String(16), nullable=True, comment="阀芯尺寸 1\" / 2\" / ...")
+    air_supply = Column(String(16), nullable=True, comment="气源压力 kPa(表压), 如 300(80)/340(120)/400/500")
+    max_dp_mpa = Column(Float, nullable=False, comment="最大允许压差 MPa")
+    created_at = Column(DateTime, default=datetime.now)
+
+
+class SelectionRecord(Base):
+    """选型历史记录"""
+    __tablename__ = "selection_records"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    valve_id = Column(Integer, ForeignKey("valves.id"), nullable=False, comment="位号ID")
+    project_id = Column(Integer, ForeignKey("projects.id"), nullable=False, comment="项目ID")
+    input_snapshot = Column(Text, nullable=True, comment="输入工艺条件 JSON")
+    candidates_json = Column(Text, nullable=True, comment="候选清单 JSON（含打分）")
+    selected_series = Column(String(32), nullable=True, comment="最终选中系列")
+    selected_config = Column(Text, nullable=True, comment="选中的阀芯/口径/材质等 JSON")
+    applied_rule_ids = Column(String(255), nullable=True, comment="触发的规则ID逗号分隔")
+    created_at = Column(DateTime, default=datetime.now)
+    created_by = Column(String(64), nullable=True, comment="创建人")

@@ -14,7 +14,7 @@ from app.api import projects, valves, calculations, fluids, units, valve_types, 
 async def lifespan(app: FastAPI):
     # 启动：确保表结构存在并初始化介质库 / 单位字典
     from app.core.database import Base, engine
-    from app.models import Fluid
+    from app.models import Fluid, SelectionRule, BodyPtRating, AllowablePressureDrop, SelectionRecord
     from app.calc.properties import get_fluid_defaults
     from app.calc.units import seed_unit_definitions
     from app.core.database import SessionLocal

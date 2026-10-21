@@ -483,16 +483,156 @@ class ValveCvStkBase(BaseModel):
     pressure_rating: Optional[str] = None
     seat_type: Optional[str] = None
     rated_cv: Optional[float] = None
-    stroke: Optional[str] = None
-    stroke_mm: Optional[float] = None
+    stroke_value: Optional[float] = None
+    stroke_unit: Optional[str] = None
     plug_mm: Optional[float] = None
     stk_index: Optional[int] = None
     kfd: Optional[float] = None
     kfo: Optional[float] = None
     kfb: Optional[float] = None
+    cv_min: Optional[float] = None
 
 
 class ValveCvStkOut(ValveCvStkBase):
     id: int
 
     model_config = ConfigDict(from_attributes=True)
+
+
+# ---------------------------------------------------------------------------
+# 选型模块 Schema (P0.2)
+# 依据: docs/选型模块优化方案.md v2.0
+# ---------------------------------------------------------------------------
+
+
+class SelectionRuleBase(BaseModel):
+    rule_code: str = Field(..., max_length=64, description="规则编号")
+    rule_name: str = Field(..., max_length=128, description="规则名称")
+    category: str = Field(..., description="scope / constraint / preference / post_filter")
+    target_series: str = Field(default="*", max_length=32, description="目标系列，* 表示全局")
+    condition_expr: Optional[dict] = Field(None, description="JSON 条件表达式")
+    condition_op: str = Field(default="and", description="and / or")
+    action: str = Field(..., description="exclude / require / boost / set_field / flag / penalty")
+    action_payload: Optional[dict] = Field(None, description="JSON 动作参数")
+    priority: int = Field(default=10, description="优先级")
+    source_ref: Optional[str] = Field(None, max_length=128, description="来源参考")
+    is_active: bool = Field(default=True, description="是否启用")
+
+    @field_validator("category")
+    @classmethod
+    def validate_category(cls, v: str) -> str:
+        allowed = {"scope", "constraint", "preference", "post_filter"}
+        if v not in allowed:
+            raise ValueError(f"category 必须是 {allowed} 之一")
+        return v
+
+    @field_validator("action")
+    @classmethod
+    def validate_action(cls, v: str) -> str:
+        allowed = {"exclude", "require", "boost", "set_field", "flag", "penalty"}
+        if v not in allowed:
+            raise ValueError(f"action 必须是 {allowed} 之一")
+        return v
+
+
+class SelectionRuleCreate(SelectionRuleBase):
+    pass
+
+
+class SelectionRuleUpdate(BaseModel):
+    rule_name: Optional[str] = None
+    category: Optional[str] = None
+    target_series: Optional[str] = None
+    condition_expr: Optional[dict] = None
+    condition_op: Optional[str] = None
+    action: Optional[str] = None
+    action_payload: Optional[dict] = None
+    priority: Optional[int] = None
+    source_ref: Optional[str] = None
+    is_active: Optional[bool] = None
+
+
+class SelectionRuleOut(SelectionRuleBase):
+    model_config = ConfigDict(from_attributes=True)
+    id: int
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+
+# ---------- 选型输入/输出 ----------
+
+class SelectionInput(BaseModel):
+    """选型输入（提交工艺条件）"""
+    project_id: int
+    valve_id: int
+    media: str = Field(..., description="liquid / gas / twophase / steam")
+    fluid_name: Optional[str] = None
+    flow_rate: Optional[float] = Field(None, description="流量（按单位）")
+    flow_rate_unit: Optional[str] = None
+    p1: Optional[float] = Field(None, description="阀前压力 kPa")
+    p2: Optional[float] = Field(None, description="阀后压力 kPa")
+    t1: Optional[float] = Field(None, description="温度 ℃")
+    t2: Optional[float] = None
+    dp: Optional[float] = Field(None, description="压差 kPa")
+    pipe_size: Optional[float] = Field(None, description="管道尺寸 mm")
+    leakage_class: Optional[str] = Field(None, description="IV / V / VI")
+    valve_action: Optional[str] = Field(None, description="modulating / on_off")
+    special_req: Optional[dict] = Field(None, description="特殊要求: nace/fire_safe/low_temp/high_temp/copper_free 等")
+    rangeability_required: Optional[float] = Field(None, description="可调比要求")
+    cv_required: Optional[float] = Field(None, description="所需 Cv（可选，由流量反算）")
+
+    @field_validator("media")
+    @classmethod
+    def validate_media(cls, v: str) -> str:
+        allowed = {"liquid", "gas", "twophase", "steam"}
+        if v not in allowed:
+            raise ValueError(f"media 必须是 {allowed} 之一")
+        return v
+
+
+class CandidateOut(BaseModel):
+    """单个候选输出"""
+    rank: int
+    series_code: str
+    series_name: Optional[str] = None
+    dn_label: Optional[str] = None
+    trim_label: Optional[str] = None
+    flow_char: Optional[str] = None
+    rated_cv: Optional[float] = None
+    cv_min: Optional[float] = None
+    opening: Optional[float] = None
+    rangeability: Optional[float] = None
+    score: int = 0
+    applied_rules: List[str] = Field(default_factory=list)
+    flags: Optional[dict] = Field(None, description="特殊标志，如 fd_mode")
+    actuator_recommend: Optional[dict] = None  # P6 阶段填充
+
+
+class SelectionResultOut(BaseModel):
+    """选型结果输出"""
+    candidates: List[CandidateOut]
+    applied_rule_count: int = 0
+    warnings: List[str] = Field(default_factory=list)
+
+
+# ---------- 选型记录 ----------
+
+class SelectionRecordBase(BaseModel):
+    valve_id: int
+    project_id: int
+    input_snapshot: Optional[dict] = None
+    candidates_json: Optional[List[dict]] = None
+    selected_series: Optional[str] = None
+    selected_config: Optional[dict] = None
+    applied_rule_ids: Optional[str] = None
+
+
+class SelectionRecordCreate(SelectionRecordBase):
+    pass
+
+
+class SelectionRecordOut(SelectionRecordBase):
+    model_config = ConfigDict(from_attributes=True)
+    id: int
+    created_at: Optional[datetime] = None
+    created_by: Optional[str] = None

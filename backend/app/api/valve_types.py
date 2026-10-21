@@ -173,9 +173,9 @@ def _query_cv_stk_rated_cv(
     trim_characteristics: str = "",
     opening_angle_val: int = None,
 ):
-    """从 valve_cv_stk 表查询 rated_cv 和 stroke_mm
+    """从 valve_cv_stk 表查询 rated_cv 和 stroke_value
 
-    返回 (rated_cv, stroke_mm) 或 (None, None)
+    返回 (rated_cv, stroke_value, stroke_unit) 或 (None, None, None)
 
     约束条件映射:
       - dn_label: 从 nominal_dn (支持 "40A" 或 "40") 或 plug_size (DN 型系列) 推导
@@ -184,7 +184,7 @@ def _query_cv_stk_rated_cv(
       - flow_char: trim_characteristics 参数 (EQ%/Linear), 或 trim_type 为 ON-OFF 时
       - trim_type: trim_seat_type/trim_type 经映射 (Standard/Large Cv/ON-OFF)
       - pressure_rating: 精确匹配优先，None 兜底
-      - stroke_mm: opening_angle_val 过滤 (BT 系列 60/75/90 Deg 对应不同 stroke_mm)
+      - stroke_value: opening_angle_val 过滤 (BT 系列 60/75/90 度对应不同 stroke_value)
     """
     mapped_tt = _map_trim_seat_to_cvstk_trim_type(trim_seat_type)
     # GV120 等系列: trim_type 直接来自前端 (如 "Large Cv"), 与 valve_cv_stk.trim_type 一致
@@ -215,16 +215,16 @@ def _query_cv_stk_rated_cv(
         except (ValueError, TypeError):
             pass
 
-    # BT 系列: opening_angle → stroke_mm (60→60, 75→75, 90→90)
-    stroke_mm_val = float(opening_angle_val) if opening_angle_val else None
+    # BT 系列: opening_angle → stroke_value (60→60, 75→75, 90→90)
+    stroke_value_val = float(opening_angle_val) if opening_angle_val else None
 
     def _apply_stroke_filter(q):
-        """统一在 query 上加 stroke_mm 过滤 (如果有 opening_angle)"""
-        if stroke_mm_val is not None:
-            # 精确匹配 OR 无 stroke_mm 的行 (兼容其他系列)
+        """统一在 query 上加 stroke_value 过滤 (如果有 opening_angle)"""
+        if stroke_value_val is not None:
+            # 精确匹配 OR 无 stroke_value 的行 (兼容其他系列)
             q = q.filter(
-                (ValveCvStk.stroke_mm == stroke_mm_val) |
-                (ValveCvStk.stroke_mm.is_(None))
+                (ValveCvStk.stroke_value == stroke_value_val) |
+                (ValveCvStk.stroke_value.is_(None))
             )
         return q
 
@@ -264,7 +264,7 @@ def _query_cv_stk_rated_cv(
         q0 = _apply_stroke_filter(q0)
         row = q0.first()
         if row:
-            return row.rated_cv, row.stroke_mm
+            return row.rated_cv, row.stroke_value, row.stroke_unit
 
     # 策略 1: plug_mm + trim_type
     if plug_size and mapped_tt:
@@ -276,7 +276,7 @@ def _query_cv_stk_rated_cv(
         q1 = _apply_stroke_filter(q1)
         row = q1.first()
         if row:
-            return row.rated_cv, row.stroke_mm
+            return row.rated_cv, row.stroke_value, row.stroke_unit
 
     # 策略 2: dn_label + trim_type + plug_size
     if dn_label and mapped_tt and plug_size:
@@ -289,7 +289,7 @@ def _query_cv_stk_rated_cv(
         q2 = _apply_stroke_filter(q2)
         row = q2.first()
         if row:
-            return row.rated_cv, row.stroke_mm
+            return row.rated_cv, row.stroke_value, row.stroke_unit
 
     # 策略 3: DN 型系列兜底 — 无 plug_mm 的系列 (BE120/BC110/BT 等)
     if dn_label and (seat_type or mapped_tt):
@@ -304,7 +304,7 @@ def _query_cv_stk_rated_cv(
         q3 = _apply_stroke_filter(q3)
         row = q3.first()
         if row:
-            return row.rated_cv, row.stroke_mm
+            return row.rated_cv, row.stroke_value, row.stroke_unit
 
     # 策略 4: trim_label + plug_size + trim_type
     if trim_label and plug_size and mapped_tt:
@@ -317,7 +317,7 @@ def _query_cv_stk_rated_cv(
         q4 = _apply_stroke_filter(q4)
         row = q4.first()
         if row:
-            return row.rated_cv, row.stroke_mm
+            return row.rated_cv, row.stroke_value, row.stroke_unit
 
     # 策略 5: trim_label + trim_type
     if trim_label and mapped_tt:
@@ -329,7 +329,7 @@ def _query_cv_stk_rated_cv(
         q5 = _apply_stroke_filter(q5)
         row = q5.first()
         if row:
-            return row.rated_cv, row.stroke_mm
+            return row.rated_cv, row.stroke_value, row.stroke_unit
 
     # 策略 6: dn_label + trim_label (DN 型系列兜底: BC110/BC120/BE110/BE120 等)
     # 这些系列 plug_mm=None 且 trim_type 可能是 'Full' 而非前端传的 'Standard'
@@ -346,9 +346,9 @@ def _query_cv_stk_rated_cv(
             )
         row = q6.first()
         if row:
-            return row.rated_cv, row.stroke_mm
+            return row.rated_cv, row.stroke_value, row.stroke_unit
 
-    return None, None
+    return None, None, None
 
 
 # KELK 产品系列种子数据
@@ -869,18 +869,20 @@ def _get_curve_options_impl(series_code: str, db: Session):
         if fc.option_source == 'hardcoded' and fc.hardcoded_options:
             cfg_item["options"] = json.loads(fc.hardcoded_options)
         elif fc.option_source == 'stroke':
-            # 从 valve_cv_stk.stroke 字段提取开启角度选项
-            rows = db.query(ValveCvStk.stroke).filter(
+            # 从 valve_cv_stk.stroke_value + stroke_unit 提取开启角度选项 (仅角行程 °)
+            rows = db.query(ValveCvStk.stroke_value, ValveCvStk.stroke_unit).filter(
                 ValveCvStk.series_code == series_code,
-                ValveCvStk.stroke.isnot(None),
+                ValveCvStk.stroke_value.isnot(None),
+                ValveCvStk.stroke_unit == "°",
             ).distinct().all()
             opts = []
             for r in rows:
-                s = r[0]
-                if not s: continue
-                m = re.search(r'(\d+)', s)
-                code = m.group(1) if m else s
-                opts.append({"code": code, "label": s})
+                val, unit = r[0], r[1]
+                if val is None:
+                    continue
+                code = str(int(val)) if float(val).is_integer() else str(val)
+                label = f"{code}{unit or '°'}"
+                opts.append({"code": code, "label": label})
             cfg_item["options"] = opts
         elif fc.option_source == 'data':
             if not fc.value_field:
@@ -1171,17 +1173,16 @@ def _get_curves_by_selection_impl(
 
     # BT 系列 (BT110/BT120/BT210): FL/Kc/Fd index 取决于开启角度
     # 75 Deg / 90 Deg → index 7, 其他 (60/45) → index 6
-    # 若 opening_angle 未传, 从 valve_cv_stk.stroke 取第一个 distinct 值兜底
+    # 若 opening_angle 未传, 从 valve_cv_stk.stroke_value 取第一个值兜底 (角行程)
     if series_code in ('BT110', 'BT120', 'BT210'):
         if opening_angle_val is None:
-            cvstk_stroke = db.query(ValveCvStk.stroke).filter(
+            cvstk_stroke = db.query(ValveCvStk.stroke_value).filter(
                 ValveCvStk.series_code == series_code,
-                ValveCvStk.stroke.isnot(None),
+                ValveCvStk.stroke_value.isnot(None),
+                ValveCvStk.stroke_unit == "°",
             ).first()
-            if cvstk_stroke and cvstk_stroke[0]:
-                m = re.search(r'(\d+)', cvstk_stroke[0])
-                if m:
-                    opening_angle_val = int(m.group(1))
+            if cvstk_stroke and cvstk_stroke[0] is not None:
+                opening_angle_val = int(cvstk_stroke[0])
         angle_idx = 7 if opening_angle_val in (75, 90) else 6
         fl_idx = angle_idx
         kc_idx = angle_idx
@@ -1197,7 +1198,8 @@ def _get_curves_by_selection_impl(
     rated_cv = None
     cv_min = None
     cv_linear = None
-    stroke_mm = None  # 行程 mm, 从 valve_trim_sizes 或 valve_cv_stk 获取
+    stroke_value = None  # 行程数值, 从 valve_trim_sizes 或 valve_cv_stk 获取
+    stroke_unit = None   # 行程单位: mm (直行程) 或 ° (角行程)
     kfd_value = None  # GC210 等系列的 KFd 查表值
     
     # 系列 → 尺寸匹配字段映射
@@ -1257,7 +1259,8 @@ def _get_curves_by_selection_impl(
             rated_cv = _pick_cv(ts, series_code, opening_angle)
             cv_min = ts.cv_min or cv_min
             cv_linear = ts.cv_linear or cv_linear
-            stroke_mm = ts.stroke_mm or stroke_mm  # 补上 stroke_mm
+            stroke_value = ts.stroke_mm or stroke_value  # 补上 stroke (ValveTrimSize 恒为 mm)
+            stroke_unit = stroke_unit or "mm"
 
     # 策略 2: GV120 系列兜底 — Table2 无 asme_class，按 trim_type + plug_mm
     if rated_cv is None and series_code.startswith('GV120') and gv_trim_type and plug_size:
@@ -1270,7 +1273,8 @@ def _get_curves_by_selection_impl(
         if ts:
             rated_cv = ts.cv_eq
             cv_linear = ts.cv_linear or cv_linear
-            stroke_mm = ts.stroke_mm or stroke_mm  # 补上 stroke_mm
+            stroke_value = ts.stroke_mm or stroke_value  # 补上 stroke (ValveTrimSize 恒为 mm)
+            stroke_unit = stroke_unit or "mm"
     
     # 策略 3: 只用尺寸匹配（忽略 pressure）
     if rated_cv is None and plug_size:
@@ -1286,7 +1290,8 @@ def _get_curves_by_selection_impl(
             rated_cv = _pick_cv(ts, series_code, opening_angle)
             cv_min = ts.cv_min or cv_min
             cv_linear = ts.cv_linear or cv_linear
-            stroke_mm = ts.stroke_mm or stroke_mm  # 补上 stroke_mm
+            stroke_value = ts.stroke_mm or stroke_value  # 补上 stroke (ValveTrimSize 恒为 mm)
+            stroke_unit = stroke_unit or "mm"
 
     # 策略 4: 通用兜底 — 只要有 plug_size 或 dn_mm 匹配
     if rated_cv is None and plug_size:
@@ -1298,11 +1303,12 @@ def _get_curves_by_selection_impl(
             rated_cv = _pick_cv(ts, series_code, opening_angle)
             cv_min = ts.cv_min or cv_min
             cv_linear = ts.cv_linear or cv_linear
-            stroke_mm = ts.stroke_mm or stroke_mm  # 补上 stroke_mm
+            stroke_value = ts.stroke_mm or stroke_value  # 补上 stroke (ValveTrimSize 恒为 mm)
+            stroke_unit = stroke_unit or "mm"
 
-    # ========== 从 valve_cv_stk 表取 rated_cv 与 stroke_mm ==========
+    # ========== 从 valve_cv_stk 表取 rated_cv 与 stroke_value ==========
     # valve_cv_stk 是所有系列的主数据源 (BT110/BT120 的 valve_trim_sizes 为空)
-    cvstk_rated, cvstk_stroke = _query_cv_stk_rated_cv(
+    cvstk_rated, cvstk_stroke, cvstk_stroke_unit = _query_cv_stk_rated_cv(
         series_code, pressure_rating, plug_size, nominal_dn, nominal_trim,
         trim_type, trim_seat_type, db, seat_type=seat_type,
         trim_characteristics=trim_characteristics,
@@ -1311,7 +1317,8 @@ def _get_curves_by_selection_impl(
     if cvstk_rated is not None:
         rated_cv = cvstk_rated
     if cvstk_stroke is not None:
-        stroke_mm = cvstk_stroke
+        stroke_value = cvstk_stroke
+        stroke_unit = cvstk_stroke_unit or stroke_unit
 
     # ========== 查询 seat_type (阀座形式) ==========
     seat_type_value = None
@@ -1478,7 +1485,8 @@ def _get_curves_by_selection_impl(
         "rated_cv": rated_cv,
         "cv_min": cv_min,
         "cv_linear": cv_linear,
-        "stroke_mm": stroke_mm,
+        "stroke_value": stroke_value,
+        "stroke_unit": stroke_unit,
         "seat_type": seat_type_value,
         "coeffs": {
             "a0": cfg.stroke_a0, "a1": cfg.stroke_a1, "a2": cfg.stroke_a2,
@@ -1488,12 +1496,12 @@ def _get_curves_by_selection_impl(
     
     # 需要 eqcv 多项式系数的模式
     if effective_mode in ('eq_index', 'poly_cv_div100', 'poly_phi100_div100', 'poly_cv_div_angle', 'exp_formula'):
-        # 优先从 valve_cv_stk 取 stk_index (最新导入, 按 dn_label + stroke_mm 匹配)
+        # 优先从 valve_cv_stk 取 stk_index (最新导入, 按 dn_label + stroke_value 匹配)
         if cvstk_rated is not None:
             cvstk_stk_q = db.query(ValveCvStk.stk_index).filter(
                 ValveCvStk.series_code == series_code,
                 ValveCvStk.dn_label == nominal_dn if nominal_dn else False,
-                ValveCvStk.stroke_mm == cvstk_stroke if cvstk_stroke else False,
+                ValveCvStk.stroke_value == cvstk_stroke if cvstk_stroke else False,
                 ValveCvStk.rated_cv == cvstk_rated,
                 ValveCvStk.stk_index.isnot(None),
             )
@@ -1571,7 +1579,8 @@ def _get_curves_by_selection_impl(
         # Stroke Curve
         "stroke_mode": effective_mode,
         "stroke_info": stroke_info,
-        "stroke_mm": stroke_mm,
+        "stroke_value": stroke_value,
+        "stroke_unit": stroke_unit,
         "seat_type": seat_type_value,
         "stk_index": stk_index,
         "eqcv": eqcv_curve,
@@ -1624,8 +1633,8 @@ def get_trim_sizes(series_code: str, db: Session = Depends(get_db)):
             "pressure_rating": c.pressure_rating,
             "seat_type": c.seat_type,
             "rated_cv": c.rated_cv,
-            "stroke": c.stroke,
-            "stroke_mm": c.stroke_mm,
+            "stroke_value": c.stroke_value,
+            "stroke_unit": c.stroke_unit,
             "plug_mm": c.plug_mm,
             "stk_index": c.stk_index,
             "kfd": c.kfd,
@@ -1692,8 +1701,8 @@ def get_cv_stk(
                 "pressure_rating": r.pressure_rating,
                 "seat_type": r.seat_type,
                 "rated_cv": r.rated_cv,
-                "stroke": r.stroke,
-                "stroke_mm": r.stroke_mm,
+                "stroke_value": r.stroke_value,
+                "stroke_unit": r.stroke_unit,
             }
             for r in rows
         ],
