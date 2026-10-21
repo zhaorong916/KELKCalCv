@@ -1,4 +1,4 @@
-﻿@echo off
+﻿﻿@echo off
 chcp 65001 >nul
 title KELKCalCv Server
 
@@ -10,7 +10,12 @@ rem   - 浏览器访问 http://localhost:8000
 rem ============================================================
 
 setlocal
-cd /d "%~dp0\backend"
+rem 本脚本位于 deploy\ 子目录, backend 在其上一级
+cd /d "%~dp0..\backend" || (
+    echo [错误] 无法进入 backend 目录, 请确认仓库文件完整.
+    pause
+    exit /b 1
+)
 
 echo.
 echo ============================================================
