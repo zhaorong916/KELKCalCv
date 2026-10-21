@@ -30,11 +30,16 @@ rem ----- Step 2: 更新 Python 依赖 -----
 echo.
 echo [2/3] 更新 Python 依赖 ...
 cd backend
-pip install -r requirements.txt -q
-if errorlevel 1 (
-    echo [警告] 依赖更新失败。可稍后手动执行: pip install -r requirements.txt
+if not exist "venv\Scripts\activate.bat" (
+    echo        未检测到 venv, 跳过依赖更新
 ) else (
-    echo        依赖已同步完成。
+    call venv\Scripts\activate.bat
+    pip install -r requirements.txt
+    if errorlevel 1 (
+        echo [警告] 依赖更新失败, 可稍后手动: cd backend ^&^& pip install -r requirements.txt
+    ) else (
+        echo        依赖已同步完成
+    )
 )
 
 rem ----- Step 3: 状态提示 -----
