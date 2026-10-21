@@ -1,4 +1,4 @@
-﻿﻿@echo off
+﻿﻿﻿@echo off
 chcp 65001 >nul
 setlocal EnableDelayedExpansion
 title KELKCalCv - 首次部署引导
@@ -148,7 +148,7 @@ rem git clone 到当前目录在目录非空时会报错
 rem 方案: 克隆到临时子目录, 再用 robocopy 移动所有内容到当前目录
 set "TEMP_DIR=!CUR_DIR!kelkcalcv-temp-%RANDOM%"
 echo        目录非空, 先克隆到临时目录 !TEMP_DIR! ...
-git clone https://gitee.com/KELKzhao/kelkcalcv.git "!TEMP_DIR!"
+git clone -b main https://gitee.com/KELKzhao/kelkcalcv.git "!TEMP_DIR!"
 if errorlevel 1 (
     echo.
     echo [错误] 克隆失败. 常见原因:
