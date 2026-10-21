@@ -11,6 +11,26 @@ rem ============================================================
 setlocal
 cd /d "%~dp0\.."
 
+rem ----- 前置: 查找 git.exe, 加入 PATH -----
+where git >nul 2>&1
+if errorlevel 1 (
+    for %%p in (
+        "C:\Program Files\Git\cmd"
+        "C:\Program Files (x86)\Git\cmd"
+        "%LOCALAPPDATA%\Programs\Git\cmd"
+        "%ProgramData%\chocolatey\lib\git\tools\cmd"
+    ) do (
+        if exist %%~p\git.exe (
+            set "PATH=%%~p;!PATH!"
+            goto :git_found
+        )
+    )
+    echo [错误] 未检测到 Git. 请安装: https://git-scm.com/download/win
+    pause
+    exit /b 1
+)
+:git_found
+
 echo.
 echo ============================================================
 echo   KELKCalCv - 远程更新
