@@ -1,0 +1,152 @@
+{
+  "label": "PC9",
+  "pdf": "PC9（22版）.pdf",
+  "n_pages": 11,
+  "pages": [
+    {
+      "page": 1,
+      "text_len": 73,
+      "table_count": 1,
+      "tables": [
+        {
+          "n_rows": 22,
+          "n_cols": 26,
+          "first_row": "Rotary Stem Motion Type Pneumatic Cylinder Actuators |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | "
+        }
+      ],
+      "preview": "PC9 | SERIES | 气动角行程执行机构 | Rotary Stem Motion Type Pneumatic Cylinder Actuators"
+    },
+    {
+      "page": 2,
+      "text_len": 1012,
+      "table_count": 0,
+      "tables": [],
+      "preview": "KELK控制阀在中国 | KELK无锡公司是一家中国与加拿大合资的专业控制阀制造商，是专业生产各类电动、气动控制阀、控制装置 | ，并集成工业控制系统的一家高科技企业。公司在质量体系保证下生产出高质量和高可靠性的控制仪表，适用于各 | 行各业及各种场合。 | 该资料是KELK控制阀选型样本，主要介绍不同类型的控制阀，帮助您在不同的工况条件下更合理选择KELK的 | 产品。如果您对此选型样本有任何问题或需要更详细资料，"
+    },
+    {
+      "page": 3,
+      "text_len": 1640,
+      "table_count": 0,
+      "tables": [],
+      "preview": "KELK FLOW | Specification Data | PC Series PC9 | 2022/11/1 | Actuators | SD-PC9-A PC Actuators | PC9气动角行程执行机构 | Rotary Stem Motion Type Pneumatic Cylinder Actuators | 应用 | PC9系列拨叉式气动执行机构 PC9系列气动执行器分为双作用式和单作用式（弹簧复位）。具容易"
+    },
+    {
+      "page": 4,
+      "text_len": 1066,
+      "table_count": 3,
+      "tables": [
+        {
+          "n_rows": 7,
+          "n_cols": 1,
+          "first_row": "型号\nType"
+        },
+        {
+          "n_rows": 3,
+          "n_cols": 1,
+          "first_row": "滞后\nHysteresis"
+        },
+        {
+          "n_rows": 2,
+          "n_cols": 1,
+          "first_row": "控制附件\nControl Accessories"
+        }
+      ],
+      "preview": "标准规格 GENERAL DATA | 型号规格Specifications | 型号 | PC9 | Type | 双动作型 | 作用方式 Double acting type | Action Type 单动作型 | Spring return type | 回转角度 | 0~90° | Angle Rotation | 供气压力 | 400~600kPa G | Air Supply | 输出力矩 请参见表1 | Output Torque See Ta"
+    },
+    {
+      "page": 5,
+      "text_len": 213,
+      "table_count": 1,
+      "tables": [
+        {
+          "n_rows": 2,
+          "n_cols": 4,
+          "first_row": "PC9\nPC9\nPC9\nPC9\nPC9\nPC9\nPC9\nPC9\nPC9\nPC9\nPC9\nPC9\nPC9 |  |  | "
+        }
+      ],
+      "preview": "基本特性CHARACTERISTICS | 表1-1. 行程、输出力矩（双动作型） | Table 1-1 STORKE, OUTPUT TORQUE (DOUBLE ACTING TYPE) | 3 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 系"
+    },
+    {
+      "page": 6,
+      "text_len": 237,
+      "table_count": 1,
+      "tables": [
+        {
+          "n_rows": 1,
+          "n_cols": 5,
+          "first_row": "PC9\nPC9\nPC9\nPC9\nPC9\nPC9\nPC9\nPC9\nPC9\nPC9\nPC9\nPC9\nPC9 |  |  |  | "
+        }
+      ],
+      "preview": "表1-2. 行程、输出力（单动作型） | Table 1-2 STORKE, OUTPUT TORQUE (SPRING RETURN TYPE) | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | 4 | Rotary Stem Motion Type Pn"
+    },
+    {
+      "page": 7,
+      "text_len": 110,
+      "table_count": 3,
+      "tables": [
+        {
+          "n_rows": 5,
+          "n_cols": 6,
+          "first_row": " |  |  |  |  | "
+        },
+        {
+          "n_rows": 5,
+          "n_cols": 3,
+          "first_row": " |  | "
+        },
+        {
+          "n_rows": 8,
+          "n_cols": 5,
+          "first_row": " |  |  |  | "
+        }
+      ],
+      "preview": "本体部构造 BODY STRUCTURE | 图1. 本体部构造 Fig. 1 BODY SECTION VIEW | 单作用 Spring Return | 双作用 Double Action | PC9 系列 气动角行程执行机构 5"
+    },
+    {
+      "page": 8,
+      "text_len": 297,
+      "table_count": 1,
+      "tables": [
+        {
+          "n_rows": 3,
+          "n_cols": 10,
+          "first_row": " |  |  |  |  |  |  |  |  | "
+        }
+      ],
+      "preview": "PC9气动角行程执行机构 RRoottaarryy SStteemm MMoottiioonn TTyyppee 尺寸表 | Dimension | 单作用 Spring Return 双作用 Double Action | 对称式参数 Symmetric Data | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | PC9 | "
+    },
+    {
+      "page": 9,
+      "text_len": 104,
+      "table_count": 1,
+      "tables": [
+        {
+          "n_rows": 1,
+          "n_cols": 8,
+          "first_row": " |  |  |  |  |  |  | "
+        }
+      ],
+      "preview": "PC9气动角行程执行机构 RRoottaarryy SStteemm MMoottiioonn TTyyppee | L | 1 | L | 2 | 对称式参数 Symmetric Data | PC9 系列 气动角行程执行机构 | 7"
+    },
+    {
+      "page": 10,
+      "text_len": 139,
+      "table_count": 0,
+      "tables": [],
+      "preview": "多功能模式选择 FUNCTION MODES SELECTION | 图2. 各种模块选用 | Fig. 2 MODULARS FOR SELECTION | 8 | Rotary Stem Motion Type Pneumatic Cylinder Actuators PC9 SERIES"
+    },
+    {
+      "page": 11,
+      "text_len": 757,
+      "table_count": 1,
+      "tables": [
+        {
+          "n_rows": 19,
+          "n_cols": 20,
+          "first_row": " |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | "
+        }
+      ],
+      "preview": "分公司联系方式 | KELK 重庆分公司 KELK 北京分公司 | 地址 ：重庆市北部新区金渝大道68号新科国际5-706 地址 ：北京市朝阳区北辰西路69号峻峰华亭D座2210室 | 邮编 ：401122 邮编 ：100029 | 电话/传真 ：023-67303323 023-67303870 电话/传真 ：010-58773822 010-58773818 | KELK 杭州分公司 KELK 广州分公司 | 地址 "
+    }
+  ]
+}

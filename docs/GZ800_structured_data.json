@@ -1,0 +1,5367 @@
+{
+  "label": "GZ800",
+  "series_name": "自立式压力调节阀 / Self-Operated Pressure Valves",
+  "source_pdf": "参考文件/选型样本/GZ800(压缩).pdf (35页, 唯一权威数据源)",
+  "reference_docx": "参考文件/选型样本/GZ800(压缩).docx (OCR转换, 41表, 仅作定位参考)",
+  "extracted_date": "2026-10-14",
+  "page_offset": "PDF页 = 印刷页 + 2",
+  "general_data": {
+    "_source": "p4 (印刷页2) 标准规格 GENERAL DATA",
+    "body": {
+      "公称通径 Body": "1/2\"~8\" (DN15~DN200)",
+      "公称压力 Body Rating": "ANSI 150#, 300#, 600#; JB/T79.1-94 & HG/T20592-2009 PN1.6MPa, PN4.0MPa, PN6.3MPa, PN10.0MPa",
+      "连接方式 Body Connection": "法兰型(RF, RTJ, MFM)、焊接型(2\"以下为SW, 3\"以上为BW)、对夹式 / Flanged (RF, RTJ, MFM), Weld ends (SW: 2\" and under, BW: 3\" and over), Wafer",
+      "设计标准 Design Standard": "ANSI B16.34, ANSI B16.47, API598等",
+      "法兰距 FF Dimen": "IEC60534, ISA.S75.03-1985"
+    },
+    "trim": {
+      "阀内件形式 Trim Form": "流体压力不平衡阀芯型 Pressure unbalance plug type / 流体压力平衡型阀芯 Pressure balance plug type",
+      "阀芯形式 Plug Form": "P孔单座 P-port single seated / 笼式单座 Cage single seated",
+      "额定Cv值 Rated Cv": "见表3 See Tab.3 for selection.",
+      "流量特性 Characteristics": "线性、等百分比(特殊加工)、快开 / Linear, Equal percentage (Special processing), Quick open.",
+      "阀座泄漏量 Seat Leakage": "金属阀座标准泄漏等级为Cv×0.003; 软阀座标准泄漏等级为Class VI / Hard-sealing: Cv×0.003; Soft-sealing: Class VI.",
+      "密封形式 Sealing Type": "长波纹管型(非填料形式) Long bellow structure (No Packing)",
+      "阀盖垫圈 Gasket of Bonnet": "缠绕垫圈(304/316+柔性石墨; 304/316+强化聚四氟乙烯) Winding gasket (304/316+Graphite; 304/316+PTFE)",
+      "_note": "PDF英文原文为 'PTEF'(p4), 系原文档笔误, 已按PTFE修正并标注"
+    },
+    "actuator": {
+      "_source": "p4 执行机构 Actuator 表 (docx整表漏, 按PDF补入)",
+      "形式 Type": "气动薄膜式 Diaphragm type / 波纹管式 Bellows actuator",
+      "用途 Purpose": "调节、开关 Modulation or On-off (两种形式均适用)",
+      "使用温度 Operating Temperature": {
+        "薄膜式(膜片材质)": {
+          "丁腈橡胶NBR": "-29℃~+82℃",
+          "氟橡胶FKM": "-8℃~+120℃",
+          "硅胶SR": "-48℃~+85℃",
+          "三元乙丙橡胶EPDM": "-38℃~+115℃",
+          "强化聚四氟乙烯PTFE": "-40℃~+150℃"
+        },
+        "波纹管式": {
+          "波纹管316": "-40℃~+300℃",
+          "波纹管316L": "-40℃~+300℃"
+        }
+      },
+      "接口 Connection": "Rc1/4",
+      "压力调节范围&精度 Pressure Regulating Range & Capacities": "0.15KPa~3600KPa, ±5%",
+      "环境温度 AMB Temp.": "-40℃~+100℃",
+      "标准图层色 Painting": "银灰色环氧树脂 Munsell: N-6"
+    }
+  },
+  "model_classification": {
+    "_source": "p5 (印刷页3) 表 (docx表2)",
+    "GZ810": "自力式单座压力调节阀",
+    "GZ820": "自力式笼式压力调节阀",
+    "GZ830": "波纹管平衡自力式压力调节阀",
+    "GZ840": "小流量自力式微压调节阀",
+    "GZ850": "自力式压力调节阀",
+    "GZ860": "带指挥器操作自力式微压阀",
+    "GZ870": "自力式低压泄压阀",
+    "GZ880": "自力式微压调节阀"
+  },
+  "model_specs": {
+    "_source": "p5 (印刷页3) 规格详述表 (docx表3); 原文档ND/DN混用, 统一按DN记录",
+    "columns": [
+      "型号 Model",
+      "公称压力 Body Rating",
+      "公称通径 Body Size",
+      "使用温度 Fluid Temp.",
+      "调压范围 Pressure Range",
+      "作用方式 Control Situation",
+      "连接方式 Connections"
+    ],
+    "rows": [
+      [
+        "GZ810",
+        "ANSI Class 150#~600#",
+        "1/2\"(DN15)~2\"(DN50)",
+        "-48℃~+300℃",
+        "3KPa~3600kPa",
+        "阀前、阀后兼用型 Upstream & Downstream",
+        "法兰式(RF) Flanges(RF)"
+      ],
+      [
+        "GZ820",
+        "ANSI Class 150#~600#",
+        "1-1/2\"(DN40)~8\"(DN200)",
+        "-48℃~+300℃",
+        "3KPa~3600kPa",
+        "阀前、阀后兼用型 Upstream & Downstream",
+        "法兰式(RF) Flanges(RF)"
+      ],
+      [
+        "GZ830",
+        "ANSI Class 150#~600#",
+        "1-1/2\"(DN40)~8\"(DN200)",
+        "-48℃~+300℃",
+        "3KPa~3600kPa",
+        "阀前、阀后兼用型 Upstream & Downstream",
+        "法兰式(RF) Flanges(RF)"
+      ],
+      [
+        "GZ840",
+        "ANSI Class 150#",
+        "1/2\"(DN15)~1\"(DN25)",
+        "-48℃~+120℃",
+        "0.3KPa~15kPa",
+        "阀后控制 Downstream",
+        "对夹式 Wafer"
+      ],
+      [
+        "GZ850",
+        "ANSI Class 150#~600#",
+        "1/2\"(DN15)~2\"(DN50)",
+        "-48℃~+120℃",
+        "1.3KPa~3600kPa",
+        "阀后控制 Downstream",
+        "法兰式(RF) Flanges(RF)"
+      ],
+      [
+        "GZ860",
+        "ANSI Class 150#~600#",
+        "1/2\"(DN15)~4\"(DN100)",
+        "-48℃~+120℃",
+        "0.15KPa~12kPa",
+        "阀后控制 Downstream",
+        "法兰式(RF) Flanges(RF)"
+      ],
+      [
+        "GZ870",
+        "ANSI Class 150#~600#",
+        "1/2\"(DN15)~8\"(DN200)",
+        "-48℃~+120℃",
+        "0.5KPa~15kPa",
+        "阀前控制 Upstream",
+        "法兰式(RF) Flanges(RF)"
+      ],
+      [
+        "GZ880",
+        "ANSI Class 150#~600#",
+        "1/2\"(DN15)~2\"(DN50)",
+        "-48℃~+120℃",
+        "0.3KPa~15kPa",
+        "阀后控制 Downstream",
+        "法兰式(RF) Flanges(RF)"
+      ]
+    ]
+  },
+  "special_specs": {
+    "_source": "p5 (印刷页3) 特殊规格表 (docx表4)",
+    "本体特殊检查 Special Testing for Body": "材料检查, 液体渗透探伤检查(PT), 放射线检查(RT), 流量特性检查, 低温试验, 蒸汽试验 / Material certificate, Liquid penetrant testing, Radiographic testing, Flow characteristic testing, Low temperature testing, Steam testing",
+    "本体特殊清洗 Cleaning for Body": "氧气清洁, 完全禁油, 除水处理 / Oxygen clean, Oil-free, Water-free",
+    "本体及执行机构特殊规格 Special Specification for Body and Actuator": "防砂, 防尘型, 防盐腐蚀型, 无铜处理, 特殊空气配管及特殊气接头, 真空工作条件用, 接触大气部分的螺栓螺母采用不锈钢, 指定涂层色, NACE处理, 阀内件特殊设计, 阀内件特殊材质 / Sand and Dustproof, Salty environment proof, Tropical area proof, Copper-free alloy, Special piping and fitting, Vacuum service proof, SUS bolt and nut for exposed parts, Non-standard painting",
+    "认证 Authorization": "各种认证 All kinds of certifications"
+  },
+  "parts_lists": {
+    "_source": "p6~p16 (印刷页4~14) 本体部/执行机构部构造图 PARTS LIST; 表1-1/1-2/1-3英文'valva seat'系PDF原文笔误, 保留原样",
+    "table_1_1_GZ810": {
+      "_source": "p6 (印刷页4) 图1-1 (docx表5)",
+      "items": {
+        "1": "压垫 Press cushion",
+        "2": "转接板 Connecting plate",
+        "3": "支架 Bracket",
+        "4": "上弹簧座 Up spring seat",
+        "5": "垫圈1 Washer 1",
+        "6": "导套 Guide bush",
+        "7": "密封垫圈 Sealing ring",
+        "8": "连接法兰 Connection flange",
+        "9": "波纹管阀杆组件 Bellows valve stem component",
+        "10": "下弹簧座 Down spring seat",
+        "11": "调节螺母 Adjusting nut",
+        "12": "调节螺母罩 Adjusting nut cover",
+        "13": "阀盖 Bonnet",
+        "14": "阀盖垫圈 Sealing ring of bonnet",
+        "15": "套筒 Cage",
+        "16": "减压阀芯 Reducing valve plug",
+        "17": "阀垫 Valve cushion",
+        "18": "阀座 Valve seat",
+        "19": "阀座垫圈 Sealing ring of valva seat",
+        "20": "阀体 Body",
+        "21": "销子 Pin",
+        "22": "键 Block",
+        "23": "滑动垫片 Sliding cushion",
+        "24": "垫圈 Cushion",
+        "25": "阀芯 Plug",
+        "26": "阀垫 Cushion",
+        "27": "压板 Press plate",
+        "28": "设定弹簧 Setting spring",
+        "29": "调节杆 Adjustment lever"
+      }
+    },
+    "table_1_2_GZ820": {
+      "_source": "p7 (印刷页5) 图1-2 (docx表6)",
+      "items": {
+        "1": "垫圈 Cushion",
+        "2": "滑动垫片 Sliding cushion",
+        "3": "压垫 Press cushion",
+        "4": "转接板 Connecting plate",
+        "5": "支架 Bracket",
+        "6": "上弹簧座 Up spring seat",
+        "7": "垫圈1 Washer 1",
+        "8": "导套 Guide bush",
+        "9": "密封垫圈 Sealing ring",
+        "10": "连接法兰 Connection flange",
+        "11": "波纹管阀杆组件 Bellows valve stem component",
+        "12": "设定弹簧 Setting spring",
+        "13": "下弹簧座 Down spring seat",
+        "14": "调节螺母 Adjusting nut",
+        "15": "调节螺母罩 Adjusting nut cover",
+        "16": "阀盖 Bonnet",
+        "17": "减压阀芯 Reducing valve plug",
+        "18": "阀座垫圈 Sealing ring of valva seat",
+        "19": "导套 Guide bush",
+        "20": "套筒 Cage",
+        "21": "导套 Guide bush",
+        "22": "压板 Press plate",
+        "23": "阀垫 Valve cushion",
+        "24": "螺钉 Screw",
+        "25": "阀座 Valve seat",
+        "26": "阀座垫圈 Sealing ring of valve seat",
+        "27": "阀体 Body",
+        "28": "销 Pin",
+        "29": "键 Block",
+        "30": "阀芯 Valve plug",
+        "31": "压板 Press plate",
+        "32": "调节杆 Adjustment lever"
+      }
+    },
+    "table_1_3_GZ830": {
+      "_source": "p8 (印刷页6) 图1-3 (docx表7)",
+      "items": {
+        "1": "垫圈 Cushion",
+        "2": "滑动垫片 Sliding cushion",
+        "3": "压垫 Press cushion",
+        "4": "转接板 Connecting plate",
+        "5": "支架 Bracket",
+        "6": "上弹簧座 Up spring seat",
+        "7": "垫圈1 Washer 1",
+        "8": "导套 Guide bush",
+        "9": "密封垫圈 Sealing ring",
+        "10": "连接法兰 Connection flange",
+        "11": "波纹管阀杆组件 Bellows valve stem component",
+        "12": "设定弹簧 Setting spring",
+        "13": "下弹簧座 Down spring seat",
+        "14": "调节螺母 Adjusting nut",
+        "15": "调节螺母罩 Adjusting nut cover",
+        "16": "阀盖 Bonnet",
+        "17": "减压波纹管组件 Reduce bellows component",
+        "18": "阀盖垫圈 Sealing ring of bonnet",
+        "19": "垫圈 Washer",
+        "20": "减压阀芯 Reducing valve plug",
+        "21": "导套 Guide bush",
+        "22": "套筒 Cage",
+        "23": "压板 Press plate",
+        "24": "阀垫 Valve cushion",
+        "25": "螺钉 Screw",
+        "26": "阀座 Valve seat",
+        "27": "阀座垫圈 Sealing ring of valva seat",
+        "28": "阀体 Body",
+        "29": "连接管 Connecting pipe",
+        "30": "键 Block",
+        "31": "销子 Pin",
+        "32": "阀芯 Plug",
+        "33": "背压阀波纹管组件 Back press bellows component",
+        "34": "背压阀阀芯 Back-press valve plug",
+        "35": "导套 Guide bush",
+        "36": "压板 Press plate",
+        "37": "调节杆 Adjustment lever",
+        "38": "阀芯 Plug"
+      }
+    },
+    "table_1_4_GZ840": {
+      "_source": "p9 (印刷页7) 图1-4 (docx表8)",
+      "items": {
+        "1": "弹簧 Spring",
+        "2": "端盖 End cover",
+        "3": "连接螺栓 Connecting bolt",
+        "4": "销 Pin",
+        "5": "垫圈 Washer",
+        "6": "下销 Bottom pin",
+        "7": "杠杆 Lever",
+        "8": "轴套 Shaft set",
+        "9": "阀芯 Valve plug",
+        "10": "阀座 Valve seat",
+        "11": "阀体 Body",
+        "12": "保护罩 Protective cover",
+        "13": "弹簧罩 Spring cover",
+        "14": "膜盖 Diaphragm case",
+        "15": "盘 Diaphragm plate",
+        "16": "膜片 Diaphragm",
+        "17": "膜盖 Diaphragm case"
+      }
+    },
+    "table_1_5_GZ850": {
+      "_source": "p10 (印刷页8) 图1-5 (docx表9)",
+      "items": {
+        "1": "阀体 Body",
+        "2": "阀座垫圈 Sealing ring of valve seat",
+        "3": "阀座 Valve seat",
+        "4": "阀芯 Valve plug",
+        "5": "阀盖垫圈 Sealing ring of bonnet",
+        "6": "阀杆 Valve stem",
+        "7": "弹簧座 Spring seat",
+        "8": "O型圈 O-Ring",
+        "9": "弹簧罩 Spring cover",
+        "10": "保护罩 Protective cover",
+        "11": "膜盖 Diaphragm case",
+        "12": "弹簧 Spring",
+        "13": "端盖 End cover",
+        "14": "销 Pin",
+        "15": "连接螺栓 Connecting bolt",
+        "16": "套管 Casing",
+        "17": "下销 Bottom pin",
+        "18": "轴套 Shaft set",
+        "19": "滚轮 Roller",
+        "20": "右杠杆 Right lever",
+        "21": "左杠杆 Left lever",
+        "22": "硬密封阀芯 Hard-sealing plug",
+        "23": "堆焊阀芯 Bead-welding plug",
+        "24": "堆焊阀座 Bead-welding seat"
+      }
+    },
+    "table_1_7_GZ860": {
+      "_source": "p12 (印刷页10) 图1-7 (docx表10); p11(印刷页9)为图1-6, 仅图无表",
+      "items": {
+        "1": "接头 Connect",
+        "2": "左阀体 Left pilot valve body",
+        "3": "阀垫 Valve cushion",
+        "4": "弹簧 Spring",
+        "5": "阀芯 Plug",
+        "6": "盘 Diaphragm plate",
+        "7": "膜片 Diaphragm",
+        "8": "垫圈 Washer",
+        "9": "恒节流件 Constant throttle",
+        "10": "盖 Cover",
+        "11": "右阀体 Right pilot valve body",
+        "12": "弹簧 Spring",
+        "13": "阀垫 Valve cushion",
+        "14": "挡板 Baffle",
+        "15": "杠杆 Lever",
+        "16": "端盖 End cover",
+        "17": "压圈 Press ring",
+        "18": "恒节流件 Constant throttle",
+        "19": "喷嘴 Nozzle",
+        "20": "螺套 Screw set",
+        "21": "弹簧 Spring",
+        "22": "连接套 Connecting set",
+        "23": "连杆 Connecting rod",
+        "24": "销 Pin",
+        "25": "膜盖 Diaphragm case",
+        "26": "膜片 Diaphragm",
+        "27": "盘 Diaphragm plate",
+        "28": "垫圈 Washer",
+        "29": "弹簧座 Spring seat",
+        "30": "膜盖 Diaphragm case",
+        "31": "挡圈 Block ring",
+        "32": "销 Pin",
+        "33": "弹簧罩 Spring cover",
+        "34": "设定弹簧 Setting spring",
+        "35": "螺杆 Screw",
+        "36": "螺母 Nut",
+        "37": "垫圈 Washer",
+        "38": "保护罩 Protective cover",
+        "39": "销 Pin",
+        "40": "垫圈 Washer",
+        "41": "连接螺栓 Connecting bolt",
+        "42": "下销 Bottom pin",
+        "43": "轴套 Shaft set",
+        "44": "膜盖 Diaphragm case",
+        "45": "膜片 Diaphragm",
+        "46": "盘 Diaphragm plate",
+        "47": "连杆 Connecting rod",
+        "48": "垫圈 Washer",
+        "49": "膜盖 Diaphragm case",
+        "50": "阀盖 Bonnet",
+        "51": "阀盖垫圈 Sealing ring of bonnet",
+        "52": "套筒 Cage",
+        "53": "阀芯 Plug",
+        "54": "阀座 Valve seat",
+        "55": "阀座垫圈 Sealing ring of seat",
+        "56": "阀垫 Valve cushion",
+        "57": "压圈 Press ring",
+        "58": "阀体 Body",
+        "59": "连接螺栓 Connecting bolt",
+        "60": "销 Pin",
+        "61": "螺钉 Screw",
+        "62": "套管 Casing",
+        "63": "左杠杆 Left lever",
+        "64": "滚轮 Roller",
+        "65": "右杠杆 Right lever",
+        "66": "轴套 Shaft set",
+        "67": "下销 Bottom pin",
+        "68": "安装板 Connecting plate",
+        "69": "端盖 End cover",
+        "70": "阀杆 Valve stem",
+        "71": "平衡圈 Balance ring",
+        "72": "弹簧 Spring",
+        "73": "挡环 Baffle ring",
+        "74": "法兰 Flange",
+        "75": "弹簧座 Spring seat",
+        "76": "弹簧座 Spring seat",
+        "77": "下销 Bottom pin",
+        "78": "导套 Guide bush",
+        "79": "阀杆 Valve stem",
+        "80": "阀芯 Plug",
+        "81": "平衡圈 Balance ring",
+        "82": "导套 Guide bush",
+        "83": "阀座 Valve seat",
+        "84": "螺钉 Screw",
+        "85": "阀垫 Valve cushion",
+        "86": "压圈 Press ring"
+      }
+    },
+    "table_1_8_GZ870": {
+      "_source": "p13 (印刷页11) 图1-8 (docx表11)",
+      "items": {
+        "1": "设定弹簧 Setting spring",
+        "2": "弹簧罩 Spring cover",
+        "3": "膜盖 Diaphragm case",
+        "4": "盘 Diaphragm plate",
+        "5": "膜片 Diaphragm",
+        "6": "阀盖 Bonnet",
+        "7": "阀盖垫圈 Sealing ring of bonnet",
+        "8": "导套 Guide bush",
+        "9": "套筒 Cage",
+        "10": "销 Pin",
+        "11": "阀垫 Valve cushion",
+        "12": "阀座 Valve seat",
+        "13": "阀座垫圈 Sealing ring of valve seat",
+        "14": "阀体 Body",
+        "15": "保护罩 Protective cover",
+        "16": "螺杆 Screw",
+        "17": "箭头 Arrow",
+        "18": "弹簧座 Spring seat",
+        "19": "阀杆 Valve stem",
+        "20": "导套 Guide bush",
+        "21": "垫块 Cushion block",
+        "22": "阀芯 Valve plug",
+        "23": "膜盖 Diaphragm case",
+        "24": "接管 Connecting pipe",
+        "25": "导压管 Pressure pipe",
+        "26": "膜盖 Diaphragm case",
+        "27": "盘 Diaphragm plate",
+        "28": "膜片 Diaphragm"
+      }
+    },
+    "table_1_9_GZ880": {
+      "_source": "p14 (印刷页12) 图1-9 (docx表12)",
+      "items": {
+        "1": "弹簧 Spring",
+        "2": "端盖 End cover",
+        "3": "连接螺栓 Connecting bolt",
+        "4": "销 Pin",
+        "5": "垫圈 Washer",
+        "6": "下销 Bottom pin",
+        "7": "杠杆 Lever",
+        "8": "轴套 Shaft set",
+        "9": "阀杆 Spring stem",
+        "10": "阀盖垫圈 Sealing ring of bonnet",
+        "11": "阀芯 Valve plug",
+        "12": "阀座 Valve seat",
+        "13": "阀座垫圈 Sealing ring of valve seat",
+        "14": "阀体 Body",
+        "15": "保护罩 Protective cover",
+        "16": "弹簧罩 Spring cover",
+        "17": "O型圈 O-Ring",
+        "18": "膜盖 Diaphragm case",
+        "19": "盘 Diaphragm plate",
+        "20": "膜片 Diaphragm",
+        "21": "膜盖 Diaphragm case"
+      }
+    },
+    "table_2_1_single_diaphragm": {
+      "_source": "p15 (印刷页13) 图2-1 单膜片执行机构 (docx表13)",
+      "items": {
+        "1": "上模盖 Upper diaphragm case",
+        "2": "膜片 Diaphragm",
+        "3": "盘 Diaphragm plate",
+        "4": "下膜盖 Lower diaphragm case",
+        "5": "推杆 Push stem",
+        "6": "导套 Guiding bush"
+      },
+      "_note": "PDF原文第1项为'上模盖'(模系膜的原文笔误), 保留原样"
+    },
+    "table_2_2_dual_diaphragm": {
+      "_source": "p15 (印刷页13) 图2-2 双膜片执行机构 (docx整表漏, 按PDF补入)",
+      "items": {
+        "1": "上模盖 Upper diaphragm case",
+        "2": "膜片 Diaphragm",
+        "3": "上盘 Up diaphragm plate",
+        "4": "膜片 Diaphragm",
+        "5": "下盘 Lower diaphragm plate",
+        "6": "推杆 Push stem",
+        "7": "下膜盖 Lower diaphragm case",
+        "8": "导套 Guide bush"
+      },
+      "_note": "PDF原文第1项为'上模盖'(模系膜的原文笔误), 保留原样"
+    },
+    "table_2_3_bellows": {
+      "_source": "p15 (印刷页13) 图2-3 波纹管执行机构 (docx表14)",
+      "items": {
+        "1": "上盖 Upper case",
+        "2": "波纹管组件 Bellow assembly",
+        "3": "推杆 Push stem",
+        "4": "下盖 Lower case",
+        "5": "导套 Guiding bush",
+        "6": "卡簧 Circlip"
+      }
+    },
+    "table_3_1_isolation_tank": {
+      "_source": "p16 (印刷页14) 图3-1 隔离罐 (docx表15)",
+      "items": {
+        "1": "螺塞 Screw plug",
+        "2": "密封圈 Sealing ring",
+        "3": "接头 Joint",
+        "4": "隔离罐 Isolation tank",
+        "5": "接头 Joint"
+      }
+    },
+    "table_3_2_composite_joint": {
+      "_source": "p16 (印刷页14) 图3-2 (docx表16)",
+      "items": {
+        "1": "密封圈 Sealing ring",
+        "2": "复合接头 Composite-joint",
+        "3": "排气塞 Vent plug"
+      }
+    },
+    "table_3_3_cylinder": {
+      "_source": "p16 (印刷页14) 图3-3 气缸 (docx表17)",
+      "items": {
+        "1": "缸盖 Cylinder cover",
+        "2": "活塞 Piston",
+        "3": "气缸 Cylinder",
+        "4": "压垫 Press pad",
+        "5": "下盖 Lower case"
+      }
+    }
+  },
+  "material_combinations": {
+    "_source": "p17 (印刷页15) 表4 阀体/阀内件材质组合及使用温度范围·阀座允许泄漏量",
+    "table_4_1_carbon_steel": {
+      "_docx": "表18",
+      "阀体 Body 材质": "ZG230-450/A216-WCB, A352-LCB",
+      "columns": [
+        "NBR",
+        "FKM",
+        "SR",
+        "EPDM",
+        "PTFE",
+        "SF"
+      ],
+      "阀芯 Plug 材质": [
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316"
+      ],
+      "阀座 SeatRing 材质": [
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316"
+      ],
+      "阀座 SeatRing 处理": [
+        "—",
+        "—",
+        "—",
+        "—",
+        "—",
+        "SF"
+      ],
+      "导向套/套筒 Guide/Cage 材质": [
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316"
+      ],
+      "垫圈 Gasket 材质": [
+        "304/316+石墨 304/316+PTFE",
+        "304/316+石墨 304/316+PTFE",
+        "304/316+石墨 304/316+PTFE",
+        "304/316+石墨 304/316+PTFE",
+        "304/316+石墨 304/316+PTFE",
+        "304/316+石墨"
+      ],
+      "阀座允许泄漏量 SeatLeakage ANSI": [
+        "Class VI",
+        "Class VI",
+        "Class VI",
+        "Class VI",
+        "Class VI",
+        "Cv×0.003"
+      ],
+      "阀座允许泄漏量 SeatLeakage Rated Cv×": [
+        "Bubble-tight",
+        "Bubble-tight",
+        "Bubble-tight",
+        "Bubble-tight",
+        "Bubble-tight",
+        "Cv×0.003"
+      ],
+      "使用温度 Operating Temperature ℃ WCB Body": [
+        "-5~+82",
+        "-5~+120",
+        "-5~+85",
+        "-5~+150",
+        "-5~+115",
+        "-5~+300"
+      ],
+      "使用温度 Operating Temperature ℃ LCB Body": [
+        "-29~+82",
+        "-8~+120",
+        "-29~+85",
+        "-29~+115",
+        "-29~+150",
+        "-29~+300"
+      ]
+    },
+    "table_4_2_stainless_steel": {
+      "_docx": "表19",
+      "阀体 Body 材质": "ZG0Cr18Ni9/A351-CF8, ZG0Cr18Ni12Mo2Ti/A351-CF8M*②",
+      "columns": [
+        "NBR",
+        "FKM",
+        "SR",
+        "EPDM",
+        "PTFE",
+        "SF"
+      ],
+      "阀芯 Plug 材质": [
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316"
+      ],
+      "阀座 SeatRing 材质": [
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316"
+      ],
+      "阀座 SeatRing 处理": [
+        "—",
+        "—",
+        "—",
+        "—",
+        "—",
+        "SF"
+      ],
+      "导向套/套筒 Guide/Cage 材质": [
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316",
+        "304/316"
+      ],
+      "垫圈 Gasket 材质": [
+        "304/316+石墨 304/316+PTFE",
+        "304/316+石墨 304/316+PTFE",
+        "304/316+石墨 304/316+PTFE",
+        "304/316+石墨 304/316+PTFE",
+        "304/316+石墨 304/316+PTFE",
+        "304/316+石墨"
+      ],
+      "阀座允许泄漏量 SeatLeakage ANSI": [
+        "Class VI",
+        "Class VI",
+        "Class VI",
+        "Class VI",
+        "Class VI",
+        "Cv×0.003"
+      ],
+      "阀座允许泄漏量 SeatLeakage Rated Cv×": [
+        "Bubble-tight",
+        "Bubble-tight",
+        "Bubble-tight",
+        "Bubble-tight",
+        "Bubble-tight",
+        "Cv×0.003"
+      ],
+      "使用温度*① Operating Temperature ℃": [
+        "-29~+82",
+        "-8~+120",
+        "-48~+85",
+        "-38~+115",
+        "-40~+150",
+        "-29~+300"
+      ]
+    },
+    "footnotes": {
+      "_docx": "docx漏, 按PDF补入",
+      "*①": "使用温度超过150℃时, 阀芯材质为不锈钢304或316进行堆焊司太莱合金硬化处理, 需加配隔离罐或配波纹管执行机构。When the operating Temperature over 150℃, the materials of the Plug will be 304SS+STL/316SS+STL, and using isolation tank or bellow actuator.",
+      "*②": "阀内件材质一般不低于阀体材质。例如: 阀体材质A351-CF8M, 阀内件材质不选304SS, 至少选316SS。Trim material generally is not lower than the body material. For example: Body material is A351-CF8M, trim materials don't choose 304SS, choose at least 316SS."
+    }
+  },
+  "rated_cv_table5": {
+    "_source": "p18 (印刷页16) 表5 额定Cv (docx整表漏, 按PDF图像全量提取)",
+    "notes": [
+      "DN15最大Cv为5.3, DN20最大Cv为7.6, 其余口径不限 / Maximum 5.3 Cv is allow for DN15, maximum 7.6 Cv is for DN20, the diameter is not limited for other type.",
+      "阀前控制阀门的Cv值是改变节流窗口的大小来实现的, 所以没有阀座直径的概念 / The Cv value of the backpressure control valve can be adjusted by changing the size of the flow control windows so the diameter of the valve seat is not involved."
+    ],
+    "GZ810": {
+      "downstream_by_seat_dia": {
+        "2": 0.12,
+        "4": 0.35,
+        "6": 0.7,
+        "8": 1.2,
+        "10": 1.9,
+        "12": 2.9,
+        "14": 5.3,
+        "18": 7.6,
+        "22": 11.7
+      },
+      "upstream_cv_values": [
+        0.35,
+        0.7,
+        1.2,
+        1.9,
+        2.9,
+        5.3,
+        7.6,
+        9.3
+      ],
+      "_note": "阀前控制无阀座直径概念, 8档Cv按节流窗口调整"
+    },
+    "GZ820_GZ830": {
+      "by_seat_dia": {
+        "40": {
+          "downstream": 29,
+          "upstream": 26
+        },
+        "50": {
+          "downstream": 47,
+          "upstream": 42
+        },
+        "65": {
+          "downstream": 76,
+          "upstream": 68
+        },
+        "80": {
+          "downstream": 116,
+          "upstream": 105
+        },
+        "100": {
+          "downstream": 187,
+          "upstream": 169
+        },
+        "150": {
+          "downstream": 373,
+          "upstream": 327
+        },
+        "200": {
+          "downstream": 560,
+          "upstream": 501
+        }
+      }
+    },
+    "GZ840": {
+      "downstream_by_seat_dia": {
+        "2": 0.12,
+        "4": 0.35,
+        "6": 0.7,
+        "8": 1.2,
+        "10": 1.9,
+        "12": 2.9,
+        "14": 4.7
+      },
+      "upstream": "—"
+    },
+    "GZ850": {
+      "downstream_by_seat_dia": {
+        "2": 0.12,
+        "4": 0.35,
+        "6": 0.7,
+        "8": 1.2,
+        "10": 1.9,
+        "12": 2.9,
+        "14": 5.3,
+        "18": 7.6,
+        "22": 11.7
+      },
+      "upstream": "—"
+    },
+    "GZ860": {
+      "small_dn_group": {
+        "dn_sizes": [
+          15,
+          20,
+          25,
+          40,
+          50
+        ],
+        "cv_values": [
+          0.12,
+          0.35,
+          0.7,
+          1.2,
+          1.9,
+          2.9,
+          5.3,
+          7.6,
+          9.3
+        ]
+      },
+      "downstream_by_seat_dia": {
+        "40": 26,
+        "50": 42,
+        "65": 68,
+        "80": 105,
+        "100": 169
+      },
+      "_note": "仅有阀后控制"
+    },
+    "GZ870": {
+      "small_dn_group": {
+        "dn_sizes": [
+          15,
+          20,
+          25
+        ],
+        "cv_values": [
+          1.9,
+          2.9,
+          5.3,
+          7.6,
+          11.7
+        ]
+      },
+      "downstream_by_seat_dia": {
+        "40": 29,
+        "50": 47,
+        "65": 76,
+        "80": 116,
+        "100": 187,
+        "150": 303,
+        "200": 443
+      }
+    },
+    "GZ880": {
+      "downstream_by_seat_dia": {
+        "2": 0.12,
+        "4": 0.35,
+        "6": 0.7,
+        "8": 1.2,
+        "10": 1.9,
+        "12": 2.9,
+        "14": 5.3,
+        "18": 7.6,
+        "22": 11.7
+      }
+    }
+  },
+  "allowable_pressure_drops": {
+    "_source": "p19~p25 (印刷页17~23) 表6-1~表6-5 允许压差 (docx表20~31, 逐格核对全部一致)",
+    "_units": "调压范围 kPa G; 许用压差 MPa; 执行机构耐压 kPa G",
+    "table_6_1_1_GZ810_diaphragm": {
+      "_docx": "表20",
+      "plug_sizes_mm": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18
+      ],
+      "rows": [
+        [
+          "01.01.00/04.01.00",
+          "HS005",
+          "150~450",
+          [
+            6.5,
+            6.5,
+            6.5,
+            5.8,
+            3.8,
+            2.7,
+            2.0,
+            1.2,
+            0.8
+          ],
+          2500
+        ],
+        [
+          "01.01.00/04.01.00",
+          "HS006",
+          "200~610",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            5.1,
+            3.6,
+            2.5,
+            1.6,
+            1.0
+          ],
+          2500
+        ],
+        [
+          "01.01.00/04.01.00",
+          "HS007",
+          "280~850",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            5.8,
+            4.8,
+            3.5,
+            2.2,
+            1.5
+          ],
+          2500
+        ],
+        [
+          "01.02.00/04.02.00",
+          "HS004",
+          "50~150",
+          [
+            6.5,
+            6.5,
+            6.5,
+            4.0,
+            2.5,
+            1.8,
+            1.3,
+            0.8,
+            0.5
+          ],
+          2000
+        ],
+        [
+          "01.02.00/04.02.00",
+          "HS005",
+          "78~230",
+          [
+            6.5,
+            6.5,
+            6.5,
+            5.8,
+            3.8,
+            2.7,
+            2.0,
+            1.2,
+            0.8
+          ],
+          2000
+        ],
+        [
+          "01.02.00/04.02.00",
+          "HS006",
+          "110~310",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            5.1,
+            3.6,
+            2.5,
+            1.6,
+            1.0
+          ],
+          2000
+        ],
+        [
+          "01.02.00/04.02.00",
+          "HS007",
+          "140~430",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            5.8,
+            4.8,
+            3.5,
+            2.2,
+            1.5
+          ],
+          2000
+        ],
+        [
+          "01.03.00/04.03.00",
+          "HS001",
+          "7~21",
+          [
+            1.5,
+            1.5,
+            1.0,
+            1.0,
+            0.7,
+            0.4,
+            0.4,
+            0.2,
+            0.2
+          ],
+          1500
+        ],
+        [
+          "01.03.00/04.03.00",
+          "HS002",
+          "14~40",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.3,
+            0.9,
+            0.7,
+            0.4,
+            0.3
+          ],
+          1500
+        ],
+        [
+          "01.03.00/04.03.00",
+          "HS003",
+          "20~60",
+          [
+            1.8,
+            1.8,
+            1.8,
+            1.8,
+            1.8,
+            1.4,
+            1.0,
+            0.6,
+            0.4
+          ],
+          1500
+        ],
+        [
+          "01.03.00/04.03.00",
+          "HS004",
+          "28~85",
+          [
+            2.5,
+            2.5,
+            2.5,
+            2.5,
+            2.5,
+            1.8,
+            1.3,
+            0.8,
+            0.5
+          ],
+          1500
+        ],
+        [
+          "01.03.00/04.03.00",
+          "HS005",
+          "40~120",
+          [
+            3.8,
+            3.8,
+            3.8,
+            3.8,
+            3.8,
+            2.5,
+            2.0,
+            1.2,
+            0.8
+          ],
+          1500
+        ],
+        [
+          "01.03.00/04.03.00",
+          "HS006",
+          "55~170",
+          [
+            3.8,
+            3.8,
+            3.8,
+            3.8,
+            3.8,
+            3.6,
+            2.5,
+            1.6,
+            1.0
+          ],
+          1500
+        ],
+        [
+          "01.04.00/04.04.00",
+          "HS001",
+          "3~8",
+          [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.7,
+            0.4,
+            0.4,
+            0.2,
+            0.2
+          ],
+          800
+        ],
+        [
+          "01.04.00/04.04.00",
+          "HS002",
+          "5~17",
+          [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.9,
+            0.7,
+            0.4,
+            0.3
+          ],
+          800
+        ],
+        [
+          "01.04.00/04.04.00",
+          "HS003",
+          "8~25",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.4,
+            1.0,
+            0.6,
+            0.4
+          ],
+          800
+        ],
+        [
+          "01.04.00/04.04.00",
+          "HS004",
+          "11~34",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.3,
+            0.8,
+            0.5
+          ],
+          800
+        ],
+        [
+          "01.09.00",
+          "HS007",
+          "500~1500",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            5.8,
+            4.8,
+            3.5,
+            2.2,
+            1.5
+          ],
+          3500
+        ],
+        [
+          "01.10.00",
+          "HS007",
+          "1000~3000",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            5.8,
+            4.8,
+            3.5,
+            2.2,
+            1.5
+          ],
+          3500
+        ]
+      ]
+    },
+    "table_6_1_2_GZ810_PTFE": {
+      "_docx": "表21",
+      "plug_sizes_mm": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18
+      ],
+      "rows": [
+        [
+          "01.12.00",
+          "HS001",
+          "8~25",
+          [
+            0.8,
+            0.8,
+            0.8,
+            0.8,
+            0.5,
+            0.4,
+            0.3,
+            0.2,
+            0.1
+          ],
+          450
+        ],
+        [
+          "01.12.00",
+          "HS002",
+          "16~50",
+          [
+            0.8,
+            0.8,
+            0.8,
+            0.8,
+            0.8,
+            0.7,
+            0.6,
+            0.4,
+            0.2
+          ],
+          450
+        ],
+        [
+          "01.13.00",
+          "HS001",
+          "3~9",
+          [
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.4,
+            0.3,
+            0.2,
+            0.1
+          ],
+          350
+        ],
+        [
+          "01.13.00",
+          "HS002",
+          "6~18",
+          [
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.4,
+            0.2
+          ],
+          350
+        ]
+      ]
+    },
+    "table_6_1_3_GZ810_bellows": {
+      "_docx": "表22",
+      "plug_sizes_mm": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18
+      ],
+      "rows": [
+        [
+          "03.01.00",
+          "HS007",
+          "650~2000",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            5.8,
+            4.1,
+            3.0,
+            1.8,
+            1.2
+          ],
+          4500
+        ],
+        [
+          "03.02.00",
+          "HS007",
+          "265~800",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            5.8,
+            4.1,
+            3.0,
+            1.8,
+            1.2
+          ],
+          3000
+        ],
+        [
+          "03.03.00",
+          "HS007",
+          "100~320",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            5.8,
+            4.1,
+            3.0,
+            1.8,
+            1.2
+          ],
+          1500
+        ],
+        [
+          "03.03.00",
+          "HS006",
+          "76~230",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            4.5,
+            3.0,
+            2.2,
+            1.3,
+            0.9
+          ],
+          1200
+        ],
+        [
+          "03.03.00",
+          "HS005",
+          "60~180",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            5.8,
+            4.1,
+            3.0,
+            1.8,
+            1.2
+          ],
+          1200
+        ],
+        [
+          "03.04.00",
+          "HS004",
+          "25~75",
+          [
+            6.5,
+            6.5,
+            6.0,
+            3.4,
+            2.2,
+            1.5,
+            1.1,
+            0.7,
+            0.5
+          ],
+          800
+        ],
+        [
+          "03.04.00",
+          "HS005",
+          "35~110",
+          [
+            6.5,
+            6.5,
+            6.0,
+            5.1,
+            3.3,
+            2.2,
+            1.6,
+            1.0,
+            0.7
+          ],
+          800
+        ],
+        [
+          "03.04.00",
+          "HS006",
+          "50~150",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            4.5,
+            3.0,
+            2.2,
+            1.3,
+            0.9
+          ],
+          800
+        ],
+        [
+          "03.04.00",
+          "HS007",
+          "65~200",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            5.8,
+            4.1,
+            3.0,
+            1.8,
+            1.2
+          ],
+          800
+        ]
+      ]
+    },
+    "table_6_2_1_GZ820_GZ830_diaphragm": {
+      "_docx": "表23(40/50段) + 表24(65/80/100段及150/200段)",
+      "seat_40_50": {
+        "plug_sizes_mm": [
+          40,
+          50
+        ],
+        "rows": [
+          [
+            "01.01.00/04.01.00",
+            "HS005",
+            "150~450",
+            [
+              1.3,
+              1.3
+            ],
+            2500
+          ],
+          [
+            "01.01.00/04.01.00",
+            "HS006",
+            "200~610",
+            [
+              1.7,
+              1.7
+            ],
+            2500
+          ],
+          [
+            "01.01.00/04.01.00",
+            "HS007",
+            "280~850",
+            [
+              2.4,
+              2.4
+            ],
+            2500
+          ],
+          [
+            "01.02.00/04.02.00",
+            "HS004",
+            "50~150",
+            [
+              0.9,
+              0.9
+            ],
+            2000
+          ],
+          [
+            "01.02.00/04.02.00",
+            "HS005",
+            "78~230",
+            [
+              1.3,
+              1.3
+            ],
+            2000
+          ],
+          [
+            "01.02.00/04.02.00",
+            "HS006",
+            "110~310",
+            [
+              1.7,
+              1.7
+            ],
+            2000
+          ],
+          [
+            "01.02.00/04.02.00",
+            "HS007",
+            "140~430",
+            [
+              2.4,
+              2.4
+            ],
+            2000
+          ],
+          [
+            "01.03.00/04.03.00",
+            "HS001",
+            "7~21",
+            [
+              0.3,
+              0.3
+            ],
+            1500
+          ],
+          [
+            "01.03.00/04.03.00",
+            "HS002",
+            "14~40",
+            [
+              0.5,
+              0.5
+            ],
+            1500
+          ],
+          [
+            "01.03.00/04.03.00",
+            "HS003",
+            "20~60",
+            [
+              0.7,
+              0.7
+            ],
+            1500
+          ],
+          [
+            "01.03.00/04.03.00",
+            "HS004",
+            "28~85",
+            [
+              0.9,
+              0.9
+            ],
+            1500
+          ],
+          [
+            "01.03.00/04.03.00",
+            "HS005",
+            "40~120",
+            [
+              1.3,
+              1.3
+            ],
+            1500
+          ],
+          [
+            "01.03.00/04.03.00",
+            "HS006",
+            "55~170",
+            [
+              1.7,
+              1.7
+            ],
+            1500
+          ],
+          [
+            "01.04.00/04.04.00",
+            "HS001",
+            "3~8",
+            [
+              0.3,
+              0.3
+            ],
+            800
+          ],
+          [
+            "01.04.00/04.04.00",
+            "HS002",
+            "5~17",
+            [
+              0.5,
+              0.5
+            ],
+            800
+          ],
+          [
+            "01.04.00/04.04.00",
+            "HS003",
+            "8~25",
+            [
+              0.7,
+              0.7
+            ],
+            800
+          ],
+          [
+            "01.04.00/04.04.00",
+            "HS004",
+            "11~34",
+            [
+              0.9,
+              0.9
+            ],
+            800
+          ],
+          [
+            "01.09.00",
+            "HS007",
+            "500~1500",
+            [
+              2.4,
+              2.0
+            ],
+            4500
+          ],
+          [
+            "01.10.00",
+            "HS007",
+            "1000~3000",
+            [
+              2.4,
+              2.0
+            ],
+            4500
+          ]
+        ]
+      },
+      "seat_65_80_100": {
+        "plug_sizes_mm": [
+          65,
+          80,
+          80,
+          100
+        ],
+        "rows": [
+          [
+            "01.05.00/04.05.00",
+            "HS033",
+            "120~360",
+            [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            2000
+          ],
+          [
+            "01.05.00/04.05.00",
+            "HS034",
+            "165~500",
+            [
+              1.5,
+              1.5,
+              1.5,
+              1.5
+            ],
+            2000
+          ],
+          [
+            "01.05.00/04.05.00",
+            "HS032+034",
+            "270~820",
+            [
+              2.4,
+              2.4,
+              2.4,
+              2.4
+            ],
+            2000
+          ],
+          [
+            "01.06.00/04.06.00",
+            "HS031",
+            "33~100",
+            [
+              0.6,
+              0.6,
+              0.6,
+              0.6
+            ],
+            1500
+          ],
+          [
+            "01.06.00/04.06.00",
+            "HS033",
+            "65~190",
+            [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            1500
+          ],
+          [
+            "01.06.00/04.06.00",
+            "HS034",
+            "90~270",
+            [
+              1.5,
+              1.5,
+              1.5,
+              1.4
+            ],
+            1500
+          ],
+          [
+            "01.06.00/04.06.00",
+            "HS032+034",
+            "150~450",
+            [
+              2.4,
+              2.4,
+              2.4,
+              2.4
+            ],
+            1500
+          ],
+          [
+            "01.07.00/04.07.00",
+            "HS029",
+            "7~21",
+            [
+              0.3,
+              0.3,
+              0.3,
+              0.3
+            ],
+            800
+          ],
+          [
+            "01.07.00/04.07.00",
+            "HS030",
+            "10~30",
+            [
+              0.4,
+              0.4,
+              0.4,
+              0.4
+            ],
+            800
+          ],
+          [
+            "01.07.00/04.07.00",
+            "HS031",
+            "14~42",
+            [
+              0.6,
+              0.6,
+              0.6,
+              0.6
+            ],
+            800
+          ],
+          [
+            "01.07.00/04.07.00",
+            "HS033",
+            "25~75",
+            [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            800
+          ],
+          [
+            "01.07.00/04.07.00",
+            "HS034",
+            "36~110",
+            [
+              1.5,
+              1.5,
+              1.5,
+              1.5
+            ],
+            800
+          ],
+          [
+            "01.08.00/04.08.00",
+            "HS029",
+            "3~10",
+            [
+              0.3,
+              0.3,
+              0.3,
+              0.3
+            ],
+            500
+          ],
+          [
+            "01.08.00/04.08.00",
+            "HS030",
+            "5~15",
+            [
+              0.4,
+              0.4,
+              0.4,
+              0.4
+            ],
+            500
+          ],
+          [
+            "01.08.00/04.08.00",
+            "HS031",
+            "7~21",
+            [
+              0.6,
+              0.6,
+              0.6,
+              0.6
+            ],
+            500
+          ],
+          [
+            "01.08.00/04.08.00",
+            "HS033",
+            "13~39",
+            [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            500
+          ],
+          [
+            "01.11.00",
+            "HS032+034",
+            "600~1800",
+            [
+              2.4,
+              2.4,
+              2.4,
+              2.4
+            ],
+            3500
+          ]
+        ]
+      },
+      "seat_150_200": {
+        "plug_sizes_mm": [
+          150,
+          150,
+          200,
+          200
+        ],
+        "rows": [
+          [
+            "01.15.00/04.15.00",
+            "HS036",
+            "65~195",
+            [
+              0.35,
+              0.35,
+              0.35,
+              0.35
+            ],
+            2000
+          ],
+          [
+            "01.15.00/04.15.00",
+            "HS037",
+            "130~390",
+            [
+              0.7,
+              0.7,
+              0.7,
+              0.7
+            ],
+            2000
+          ],
+          [
+            "01.15.00/04.15.00",
+            "HS038",
+            "260~780",
+            [
+              1.4,
+              1.4,
+              1.4,
+              1.4
+            ],
+            2000
+          ],
+          [
+            "01.16.00/04.16.00",
+            "HS035",
+            "17~51",
+            [
+              0.18,
+              0.18,
+              0.18,
+              0.18
+            ],
+            1500
+          ],
+          [
+            "01.16.00/04.16.00",
+            "HS036",
+            "35~105",
+            [
+              0.35,
+              0.35,
+              0.35,
+              0.35
+            ],
+            1500
+          ],
+          [
+            "01.16.00/04.16.00",
+            "HS037",
+            "70~210",
+            [
+              0.7,
+              0.7,
+              0.7,
+              0.7
+            ],
+            1500
+          ],
+          [
+            "01.16.00/04.16.00",
+            "HS038",
+            "140~420",
+            [
+              1.4,
+              1.4,
+              1.4,
+              1.4
+            ],
+            1500
+          ],
+          [
+            "01.17.00/04.17.00",
+            "HS035",
+            "7~21",
+            [
+              0.18,
+              0.18,
+              0.18,
+              0.18
+            ],
+            800
+          ],
+          [
+            "01.17.00/04.17.00",
+            "HS036",
+            "14~42",
+            [
+              0.35,
+              0.35,
+              0.35,
+              0.35
+            ],
+            800
+          ],
+          [
+            "01.17.00/04.17.00",
+            "HS037",
+            "28~84",
+            [
+              0.7,
+              0.7,
+              0.7,
+              0.7
+            ],
+            800
+          ],
+          [
+            "01.17.00/04.17.00",
+            "HS038",
+            "56~168",
+            [
+              1.4,
+              1.4,
+              1.4,
+              1.4
+            ],
+            800
+          ],
+          [
+            "01.18.00/04.18.00",
+            "HS035",
+            "3.5~11",
+            [
+              0.18,
+              0.18,
+              0.18,
+              0.18
+            ],
+            500
+          ],
+          [
+            "01.18.00/04.18.00",
+            "HS036",
+            "7~21",
+            [
+              0.35,
+              0.35,
+              0.35,
+              0.35
+            ],
+            500
+          ],
+          [
+            "01.18.00/04.18.00",
+            "HS037",
+            "14~42",
+            [
+              0.7,
+              0.7,
+              0.7,
+              0.7
+            ],
+            500
+          ]
+        ]
+      }
+    },
+    "table_6_2_2_GZ820_GZ830_PTFE": {
+      "_docx": "表25",
+      "plug_sizes_mm": [
+        40,
+        50,
+        65,
+        80,
+        100,
+        150,
+        200
+      ],
+      "rows": [
+        [
+          "01.12.00",
+          "HS001",
+          "8~25",
+          [
+            0.3,
+            0.3,
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          450
+        ],
+        [
+          "01.12.00",
+          "HS002",
+          "16~50",
+          [
+            0.5,
+            0.5,
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          450
+        ],
+        [
+          "01.13.00",
+          "HS001",
+          "3~9",
+          [
+            0.3,
+            0.3,
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          350
+        ],
+        [
+          "01.13.00",
+          "HS002",
+          "6~18",
+          [
+            0.5,
+            0.5,
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          350
+        ],
+        [
+          "01.14.00",
+          "HS029",
+          "3~10",
+          [
+            "",
+            "",
+            0.3,
+            0.3,
+            0.3,
+            "",
+            ""
+          ],
+          300
+        ],
+        [
+          "01.14.00",
+          "HS030",
+          "5~15",
+          [
+            "",
+            "",
+            0.4,
+            0.4,
+            0.4,
+            "",
+            ""
+          ],
+          300
+        ],
+        [
+          "01.14.00",
+          "HS031",
+          "7~21",
+          [
+            "",
+            "",
+            0.6,
+            0.6,
+            0.6,
+            "",
+            ""
+          ],
+          300
+        ],
+        [
+          "01.14.00",
+          "HS032",
+          "13~39",
+          [
+            "",
+            "",
+            1.0,
+            1.0,
+            1.0,
+            "",
+            ""
+          ],
+          300
+        ],
+        [
+          "01.19.00",
+          "HS035",
+          "3.5~11",
+          [
+            "",
+            "",
+            "",
+            "",
+            "",
+            0.18,
+            0.18
+          ],
+          300
+        ],
+        [
+          "01.19.00",
+          "HS036",
+          "7~21",
+          [
+            "",
+            "",
+            "",
+            "",
+            "",
+            0.35,
+            0.35
+          ],
+          300
+        ],
+        [
+          "01.19.00",
+          "HS037",
+          "14~42",
+          [
+            "",
+            "",
+            "",
+            "",
+            "",
+            0.7,
+            0.7
+          ],
+          300
+        ]
+      ]
+    },
+    "table_6_2_3_GZ820_GZ830_bellows": {
+      "_docx": "表26(40/50段) + 表27(65/80/100段) + 表28(150/200段)",
+      "seat_40_50": {
+        "plug_sizes_mm": [
+          40,
+          50
+        ],
+        "rows": [
+          [
+            "03.01.00",
+            "HS007",
+            "650~2000",
+            [
+              2.4,
+              2.4
+            ],
+            4500
+          ],
+          [
+            "03.02.00",
+            "HS007",
+            "265~800",
+            [
+              2.4,
+              2.4
+            ],
+            3000
+          ],
+          [
+            "03.02.00",
+            "HS006",
+            "180~560",
+            [
+              1.7,
+              1.7
+            ],
+            3000
+          ],
+          [
+            "03.03.00",
+            "HS007",
+            "100~320",
+            [
+              2.4,
+              2.4
+            ],
+            1500
+          ],
+          [
+            "03.03.00",
+            "HS006",
+            "76~230",
+            [
+              1.7,
+              1.7
+            ],
+            1500
+          ],
+          [
+            "03.03.00",
+            "HS005",
+            "60~180",
+            [
+              1.3,
+              1.3
+            ],
+            1500
+          ],
+          [
+            "03.04.00",
+            "HS002",
+            "12~36",
+            [
+              0.7,
+              0.7
+            ],
+            800
+          ],
+          [
+            "03.04.00",
+            "HS004",
+            "25~75",
+            [
+              0.9,
+              0.9
+            ],
+            800
+          ],
+          [
+            "03.04.00",
+            "HS005",
+            "35~110",
+            [
+              1.3,
+              1.3
+            ],
+            800
+          ],
+          [
+            "03.04.00",
+            "HS006",
+            "50~150",
+            [
+              1.7,
+              1.7
+            ],
+            800
+          ],
+          [
+            "03.04.00",
+            "HS007",
+            "65~200",
+            [
+              2.4,
+              2.4
+            ],
+            800
+          ]
+        ]
+      },
+      "seat_65_80_100": {
+        "plug_sizes_mm": [
+          65,
+          80,
+          100
+        ],
+        "rows": [
+          [
+            "03.05.00",
+            "HS033",
+            "530~1600",
+            [
+              1.0,
+              1.0,
+              1.0
+            ],
+            4500
+          ],
+          [
+            "03.05.00",
+            "HS034",
+            "720~2200",
+            [
+              1.5,
+              1.5,
+              1.5
+            ],
+            4500
+          ],
+          [
+            "03.05.00",
+            "HS032+034",
+            "1200~3600",
+            [
+              2.4,
+              2.5,
+              2.5
+            ],
+            4500
+          ],
+          [
+            "03.06.00",
+            "HS031",
+            "110~330",
+            [
+              0.6,
+              0.6,
+              0.6
+            ],
+            3000
+          ],
+          [
+            "03.06.00",
+            "HS033",
+            "210~630",
+            [
+              1.0,
+              1.0,
+              1.0
+            ],
+            3000
+          ],
+          [
+            "03.06.00",
+            "HS034",
+            "300~900",
+            [
+              1.5,
+              1.5,
+              1.5
+            ],
+            3000
+          ],
+          [
+            "03.06.00",
+            "HS032+034",
+            "480~1450",
+            [
+              2.4,
+              2.4,
+              2.4
+            ],
+            3000
+          ],
+          [
+            "03.07.00",
+            "HS029",
+            "23~69",
+            [
+              0.3,
+              0.3,
+              0.3
+            ],
+            800
+          ],
+          [
+            "03.07.00",
+            "HS030",
+            "35~100",
+            [
+              0.4,
+              0.4,
+              0.4
+            ],
+            800
+          ],
+          [
+            "03.07.00",
+            "HS031",
+            "45~135",
+            [
+              0.6,
+              0.6,
+              0.6
+            ],
+            800
+          ],
+          [
+            "03.07.00",
+            "HS033",
+            "85~250",
+            [
+              1.0,
+              1.0,
+              1.0
+            ],
+            800
+          ],
+          [
+            "03.07.00",
+            "HS034",
+            "120~360",
+            [
+              1.5,
+              1.5,
+              1.5
+            ],
+            800
+          ],
+          [
+            "03.08.00",
+            "HS029",
+            "15~45",
+            [
+              0.3,
+              0.3,
+              0.3
+            ],
+            800
+          ],
+          [
+            "03.08.00",
+            "HS030",
+            "22~66",
+            [
+              0.4,
+              0.4,
+              0.4
+            ],
+            800
+          ],
+          [
+            "03.08.00",
+            "HS031",
+            "31~94",
+            [
+              0.6,
+              0.6,
+              0.6
+            ],
+            800
+          ],
+          [
+            "03.08.00",
+            "HS033",
+            "56~170",
+            [
+              1.0,
+              1.0,
+              1.0
+            ],
+            800
+          ]
+        ]
+      },
+      "seat_150_200": {
+        "plug_sizes_mm": [
+          150,
+          200
+        ],
+        "rows": [
+          [
+            "03.09.00",
+            "HS036",
+            "290~875",
+            [
+              0.35,
+              0.35
+            ],
+            4500
+          ],
+          [
+            "03.09.00",
+            "HS037",
+            "580~1750",
+            [
+              0.7,
+              0.7
+            ],
+            4500
+          ],
+          [
+            "03.09.00",
+            "HS038",
+            "1160~3500",
+            [
+              1.4,
+              1.4
+            ],
+            4500
+          ],
+          [
+            "03.10.00",
+            "HS035",
+            "56~175",
+            [
+              0.18,
+              0.18
+            ],
+            3000
+          ],
+          [
+            "03.10.00",
+            "HS036",
+            "112~350",
+            [
+              0.35,
+              0.35
+            ],
+            3000
+          ],
+          [
+            "03.10.00",
+            "HS037",
+            "225~700",
+            [
+              0.7,
+              0.7
+            ],
+            3000
+          ],
+          [
+            "03.10.00",
+            "HS038",
+            "450~1400",
+            [
+              1.4,
+              1.4
+            ],
+            3000
+          ],
+          [
+            "03.11.00",
+            "HS035",
+            "23~71",
+            [
+              0.18,
+              0.18
+            ],
+            800
+          ],
+          [
+            "03.11.00",
+            "HS036",
+            "47~142",
+            [
+              0.35,
+              0.35
+            ],
+            800
+          ],
+          [
+            "03.11.00",
+            "HS037",
+            "95~285",
+            [
+              0.7,
+              0.7
+            ],
+            800
+          ],
+          [
+            "03.11.00",
+            "HS038",
+            "190~570",
+            [
+              1.4,
+              1.4
+            ],
+            800
+          ],
+          [
+            "03.12.00",
+            "HS035",
+            "6~19",
+            [
+              0.18,
+              0.18
+            ],
+            800
+          ],
+          [
+            "03.12.00",
+            "HS036",
+            "31~93",
+            [
+              0.35,
+              0.35
+            ],
+            800
+          ],
+          [
+            "03.12.00",
+            "HS037",
+            "60~180",
+            [
+              0.7,
+              0.7
+            ],
+            800
+          ]
+        ]
+      }
+    },
+    "table_6_3_GZ840": {
+      "_docx": "表29",
+      "plug_sizes_mm": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14
+      ],
+      "rows": [
+        [
+          "02.11.00",
+          "HS008",
+          "0.2~0.5",
+          [
+            1.5,
+            0.9,
+            0.4,
+            0.2,
+            0.14,
+            "",
+            ""
+          ],
+          800
+        ],
+        [
+          "02.11.00",
+          "HS009",
+          "0.3~0.8",
+          [
+            1.5,
+            1.5,
+            0.7,
+            0.4,
+            0.24,
+            0.16,
+            ""
+          ],
+          800
+        ],
+        [
+          "02.11.00",
+          "HS010",
+          "0.45~1.4",
+          [
+            1.5,
+            1.5,
+            1.2,
+            0.7,
+            0.4,
+            0.3,
+            ""
+          ],
+          800
+        ],
+        [
+          "02.11.00",
+          "HS011",
+          "1~3",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.0,
+            0.7,
+            0.5
+          ],
+          800
+        ],
+        [
+          "02.11.00",
+          "HS012",
+          "2.4~7",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.1
+          ],
+          800
+        ],
+        [
+          "02.11.00",
+          "HS013",
+          "3.3~10",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5
+          ],
+          800
+        ],
+        [
+          "02.11.00",
+          "HS014",
+          "5~15",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5
+          ],
+          800
+        ],
+        [
+          "02.12.00",
+          "HS020",
+          "0.2~0.4",
+          [
+            1.5,
+            1.5,
+            0.9,
+            0.5,
+            0.3,
+            0.2,
+            0.15
+          ],
+          500
+        ],
+        [
+          "02.12.00",
+          "HS021",
+          "0.25~0.75",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.0,
+            0.6,
+            0.4,
+            0.3
+          ],
+          500
+        ],
+        [
+          "02.12.00",
+          "HS022",
+          "0.5~1.5",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.2,
+            0.8,
+            0.6
+          ],
+          500
+        ],
+        [
+          "02.12.00",
+          "HS023",
+          "0.8~2.5",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.4,
+            1.0
+          ],
+          500
+        ],
+        [
+          "02.12.00",
+          "HS024",
+          "1.3~3.9",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5
+          ],
+          500
+        ],
+        [
+          "02.12.00",
+          "HS025",
+          "2~6",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5
+          ],
+          500
+        ],
+        [
+          "02.12.00",
+          "HS026",
+          "5~15",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5
+          ],
+          500
+        ]
+      ]
+    },
+    "table_6_4_GZ880": {
+      "_docx": "表30",
+      "plug_sizes_mm": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        18,
+        22
+      ],
+      "rows": [
+        [
+          "02.11.00",
+          "HS008",
+          "0.3~0.5",
+          [
+            1.5,
+            0.9,
+            0.4,
+            0.2,
+            0.14,
+            "",
+            "",
+            "",
+            ""
+          ],
+          800
+        ],
+        [
+          "02.11.00",
+          "HS009",
+          "0.3~0.8",
+          [
+            1.5,
+            1.5,
+            0.7,
+            0.4,
+            0.24,
+            0.16,
+            "",
+            "",
+            ""
+          ],
+          800
+        ],
+        [
+          "02.11.00",
+          "HS010",
+          "0.45~1.4",
+          [
+            1.5,
+            1.5,
+            1.2,
+            0.7,
+            0.4,
+            0.3,
+            "",
+            "",
+            ""
+          ],
+          800
+        ],
+        [
+          "02.11.00",
+          "HS011",
+          "1~3",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.0,
+            0.7,
+            0.5,
+            0.3,
+            ""
+          ],
+          800
+        ],
+        [
+          "02.11.00",
+          "HS012",
+          "2.4~7",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.1,
+            0.6,
+            0.4
+          ],
+          800
+        ],
+        [
+          "02.11.00",
+          "HS013",
+          "3.3~10",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            0.9,
+            0.6
+          ],
+          800
+        ],
+        [
+          "02.11.00",
+          "HS014",
+          "5~15",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.2,
+            0.8
+          ],
+          800
+        ],
+        [
+          "02.12.00",
+          "HS020",
+          "0.3~0.45",
+          [
+            1.5,
+            1.5,
+            0.9,
+            0.5,
+            0.3,
+            0.2,
+            0.15,
+            0.1,
+            0.06
+          ],
+          500
+        ],
+        [
+          "02.12.00",
+          "HS021",
+          "0.25~0.75",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.0,
+            0.6,
+            0.4,
+            0.3,
+            0.18,
+            0.12
+          ],
+          500
+        ],
+        [
+          "02.12.00",
+          "HS022",
+          "0.5~1.5",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.2,
+            0.8,
+            0.6,
+            0.36,
+            0.23
+          ],
+          500
+        ],
+        [
+          "02.12.00",
+          "HS023",
+          "0.8~2.5",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.4,
+            1.0,
+            0.6,
+            0.4
+          ],
+          500
+        ],
+        [
+          "02.12.00",
+          "HS024",
+          "1.3~3.9",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            0.9,
+            0.6
+          ],
+          500
+        ],
+        [
+          "02.12.00",
+          "HS025",
+          "2~6",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.2,
+            0.8
+          ],
+          500
+        ],
+        [
+          "02.12.00",
+          "HS026",
+          "5~15",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.2
+          ],
+          500
+        ]
+      ]
+    },
+    "table_6_5_GZ850": {
+      "_docx": "表31",
+      "plug_sizes_mm": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18
+      ],
+      "rows": [
+        [
+          "02.01.00",
+          "HS016",
+          "70~210",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            4.5,
+            3.1,
+            2.3,
+            1.3,
+            0.9
+          ],
+          2500
+        ],
+        [
+          "02.01.00",
+          "HS017",
+          "125~380",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            5.3,
+            4.0,
+            2.4,
+            1.6
+          ],
+          2500
+        ],
+        [
+          "02.01.00",
+          "HS018",
+          "160~490",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            5.2,
+            3.1,
+            2.1
+          ],
+          2500
+        ],
+        [
+          "02.01.00",
+          "HS019",
+          "255~770",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            4.9,
+            3.2
+          ],
+          2500
+        ],
+        [
+          "02.02.00",
+          "HS014",
+          "10~30",
+          [
+            3.0,
+            3.0,
+            3.0,
+            1.9,
+            1.2,
+            0.8,
+            0.6,
+            0.4,
+            0.3
+          ],
+          2000
+        ],
+        [
+          "02.02.00",
+          "HS015",
+          "18~56",
+          [
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            2.3,
+            1.6,
+            1.2,
+            0.7,
+            0.5
+          ],
+          2000
+        ],
+        [
+          "02.02.00",
+          "HS016",
+          "37~110",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            4.5,
+            3.1,
+            2.3,
+            1.3,
+            0.9
+          ],
+          2000
+        ],
+        [
+          "02.02.00",
+          "HS017",
+          "63~190",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            5.3,
+            4.0,
+            2.4,
+            1.6
+          ],
+          2000
+        ],
+        [
+          "02.02.00",
+          "HS018",
+          "90~270",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            5.2,
+            3.1,
+            2.1
+          ],
+          2000
+        ],
+        [
+          "02.02.00",
+          "HS019",
+          "130~390",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            4.9,
+            3.2
+          ],
+          2000
+        ],
+        [
+          "02.03.00",
+          "HS013",
+          "3~10",
+          [
+            1.8,
+            1.8,
+            1.8,
+            1.2,
+            0.8,
+            0.5,
+            0.4,
+            0.2,
+            0.15
+          ],
+          1500
+        ],
+        [
+          "02.03.00",
+          "HS014",
+          "5~16",
+          [
+            3.0,
+            3.0,
+            3.0,
+            1.9,
+            1.2,
+            0.8,
+            0.6,
+            0.4,
+            0.3
+          ],
+          1500
+        ],
+        [
+          "02.03.00",
+          "HS015",
+          "10~30",
+          [
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            2.3,
+            1.6,
+            1.2,
+            0.7,
+            0.5
+          ],
+          1500
+        ],
+        [
+          "02.03.00",
+          "HS016",
+          "20~60",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            4.5,
+            3.1,
+            2.3,
+            1.3,
+            0.9
+          ],
+          1500
+        ],
+        [
+          "02.09.00",
+          "HS018",
+          "320~960",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            5.2,
+            3.1,
+            2.1
+          ],
+          3000
+        ],
+        [
+          "02.09.00",
+          "HS019",
+          "500~1500",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            4.9,
+            3.2
+          ],
+          3000
+        ],
+        [
+          "02.12.00",
+          "HS024",
+          "1.3~3.9",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.2,
+            0.8,
+            0.5,
+            0.5,
+            0.3,
+            0.15
+          ],
+          500
+        ],
+        [
+          "02.12.00",
+          "HS025",
+          "2~6",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.2,
+            0.8,
+            0.6,
+            0.4,
+            0.2
+          ],
+          500
+        ],
+        [
+          "02.12.00",
+          "HS026",
+          "5~15",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.4,
+            0.8,
+            0.5
+          ],
+          500
+        ],
+        [
+          "02.12.00",
+          "HS027",
+          "8~26",
+          [
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            2.0,
+            1.2,
+            0.8
+          ],
+          500
+        ],
+        [
+          "02.12.00",
+          "HS028A",
+          "15~45",
+          [
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            2.5,
+            1.6
+          ],
+          500
+        ],
+        [
+          "02.13.00",
+          "HS025",
+          "8~26",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.2,
+            0.8,
+            0.6,
+            0.4,
+            0.2
+          ],
+          2000
+        ],
+        [
+          "02.13.00",
+          "HS026",
+          "20~60",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.4,
+            0.8,
+            0.5
+          ],
+          2000
+        ],
+        [
+          "02.13.00",
+          "HS027",
+          "33~100",
+          [
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            2.0,
+            1.2,
+            0.8
+          ],
+          2000
+        ],
+        [
+          "02.13.00",
+          "HS028A",
+          "60~180",
+          [
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            2.5,
+            1.6
+          ],
+          2000
+        ],
+        [
+          "02.13.00",
+          "HS028B",
+          "125~370",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            4.9,
+            3.3
+          ],
+          2000
+        ],
+        [
+          "02.13.00",
+          "HS028C",
+          "200~600",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            4.6
+          ],
+          2000
+        ],
+        [
+          "02.14.00",
+          "HS024",
+          "3~9",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.2,
+            0.8,
+            0.5,
+            0.5,
+            0.3,
+            0.15
+          ],
+          1500
+        ],
+        [
+          "02.14.00",
+          "HS025",
+          "5~15",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.2,
+            0.8,
+            0.6,
+            0.4,
+            0.2
+          ],
+          1500
+        ],
+        [
+          "02.14.00",
+          "HS026",
+          "11~33",
+          [
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.4,
+            0.8,
+            0.5
+          ],
+          1500
+        ],
+        [
+          "02.14.00",
+          "HS027",
+          "19~57",
+          [
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            2.0,
+            1.2,
+            0.8
+          ],
+          1500
+        ],
+        [
+          "02.19.00",
+          "HS019",
+          "1200~3600",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            4.9,
+            3.2
+          ],
+          4500
+        ],
+        [
+          "02.20.00",
+          "HS028C",
+          "400~1200",
+          [
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            6.5,
+            4.6
+          ],
+          2500
+        ]
+      ]
+    }
+  },
+  "net_weight_table7": {
+    "_source": "p26 (印刷页24) 表7 产品重量(单位: kg); 左栏docx漏, 按PDF补入; 右栏=docx表32核对一致",
+    "columns": [
+      "ANSI 150# PN1.6MPa",
+      "ANSI 300# PN4.0MPa",
+      "ANSI 600# PN6.3MPa"
+    ],
+    "GZ810": {
+      "15": [
+        11,
+        11,
+        12
+      ],
+      "20": [
+        12,
+        12,
+        15
+      ],
+      "25": [
+        13,
+        13,
+        17
+      ],
+      "40": [
+        18,
+        18,
+        22
+      ],
+      "50": [
+        21,
+        21,
+        25
+      ]
+    },
+    "GZ820": {
+      "40": [
+        18,
+        18,
+        21
+      ],
+      "50": [
+        22,
+        22,
+        25
+      ],
+      "65": [
+        55,
+        60,
+        72
+      ],
+      "80": [
+        62,
+        71,
+        85
+      ],
+      "100": [
+        85,
+        93,
+        112
+      ],
+      "150": [
+        135,
+        145,
+        170
+      ],
+      "200": [
+        185,
+        198,
+        235
+      ]
+    },
+    "GZ830": {
+      "40": [
+        21,
+        21,
+        24
+      ],
+      "50": [
+        25,
+        25,
+        29
+      ],
+      "65": [
+        60,
+        65,
+        77
+      ],
+      "80": [
+        70,
+        79,
+        94
+      ],
+      "100": [
+        95,
+        103,
+        122
+      ],
+      "150": [
+        150,
+        160,
+        195
+      ],
+      "200": [
+        205,
+        218,
+        255
+      ]
+    },
+    "GZ840 (02.11.00/02.12.00)": {
+      "15": [
+        "9.5/12.5",
+        "—",
+        "—"
+      ],
+      "20": [
+        "9.5/12.5",
+        "—",
+        "—"
+      ],
+      "25": [
+        "9.5/12.5",
+        "—",
+        "—"
+      ]
+    },
+    "GZ850 (I型/II型)": {
+      "15": [
+        "11/14",
+        "11/14",
+        "12/15"
+      ],
+      "20": [
+        "12/15",
+        "12/15",
+        "15/18"
+      ],
+      "25": [
+        "13/16",
+        "13/16",
+        "17/20"
+      ],
+      "40": [
+        "18/21",
+        "18/21",
+        "22/25"
+      ],
+      "50": [
+        "21/24",
+        "21/24",
+        "25/28"
+      ]
+    },
+    "GZ860": {
+      "15": [
+        20,
+        20,
+        22
+      ],
+      "20": [
+        22,
+        22,
+        25
+      ],
+      "25": [
+        23,
+        23,
+        27
+      ],
+      "40": [
+        28,
+        28,
+        33
+      ],
+      "50": [
+        31,
+        31,
+        36
+      ],
+      "65": [
+        45,
+        45,
+        53
+      ],
+      "80": [
+        58,
+        60,
+        65
+      ],
+      "100": [
+        71,
+        75,
+        83
+      ]
+    },
+    "GZ870": {
+      "15": [
+        11,
+        11,
+        13
+      ],
+      "20": [
+        11,
+        11,
+        13
+      ],
+      "25": [
+        13,
+        13,
+        16
+      ],
+      "40": [
+        20,
+        20,
+        25
+      ],
+      "50": [
+        28,
+        30,
+        36
+      ],
+      "65": [
+        52,
+        55,
+        63
+      ],
+      "80": [
+        68,
+        72,
+        81
+      ],
+      "100": [
+        75,
+        83,
+        92
+      ],
+      "150": [
+        118,
+        138,
+        165
+      ],
+      "200": [
+        172,
+        195,
+        236
+      ]
+    },
+    "GZ880 (02.11.00/02.12.00)": {
+      "15": [
+        "11/14",
+        "11/14",
+        "12/15"
+      ],
+      "20": [
+        "12/15",
+        "12/15",
+        "15/18"
+      ],
+      "25": [
+        "13/16",
+        "13/16",
+        "17/20"
+      ],
+      "40": [
+        "18/21",
+        "18/21",
+        "22/25"
+      ],
+      "50": [
+        "21/24",
+        "21/24",
+        "25/28"
+      ]
+    },
+    "note": "重量由于配置不同会有所不同, 这里重量为较平均的值 / The weight will be different due to different configurations, the weight indicates average weight."
+  },
+  "dimensions": {
+    "_source": "p27~p33 (印刷页25~31) 各型号外形尺寸; GZ810/GZ820/GZ830/GZ850/GZ860 的docx表漏或为全空表, 均按PDF图像补入",
+    "GZ810": {
+      "_source": "p27 (印刷页25), docx全漏",
+      "dn_sizes": [
+        "DN15 1/2\"",
+        "DN20 3/4\"",
+        "DN25 1\"",
+        "DN40 1-1/2\"",
+        "DN50 2\""
+      ],
+      "L": {
+        "PN1.6(150#)": [
+          181,
+          181,
+          184,
+          222,
+          254
+        ],
+        "PN4.0(300#)": [
+          181,
+          194,
+          197,
+          235,
+          267
+        ],
+        "PN6.3(600#)": [
+          206,
+          206,
+          210,
+          251,
+          286
+        ]
+      },
+      "H1": [
+        340,
+        340,
+        350,
+        366,
+        370
+      ],
+      "actuator_H2_A": {
+        "双膜片 Double-Diaphragm (01.xx)": {
+          "01.01.00": [
+            71,
+            157
+          ],
+          "01.02.00": [
+            71,
+            191
+          ],
+          "01.03.00": [
+            71,
+            233
+          ],
+          "01.04.00": [
+            71,
+            327
+          ],
+          "01.09.00": [
+            68,
+            157
+          ],
+          "01.10.00": [
+            68,
+            157
+          ],
+          "01.12.00": [
+            71,
+            233
+          ],
+          "01.13.00": [
+            71,
+            327
+          ]
+        },
+        "单膜片 Single-Diaphragm (04.xx)": {
+          "04.01.00": [
+            96,
+            157
+          ],
+          "04.02.00": [
+            96,
+            191
+          ],
+          "04.03.00": [
+            96,
+            233
+          ],
+          "04.04.00": [
+            96,
+            327
+          ]
+        },
+        "波纹管 Bellows (03.xx)": {
+          "03.01.00": [
+            119,
+            186
+          ],
+          "03.02.00": [
+            119,
+            186
+          ],
+          "03.03.00": [
+            119,
+            186
+          ],
+          "03.04.00": [
+            171,
+            289
+          ],
+          "03.05.00": [
+            171,
+            289
+          ]
+        }
+      }
+    },
+    "GZ820_GZ830": {
+      "_source": "p28 (印刷页26), docx全漏",
+      "dn_sizes": [
+        40,
+        50,
+        65,
+        80,
+        100,
+        150,
+        200
+      ],
+      "L": {
+        "PN1.6(150#)": [
+          222,
+          254,
+          276,
+          298,
+          352,
+          451,
+          600
+        ],
+        "PN4.0(300#)": [
+          235,
+          267,
+          292,
+          317,
+          368,
+          473,
+          600
+        ],
+        "PN6.3(600#)": [
+          251,
+          286,
+          311,
+          337,
+          394,
+          508,
+          650
+        ]
+      },
+      "H1": [
+        366,
+        370,
+        512,
+        512,
+        520,
+        752,
+        827
+      ],
+      "drawing_note": "法兰取压 Measured from Valve Flange (图上标注75/25)",
+      "actuator_H2_A": {
+        "双膜片 Double-Diaphragm (01.xx)": {
+          "01.01.00": [
+            71,
+            157
+          ],
+          "01.02.00": [
+            71,
+            191
+          ],
+          "01.03.00": [
+            71,
+            233
+          ],
+          "01.04.00": [
+            71,
+            327
+          ],
+          "01.09.00": [
+            68,
+            154
+          ],
+          "01.10.00": [
+            68,
+            154
+          ],
+          "01.12.00": [
+            71,
+            233
+          ],
+          "01.13.00": [
+            71,
+            327
+          ],
+          "01.05.00": [
+            88,
+            191
+          ],
+          "01.06.00": [
+            88,
+            233
+          ],
+          "01.07.00": [
+            88,
+            327
+          ],
+          "01.08.00": [
+            88,
+            494
+          ],
+          "01.14.00": [
+            88,
+            494
+          ],
+          "01.15.00": [
+            112,
+            191
+          ],
+          "01.16.00": [
+            112,
+            233
+          ],
+          "01.17.00": [
+            112,
+            327
+          ],
+          "01.18.00": [
+            112,
+            494
+          ],
+          "01.19.00": [
+            112,
+            494
+          ],
+          "01.11.00": [
+            86,
+            188
+          ]
+        },
+        "单膜片 Single-Diaphragm (04.xx)": {
+          "04.01.00": [
+            96,
+            157
+          ],
+          "04.02.00": [
+            96,
+            191
+          ],
+          "04.03.00": [
+            96,
+            233
+          ],
+          "04.04.00": [
+            96,
+            327
+          ],
+          "04.05.00": [
+            113,
+            191
+          ],
+          "04.06.00": [
+            113,
+            233
+          ],
+          "04.07.00": [
+            113,
+            327
+          ],
+          "04.08.00": [
+            113,
+            494
+          ],
+          "04.09.00": [
+            137,
+            191
+          ],
+          "04.10.00": [
+            137,
+            233
+          ],
+          "04.11.00": [
+            137,
+            327
+          ],
+          "04.12.00": [
+            137,
+            494
+          ]
+        },
+        "波纹管 Bellows (03.xx)": {
+          "03.01.00": [
+            116,
+            115
+          ],
+          "03.02.00": [
+            123,
+            178
+          ],
+          "03.03.00": [
+            171,
+            284
+          ],
+          "03.04.00": [
+            171,
+            284
+          ],
+          "03.05.00": [
+            116,
+            115
+          ],
+          "03.06.00": [
+            123,
+            178
+          ],
+          "03.07.00": [
+            171,
+            284
+          ],
+          "03.08.00": [
+            171,
+            284
+          ],
+          "03.09.00": [
+            146,
+            115
+          ],
+          "03.10.00": [
+            153,
+            178
+          ],
+          "03.11.00": [
+            201,
+            284
+          ],
+          "03.12.00": [
+            201,
+            284
+          ]
+        }
+      }
+    },
+    "GZ840": {
+      "_source": "p29 (印刷页27) = docx表33, 核对一致",
+      "actuator_models": [
+        "02.11.00",
+        "02.12.00"
+      ],
+      "L": [
+        60,
+        60
+      ],
+      "L1": [
+        253,
+        336
+      ],
+      "L2": [
+        317,
+        402
+      ],
+      "H": [
+        319,
+        386
+      ],
+      "H1": [
+        203,
+        223
+      ],
+      "A": [
+        233,
+        327
+      ]
+    },
+    "GZ850": {
+      "_source": "p30 (印刷页28), docx全漏",
+      "dn_sizes": [
+        "DN15 1/2\"",
+        "DN20 3/4\"",
+        "DN25 1\"",
+        "DN40 1-1/2\"",
+        "DN50 2\""
+      ],
+      "L": {
+        "PN1.6(150#)": [
+          181,
+          181,
+          184,
+          222,
+          254
+        ],
+        "PN4.0(300#)": [
+          181,
+          194,
+          197,
+          235,
+          267
+        ],
+        "PN6.3(600#)": [
+          206,
+          206,
+          210,
+          251,
+          286
+        ]
+      },
+      "H1": [
+        186,
+        186,
+        196,
+        212,
+        216
+      ],
+      "actuator_A": {
+        "02.01.00/02.09.00/02.19.00": 157,
+        "02.02.00/02.13.00/02.20.00": 191,
+        "02.03.00/02.14.00": 233,
+        "02.12.00": 327
+      },
+      "type_dims": {
+        "I型执行机构": {
+          "width": 319,
+          "gauge_h": 147,
+          "side": [
+            50,
+            62
+          ]
+        },
+        "II型执行机构": {
+          "width": 421,
+          "gauge_h": 147,
+          "side": [
+            50,
+            62
+          ]
+        }
+      }
+    },
+    "GZ860": {
+      "_source": "p31 (印刷页29), docx表34为9×10全空表, 按PDF图像补入",
+      "dn_sizes": [
+        15,
+        20,
+        25,
+        40,
+        50,
+        65,
+        80,
+        100
+      ],
+      "L": {
+        "PN1.6(150#)": [
+          181,
+          181,
+          184,
+          222,
+          254,
+          276,
+          298,
+          352
+        ],
+        "PN4.0(300#)": [
+          181,
+          194,
+          197,
+          235,
+          267,
+          292,
+          317,
+          368
+        ],
+        "PN6.3(600#)": [
+          206,
+          206,
+          210,
+          251,
+          286,
+          311,
+          337,
+          394
+        ]
+      },
+      "_anomaly": "PN6.3(600#)行DN100 原PDF印刷为337，经人工复核确认应为394，已修正（2026-10-14）",
+      "L1": {
+        "DN15~50": 377,
+        "DN65~100": 425
+      },
+      "L2": {
+        "DN15~50": 132,
+        "DN65~100": 164
+      },
+      "H": [
+        375,
+        375,
+        385,
+        400,
+        406,
+        485,
+        490,
+        505
+      ],
+      "B1": {
+        "DN15~50": 322,
+        "DN65~100": 386
+      },
+      "B2": {
+        "DN15~50": 152,
+        "DN65~100": 225
+      },
+      "drawing_note": "图上另有标注: 指挥器部233, 侧视高233, 压力表高118"
+    },
+    "GZ870": {
+      "_source": "p32 (印刷页30) = docx表35, 核对一致",
+      "dn_sizes": [
+        15,
+        20,
+        25,
+        40,
+        50,
+        65,
+        80,
+        100,
+        150,
+        200
+      ],
+      "L": {
+        "PN1.6(150#)": [
+          181,
+          181,
+          184,
+          222,
+          254,
+          276,
+          298,
+          352,
+          451,
+          600
+        ],
+        "PN4.0(300#)": [
+          181,
+          194,
+          197,
+          235,
+          267,
+          292,
+          317,
+          368,
+          473,
+          600
+        ],
+        "PN6.3(600#)": [
+          206,
+          206,
+          210,
+          251,
+          286,
+          311,
+          337,
+          394,
+          508,
+          650
+        ]
+      },
+      "actuator_H_A": {
+        "02.04.00": {
+          "H": [
+            347,
+            347,
+            357
+          ],
+          "A": [
+            327,
+            327,
+            327
+          ],
+          "applies_dn": [
+            15,
+            20,
+            25
+          ]
+        },
+        "02.12.00": {
+          "H": [
+            440,
+            450
+          ],
+          "A": [
+            327,
+            327
+          ],
+          "applies_dn": [
+            40,
+            50
+          ]
+        },
+        "02.16.00": {
+          "H": [
+            440,
+            450,
+            500,
+            500,
+            505
+          ],
+          "A": [
+            494,
+            494,
+            494,
+            494,
+            494
+          ],
+          "applies_dn": [
+            40,
+            50,
+            65,
+            80,
+            100
+          ]
+        },
+        "02.18.00": {
+          "H": [
+            630,
+            630,
+            635,
+            730,
+            800
+          ],
+          "A": [
+            494,
+            494,
+            494,
+            494,
+            494
+          ],
+          "applies_dn": [
+            65,
+            80,
+            100,
+            150,
+            200
+          ]
+        }
+      }
+    },
+    "GZ880": {
+      "_source": "p33 (印刷页31) = docx表36, 核对一致",
+      "dn_sizes": [
+        "DN15 1/2\"",
+        "DN20 3/4\"",
+        "DN25 1\"",
+        "DN40 1-1/2\"",
+        "DN50 2\""
+      ],
+      "L": {
+        "PN1.6(150#)": [
+          181,
+          181,
+          184,
+          222,
+          254
+        ],
+        "PN4.0(300#)": [
+          181,
+          194,
+          197,
+          235,
+          267
+        ],
+        "PN6.3(600#)": [
+          206,
+          206,
+          210,
+          251,
+          286
+        ]
+      },
+      "H": [
+        227,
+        227,
+        237,
+        246,
+        256
+      ]
+    }
+  },
+  "appendix": {
+    "_source": "p34 (印刷页32) 附表一/二/三 (pdfplumber文字层逐值核对 = docx表37/38/39/40, 全部一致)",
+    "table_S1_ansi_temp_pressure": {
+      "_docx": "表37",
+      "unit": "MPa",
+      "classes": {
+        "ANSI Class 150": [
+          "A352 LCB",
+          "A216 WCB",
+          "A217 WC6",
+          "A217 WC9",
+          "A351 CF8",
+          "A351 CF8M"
+        ],
+        "ANSI Class 300": [
+          "A352 LCB",
+          "A216 WCB",
+          "A217 WC6",
+          "A217 WC9",
+          "A351 CF8",
+          "A351 CF8M"
+        ],
+        "ANSI Class 600": [
+          "A352 LCB",
+          "A216 WCB",
+          "A217 WC6",
+          "A217 WC9",
+          "A351 CF8",
+          "A351 CF8M"
+        ]
+      },
+      "rows": [
+        [
+          "-196~38",
+          [
+            "—",
+            "—",
+            "—",
+            "—",
+            1.9,
+            1.9
+          ],
+          [
+            "—",
+            "—",
+            "—",
+            "—",
+            4.95,
+            4.95
+          ],
+          [
+            "—",
+            "—",
+            "—",
+            "—",
+            9.91,
+            9.92
+          ]
+        ],
+        [
+          "-45~38",
+          [
+            1.84,
+            "—",
+            "—",
+            "—",
+            1.9,
+            1.9
+          ],
+          [
+            4.78,
+            "—",
+            "—",
+            "—",
+            4.95,
+            4.95
+          ],
+          [
+            9.57,
+            "—",
+            "—",
+            "—",
+            9.91,
+            9.92
+          ]
+        ],
+        [
+          "-5~38",
+          [
+            1.84,
+            1.96,
+            1.99,
+            1.99,
+            1.9,
+            1.9
+          ],
+          [
+            4.78,
+            5.1,
+            5.16,
+            5.16,
+            4.95,
+            4.95
+          ],
+          [
+            9.57,
+            10.2,
+            10.32,
+            10.32,
+            9.91,
+            9.92
+          ]
+        ],
+        [
+          "50",
+          [
+            1.81,
+            1.92,
+            1.92,
+            1.92,
+            1.84,
+            1.84
+          ],
+          [
+            4.72,
+            5.0,
+            5.1,
+            5.11,
+            4.77,
+            4.8
+          ],
+          [
+            9.46,
+            10.01,
+            10.22,
+            10.22,
+            9.56,
+            9.62
+          ]
+        ],
+        [
+          "100",
+          [
+            1.72,
+            1.76,
+            1.76,
+            1.76,
+            1.56,
+            1.61
+          ],
+          [
+            4.51,
+            4.63,
+            4.88,
+            4.89,
+            4.08,
+            4.21
+          ],
+          [
+            9.02,
+            9.27,
+            9.74,
+            9.79,
+            8.17,
+            8.43
+          ]
+        ],
+        [
+          "150",
+          [
+            1.57,
+            1.57,
+            1.57,
+            1.57,
+            1.39,
+            1.47
+          ],
+          [
+            4.4,
+            4.51,
+            4.63,
+            4.65,
+            3.62,
+            3.85
+          ],
+          [
+            8.78,
+            9.04,
+            9.26,
+            9.31,
+            7.26,
+            7.69
+          ]
+        ],
+        [
+          "200",
+          [
+            1.4,
+            1.4,
+            1.4,
+            1.4,
+            1.25,
+            1.37
+          ],
+          [
+            4.26,
+            4.38,
+            4.54,
+            4.47,
+            3.27,
+            3.56
+          ],
+          [
+            8.54,
+            8.75,
+            9.09,
+            8.95,
+            6.54,
+            7.12
+          ]
+        ],
+        [
+          "250",
+          [
+            1.2,
+            1.2,
+            1.2,
+            1.2,
+            1.16,
+            1.2
+          ],
+          [
+            4.05,
+            4.16,
+            4.44,
+            4.41,
+            3.04,
+            3.34
+          ],
+          [
+            8.11,
+            8.33,
+            8.88,
+            8.82,
+            6.1,
+            6.67
+          ]
+        ],
+        [
+          "300",
+          [
+            1.01,
+            1.01,
+            1.01,
+            1.01,
+            1.01,
+            1.01
+          ],
+          [
+            3.76,
+            3.87,
+            4.23,
+            4.23,
+            2.91,
+            3.15
+          ],
+          [
+            7.54,
+            7.74,
+            8.48,
+            8.47,
+            5.8,
+            6.32
+          ]
+        ],
+        [
+          "350",
+          [
+            0.84,
+            0.84,
+            0.84,
+            0.84,
+            0.84,
+            0.84
+          ],
+          [
+            3.59,
+            3.69,
+            4.01,
+            4.01,
+            2.81,
+            3.03
+          ],
+          [
+            7.18,
+            7.38,
+            8.04,
+            8.04,
+            5.6,
+            6.07
+          ]
+        ],
+        [
+          "375",
+          [
+            "",
+            0.73,
+            0.73,
+            0.73,
+            0.73,
+            0.73
+          ],
+          [
+            "",
+            3.64,
+            3.88,
+            3.87,
+            2.77,
+            2.96
+          ],
+          [
+            "",
+            7.28,
+            7.75,
+            7.75,
+            5.54,
+            5.93
+          ]
+        ],
+        [
+          "400",
+          [
+            "",
+            0.64,
+            0.64,
+            0.64,
+            0.64,
+            0.64
+          ],
+          [
+            "",
+            3.44,
+            3.65,
+            3.65,
+            2.74,
+            2.91
+          ],
+          [
+            "",
+            6.89,
+            7.31,
+            7.31,
+            5.48,
+            5.81
+          ]
+        ],
+        [
+          "425",
+          [
+            "",
+            0.55,
+            0.55,
+            0.55,
+            0.55,
+            0.55
+          ],
+          [
+            "",
+            2.88,
+            3.5,
+            3.5,
+            2.71,
+            2.87
+          ],
+          [
+            "",
+            5.74,
+            7.01,
+            7.01,
+            5.42,
+            5.72
+          ]
+        ],
+        [
+          "450",
+          [
+            "",
+            0.47,
+            0.47,
+            0.47,
+            0.47,
+            0.47
+          ],
+          [
+            "",
+            1.99,
+            3.38,
+            3.37,
+            2.68,
+            2.81
+          ],
+          [
+            "",
+            4.0,
+            6.75,
+            6.75,
+            5.37,
+            5.61
+          ]
+        ],
+        [
+          "475",
+          [
+            "",
+            0.37,
+            0.37,
+            0.37,
+            0.37,
+            0.37
+          ],
+          [
+            "",
+            1.35,
+            3.16,
+            3.16,
+            2.65,
+            2.73
+          ],
+          [
+            "",
+            2.7,
+            6.32,
+            6.32,
+            5.3,
+            5.46
+          ]
+        ],
+        [
+          "500",
+          [
+            "",
+            0.28,
+            0.28,
+            0.28,
+            0.28,
+            0.28
+          ],
+          [
+            "",
+            0.88,
+            2.77,
+            2.77,
+            2.6,
+            2.67
+          ],
+          [
+            "",
+            1.75,
+            5.55,
+            5.55,
+            5.2,
+            5.37
+          ]
+        ],
+        [
+          "525",
+          [
+            "",
+            0.18,
+            0.18,
+            0.18,
+            0.18,
+            0.18
+          ],
+          [
+            "",
+            0.51,
+            2.02,
+            2.18,
+            2.19,
+            2.57
+          ],
+          [
+            "",
+            1.03,
+            4.04,
+            4.36,
+            4.77,
+            5.15
+          ]
+        ],
+        [
+          "538",
+          [
+            "",
+            0.13,
+            0.15,
+            0.15,
+            0.15,
+            0.15
+          ],
+          [
+            "",
+            0.34,
+            1.63,
+            1.63,
+            2.18,
+            2.53
+          ],
+          [
+            "",
+            0.72,
+            3.26,
+            3.26,
+            4.55,
+            5.06
+          ]
+        ]
+      ]
+    },
+    "table_S2_pn_temp_pressure": {
+      "_docx": "表38",
+      "unit": "MPa",
+      "ZG230-450": {
+        "temps": [
+          "-5~200",
+          "~250",
+          "~300",
+          "~350",
+          "~400",
+          "~425",
+          "~435",
+          "~445",
+          "~455"
+        ],
+        "PN16": [
+          1.6,
+          1.4,
+          1.2,
+          1.1,
+          0.9,
+          0.8,
+          0.7,
+          0.62,
+          0.57
+        ],
+        "PN40": [
+          4.0,
+          3.5,
+          3.0,
+          2.6,
+          2.3,
+          2.0,
+          1.8,
+          1.6,
+          1.4
+        ],
+        "PN63": [
+          6.3,
+          5.4,
+          4.8,
+          4.0,
+          3.7,
+          3.2,
+          2.8,
+          2.5,
+          2.3
+        ],
+        "PN100": [
+          10.0,
+          9.0,
+          7.5,
+          6.6,
+          5.8,
+          5.0,
+          4.5,
+          4.2,
+          3.6
+        ]
+      },
+      "ZG0Cr18Ni9": {
+        "temps": [
+          "-45~200",
+          "~300",
+          "~400",
+          "~480",
+          "~520",
+          "~560"
+        ],
+        "PN16": [
+          1.6,
+          1.4,
+          1.2,
+          1.1,
+          0.9,
+          0.8
+        ],
+        "PN40": [
+          4.0,
+          3.5,
+          3.0,
+          2.6,
+          2.3,
+          2.0
+        ],
+        "PN63": [
+          6.3,
+          5.4,
+          4.8,
+          4.0,
+          3.7,
+          3.2
+        ],
+        "PN100": [
+          10.0,
+          9.0,
+          7.5,
+          6.6,
+          5.8,
+          5.0
+        ]
+      }
+    },
+    "table_S3_pressure_cross_ref": {
+      "_docx": "表39",
+      "美国标准": [
+        "ANSI 150#",
+        "ANSI 300#",
+        "ANSI 600#",
+        "ANSI 900#",
+        "ANSI 1500#",
+        "ANSI 2500#"
+      ],
+      "中国标准": [
+        "PN 16",
+        "PN 40",
+        "PN 63, PN 100",
+        "",
+        "",
+        ""
+      ]
+    },
+    "table_S3_material_cross_ref": {
+      "_docx": "表40",
+      "美国标准": [
+        "A216-WCB",
+        "A351-CF8",
+        "A351-CF8M",
+        "A217-WC6",
+        "A217-WC9",
+        "A352-LCB"
+      ],
+      "中国标准": [
+        "ZG230-450",
+        "ZG0Cr18nI9",
+        "ZG0Cr18Ni12Mo2Ti",
+        "ZG15CrMo",
+        "",
+        ""
+      ],
+      "_note": "'ZG0Cr18nI9'系PDF原文错别字(正确牌号ZG0Cr18Ni9), 保留原样"
+    }
+  }
+}

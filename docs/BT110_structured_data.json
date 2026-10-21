@@ -1,0 +1,4591 @@
+{
+  "label": "BT110",
+  "series_name": "BT110 SERIES 低负载轻型蝶阀 Light-load Butterfly Valves",
+  "doc_code": "SD-BT110-A (Specification Data BT110 01/15)",
+  "source_pdf": "参考文件/选型样本/BT110(压缩).pdf",
+  "source_docx": "参考文件/选型样本/BT110(压缩).docx (OCR, 仅定位参考)",
+  "verify_date": "2026-10-14",
+  "page_count": 21,
+  "page_offset": "PDF页 = 印刷页 + 2",
+  "general_data": {
+    "body": {
+      "公称通径 Body": "3\"~112\" (DN80~DN2800)",
+      "公称压力 Body Rating": "ANSI 150#; JB/T79.1-94 & HG/T20592-2009 PN0.25MPa, PN0.6MPa, PN1.0MPa, PN1.6MPa",
+      "连接方式 Body Connection": "法兰式 Flange",
+      "设计标准 Design Standard": "ANSI B16.34, ANSI B16.47, API598等",
+      "法兰距 FF Dimen": "IEC60534, ISA.S75.03-1985",
+      "表面涂层 Painting Color": "德国劳尔色标RAL 7046（银灰色环氧树脂），阀体材质为不锈钢时，本体部不加涂层 / RAL 7046 is standard. In the case of stainless steel body, no painting is standard."
+    },
+    "bearing_type_for_stem": {
+      "内部轴承型 Inner Bearing Type": "-5~+200℃（仅用于3\"~22\"，即DN80~DN550）",
+      "外部轴承型 Outer Bearing Type": "-5~+600℃（超过600℃至1000℃情况，可特殊设计）"
+    },
+    "trim": {
+      "阀板形式 Disc Form": "开放型 Damper type / 15°密封型 15° Sealed type / 后座型 Back Seat type",
+      "额定Cv值 Rated Cv": "见表3 See Tab.3 for selection.",
+      "流量特性 Characteristics": "近似百分比 Approximate Equal percentage",
+      "可调比 Range Ratio": "60°开度15:1, 90°开度30:1 / 60° Open 15:1, 90°Open 30:1",
+      "允许泄漏量 Seat Leakage": "见表2 See Tab.2 for selection.",
+      "填料 Packing": "聚四氟乙烯V形填料、柔性石墨。各种填料的使用温度·压力范围，请参见图2 / Teflon V-ring, Grafoil, etc. See Fig.2 for selection."
+    }
+  },
+  "actuator": {
+    "形式 Type": "气缸式 Pneumatic Cylinder type",
+    "用途 Purpose": "调节、开关 Modulation or On-Off",
+    "供气压力 Air Supply": "300~500 kPa G",
+    "接口 Connection": "Rc3/8~Rc3/4",
+    "作用方式 Action Type": "随输入定位器信号增加阀开或阀闭 / Valve open or shut by air or electric signal.",
+    "环境温度 AMB Temp.": "-40~+100℃",
+    "标准涂层色 Painting": "银灰色环氧树脂 RAL 7046",
+    "手轮机构 Handwheel": "可选 Option",
+    "其他执行机构 Option": "电动式 Electric Motor type"
+  },
+  "accessories": {
+    "气动执行机构控制附件 Pneumatic Actuator Control Accessories": "电气、气气、智能定位器，过滤减压阀，电磁阀，限位开关，调速器/增速器，锁止阀等等 / E/P·P/P·Smart-Positioner, Air-set, Solenoid valve, Limit switch, Speed controller, Lock valve, Lock-up valve, etc.",
+    "电动执行机构控制附件 Electric Actuator Accessories": "加热器，控制箱，手轮机构等 / Space heater, Junction box, Manual handle, etc."
+  },
+  "options": {
+    "本体特殊检查 Special Testing for Body": "材料检查，液体渗透探伤检查（PT），放射线检查（RT），流量特性检查，低温试验，蒸汽试验 / Material certificate, Liquid penetrant testing, Radiographic testing, Flow characteristic testing, Low temperature testing, Steam testing",
+    "本体特殊清洗 Cleaning for Body": "氧气清洁，完全禁油，除水处理 / Oxygen clean, Oil-free, Water-free.",
+    "本体及执行机构特殊规格 Special Specification for Body and Actuator": "防砂，防尘型，防盐腐蚀型，无铜处理，特殊空气配管及特殊气接头，真空工作条件用，接触大气部分的螺栓、螺母采用不锈钢，指定涂层色，NACE处理，阀内件特殊设计，阀内件特殊材质 / Sand and Dust proof, Salty environment proof, Tropical area proof, Copper-free alloy, Special piping and fitting, Vacuum service proof, SUS bolt and nut for exposed parts, Non-standard painting",
+    "认证 Authorization": "各种认证 All kinds of certifications"
+  },
+  "parts_lists": {
+    "table_1_1_inner_bearing_fig1_1": [
+      "六角螺栓 Bolt",
+      "填料函 Gland box",
+      "填料座 Gland seat",
+      "阀体 Body",
+      "阀杆 Stem",
+      "阀板 Disc",
+      "轴承 Bearing",
+      "六角螺栓 Bolt",
+      "填料压板 Gland flange",
+      "填料函 Gland box",
+      "填料 Gland",
+      "填料座 Gland seat",
+      "轴承 Bearing",
+      "填料 Gland",
+      "填料压板 Gland flange"
+    ],
+    "table_1_2_outer_bearing_fig1_2": [
+      "轴承单元 Bearing unit",
+      "六角螺栓 Bolt",
+      "六角螺栓 Bolt",
+      "填料函 Gland box",
+      "阀体 Body",
+      "阀杆 Stem",
+      "阀板 Disc",
+      "填料函 Gland box",
+      "轴承单元 Bearing unit",
+      "轴承 Bearing",
+      "六角螺栓 Bolt",
+      "六角螺栓 Bolt",
+      "填料压板 Gland flange",
+      "填料 Gland",
+      "填料座 Gland seat",
+      "填料座 Gland seat",
+      "填料 Gland",
+      "填料压板 Gland flange",
+      "轴承 Bearing"
+    ],
+    "table_1_3_fin_extension_fig1_3": [
+      "六角螺栓 Bolt",
+      "散热片 Cooling fin",
+      "填料函 Gland box",
+      "填料 Gland",
+      "阀体 Body",
+      "阀杆 Stem",
+      "阀板 Disc",
+      "填料函 Gland box",
+      "六角螺栓 Bolt",
+      "填料压板 Gland flange",
+      "散热片 Cooling fin",
+      "填料隔套 Lantern ring",
+      "填料 Gland",
+      "填料座 Gland seat",
+      "填料座 Gland seat",
+      "填料隔套 Lantern ring",
+      "填料压板 Gland flange"
+    ]
+  },
+  "disc_form_note_fig2": "开放型及15°密封型阀门形式无阀座结构 / Damper type and 15° sealed type valve have no seat structure.",
+  "selection_table2": {
+    "notes": [
+      "各种阀体材质的使用温度·压力限制请参见附表1 / Body material operating temperature-pressure range: See Appendix Table 1.",
+      "本表为标准产品阀体、阀内件材质组合，如需选用其他材质，请向工厂咨询 / Permitted to use non-standard material for body and trim."
+    ],
+    "legend": {
+      "Hcr": "镀硬铬 Hard chrome plated",
+      "PH": "析出硬化热处理 Precipitation hardening"
+    },
+    "table_2_1_body_material_Q235_304_316": {
+      "columns": [
+        "Q235-a",
+        "Q235-b",
+        "304-a",
+        "304-b",
+        "316"
+      ],
+      "阀体 Body": [
+        "Q235",
+        "Q235",
+        "304",
+        "304",
+        "316"
+      ],
+      "阀板 Disc": [
+        "Q235",
+        "304",
+        "304",
+        "304",
+        "316"
+      ],
+      "阀杆 Stem": [
+        "304",
+        "304",
+        "304",
+        "316",
+        "316"
+      ],
+      "轴承 Bearing": [
+        "316/Hcr，外部型",
+        "316/Hcr，外部型",
+        "316/Hcr，外部型",
+        "316/Hcr，外部型",
+        "316/Hcr，外部型"
+      ],
+      "阀座 Seat Gasket": [
+        "—，Q235（后座型）",
+        "—，Q235（后座型）",
+        "—，304（后座型）",
+        "—，304（后座型）",
+        "—，316（后座型）"
+      ],
+      "阀体法兰 Flange": [
+        "Q235",
+        "Q235",
+        "Q235，304",
+        "Q235，304",
+        "316"
+      ],
+      "footnote": "当介质温度较高（≥400℃）时，请选用不锈钢阀内件 / When the medium temperature is high (≥400℃), please use the stainless steel trim."
+    },
+    "table_2_2_seat_leakage": {
+      "description": "泄漏量 ≤ Cv(阀板90°开度)×下述%",
+      "rows": [
+        {
+          "size_inch": "3",
+          "size_mm": "80",
+          "damper": "5.0%",
+          "sealed_15": "0.5%",
+          "backseat": "2.0%"
+        },
+        {
+          "size_inch": "4~10",
+          "size_mm": "100~250",
+          "damper": "3.5%",
+          "sealed_15": "0.45%",
+          "backseat": "2.0%"
+        },
+        {
+          "size_inch": "12~18",
+          "size_mm": "300~450",
+          "damper": "3.0%",
+          "sealed_15": "0.4%",
+          "backseat": "2.0%"
+        },
+        {
+          "size_inch": "20~30",
+          "size_mm": "500~750",
+          "damper": "2.0%",
+          "sealed_15": "0.3%",
+          "backseat": "1.0%"
+        },
+        {
+          "size_inch": "32~64",
+          "size_mm": "800~1600",
+          "damper": "1.5%",
+          "sealed_15": "0.2%",
+          "backseat": "1.0%"
+        }
+      ]
+    },
+    "table_2_3_operating_temp": {
+      "内部轴承型": {
+        "damper": "-5~+200℃",
+        "sealed_15": "-5~+150℃",
+        "backseat": "-5~+200℃"
+      },
+      "外部轴承型": {
+        "damper": "-5~+400℃ *①",
+        "sealed_15": "-5~+150℃",
+        "backseat": "-5~+600℃ *②"
+      },
+      "footnotes": [
+        "*① 当选用开放型，温度需求在-5~600℃范围时，可选用散热片型特殊设计。",
+        "*② 当选用后座型，阀杆为630/PH（析出硬化热处理）时，温度范围为-5~+400℃。"
+      ]
+    },
+    "packing_pt_ratings_fig3": {
+      "图3-1": "高强度碳纤维+聚四氟乙烯纤维 CARBON+PTFE FIBRE",
+      "图3-2": "强化聚四氟乙烯V形填料 R.TFE V-RING",
+      "图3-3": "柔性石墨 GRAFOIL",
+      "note": "曲线图：纵轴流体压力 0~10.5 MPa G，横轴流体温度（图3-1约-100~250℃，图3-2约-100~250℃，图3-3约-200~538℃），无数值表。"
+    }
+  },
+  "rated_cv_table_3": {
+    "rows": [
+      {
+        "size_inch": 3,
+        "size_mm": 80,
+        "cv_60deg_damper": 158,
+        "cv_60deg_15sealed": 150,
+        "cv_60deg_backseat": null,
+        "cv_90deg_damper": 320,
+        "cv_90deg_15sealed": 320,
+        "cv_90deg_backseat": null
+      },
+      {
+        "size_inch": 4,
+        "size_mm": 100,
+        "cv_60deg_damper": 278,
+        "cv_60deg_15sealed": 265,
+        "cv_60deg_backseat": null,
+        "cv_90deg_damper": 560,
+        "cv_90deg_15sealed": 560,
+        "cv_90deg_backseat": null
+      },
+      {
+        "size_inch": 5,
+        "size_mm": 125,
+        "cv_60deg_damper": 425,
+        "cv_60deg_15sealed": 420,
+        "cv_60deg_backseat": 295,
+        "cv_90deg_damper": 900,
+        "cv_90deg_15sealed": 900,
+        "cv_90deg_backseat": 585
+      },
+      {
+        "size_inch": 6,
+        "size_mm": 150,
+        "cv_60deg_damper": 610,
+        "cv_60deg_15sealed": 585,
+        "cv_60deg_backseat": 430,
+        "cv_90deg_damper": 1280,
+        "cv_90deg_15sealed": 1280,
+        "cv_90deg_backseat": 845
+      },
+      {
+        "size_inch": 8,
+        "size_mm": 200,
+        "cv_60deg_damper": 1040,
+        "cv_60deg_15sealed": 1010,
+        "cv_60deg_backseat": 750,
+        "cv_90deg_damper": 2300,
+        "cv_90deg_15sealed": 2300,
+        "cv_90deg_backseat": 1500
+      },
+      {
+        "size_inch": 10,
+        "size_mm": 250,
+        "cv_60deg_damper": 1700,
+        "cv_60deg_15sealed": 1630,
+        "cv_60deg_backseat": 1375,
+        "cv_90deg_damper": 3500,
+        "cv_90deg_15sealed": 3500,
+        "cv_90deg_backseat": 2550
+      },
+      {
+        "size_inch": 12,
+        "size_mm": 300,
+        "cv_60deg_damper": 2480,
+        "cv_60deg_15sealed": 2400,
+        "cv_60deg_backseat": 1980,
+        "cv_90deg_damper": 5200,
+        "cv_90deg_15sealed": 5200,
+        "cv_90deg_backseat": 3900
+      },
+      {
+        "size_inch": 14,
+        "size_mm": 350,
+        "cv_60deg_damper": 3300,
+        "cv_60deg_15sealed": 3200,
+        "cv_60deg_backseat": 2690,
+        "cv_90deg_damper": 6800,
+        "cv_90deg_15sealed": 6800,
+        "cv_90deg_backseat": 5500
+      },
+      {
+        "size_inch": 16,
+        "size_mm": 400,
+        "cv_60deg_damper": 4350,
+        "cv_60deg_15sealed": 4200,
+        "cv_60deg_backseat": 3600,
+        "cv_90deg_damper": 9000,
+        "cv_90deg_15sealed": 9000,
+        "cv_90deg_backseat": 7400
+      },
+      {
+        "size_inch": 18,
+        "size_mm": 450,
+        "cv_60deg_damper": 5500,
+        "cv_60deg_15sealed": 5300,
+        "cv_60deg_backseat": 4450,
+        "cv_90deg_damper": 11000,
+        "cv_90deg_15sealed": 11000,
+        "cv_90deg_backseat": 9100
+      },
+      {
+        "size_inch": 20,
+        "size_mm": 500,
+        "cv_60deg_damper": 6800,
+        "cv_60deg_15sealed": 6500,
+        "cv_60deg_backseat": 5500,
+        "cv_90deg_damper": 14000,
+        "cv_90deg_15sealed": 14000,
+        "cv_90deg_backseat": 11500
+      },
+      {
+        "size_inch": 22,
+        "size_mm": 550,
+        "cv_60deg_damper": 8200,
+        "cv_60deg_15sealed": 7800,
+        "cv_60deg_backseat": 6900,
+        "cv_90deg_damper": 17500,
+        "cv_90deg_15sealed": 17500,
+        "cv_90deg_backseat": 14000
+      },
+      {
+        "size_inch": 24,
+        "size_mm": 600,
+        "cv_60deg_damper": 9800,
+        "cv_60deg_15sealed": 9300,
+        "cv_60deg_backseat": 8300,
+        "cv_90deg_damper": 20500,
+        "cv_90deg_15sealed": 20500,
+        "cv_90deg_backseat": 17000
+      },
+      {
+        "size_inch": 26,
+        "size_mm": 650,
+        "cv_60deg_damper": 12000,
+        "cv_60deg_15sealed": 10900,
+        "cv_60deg_backseat": 10000,
+        "cv_90deg_damper": 24000,
+        "cv_90deg_15sealed": 24000,
+        "cv_90deg_backseat": 20500
+      },
+      {
+        "size_inch": 28,
+        "size_mm": 700,
+        "cv_60deg_damper": 14000,
+        "cv_60deg_15sealed": 12600,
+        "cv_60deg_backseat": 11300,
+        "cv_90deg_damper": 28000,
+        "cv_90deg_15sealed": 28000,
+        "cv_90deg_backseat": 23900
+      },
+      {
+        "size_inch": 30,
+        "size_mm": 750,
+        "cv_60deg_damper": 16200,
+        "cv_60deg_15sealed": 14500,
+        "cv_60deg_backseat": 13100,
+        "cv_90deg_damper": 32000,
+        "cv_90deg_15sealed": 32000,
+        "cv_90deg_backseat": 27800
+      },
+      {
+        "size_inch": 32,
+        "size_mm": 800,
+        "cv_60deg_damper": 17300,
+        "cv_60deg_15sealed": 16500,
+        "cv_60deg_backseat": 14600,
+        "cv_90deg_damper": 36400,
+        "cv_90deg_15sealed": 36400,
+        "cv_90deg_backseat": 31900
+      },
+      {
+        "size_inch": 34,
+        "size_mm": 850,
+        "cv_60deg_damper": 19500,
+        "cv_60deg_15sealed": 18600,
+        "cv_60deg_backseat": 16600,
+        "cv_90deg_damper": 41000,
+        "cv_90deg_15sealed": 41000,
+        "cv_90deg_backseat": 36000
+      },
+      {
+        "size_inch": 36,
+        "size_mm": 900,
+        "cv_60deg_damper": 23000,
+        "cv_60deg_15sealed": 20900,
+        "cv_60deg_backseat": 19000,
+        "cv_90deg_damper": 46000,
+        "cv_90deg_15sealed": 46000,
+        "cv_90deg_backseat": 41000
+      },
+      {
+        "size_inch": 40,
+        "size_mm": 1000,
+        "cv_60deg_damper": 27000,
+        "cv_60deg_15sealed": 25000,
+        "cv_60deg_backseat": 24800,
+        "cv_90deg_damper": 57000,
+        "cv_90deg_15sealed": 57000,
+        "cv_90deg_backseat": 49000
+      },
+      {
+        "size_inch": 44,
+        "size_mm": 1100,
+        "cv_60deg_damper": 34000,
+        "cv_60deg_15sealed": null,
+        "cv_60deg_backseat": 30000,
+        "cv_90deg_damper": 68000,
+        "cv_90deg_15sealed": null,
+        "cv_90deg_backseat": 61000
+      },
+      {
+        "size_inch": 48,
+        "size_mm": 1200,
+        "cv_60deg_damper": 39000,
+        "cv_60deg_15sealed": null,
+        "cv_60deg_backseat": 35700,
+        "cv_90deg_damper": 81000,
+        "cv_90deg_15sealed": null,
+        "cv_90deg_backseat": 73000
+      },
+      {
+        "size_inch": 52,
+        "size_mm": 1300,
+        "cv_60deg_damper": 46000,
+        "cv_60deg_15sealed": null,
+        "cv_60deg_backseat": 41900,
+        "cv_90deg_damper": 95000,
+        "cv_90deg_15sealed": null,
+        "cv_90deg_backseat": 85600
+      },
+      {
+        "size_inch": 54,
+        "size_mm": 1350,
+        "cv_60deg_damper": 49200,
+        "cv_60deg_15sealed": null,
+        "cv_60deg_backseat": 45200,
+        "cv_90deg_damper": 103500,
+        "cv_90deg_15sealed": null,
+        "cv_90deg_backseat": 92300
+      },
+      {
+        "size_inch": 60,
+        "size_mm": 1500,
+        "cv_60deg_damper": 61000,
+        "cv_60deg_15sealed": null,
+        "cv_60deg_backseat": 57000,
+        "cv_90deg_damper": 125000,
+        "cv_90deg_15sealed": null,
+        "cv_90deg_backseat": 115000
+      },
+      {
+        "size_inch": 64,
+        "size_mm": 1600,
+        "cv_60deg_damper": 70500,
+        "cv_60deg_15sealed": null,
+        "cv_60deg_backseat": 64800,
+        "cv_90deg_damper": 145000,
+        "cv_90deg_15sealed": null,
+        "cv_90deg_backseat": 130000
+      }
+    ]
+  },
+  "allowable_pressure_drops_table4": {
+    "unit": "kPa",
+    "note": "表4 最大允许压差；允许阀闭压力按流体温度<200/<400/<600℃三档；40in以上可选630/PH阀杆（<600℃档为—）",
+    "table_4_1A_double_acting_400kPa_60deg_lowtorque": {
+      "stem_304_316": [
+        {
+          "size_inch": 3,
+          "size_mm": 80,
+          "shutoff_lt200C_kPa": 490,
+          "shutoff_lt400C_kPa": 159,
+          "shutoff_lt600C_kPa": 119,
+          "actuator_kPa": {
+            "PC2207RA_75": 229.0
+          }
+        },
+        {
+          "size_inch": 4,
+          "size_mm": 100,
+          "shutoff_lt200C_kPa": 490,
+          "shutoff_lt400C_kPa": 94,
+          "shutoff_lt600C_kPa": 70,
+          "actuator_kPa": {
+            "PC2207RA_75": 116.0
+          }
+        },
+        {
+          "size_inch": 5,
+          "size_mm": 125,
+          "shutoff_lt200C_kPa": 392,
+          "shutoff_lt400C_kPa": 60,
+          "shutoff_lt600C_kPa": 45,
+          "actuator_kPa": {
+            "PC2207RA_75": 59.7
+          }
+        },
+        {
+          "size_inch": 6,
+          "size_mm": 150,
+          "shutoff_lt200C_kPa": 279,
+          "shutoff_lt400C_kPa": 78,
+          "shutoff_lt600C_kPa": 61,
+          "actuator_kPa": {
+            "PC2209RA_95": 74.2,
+            "PC2211RA_110": 111.0
+          }
+        },
+        {
+          "size_inch": 8,
+          "size_mm": 200,
+          "shutoff_lt200C_kPa": 190,
+          "shutoff_lt400C_kPa": 46,
+          "shutoff_lt600C_kPa": 34,
+          "actuator_kPa": {
+            "PC2209RA_95": 31.2,
+            "PC2211RA_110": 42.9
+          }
+        },
+        {
+          "size_inch": 10,
+          "size_mm": 250,
+          "shutoff_lt200C_kPa": 97,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": 19,
+          "actuator_kPa": {
+            "PC2209RA_95": 13.7,
+            "PC2211RA_110": 21.9
+          }
+        },
+        {
+          "size_inch": 12,
+          "size_mm": 300,
+          "shutoff_lt200C_kPa": 55,
+          "shutoff_lt400C_kPa": 16,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2209RA_95": 7.9,
+            "PC2211RA_110": 12.7
+          }
+        },
+        {
+          "size_inch": 14,
+          "size_mm": 350,
+          "shutoff_lt200C_kPa": 60,
+          "shutoff_lt400C_kPa": 17,
+          "shutoff_lt600C_kPa": 13,
+          "actuator_kPa": {
+            "PC2211RA_110": 7.9,
+            "PC2212RA_125": 16.3,
+            "PC4213RA_130": 39.3
+          }
+        },
+        {
+          "size_inch": 16,
+          "size_mm": 400,
+          "shutoff_lt200C_kPa": 41,
+          "shutoff_lt400C_kPa": 13,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2211RA_110": 5.3,
+            "PC2212RA_125": 10.9,
+            "PC4213RA_130": 26.3
+          }
+        },
+        {
+          "size_inch": 18,
+          "size_mm": 450,
+          "shutoff_lt200C_kPa": 28,
+          "shutoff_lt400C_kPa": 10,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2211RA_110": 3.7,
+            "PC2212RA_125": 7.6,
+            "PC4213RA_130": 17.9
+          }
+        },
+        {
+          "size_inch": 20,
+          "size_mm": 500,
+          "shutoff_lt200C_kPa": 50,
+          "shutoff_lt400C_kPa": 22,
+          "shutoff_lt600C_kPa": 16,
+          "actuator_kPa": {
+            "PC2212RA_125": 5.1,
+            "PC2216RA_160": 10.5,
+            "PC4213RA_130": 12.6
+          }
+        },
+        {
+          "size_inch": 22,
+          "size_mm": 550,
+          "shutoff_lt200C_kPa": 37,
+          "shutoff_lt400C_kPa": 17,
+          "shutoff_lt600C_kPa": 14,
+          "actuator_kPa": {
+            "PC2212RA_125": 3.8,
+            "PC2216RA_160": 7.9,
+            "PC4213RA_130": 9.4
+          }
+        },
+        {
+          "size_inch": 24,
+          "size_mm": 600,
+          "shutoff_lt200C_kPa": 15,
+          "shutoff_lt400C_kPa": 15,
+          "shutoff_lt600C_kPa": 11,
+          "actuator_kPa": {
+            "PC2212RA_125": 3.0,
+            "PC2216RA_160": 6.1,
+            "PC4213RA_130": 7.3
+          }
+        },
+        {
+          "size_inch": 26,
+          "size_mm": 650,
+          "shutoff_lt200C_kPa": 13,
+          "shutoff_lt400C_kPa": 13,
+          "shutoff_lt600C_kPa": 10,
+          "actuator_kPa": {
+            "PC2212RA_125": 2.3,
+            "PC2216RA_160": 4.7,
+            "PC4213RA_130": 5.7,
+            "PC4217RA_170": 10.5
+          }
+        },
+        {
+          "size_inch": 28,
+          "size_mm": 700,
+          "shutoff_lt200C_kPa": 11,
+          "shutoff_lt400C_kPa": 11,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2216RA_160": 3.7,
+            "PC4213RA_130": 4.5,
+            "PC4217RA_170": 9.0
+          }
+        },
+        {
+          "size_inch": 30,
+          "size_mm": 750,
+          "shutoff_lt200C_kPa": 26,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": 18,
+          "actuator_kPa": {
+            "PC2216RA_160": 3.1,
+            "PC2221RA_210": 7.5,
+            "PC4213RA_130": 3.7,
+            "PC4217RA_170": 7.5,
+            "PC4220RA_200": 18.2
+          }
+        },
+        {
+          "size_inch": 32,
+          "size_mm": 800,
+          "shutoff_lt200C_kPa": 23,
+          "shutoff_lt400C_kPa": 23,
+          "shutoff_lt600C_kPa": 17,
+          "actuator_kPa": {
+            "PC2216RA_160": 2.6,
+            "PC2221RA_210": 6.2,
+            "PC4213RA_130": 3.0,
+            "PC4217RA_170": 6.6,
+            "PC4220RA_200": 15.0
+          }
+        },
+        {
+          "size_inch": 34,
+          "size_mm": 850,
+          "shutoff_lt200C_kPa": 20,
+          "shutoff_lt400C_kPa": 20,
+          "shutoff_lt600C_kPa": 14,
+          "actuator_kPa": {
+            "PC2221RA_210": 5.1,
+            "PC4213RA_130": 2.5,
+            "PC4217RA_170": 5.4,
+            "PC4220RA_200": 12.5
+          }
+        },
+        {
+          "size_inch": 36,
+          "size_mm": 900,
+          "shutoff_lt200C_kPa": 18,
+          "shutoff_lt400C_kPa": 18,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2221RA_210": 4.2,
+            "PC4213RA_130": 2.1,
+            "PC4217RA_170": 4.6,
+            "PC4220RA_200": 10.5
+          }
+        },
+        {
+          "size_inch": 40,
+          "size_mm": 1000,
+          "shutoff_lt200C_kPa": 14,
+          "shutoff_lt400C_kPa": 14,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2221RA_210": 3.0,
+            "PC2227RA_270": 6.5,
+            "PC4213RA_130": 1.5,
+            "PC4217RA_170": 3.3,
+            "PC4220RA_200": 6.2
+          }
+        },
+        {
+          "size_inch": 44,
+          "size_mm": 1100,
+          "shutoff_lt200C_kPa": 11,
+          "shutoff_lt400C_kPa": 11,
+          "shutoff_lt600C_kPa": 10,
+          "actuator_kPa": {
+            "PC2227RA_270": 4.9,
+            "PC4213RA_130": 1.1,
+            "PC4217RA_170": 2.5,
+            "PC4220RA_200": 5.7
+          }
+        },
+        {
+          "size_inch": 48,
+          "size_mm": 1200,
+          "shutoff_lt200C_kPa": 9,
+          "shutoff_lt400C_kPa": 9,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2227RA_270": 3.8,
+            "PC4217RA_170": 1.9,
+            "PC4220RA_200": 4.4
+          }
+        },
+        {
+          "size_inch": 52,
+          "size_mm": 1300,
+          "shutoff_lt200C_kPa": 10,
+          "shutoff_lt400C_kPa": 10,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2227RA_270": 2.9,
+            "PC4217RA_170": 1.4,
+            "PC4220RA_200": 3.4
+          }
+        },
+        {
+          "size_inch": 54,
+          "size_mm": 1350,
+          "shutoff_lt200C_kPa": 9,
+          "shutoff_lt400C_kPa": 9,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2227RA_270": 2.6,
+            "PC4217RA_170": 1.3,
+            "PC4220RA_200": 3.0
+          }
+        },
+        {
+          "size_inch": 60,
+          "size_mm": 1500,
+          "shutoff_lt200C_kPa": 7,
+          "shutoff_lt400C_kPa": 7,
+          "shutoff_lt600C_kPa": 6,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.9,
+            "PC4217RA_170": 0.9,
+            "PC4220RA_200": 2.2
+          }
+        },
+        {
+          "size_inch": 64,
+          "size_mm": 1600,
+          "shutoff_lt200C_kPa": 6,
+          "shutoff_lt400C_kPa": 6,
+          "shutoff_lt600C_kPa": 5,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.6,
+            "PC4220RA_200": 1.9,
+            "PC4228RA_280": 4.4
+          }
+        }
+      ],
+      "stem_630_PH": [
+        {
+          "size_inch": 40,
+          "size_mm": 1000,
+          "shutoff_lt200C_kPa": 34,
+          "shutoff_lt400C_kPa": 34,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2221RA_210": 3.0,
+            "PC2227RA_270": 6.5,
+            "PC4213RA_130": 1.5,
+            "PC4217RA_170": 3.3,
+            "PC4220RA_200": 6.2
+          }
+        },
+        {
+          "size_inch": 44,
+          "size_mm": 1100,
+          "shutoff_lt200C_kPa": 27,
+          "shutoff_lt400C_kPa": 27,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 4.9,
+            "PC4213RA_130": 1.1,
+            "PC4217RA_170": 2.5,
+            "PC4220RA_200": 5.7
+          }
+        },
+        {
+          "size_inch": 48,
+          "size_mm": 1200,
+          "shutoff_lt200C_kPa": 23,
+          "shutoff_lt400C_kPa": 23,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 3.8,
+            "PC4217RA_170": 1.9,
+            "PC4220RA_200": 4.4
+          }
+        },
+        {
+          "size_inch": 52,
+          "size_mm": 1300,
+          "shutoff_lt200C_kPa": 26,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 2.9,
+            "PC4217RA_170": 1.4,
+            "PC4220RA_200": 3.4
+          }
+        },
+        {
+          "size_inch": 54,
+          "size_mm": 1350,
+          "shutoff_lt200C_kPa": 24,
+          "shutoff_lt400C_kPa": 24,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 2.6,
+            "PC4217RA_170": 1.3,
+            "PC4220RA_200": 3.0
+          }
+        },
+        {
+          "size_inch": 60,
+          "size_mm": 1500,
+          "shutoff_lt200C_kPa": 18,
+          "shutoff_lt400C_kPa": 18,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.9,
+            "PC4217RA_170": 0.9,
+            "PC4220RA_200": 2.2
+          }
+        },
+        {
+          "size_inch": 64,
+          "size_mm": 1600,
+          "shutoff_lt200C_kPa": 15,
+          "shutoff_lt400C_kPa": 15,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.6,
+            "PC4220RA_200": 1.9,
+            "PC4228RA_280": 4.4
+          }
+        }
+      ]
+    },
+    "table_4_1B_double_acting_400kPa_60deg_grafoil": {
+      "stem_304_316": [
+        {
+          "size_inch": 3,
+          "size_mm": 80,
+          "shutoff_lt200C_kPa": 490,
+          "shutoff_lt400C_kPa": 159,
+          "shutoff_lt600C_kPa": 119,
+          "actuator_kPa": {
+            "PC2207RA_75": 103.7
+          }
+        },
+        {
+          "size_inch": 4,
+          "size_mm": 100,
+          "shutoff_lt200C_kPa": 490,
+          "shutoff_lt400C_kPa": 94,
+          "shutoff_lt600C_kPa": 70,
+          "actuator_kPa": {
+            "PC2207RA_75": 53.8
+          }
+        },
+        {
+          "size_inch": 5,
+          "size_mm": 125,
+          "shutoff_lt200C_kPa": 392,
+          "shutoff_lt400C_kPa": 60,
+          "shutoff_lt600C_kPa": 45,
+          "actuator_kPa": {
+            "PC2207RA_75": 44.2
+          }
+        },
+        {
+          "size_inch": 6,
+          "size_mm": 150,
+          "shutoff_lt200C_kPa": 279,
+          "shutoff_lt400C_kPa": 78,
+          "shutoff_lt600C_kPa": 61,
+          "actuator_kPa": {
+            "PC2209RA_95": 63.8
+          }
+        },
+        {
+          "size_inch": 8,
+          "size_mm": 200,
+          "shutoff_lt200C_kPa": 190,
+          "shutoff_lt400C_kPa": 46,
+          "shutoff_lt600C_kPa": 34,
+          "actuator_kPa": {
+            "PC2209RA_95": 26.9
+          }
+        },
+        {
+          "size_inch": 10,
+          "size_mm": 250,
+          "shutoff_lt200C_kPa": 97,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": 19,
+          "actuator_kPa": {
+            "PC2209RA_95": 9.3
+          }
+        },
+        {
+          "size_inch": 12,
+          "size_mm": 300,
+          "shutoff_lt200C_kPa": 55,
+          "shutoff_lt400C_kPa": 16,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2209RA_95": 5.4
+          }
+        },
+        {
+          "size_inch": 14,
+          "size_mm": 350,
+          "shutoff_lt200C_kPa": 60,
+          "shutoff_lt400C_kPa": 17,
+          "shutoff_lt600C_kPa": 13,
+          "actuator_kPa": {
+            "PC2211RA_110": 6.6
+          }
+        },
+        {
+          "size_inch": 16,
+          "size_mm": 400,
+          "shutoff_lt200C_kPa": 41,
+          "shutoff_lt400C_kPa": 13,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2211RA_110": 4.3
+          }
+        },
+        {
+          "size_inch": 18,
+          "size_mm": 450,
+          "shutoff_lt200C_kPa": 28,
+          "shutoff_lt400C_kPa": 10,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2211RA_110": 3.1
+          }
+        },
+        {
+          "size_inch": 20,
+          "size_mm": 500,
+          "shutoff_lt200C_kPa": 50,
+          "shutoff_lt400C_kPa": 22,
+          "shutoff_lt600C_kPa": 16,
+          "actuator_kPa": {
+            "PC2212RA_125": 4.6,
+            "PC2216RA_160": 9.9,
+            "PC4213RA_130": 11.9
+          }
+        },
+        {
+          "size_inch": 22,
+          "size_mm": 550,
+          "shutoff_lt200C_kPa": 37,
+          "shutoff_lt400C_kPa": 17,
+          "shutoff_lt600C_kPa": 14,
+          "actuator_kPa": {
+            "PC2212RA_125": 3.4,
+            "PC2216RA_160": 7.5,
+            "PC4213RA_130": 8.9
+          }
+        },
+        {
+          "size_inch": 24,
+          "size_mm": 600,
+          "shutoff_lt200C_kPa": 15,
+          "shutoff_lt400C_kPa": 15,
+          "shutoff_lt600C_kPa": 11,
+          "actuator_kPa": {
+            "PC2212RA_125": 2.6,
+            "PC2216RA_160": 5.7,
+            "PC4213RA_130": 6.9
+          }
+        },
+        {
+          "size_inch": 26,
+          "size_mm": 650,
+          "shutoff_lt200C_kPa": 13,
+          "shutoff_lt400C_kPa": 13,
+          "shutoff_lt600C_kPa": 10,
+          "actuator_kPa": {
+            "PC2212RA_125": 2.1,
+            "PC2216RA_160": 4.6,
+            "PC4213RA_130": 5.4
+          }
+        },
+        {
+          "size_inch": 28,
+          "size_mm": 700,
+          "shutoff_lt200C_kPa": 11,
+          "shutoff_lt400C_kPa": 11,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2216RA_160": 3.6,
+            "PC4213RA_130": 4.3
+          }
+        },
+        {
+          "size_inch": 30,
+          "size_mm": 750,
+          "shutoff_lt200C_kPa": 26,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": 18,
+          "actuator_kPa": {
+            "PC2216RA_160": 2.9,
+            "PC2221RA_210": 7.3,
+            "PC4213RA_130": 3.5,
+            "PC4217RA_170": 7.8
+          }
+        },
+        {
+          "size_inch": 32,
+          "size_mm": 800,
+          "shutoff_lt200C_kPa": 23,
+          "shutoff_lt400C_kPa": 23,
+          "shutoff_lt600C_kPa": 17,
+          "actuator_kPa": {
+            "PC2216RA_160": 2.4,
+            "PC2221RA_210": 6.1,
+            "PC4213RA_130": 2.8,
+            "PC4217RA_170": 6.5
+          }
+        },
+        {
+          "size_inch": 34,
+          "size_mm": 850,
+          "shutoff_lt200C_kPa": 20,
+          "shutoff_lt400C_kPa": 20,
+          "shutoff_lt600C_kPa": 14,
+          "actuator_kPa": {
+            "PC2221RA_210": 5.1,
+            "PC4213RA_130": 2.4,
+            "PC4217RA_170": 5.3
+          }
+        },
+        {
+          "size_inch": 36,
+          "size_mm": 900,
+          "shutoff_lt200C_kPa": 18,
+          "shutoff_lt400C_kPa": 18,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2221RA_210": 4.2,
+            "PC4213RA_130": 1.9,
+            "PC4217RA_170": 4.4
+          }
+        },
+        {
+          "size_inch": 40,
+          "size_mm": 1000,
+          "shutoff_lt200C_kPa": 14,
+          "shutoff_lt400C_kPa": 14,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2221RA_210": 3.1,
+            "PC2227RA_270": 6.5,
+            "PC4213RA_130": 1.4,
+            "PC4217RA_170": 3.2,
+            "PC4220RA_200": 7.6
+          }
+        },
+        {
+          "size_inch": 44,
+          "size_mm": 1100,
+          "shutoff_lt200C_kPa": 11,
+          "shutoff_lt400C_kPa": 11,
+          "shutoff_lt600C_kPa": 10,
+          "actuator_kPa": {
+            "PC2227RA_270": 4.9,
+            "PC4217RA_170": 2.4,
+            "PC4220RA_200": 5.7
+          }
+        },
+        {
+          "size_inch": 48,
+          "size_mm": 1200,
+          "shutoff_lt200C_kPa": 9,
+          "shutoff_lt400C_kPa": 9,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2227RA_270": 3.8,
+            "PC4217RA_170": 1.9,
+            "PC4220RA_200": 4.3
+          }
+        },
+        {
+          "size_inch": 52,
+          "size_mm": 1300,
+          "shutoff_lt200C_kPa": 10,
+          "shutoff_lt400C_kPa": 10,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2227RA_270": 2.9,
+            "PC4217RA_170": 1.4,
+            "PC4220RA_200": 3.3
+          }
+        },
+        {
+          "size_inch": 54,
+          "size_mm": 1350,
+          "shutoff_lt200C_kPa": 9,
+          "shutoff_lt400C_kPa": 9,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2227RA_270": 2.6,
+            "PC4217RA_170": 1.3,
+            "PC4220RA_200": 3.0
+          }
+        },
+        {
+          "size_inch": 60,
+          "size_mm": 1500,
+          "shutoff_lt200C_kPa": 7,
+          "shutoff_lt400C_kPa": 7,
+          "shutoff_lt600C_kPa": 6,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.9,
+            "PC4217RA_170": 0.9,
+            "PC4220RA_200": 2.2
+          }
+        },
+        {
+          "size_inch": 64,
+          "size_mm": 1600,
+          "shutoff_lt200C_kPa": 6,
+          "shutoff_lt400C_kPa": 6,
+          "shutoff_lt600C_kPa": 5,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.6,
+            "PC4220RA_200": 1.8,
+            "PC4228RA_280": 4.3
+          }
+        }
+      ],
+      "stem_630_PH": [
+        {
+          "size_inch": 40,
+          "size_mm": 1000,
+          "shutoff_lt200C_kPa": 34,
+          "shutoff_lt400C_kPa": 34,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2221RA_210": 2.7,
+            "PC2227RA_270": 6.5,
+            "PC4213RA_130": 1.4,
+            "PC4217RA_170": 3.2,
+            "PC4220RA_200": 7.6
+          }
+        },
+        {
+          "size_inch": 44,
+          "size_mm": 1100,
+          "shutoff_lt200C_kPa": 27,
+          "shutoff_lt400C_kPa": 27,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 4.9,
+            "PC4217RA_170": 2.4,
+            "PC4220RA_200": 5.7
+          }
+        },
+        {
+          "size_inch": 48,
+          "size_mm": 1200,
+          "shutoff_lt200C_kPa": 23,
+          "shutoff_lt400C_kPa": 23,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 3.8,
+            "PC4217RA_170": 1.9,
+            "PC4220RA_200": 4.3
+          }
+        },
+        {
+          "size_inch": 52,
+          "size_mm": 1300,
+          "shutoff_lt200C_kPa": 26,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 2.9,
+            "PC4217RA_170": 1.4,
+            "PC4220RA_200": 3.3
+          }
+        },
+        {
+          "size_inch": 54,
+          "size_mm": 1350,
+          "shutoff_lt200C_kPa": 24,
+          "shutoff_lt400C_kPa": 24,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 2.6,
+            "PC4217RA_170": 1.3,
+            "PC4220RA_200": 3.0
+          }
+        },
+        {
+          "size_inch": 60,
+          "size_mm": 1500,
+          "shutoff_lt200C_kPa": 18,
+          "shutoff_lt400C_kPa": 18,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.9,
+            "PC4217RA_170": 0.9,
+            "PC4220RA_200": 2.2
+          }
+        },
+        {
+          "size_inch": 64,
+          "size_mm": 1600,
+          "shutoff_lt200C_kPa": 15,
+          "shutoff_lt400C_kPa": 15,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.6,
+            "PC4220RA_200": 1.8,
+            "PC4228RA_280": 4.3
+          }
+        }
+      ]
+    },
+    "table_4_2A_single_acting_400kPa_60deg_lowtorque": {
+      "stem_304_316": [
+        {
+          "size_inch": 3,
+          "size_mm": 80,
+          "shutoff_lt200C_kPa": 490,
+          "shutoff_lt400C_kPa": 159,
+          "shutoff_lt600C_kPa": 119,
+          "actuator_kPa": {
+            "PC2109RA_95": 60.7,
+            "PC2111RA_110": 153.7
+          }
+        },
+        {
+          "size_inch": 4,
+          "size_mm": 100,
+          "shutoff_lt200C_kPa": 490,
+          "shutoff_lt400C_kPa": 94,
+          "shutoff_lt600C_kPa": 70,
+          "actuator_kPa": {
+            "PC2109RA_95": 31.1,
+            "PC2111RA_110": 77.2
+          }
+        },
+        {
+          "size_inch": 5,
+          "size_mm": 125,
+          "shutoff_lt200C_kPa": 392,
+          "shutoff_lt400C_kPa": 60,
+          "shutoff_lt600C_kPa": 45,
+          "actuator_kPa": {
+            "PC2109RA_95": 16.0,
+            "PC2111RA_110": 39.7
+          }
+        },
+        {
+          "size_inch": 6,
+          "size_mm": 150,
+          "shutoff_lt200C_kPa": 279,
+          "shutoff_lt400C_kPa": 78,
+          "shutoff_lt600C_kPa": 61,
+          "actuator_kPa": {
+            "PC2111RA_110": 22.6,
+            "PC2112RA_125": 52.2
+          }
+        },
+        {
+          "size_inch": 8,
+          "size_mm": 200,
+          "shutoff_lt200C_kPa": 190,
+          "shutoff_lt400C_kPa": 46,
+          "shutoff_lt600C_kPa": 34,
+          "actuator_kPa": {
+            "PC2111RA_110": 9.6,
+            "PC2112RA_125": 21.8
+          }
+        },
+        {
+          "size_inch": 10,
+          "size_mm": 250,
+          "shutoff_lt200C_kPa": 97,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": 19,
+          "actuator_kPa": {
+            "PC2112RA_125": 9.4,
+            "PC2116RA_160": 21.9
+          }
+        },
+        {
+          "size_inch": 12,
+          "size_mm": 300,
+          "shutoff_lt200C_kPa": 55,
+          "shutoff_lt400C_kPa": 16,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2112RA_125": 5.6,
+            "PC2116RA_160": 12.6
+          }
+        },
+        {
+          "size_inch": 14,
+          "size_mm": 350,
+          "shutoff_lt200C_kPa": 60,
+          "shutoff_lt400C_kPa": 17,
+          "shutoff_lt600C_kPa": 13,
+          "actuator_kPa": {
+            "PC2116RA_160": 7.9,
+            "PC2121RA_210": 19.7,
+            "PC4113RA_130": 21.5,
+            "PC4117RA_170": 46.1
+          }
+        },
+        {
+          "size_inch": 16,
+          "size_mm": 400,
+          "shutoff_lt200C_kPa": 41,
+          "shutoff_lt400C_kPa": 13,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2116RA_160": 5.4,
+            "PC2121RA_210": 13.3,
+            "PC4113RA_130": 14.5,
+            "PC4117RA_170": 31.0
+          }
+        },
+        {
+          "size_inch": 18,
+          "size_mm": 450,
+          "shutoff_lt200C_kPa": 28,
+          "shutoff_lt400C_kPa": 10,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2116RA_160": 3.7,
+            "PC2121RA_210": 9.3,
+            "PC4113RA_130": 10.0,
+            "PC4117RA_170": 21.7
+          }
+        },
+        {
+          "size_inch": 20,
+          "size_mm": 500,
+          "shutoff_lt200C_kPa": 50,
+          "shutoff_lt400C_kPa": 22,
+          "shutoff_lt600C_kPa": 16,
+          "actuator_kPa": {
+            "PC2121RA_210": 6.2,
+            "PC2127RA_270": 16.8,
+            "PC4113RA_130": 6.6,
+            "PC4117RA_170": 15.8,
+            "PC4120RA_200": 40.4
+          }
+        },
+        {
+          "size_inch": 22,
+          "size_mm": 550,
+          "shutoff_lt200C_kPa": 37,
+          "shutoff_lt400C_kPa": 17,
+          "shutoff_lt600C_kPa": 14,
+          "actuator_kPa": {
+            "PC2121RA_210": 4.7,
+            "PC2127RA_270": 12.5,
+            "PC4113RA_130": 4.8,
+            "PC4117RA_170": 11.0,
+            "PC4120RA_200": 30.3
+          }
+        },
+        {
+          "size_inch": 24,
+          "size_mm": 600,
+          "shutoff_lt200C_kPa": 15,
+          "shutoff_lt400C_kPa": 15,
+          "shutoff_lt600C_kPa": 11,
+          "actuator_kPa": {
+            "PC2121RA_210": 3.6,
+            "PC2127RA_270": 9.6,
+            "PC4113RA_130": 3.8,
+            "PC4117RA_170": 8.4,
+            "PC4120RA_200": 23.4
+          }
+        },
+        {
+          "size_inch": 26,
+          "size_mm": 650,
+          "shutoff_lt200C_kPa": 13,
+          "shutoff_lt400C_kPa": 13,
+          "shutoff_lt600C_kPa": 10,
+          "actuator_kPa": {
+            "PC2121RA_210": 2.9,
+            "PC2127RA_270": 7.6,
+            "PC4113RA_130": 2.9,
+            "PC4117RA_170": 6.7,
+            "PC4120RA_200": 17.9
+          }
+        },
+        {
+          "size_inch": 28,
+          "size_mm": 700,
+          "shutoff_lt200C_kPa": 11,
+          "shutoff_lt400C_kPa": 11,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2121RA_210": 2.2,
+            "PC2127RA_270": 6.1,
+            "PC4113RA_130": 2.3,
+            "PC4117RA_170": 5.4,
+            "PC4120RA_200": 14.2
+          }
+        },
+        {
+          "size_inch": 30,
+          "size_mm": 750,
+          "shutoff_lt200C_kPa": 26,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": 18,
+          "actuator_kPa": {
+            "PC2127RA_270": 4.7,
+            "PC4117RA_170": 4.3,
+            "PC4120RA_200": 11.6,
+            "PC4125RA_250": 18.3
+          }
+        },
+        {
+          "size_inch": 32,
+          "size_mm": 800,
+          "shutoff_lt200C_kPa": 23,
+          "shutoff_lt400C_kPa": 23,
+          "shutoff_lt600C_kPa": 17,
+          "actuator_kPa": {
+            "PC2127RA_270": 4.1,
+            "PC4117RA_170": 3.5,
+            "PC4120RA_200": 9.5,
+            "PC4125RA_250": 15.1
+          }
+        },
+        {
+          "size_inch": 34,
+          "size_mm": 850,
+          "shutoff_lt200C_kPa": 20,
+          "shutoff_lt400C_kPa": 20,
+          "shutoff_lt600C_kPa": 14,
+          "actuator_kPa": {
+            "PC2127RA_270": 3.3,
+            "PC4117RA_170": 2.9,
+            "PC4120RA_200": 8.1,
+            "PC4125RA_250": 12.4
+          }
+        },
+        {
+          "size_inch": 36,
+          "size_mm": 900,
+          "shutoff_lt200C_kPa": 18,
+          "shutoff_lt400C_kPa": 18,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2127RA_270": 2.7,
+            "PC4117RA_170": 2.4,
+            "PC4120RA_200": 6.7,
+            "PC4125RA_250": 10.6
+          }
+        },
+        {
+          "size_inch": 40,
+          "size_mm": 1000,
+          "shutoff_lt200C_kPa": 14,
+          "shutoff_lt400C_kPa": 14,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.9,
+            "PC4117RA_170": 1.7,
+            "PC4120RA_200": 4.9,
+            "PC4125RA_250": 7.7
+          }
+        },
+        {
+          "size_inch": 44,
+          "size_mm": 1100,
+          "shutoff_lt200C_kPa": 11,
+          "shutoff_lt400C_kPa": 11,
+          "shutoff_lt600C_kPa": 10,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.5,
+            "PC4120RA_200": 3.7,
+            "PC4125RA_250": 5.8
+          }
+        },
+        {
+          "size_inch": 48,
+          "size_mm": 1200,
+          "shutoff_lt200C_kPa": 9,
+          "shutoff_lt400C_kPa": 9,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.2,
+            "PC4120RA_200": 2.8,
+            "PC4125RA_250": 4.4
+          }
+        },
+        {
+          "size_inch": 52,
+          "size_mm": 1300,
+          "shutoff_lt200C_kPa": 10,
+          "shutoff_lt400C_kPa": 10,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC4120RA_200": 2.2,
+            "PC4125RA_250": 3.3
+          }
+        },
+        {
+          "size_inch": 54,
+          "size_mm": 1350,
+          "shutoff_lt200C_kPa": 9,
+          "shutoff_lt400C_kPa": 9,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC4125RA_250": 3.0
+          }
+        },
+        {
+          "size_inch": 60,
+          "size_mm": 1500,
+          "shutoff_lt200C_kPa": 7,
+          "shutoff_lt400C_kPa": 7,
+          "shutoff_lt600C_kPa": 6,
+          "actuator_kPa": {
+            "PC4125RA_250": 2.1
+          }
+        },
+        {
+          "size_inch": 64,
+          "size_mm": 1600,
+          "shutoff_lt200C_kPa": 6,
+          "shutoff_lt400C_kPa": 6,
+          "shutoff_lt600C_kPa": 5,
+          "actuator_kPa": {
+            "PC4125RA_250": 1.8
+          }
+        }
+      ],
+      "stem_630_PH": [
+        {
+          "size_inch": 40,
+          "size_mm": 1000,
+          "shutoff_lt200C_kPa": 34,
+          "shutoff_lt400C_kPa": 34,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.9,
+            "PC4117RA_170": 1.7,
+            "PC4120RA_200": 4.9,
+            "PC4125RA_250": 7.7
+          }
+        },
+        {
+          "size_inch": 44,
+          "size_mm": 1100,
+          "shutoff_lt200C_kPa": 27,
+          "shutoff_lt400C_kPa": 27,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.5,
+            "PC4120RA_200": 3.7,
+            "PC4125RA_250": 5.8
+          }
+        },
+        {
+          "size_inch": 48,
+          "size_mm": 1200,
+          "shutoff_lt200C_kPa": 23,
+          "shutoff_lt400C_kPa": 23,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.2,
+            "PC4120RA_200": 2.8,
+            "PC4125RA_250": 4.4
+          }
+        },
+        {
+          "size_inch": 52,
+          "size_mm": 1300,
+          "shutoff_lt200C_kPa": 26,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4120RA_200": 2.2,
+            "PC4125RA_250": 3.4
+          }
+        },
+        {
+          "size_inch": 54,
+          "size_mm": 1350,
+          "shutoff_lt200C_kPa": 24,
+          "shutoff_lt400C_kPa": 24,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4125RA_250": 3.0
+          }
+        },
+        {
+          "size_inch": 60,
+          "size_mm": 1500,
+          "shutoff_lt200C_kPa": 18,
+          "shutoff_lt400C_kPa": 18,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4125RA_250": 2.1
+          }
+        },
+        {
+          "size_inch": 64,
+          "size_mm": 1600,
+          "shutoff_lt200C_kPa": 15,
+          "shutoff_lt400C_kPa": 15,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4125RA_250": 1.8
+          }
+        }
+      ]
+    },
+    "table_4_2B_single_acting_400kPa_60deg_grafoil": {
+      "stem_304_316": [
+        {
+          "size_inch": 3,
+          "size_mm": 80,
+          "shutoff_lt200C_kPa": 490,
+          "shutoff_lt400C_kPa": 159,
+          "shutoff_lt600C_kPa": 119,
+          "actuator_kPa": {
+            "PC2111RA_110": 101.9
+          }
+        },
+        {
+          "size_inch": 4,
+          "size_mm": 100,
+          "shutoff_lt200C_kPa": 490,
+          "shutoff_lt400C_kPa": 94,
+          "shutoff_lt600C_kPa": 70,
+          "actuator_kPa": {
+            "PC2111RA_110": 52.0
+          }
+        },
+        {
+          "size_inch": 5,
+          "size_mm": 125,
+          "shutoff_lt200C_kPa": 392,
+          "shutoff_lt400C_kPa": 60,
+          "shutoff_lt600C_kPa": 45,
+          "actuator_kPa": {
+            "PC2111RA_110": 26.7
+          }
+        },
+        {
+          "size_inch": 6,
+          "size_mm": 150,
+          "shutoff_lt200C_kPa": 279,
+          "shutoff_lt400C_kPa": 78,
+          "shutoff_lt600C_kPa": 61,
+          "actuator_kPa": {
+            "PC2111RA_110": 15.4,
+            "PC2112RA_125": 43.8
+          }
+        },
+        {
+          "size_inch": 8,
+          "size_mm": 200,
+          "shutoff_lt200C_kPa": 190,
+          "shutoff_lt400C_kPa": 46,
+          "shutoff_lt600C_kPa": 34,
+          "actuator_kPa": {
+            "PC2111RA_110": 6.6,
+            "PC2112RA_125": 18.4
+          }
+        },
+        {
+          "size_inch": 10,
+          "size_mm": 250,
+          "shutoff_lt200C_kPa": 97,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": 19,
+          "actuator_kPa": {
+            "PC2112RA_125": 6.0,
+            "PC2116RA_160": 19.0
+          }
+        },
+        {
+          "size_inch": 12,
+          "size_mm": 300,
+          "shutoff_lt200C_kPa": 55,
+          "shutoff_lt400C_kPa": 16,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2112RA_125": 3.4,
+            "PC2116RA_160": 10.9
+          }
+        },
+        {
+          "size_inch": 14,
+          "size_mm": 350,
+          "shutoff_lt200C_kPa": 60,
+          "shutoff_lt400C_kPa": 17,
+          "shutoff_lt600C_kPa": 13,
+          "actuator_kPa": {
+            "PC2116RA_160": 6.8,
+            "PC2121RA_210": 18.3,
+            "PC4113RA_130": 17.9
+          }
+        },
+        {
+          "size_inch": 16,
+          "size_mm": 400,
+          "shutoff_lt200C_kPa": 41,
+          "shutoff_lt400C_kPa": 13,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2116RA_160": 4.6,
+            "PC2121RA_210": 12.3,
+            "PC4113RA_130": 12.9
+          }
+        },
+        {
+          "size_inch": 18,
+          "size_mm": 450,
+          "shutoff_lt200C_kPa": 28,
+          "shutoff_lt400C_kPa": 10,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2116RA_160": 3.2,
+            "PC2121RA_210": 8.7,
+            "PC4113RA_130": 9.0
+          }
+        },
+        {
+          "size_inch": 20,
+          "size_mm": 500,
+          "shutoff_lt200C_kPa": 50,
+          "shutoff_lt400C_kPa": 22,
+          "shutoff_lt600C_kPa": 16,
+          "actuator_kPa": {
+            "PC2121RA_210": 5.5,
+            "PC2127RA_270": 15.9,
+            "PC4113RA_130": 5.6,
+            "PC4117RA_170": 13.5
+          }
+        },
+        {
+          "size_inch": 22,
+          "size_mm": 550,
+          "shutoff_lt200C_kPa": 37,
+          "shutoff_lt400C_kPa": 17,
+          "shutoff_lt600C_kPa": 14,
+          "actuator_kPa": {
+            "PC2121RA_210": 4.2,
+            "PC2127RA_270": 12.0,
+            "PC4113RA_130": 3.9,
+            "PC4117RA_170": 10.7
+          }
+        },
+        {
+          "size_inch": 24,
+          "size_mm": 600,
+          "shutoff_lt200C_kPa": 15,
+          "shutoff_lt400C_kPa": 15,
+          "shutoff_lt600C_kPa": 11,
+          "actuator_kPa": {
+            "PC2121RA_210": 3.2,
+            "PC2127RA_270": 9.4,
+            "PC4113RA_130": 3.0,
+            "PC4117RA_170": 8.2
+          }
+        },
+        {
+          "size_inch": 26,
+          "size_mm": 650,
+          "shutoff_lt200C_kPa": 13,
+          "shutoff_lt400C_kPa": 13,
+          "shutoff_lt600C_kPa": 10,
+          "actuator_kPa": {
+            "PC2121RA_210": 2.5,
+            "PC2127RA_270": 7.3,
+            "PC4113RA_130": 2.3,
+            "PC4117RA_170": 6.4
+          }
+        },
+        {
+          "size_inch": 28,
+          "size_mm": 700,
+          "shutoff_lt200C_kPa": 11,
+          "shutoff_lt400C_kPa": 11,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2121RA_210": 2.0,
+            "PC2127RA_270": 5.8,
+            "PC4113RA_130": 2.0,
+            "PC4117RA_170": 5.2
+          }
+        },
+        {
+          "size_inch": 30,
+          "size_mm": 750,
+          "shutoff_lt200C_kPa": 26,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": 18,
+          "actuator_kPa": {
+            "PC2127RA_270": 4.4,
+            "PC4117RA_170": 4.2,
+            "PC4120RA_200": 11.6
+          }
+        },
+        {
+          "size_inch": 32,
+          "size_mm": 800,
+          "shutoff_lt200C_kPa": 23,
+          "shutoff_lt400C_kPa": 23,
+          "shutoff_lt600C_kPa": 17,
+          "actuator_kPa": {
+            "PC2127RA_270": 3.7,
+            "PC4117RA_170": 3.5,
+            "PC4120RA_200": 9.5
+          }
+        },
+        {
+          "size_inch": 34,
+          "size_mm": 850,
+          "shutoff_lt200C_kPa": 20,
+          "shutoff_lt400C_kPa": 20,
+          "shutoff_lt600C_kPa": 14,
+          "actuator_kPa": {
+            "PC2127RA_270": 2.8,
+            "PC4117RA_170": 2.7,
+            "PC4120RA_200": 7.7
+          }
+        },
+        {
+          "size_inch": 36,
+          "size_mm": 900,
+          "shutoff_lt200C_kPa": 18,
+          "shutoff_lt400C_kPa": 18,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2127RA_270": 2.4,
+            "PC4117RA_170": 2.3,
+            "PC4120RA_200": 6.5
+          }
+        },
+        {
+          "size_inch": 40,
+          "size_mm": 1000,
+          "shutoff_lt200C_kPa": 14,
+          "shutoff_lt400C_kPa": 14,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.7,
+            "PC4117RA_170": 1.6,
+            "PC4120RA_200": 4.7,
+            "PC4125RA_250": 7.5
+          }
+        },
+        {
+          "size_inch": 44,
+          "size_mm": 1100,
+          "shutoff_lt200C_kPa": 11,
+          "shutoff_lt400C_kPa": 11,
+          "shutoff_lt600C_kPa": 10,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.4,
+            "PC4120RA_200": 3.5,
+            "PC4125RA_250": 5.6
+          }
+        },
+        {
+          "size_inch": 48,
+          "size_mm": 1200,
+          "shutoff_lt200C_kPa": 9,
+          "shutoff_lt400C_kPa": 9,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.1,
+            "PC4120RA_200": 2.8,
+            "PC4125RA_250": 4.3
+          }
+        },
+        {
+          "size_inch": 52,
+          "size_mm": 1300,
+          "shutoff_lt200C_kPa": 10,
+          "shutoff_lt400C_kPa": 10,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC4120RA_200": 2.0,
+            "PC4125RA_250": 3.4
+          }
+        },
+        {
+          "size_inch": 54,
+          "size_mm": 1350,
+          "shutoff_lt200C_kPa": 9,
+          "shutoff_lt400C_kPa": 9,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC4125RA_250": 3.0
+          }
+        },
+        {
+          "size_inch": 60,
+          "size_mm": 1500,
+          "shutoff_lt200C_kPa": 7,
+          "shutoff_lt400C_kPa": 7,
+          "shutoff_lt600C_kPa": 6,
+          "actuator_kPa": {
+            "PC4125RA_250": 2.1
+          }
+        },
+        {
+          "size_inch": 64,
+          "size_mm": 1600,
+          "shutoff_lt200C_kPa": 6,
+          "shutoff_lt400C_kPa": 6,
+          "shutoff_lt600C_kPa": 5,
+          "actuator_kPa": {
+            "PC4125RA_250": 1.8
+          }
+        }
+      ],
+      "stem_630_PH": [
+        {
+          "size_inch": 40,
+          "size_mm": 1000,
+          "shutoff_lt200C_kPa": 34,
+          "shutoff_lt400C_kPa": 34,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.7,
+            "PC4117RA_170": 1.6,
+            "PC4120RA_200": 4.7,
+            "PC4125RA_250": 7.5
+          }
+        },
+        {
+          "size_inch": 44,
+          "size_mm": 1100,
+          "shutoff_lt200C_kPa": 27,
+          "shutoff_lt400C_kPa": 27,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.4,
+            "PC4120RA_200": 3.5,
+            "PC4125RA_250": 5.6
+          }
+        },
+        {
+          "size_inch": 48,
+          "size_mm": 1200,
+          "shutoff_lt200C_kPa": 23,
+          "shutoff_lt400C_kPa": 23,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.1,
+            "PC4120RA_200": 2.8,
+            "PC4125RA_250": 4.3
+          }
+        },
+        {
+          "size_inch": 52,
+          "size_mm": 1300,
+          "shutoff_lt200C_kPa": 26,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4120RA_200": 2.0,
+            "PC4125RA_250": 3.4
+          }
+        },
+        {
+          "size_inch": 54,
+          "size_mm": 1350,
+          "shutoff_lt200C_kPa": 24,
+          "shutoff_lt400C_kPa": 24,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4125RA_250": 3.0
+          }
+        },
+        {
+          "size_inch": 60,
+          "size_mm": 1500,
+          "shutoff_lt200C_kPa": 18,
+          "shutoff_lt400C_kPa": 18,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4125RA_250": 2.1
+          }
+        },
+        {
+          "size_inch": 64,
+          "size_mm": 1600,
+          "shutoff_lt200C_kPa": 15,
+          "shutoff_lt400C_kPa": 15,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4125RA_250": 1.8
+          }
+        }
+      ]
+    },
+    "table_4_3A_double_acting_400kPa_90deg_lowtorque": {
+      "stem_304_316": [
+        {
+          "size_inch": 3,
+          "size_mm": 80,
+          "shutoff_lt200C_kPa": 490,
+          "shutoff_lt400C_kPa": 159,
+          "shutoff_lt600C_kPa": 119,
+          "actuator_kPa": {
+            "PC2207RA_75": 142.2
+          }
+        },
+        {
+          "size_inch": 4,
+          "size_mm": 100,
+          "shutoff_lt200C_kPa": 490,
+          "shutoff_lt400C_kPa": 94,
+          "shutoff_lt600C_kPa": 70,
+          "actuator_kPa": {
+            "PC2207RA_75": 72.7
+          }
+        },
+        {
+          "size_inch": 5,
+          "size_mm": 125,
+          "shutoff_lt200C_kPa": 392,
+          "shutoff_lt400C_kPa": 60,
+          "shutoff_lt600C_kPa": 45,
+          "actuator_kPa": {
+            "PC2207RA_75": 37.4
+          }
+        },
+        {
+          "size_inch": 6,
+          "size_mm": 150,
+          "shutoff_lt200C_kPa": 279,
+          "shutoff_lt400C_kPa": 78,
+          "shutoff_lt600C_kPa": 61,
+          "actuator_kPa": {
+            "PC2209RA_95": 46.4,
+            "PC2211RA_110": 69.5
+          }
+        },
+        {
+          "size_inch": 8,
+          "size_mm": 200,
+          "shutoff_lt200C_kPa": 190,
+          "shutoff_lt400C_kPa": 46,
+          "shutoff_lt600C_kPa": 34,
+          "actuator_kPa": {
+            "PC2209RA_95": 19.5,
+            "PC2211RA_110": 26.8
+          }
+        },
+        {
+          "size_inch": 10,
+          "size_mm": 250,
+          "shutoff_lt200C_kPa": 97,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": 19,
+          "actuator_kPa": {
+            "PC2209RA_95": 8.6,
+            "PC2211RA_110": 13.8
+          }
+        },
+        {
+          "size_inch": 12,
+          "size_mm": 300,
+          "shutoff_lt200C_kPa": 55,
+          "shutoff_lt400C_kPa": 16,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2209RA_95": 4.9,
+            "PC2211RA_110": 8.0
+          }
+        },
+        {
+          "size_inch": 14,
+          "size_mm": 350,
+          "shutoff_lt200C_kPa": 60,
+          "shutoff_lt400C_kPa": 17,
+          "shutoff_lt600C_kPa": 13,
+          "actuator_kPa": {
+            "PC2211RA_110": 5.0,
+            "PC2212RA_125": 10.3,
+            "PC4213RA_130": 24.6
+          }
+        },
+        {
+          "size_inch": 16,
+          "size_mm": 400,
+          "shutoff_lt200C_kPa": 41,
+          "shutoff_lt400C_kPa": 13,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2211RA_110": 3.3,
+            "PC2212RA_125": 6.9,
+            "PC4213RA_130": 16.5
+          }
+        },
+        {
+          "size_inch": 18,
+          "size_mm": 450,
+          "shutoff_lt200C_kPa": 28,
+          "shutoff_lt400C_kPa": 10,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2211RA_110": 2.4,
+            "PC2212RA_125": 2.4,
+            "PC4213RA_130": 11.1
+          }
+        },
+        {
+          "size_inch": 20,
+          "size_mm": 500,
+          "shutoff_lt200C_kPa": 50,
+          "shutoff_lt400C_kPa": 22,
+          "shutoff_lt600C_kPa": 16,
+          "actuator_kPa": {
+            "PC2212RA_125": 1.8,
+            "PC2216RA_160": 6.6,
+            "PC4213RA_130": 7.8
+          }
+        },
+        {
+          "size_inch": 22,
+          "size_mm": 550,
+          "shutoff_lt200C_kPa": 37,
+          "shutoff_lt400C_kPa": 17,
+          "shutoff_lt600C_kPa": 14,
+          "actuator_kPa": {
+            "PC2212RA_125": 1.5,
+            "PC2216RA_160": 5.0,
+            "PC4213RA_130": 5.8
+          }
+        },
+        {
+          "size_inch": 24,
+          "size_mm": 600,
+          "shutoff_lt200C_kPa": 15,
+          "shutoff_lt400C_kPa": 15,
+          "shutoff_lt600C_kPa": 11,
+          "actuator_kPa": {
+            "PC2212RA_125": 1.2,
+            "PC2216RA_160": 3.8,
+            "PC4213RA_130": 4.4
+          }
+        },
+        {
+          "size_inch": 26,
+          "size_mm": 650,
+          "shutoff_lt200C_kPa": 13,
+          "shutoff_lt400C_kPa": 13,
+          "shutoff_lt600C_kPa": 10,
+          "actuator_kPa": {
+            "PC2212RA_125": 1.0,
+            "PC2216RA_160": 3.0,
+            "PC4213RA_130": 3.5,
+            "PC4217RA_170": 6.6
+          }
+        },
+        {
+          "size_inch": 28,
+          "size_mm": 700,
+          "shutoff_lt200C_kPa": 11,
+          "shutoff_lt400C_kPa": 11,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2216RA_160": 2.3,
+            "PC4213RA_130": 2.7,
+            "PC4217RA_170": 5.5
+          }
+        },
+        {
+          "size_inch": 30,
+          "size_mm": 750,
+          "shutoff_lt200C_kPa": 26,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": 18,
+          "actuator_kPa": {
+            "PC2216RA_160": 1.9,
+            "PC2221RA_210": 4.7,
+            "PC4213RA_130": 2.3,
+            "PC4217RA_170": 4.7,
+            "PC4220RA_200": 11.0
+          }
+        },
+        {
+          "size_inch": 32,
+          "size_mm": 800,
+          "shutoff_lt200C_kPa": 23,
+          "shutoff_lt400C_kPa": 23,
+          "shutoff_lt600C_kPa": 17,
+          "actuator_kPa": {
+            "PC2216RA_160": 1.7,
+            "PC2221RA_210": 3.9,
+            "PC4213RA_130": 1.9,
+            "PC4217RA_170": 4.1,
+            "PC4220RA_200": 8.9
+          }
+        },
+        {
+          "size_inch": 34,
+          "size_mm": 850,
+          "shutoff_lt200C_kPa": 20,
+          "shutoff_lt400C_kPa": 20,
+          "shutoff_lt600C_kPa": 14,
+          "actuator_kPa": {
+            "PC2221RA_210": 3.2,
+            "PC4213RA_130": 1.5,
+            "PC4217RA_170": 3.3,
+            "PC4220RA_200": 8.5
+          }
+        },
+        {
+          "size_inch": 36,
+          "size_mm": 900,
+          "shutoff_lt200C_kPa": 18,
+          "shutoff_lt400C_kPa": 18,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2221RA_210": 2.6,
+            "PC4213RA_130": 1.3,
+            "PC4217RA_170": 2.8,
+            "PC4220RA_200": 6.0
+          }
+        },
+        {
+          "size_inch": 40,
+          "size_mm": 1000,
+          "shutoff_lt200C_kPa": 14,
+          "shutoff_lt400C_kPa": 14,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2221RA_210": 1.9,
+            "PC2227RA_270": 4.2,
+            "PC4213RA_130": 0.9,
+            "PC4217RA_170": 2.0,
+            "PC4220RA_200": 3.5
+          }
+        },
+        {
+          "size_inch": 44,
+          "size_mm": 1100,
+          "shutoff_lt200C_kPa": 11,
+          "shutoff_lt400C_kPa": 11,
+          "shutoff_lt600C_kPa": 10,
+          "actuator_kPa": {
+            "PC2227RA_270": 3.2,
+            "PC4213RA_130": 0.6,
+            "PC4217RA_170": 1.6,
+            "PC4220RA_200": 3.3
+          }
+        },
+        {
+          "size_inch": 48,
+          "size_mm": 1200,
+          "shutoff_lt200C_kPa": 9,
+          "shutoff_lt400C_kPa": 9,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2227RA_270": 2.5,
+            "PC4217RA_170": 1.1,
+            "PC4220RA_200": 2.6
+          }
+        },
+        {
+          "size_inch": 52,
+          "size_mm": 1300,
+          "shutoff_lt200C_kPa": 10,
+          "shutoff_lt400C_kPa": 10,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.8,
+            "PC4217RA_170": 0.8,
+            "PC4220RA_200": 2.2
+          }
+        },
+        {
+          "size_inch": 54,
+          "size_mm": 1350,
+          "shutoff_lt200C_kPa": 9,
+          "shutoff_lt400C_kPa": 9,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.6,
+            "PC4217RA_170": 0.8,
+            "PC4220RA_200": 2.0
+          }
+        },
+        {
+          "size_inch": 60,
+          "size_mm": 1500,
+          "shutoff_lt200C_kPa": 7,
+          "shutoff_lt400C_kPa": 7,
+          "shutoff_lt600C_kPa": 6,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.1,
+            "PC4217RA_170": 0.5,
+            "PC4220RA_200": 1.3
+          }
+        },
+        {
+          "size_inch": 64,
+          "size_mm": 1600,
+          "shutoff_lt200C_kPa": 6,
+          "shutoff_lt400C_kPa": 6,
+          "shutoff_lt600C_kPa": 5,
+          "actuator_kPa": {
+            "PC2227RA_270": 0.8,
+            "PC4220RA_200": 1.0,
+            "PC4228RA_280": 2.5
+          }
+        }
+      ],
+      "stem_630_PH": [
+        {
+          "size_inch": 40,
+          "size_mm": 1000,
+          "shutoff_lt200C_kPa": 34,
+          "shutoff_lt400C_kPa": 34,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2221RA_210": 1.9,
+            "PC2227RA_270": 4.2,
+            "PC4213RA_130": 0.9,
+            "PC4217RA_170": 2.0,
+            "PC4220RA_200": 3.5
+          }
+        },
+        {
+          "size_inch": 44,
+          "size_mm": 1100,
+          "shutoff_lt200C_kPa": 27,
+          "shutoff_lt400C_kPa": 27,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 3.2,
+            "PC4213RA_130": 0.6,
+            "PC4217RA_170": 1.6,
+            "PC4220RA_200": 3.3
+          }
+        },
+        {
+          "size_inch": 48,
+          "size_mm": 1200,
+          "shutoff_lt200C_kPa": 23,
+          "shutoff_lt400C_kPa": 23,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 2.5,
+            "PC4217RA_170": 1.1,
+            "PC4220RA_200": 2.6
+          }
+        },
+        {
+          "size_inch": 52,
+          "size_mm": 1300,
+          "shutoff_lt200C_kPa": 26,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.8,
+            "PC4217RA_170": 0.8,
+            "PC4220RA_200": 2.2
+          }
+        },
+        {
+          "size_inch": 54,
+          "size_mm": 1350,
+          "shutoff_lt200C_kPa": 24,
+          "shutoff_lt400C_kPa": 24,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.6,
+            "PC4217RA_170": 0.8,
+            "PC4220RA_200": 2.0
+          }
+        },
+        {
+          "size_inch": 60,
+          "size_mm": 1500,
+          "shutoff_lt200C_kPa": 18,
+          "shutoff_lt400C_kPa": 18,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.1,
+            "PC4217RA_170": 0.5,
+            "PC4220RA_200": 1.3
+          }
+        },
+        {
+          "size_inch": 64,
+          "size_mm": 1600,
+          "shutoff_lt200C_kPa": 15,
+          "shutoff_lt400C_kPa": 15,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 0.8,
+            "PC4220RA_200": 1.0,
+            "PC4228RA_280": 2.5
+          }
+        }
+      ]
+    },
+    "table_4_3B_double_acting_400kPa_90deg_grafoil": {
+      "stem_304_316": [
+        {
+          "size_inch": 3,
+          "size_mm": 80,
+          "shutoff_lt200C_kPa": 490,
+          "shutoff_lt400C_kPa": 159,
+          "shutoff_lt600C_kPa": 119,
+          "actuator_kPa": {
+            "PC2207RA_75": 65.3
+          }
+        },
+        {
+          "size_inch": 4,
+          "size_mm": 100,
+          "shutoff_lt200C_kPa": 490,
+          "shutoff_lt400C_kPa": 94,
+          "shutoff_lt600C_kPa": 70,
+          "actuator_kPa": {
+            "PC2207RA_75": 33.6
+          }
+        },
+        {
+          "size_inch": 5,
+          "size_mm": 125,
+          "shutoff_lt200C_kPa": 392,
+          "shutoff_lt400C_kPa": 60,
+          "shutoff_lt600C_kPa": 45,
+          "actuator_kPa": {
+            "PC2207RA_75": 28.8
+          }
+        },
+        {
+          "size_inch": 6,
+          "size_mm": 150,
+          "shutoff_lt200C_kPa": 279,
+          "shutoff_lt400C_kPa": 78,
+          "shutoff_lt600C_kPa": 61,
+          "actuator_kPa": {
+            "PC2209RA_95": 39.9
+          }
+        },
+        {
+          "size_inch": 8,
+          "size_mm": 200,
+          "shutoff_lt200C_kPa": 190,
+          "shutoff_lt400C_kPa": 46,
+          "shutoff_lt600C_kPa": 34,
+          "actuator_kPa": {
+            "PC2209RA_95": 17.1
+          }
+        },
+        {
+          "size_inch": 10,
+          "size_mm": 250,
+          "shutoff_lt200C_kPa": 97,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": 19,
+          "actuator_kPa": {
+            "PC2209RA_95": 5.8
+          }
+        },
+        {
+          "size_inch": 12,
+          "size_mm": 300,
+          "shutoff_lt200C_kPa": 55,
+          "shutoff_lt400C_kPa": 16,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2209RA_95": 3.4,
+            "PC2211RA_110": 8.8
+          }
+        },
+        {
+          "size_inch": 14,
+          "size_mm": 350,
+          "shutoff_lt200C_kPa": 60,
+          "shutoff_lt400C_kPa": 17,
+          "shutoff_lt600C_kPa": 13,
+          "actuator_kPa": {
+            "PC2211RA_110": 4.1
+          }
+        },
+        {
+          "size_inch": 16,
+          "size_mm": 400,
+          "shutoff_lt200C_kPa": 41,
+          "shutoff_lt400C_kPa": 13,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2211RA_110": 2.7
+          }
+        },
+        {
+          "size_inch": 18,
+          "size_mm": 450,
+          "shutoff_lt200C_kPa": 28,
+          "shutoff_lt400C_kPa": 10,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2211RA_110": 1.9
+          }
+        },
+        {
+          "size_inch": 20,
+          "size_mm": 500,
+          "shutoff_lt200C_kPa": 50,
+          "shutoff_lt400C_kPa": 22,
+          "shutoff_lt600C_kPa": 16,
+          "actuator_kPa": {
+            "PC2212RA_125": 1.6,
+            "PC2216RA_160": 6.2,
+            "PC4213RA_130": 7.1
+          }
+        },
+        {
+          "size_inch": 22,
+          "size_mm": 550,
+          "shutoff_lt200C_kPa": 37,
+          "shutoff_lt400C_kPa": 17,
+          "shutoff_lt600C_kPa": 14,
+          "actuator_kPa": {
+            "PC2212RA_125": 1.3,
+            "PC2216RA_160": 4.7,
+            "PC4213RA_130": 5.3
+          }
+        },
+        {
+          "size_inch": 24,
+          "size_mm": 600,
+          "shutoff_lt200C_kPa": 15,
+          "shutoff_lt400C_kPa": 15,
+          "shutoff_lt600C_kPa": 11,
+          "actuator_kPa": {
+            "PC2212RA_125": 1.1,
+            "PC2216RA_160": 3.6,
+            "PC4213RA_130": 4.1
+          }
+        },
+        {
+          "size_inch": 26,
+          "size_mm": 650,
+          "shutoff_lt200C_kPa": 13,
+          "shutoff_lt400C_kPa": 13,
+          "shutoff_lt600C_kPa": 10,
+          "actuator_kPa": {
+            "PC2216RA_160": 2.8,
+            "PC4213RA_130": 3.2
+          }
+        },
+        {
+          "size_inch": 28,
+          "size_mm": 700,
+          "shutoff_lt200C_kPa": 11,
+          "shutoff_lt400C_kPa": 11,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2216RA_160": 2.2,
+            "PC4213RA_130": 2.6
+          }
+        },
+        {
+          "size_inch": 30,
+          "size_mm": 750,
+          "shutoff_lt200C_kPa": 26,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": 18,
+          "actuator_kPa": {
+            "PC2216RA_160": 1.8,
+            "PC2221RA_210": 4.6,
+            "PC4213RA_130": 2.1,
+            "PC4217RA_170": 4.7
+          }
+        },
+        {
+          "size_inch": 32,
+          "size_mm": 800,
+          "shutoff_lt200C_kPa": 23,
+          "shutoff_lt400C_kPa": 23,
+          "shutoff_lt600C_kPa": 17,
+          "actuator_kPa": {
+            "PC2216RA_160": 1.6,
+            "PC2221RA_210": 3.8,
+            "PC2227RA_270": 8.2,
+            "PC4213RA_130": 1.7,
+            "PC4217RA_170": 3.8
+          }
+        },
+        {
+          "size_inch": 34,
+          "size_mm": 850,
+          "shutoff_lt200C_kPa": 20,
+          "shutoff_lt400C_kPa": 20,
+          "shutoff_lt600C_kPa": 14,
+          "actuator_kPa": {
+            "PC2227RA_270": 6.7,
+            "PC4213RA_130": 1.4,
+            "PC4217RA_170": 3.2
+          }
+        },
+        {
+          "size_inch": 36,
+          "size_mm": 900,
+          "shutoff_lt200C_kPa": 18,
+          "shutoff_lt400C_kPa": 18,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2227RA_270": 5.7,
+            "PC4213RA_130": 1.1,
+            "PC4217RA_170": 2.6
+          }
+        },
+        {
+          "size_inch": 40,
+          "size_mm": 1000,
+          "shutoff_lt200C_kPa": 14,
+          "shutoff_lt400C_kPa": 14,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2227RA_270": 4.2,
+            "PC4213RA_130": 0.8,
+            "PC4217RA_170": 1.9,
+            "PC4220RA_200": 4.5
+          }
+        },
+        {
+          "size_inch": 44,
+          "size_mm": 1100,
+          "shutoff_lt200C_kPa": 11,
+          "shutoff_lt400C_kPa": 11,
+          "shutoff_lt600C_kPa": 10,
+          "actuator_kPa": {
+            "PC2227RA_270": 3.1,
+            "PC4217RA_170": 1.4,
+            "PC4220RA_200": 3.3
+          }
+        },
+        {
+          "size_inch": 48,
+          "size_mm": 1200,
+          "shutoff_lt200C_kPa": 9,
+          "shutoff_lt400C_kPa": 9,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2227RA_270": 2.4,
+            "PC4217RA_170": 1.1,
+            "PC4220RA_200": 2.6
+          }
+        },
+        {
+          "size_inch": 52,
+          "size_mm": 1300,
+          "shutoff_lt200C_kPa": 10,
+          "shutoff_lt400C_kPa": 10,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.8,
+            "PC4217RA_170": 0.8,
+            "PC4220RA_200": 2.0
+          }
+        },
+        {
+          "size_inch": 54,
+          "size_mm": 1350,
+          "shutoff_lt200C_kPa": 9,
+          "shutoff_lt400C_kPa": 9,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.6,
+            "PC4217RA_170": 0.8,
+            "PC4220RA_200": 1.8
+          }
+        },
+        {
+          "size_inch": 60,
+          "size_mm": 1500,
+          "shutoff_lt200C_kPa": 7,
+          "shutoff_lt400C_kPa": 7,
+          "shutoff_lt600C_kPa": 6,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.1,
+            "PC4217RA_170": 0.5,
+            "PC4220RA_200": 1.3
+          }
+        },
+        {
+          "size_inch": 64,
+          "size_mm": 1600,
+          "shutoff_lt200C_kPa": 6,
+          "shutoff_lt400C_kPa": 6,
+          "shutoff_lt600C_kPa": 5,
+          "actuator_kPa": {
+            "PC2227RA_270": 0.8,
+            "PC4220RA_200": 1.0,
+            "PC4228RA_280": 2.5
+          }
+        }
+      ],
+      "stem_630_PH": [
+        {
+          "size_inch": 40,
+          "size_mm": 1000,
+          "shutoff_lt200C_kPa": 34,
+          "shutoff_lt400C_kPa": 34,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 4.2,
+            "PC4213RA_130": 0.8,
+            "PC4217RA_170": 1.9,
+            "PC4220RA_200": 4.5
+          }
+        },
+        {
+          "size_inch": 44,
+          "size_mm": 1100,
+          "shutoff_lt200C_kPa": 27,
+          "shutoff_lt400C_kPa": 27,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 3.1,
+            "PC4217RA_170": 1.4,
+            "PC4220RA_200": 3.3
+          }
+        },
+        {
+          "size_inch": 48,
+          "size_mm": 1200,
+          "shutoff_lt200C_kPa": 23,
+          "shutoff_lt400C_kPa": 23,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 2.4,
+            "PC4217RA_170": 1.1,
+            "PC4220RA_200": 2.6
+          }
+        },
+        {
+          "size_inch": 52,
+          "size_mm": 1300,
+          "shutoff_lt200C_kPa": 26,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.8,
+            "PC4217RA_170": 0.8,
+            "PC4220RA_200": 2.0
+          }
+        },
+        {
+          "size_inch": 54,
+          "size_mm": 1350,
+          "shutoff_lt200C_kPa": 24,
+          "shutoff_lt400C_kPa": 24,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.6,
+            "PC4217RA_170": 0.8,
+            "PC4220RA_200": 1.8
+          }
+        },
+        {
+          "size_inch": 60,
+          "size_mm": 1500,
+          "shutoff_lt200C_kPa": 18,
+          "shutoff_lt400C_kPa": 18,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 1.1,
+            "PC4217RA_170": 0.5,
+            "PC4220RA_200": 1.3
+          }
+        },
+        {
+          "size_inch": 64,
+          "size_mm": 1600,
+          "shutoff_lt200C_kPa": 15,
+          "shutoff_lt400C_kPa": 15,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2227RA_270": 0.8,
+            "PC4220RA_200": 1.0,
+            "PC4228RA_280": 2.5
+          }
+        }
+      ]
+    },
+    "table_4_4A_single_acting_400kPa_90deg_lowtorque": {
+      "stem_304_316": [
+        {
+          "size_inch": 3,
+          "size_mm": 80,
+          "shutoff_lt200C_kPa": 490,
+          "shutoff_lt400C_kPa": 159,
+          "shutoff_lt600C_kPa": 119,
+          "actuator_kPa": {
+            "PC2109RA_95": 38.0,
+            "PC2111RA_110": 96.1
+          }
+        },
+        {
+          "size_inch": 4,
+          "size_mm": 100,
+          "shutoff_lt200C_kPa": 490,
+          "shutoff_lt400C_kPa": 94,
+          "shutoff_lt600C_kPa": 70,
+          "actuator_kPa": {
+            "PC2109RA_95": 19.4,
+            "PC2111RA_110": 48.3
+          }
+        },
+        {
+          "size_inch": 5,
+          "size_mm": 125,
+          "shutoff_lt200C_kPa": 392,
+          "shutoff_lt400C_kPa": 60,
+          "shutoff_lt600C_kPa": 45,
+          "actuator_kPa": {
+            "PC2109RA_95": 10.0,
+            "PC2111RA_110": 24.7
+          }
+        },
+        {
+          "size_inch": 6,
+          "size_mm": 150,
+          "shutoff_lt200C_kPa": 279,
+          "shutoff_lt400C_kPa": 78,
+          "shutoff_lt600C_kPa": 61,
+          "actuator_kPa": {
+            "PC2111RA_110": 14.1,
+            "PC2112RA_125": 32.3
+          }
+        },
+        {
+          "size_inch": 8,
+          "size_mm": 200,
+          "shutoff_lt200C_kPa": 190,
+          "shutoff_lt400C_kPa": 46,
+          "shutoff_lt600C_kPa": 34,
+          "actuator_kPa": {
+            "PC2111RA_110": 6.0,
+            "PC2112RA_125": 13.7
+          }
+        },
+        {
+          "size_inch": 10,
+          "size_mm": 250,
+          "shutoff_lt200C_kPa": 97,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": 19,
+          "actuator_kPa": {
+            "PC2112RA_125": 5.9,
+            "PC2116RA_160": 14.0
+          }
+        },
+        {
+          "size_inch": 12,
+          "size_mm": 300,
+          "shutoff_lt200C_kPa": 55,
+          "shutoff_lt400C_kPa": 16,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2112RA_125": 3.5,
+            "PC2116RA_160": 8.1
+          }
+        },
+        {
+          "size_inch": 14,
+          "size_mm": 350,
+          "shutoff_lt200C_kPa": 60,
+          "shutoff_lt400C_kPa": 17,
+          "shutoff_lt600C_kPa": 13,
+          "actuator_kPa": {
+            "PC2116RA_160": 5.1,
+            "PC2121RA_210": 12.4,
+            "PC4113RA_130": 13.2,
+            "PC4117RA_170": 28.5
+          }
+        },
+        {
+          "size_inch": 16,
+          "size_mm": 400,
+          "shutoff_lt200C_kPa": 41,
+          "shutoff_lt400C_kPa": 13,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2116RA_160": 3.4,
+            "PC2121RA_210": 8.3,
+            "PC4113RA_130": 9.0,
+            "PC4117RA_170": 19.2
+          }
+        },
+        {
+          "size_inch": 18,
+          "size_mm": 450,
+          "shutoff_lt200C_kPa": 28,
+          "shutoff_lt400C_kPa": 10,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2116RA_160": 2.3,
+            "PC2121RA_210": 5.9,
+            "PC4113RA_130": 6.1,
+            "PC4117RA_170": 13.4
+          }
+        },
+        {
+          "size_inch": 20,
+          "size_mm": 500,
+          "shutoff_lt200C_kPa": 50,
+          "shutoff_lt400C_kPa": 22,
+          "shutoff_lt600C_kPa": 16,
+          "actuator_kPa": {
+            "PC2121RA_210": 3.9,
+            "PC2127RA_270": 9.5,
+            "PC4113RA_130": 3.9,
+            "PC4117RA_170": 9.8,
+            "PC4120RA_200": 25.0
+          }
+        },
+        {
+          "size_inch": 22,
+          "size_mm": 550,
+          "shutoff_lt200C_kPa": 37,
+          "shutoff_lt400C_kPa": 17,
+          "shutoff_lt600C_kPa": 14,
+          "actuator_kPa": {
+            "PC2121RA_210": 3.0,
+            "PC2127RA_270": 7.1,
+            "PC4113RA_130": 2.9,
+            "PC4117RA_170": 6.7,
+            "PC4120RA_200": 18.7
+          }
+        },
+        {
+          "size_inch": 24,
+          "size_mm": 600,
+          "shutoff_lt200C_kPa": 15,
+          "shutoff_lt400C_kPa": 15,
+          "shutoff_lt600C_kPa": 11,
+          "actuator_kPa": {
+            "PC2121RA_210": 2.2,
+            "PC2127RA_270": 5.4,
+            "PC4113RA_130": 2.3,
+            "PC4117RA_170": 5.2,
+            "PC4120RA_200": 14.4
+          }
+        },
+        {
+          "size_inch": 26,
+          "size_mm": 650,
+          "shutoff_lt200C_kPa": 13,
+          "shutoff_lt400C_kPa": 13,
+          "shutoff_lt600C_kPa": 10,
+          "actuator_kPa": {
+            "PC2121RA_210": 1.8,
+            "PC2127RA_270": 4.3,
+            "PC4113RA_130": 1.6,
+            "PC4117RA_170": 4.2,
+            "PC4120RA_200": 11.0
+          }
+        },
+        {
+          "size_inch": 28,
+          "size_mm": 700,
+          "shutoff_lt200C_kPa": 11,
+          "shutoff_lt400C_kPa": 11,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2121RA_210": 1.4,
+            "PC2127RA_270": 3.5,
+            "PC4113RA_130": 1.4,
+            "PC4117RA_170": 3.2,
+            "PC4120RA_200": 8.7
+          }
+        },
+        {
+          "size_inch": 30,
+          "size_mm": 750,
+          "shutoff_lt200C_kPa": 26,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": 18,
+          "actuator_kPa": {
+            "PC2127RA_270": 2.7,
+            "PC4117RA_170": 2.5,
+            "PC4120RA_200": 7.1,
+            "PC4125RA_250": 11.3
+          }
+        },
+        {
+          "size_inch": 32,
+          "size_mm": 800,
+          "shutoff_lt200C_kPa": 23,
+          "shutoff_lt400C_kPa": 23,
+          "shutoff_lt600C_kPa": 17,
+          "actuator_kPa": {
+            "PC2127RA_270": 2.2,
+            "PC4117RA_170": 2.1,
+            "PC4120RA_200": 5.7,
+            "PC4125RA_250": 9.3
+          }
+        },
+        {
+          "size_inch": 34,
+          "size_mm": 850,
+          "shutoff_lt200C_kPa": 20,
+          "shutoff_lt400C_kPa": 20,
+          "shutoff_lt600C_kPa": 14,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.8,
+            "PC4117RA_170": 1.7,
+            "PC4120RA_200": 4.9,
+            "PC4125RA_250": 7.7
+          }
+        },
+        {
+          "size_inch": 36,
+          "size_mm": 900,
+          "shutoff_lt200C_kPa": 18,
+          "shutoff_lt400C_kPa": 18,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.5,
+            "PC4117RA_170": 1.5,
+            "PC4120RA_200": 4.1,
+            "PC4125RA_250": 6.5
+          }
+        },
+        {
+          "size_inch": 40,
+          "size_mm": 1000,
+          "shutoff_lt200C_kPa": 14,
+          "shutoff_lt400C_kPa": 14,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.0,
+            "PC4117RA_170": 1.1,
+            "PC4120RA_200": 3.0,
+            "PC4125RA_250": 4.6
+          }
+        },
+        {
+          "size_inch": 44,
+          "size_mm": 1100,
+          "shutoff_lt200C_kPa": 11,
+          "shutoff_lt400C_kPa": 11,
+          "shutoff_lt600C_kPa": 10,
+          "actuator_kPa": {
+            "PC4120RA_200": 2.2,
+            "PC4125RA_250": 3.5
+          }
+        },
+        {
+          "size_inch": 48,
+          "size_mm": 1200,
+          "shutoff_lt200C_kPa": 9,
+          "shutoff_lt400C_kPa": 9,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC4120RA_200": 1.6,
+            "PC4125RA_250": 2.6
+          }
+        },
+        {
+          "size_inch": 52,
+          "size_mm": 1300,
+          "shutoff_lt200C_kPa": 10,
+          "shutoff_lt400C_kPa": 10,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC4120RA_200": 1.2,
+            "PC4125RA_250": 2.0
+          }
+        },
+        {
+          "size_inch": 54,
+          "size_mm": 1350,
+          "shutoff_lt200C_kPa": 9,
+          "shutoff_lt400C_kPa": 9,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC4125RA_250": 1.8
+          }
+        },
+        {
+          "size_inch": 60,
+          "size_mm": 1500,
+          "shutoff_lt200C_kPa": 7,
+          "shutoff_lt400C_kPa": 7,
+          "shutoff_lt600C_kPa": 6,
+          "actuator_kPa": {
+            "PC4125RA_250": 1.3
+          }
+        },
+        {
+          "size_inch": 64,
+          "size_mm": 1600,
+          "shutoff_lt200C_kPa": 6,
+          "shutoff_lt400C_kPa": 6,
+          "shutoff_lt600C_kPa": 5,
+          "actuator_kPa": {
+            "PC4125RA_250": 1.0
+          }
+        }
+      ],
+      "stem_630_PH": [
+        {
+          "size_inch": 40,
+          "size_mm": 1000,
+          "shutoff_lt200C_kPa": 34,
+          "shutoff_lt400C_kPa": 34,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.0,
+            "PC4117RA_170": 1.1,
+            "PC4120RA_200": 3.0,
+            "PC4125RA_250": 4.6
+          }
+        },
+        {
+          "size_inch": 44,
+          "size_mm": 1100,
+          "shutoff_lt200C_kPa": 27,
+          "shutoff_lt400C_kPa": 27,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4120RA_200": 2.2,
+            "PC4125RA_250": 3.5
+          }
+        },
+        {
+          "size_inch": 48,
+          "size_mm": 1200,
+          "shutoff_lt200C_kPa": 23,
+          "shutoff_lt400C_kPa": 23,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4120RA_200": 1.6,
+            "PC4125RA_250": 2.6
+          }
+        },
+        {
+          "size_inch": 52,
+          "size_mm": 1300,
+          "shutoff_lt200C_kPa": 26,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4120RA_200": 1.2,
+            "PC4125RA_250": 2.0
+          }
+        },
+        {
+          "size_inch": 54,
+          "size_mm": 1350,
+          "shutoff_lt200C_kPa": 24,
+          "shutoff_lt400C_kPa": 24,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4125RA_250": 1.8
+          }
+        },
+        {
+          "size_inch": 60,
+          "size_mm": 1500,
+          "shutoff_lt200C_kPa": 18,
+          "shutoff_lt400C_kPa": 18,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4125RA_250": 1.3
+          }
+        },
+        {
+          "size_inch": 64,
+          "size_mm": 1600,
+          "shutoff_lt200C_kPa": 15,
+          "shutoff_lt400C_kPa": 15,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4125RA_250": 1.0
+          }
+        }
+      ]
+    },
+    "table_4_4B_single_acting_400kPa_90deg_grafoil": {
+      "stem_304_316": [
+        {
+          "size_inch": 3,
+          "size_mm": 80,
+          "shutoff_lt200C_kPa": 490,
+          "shutoff_lt400C_kPa": 159,
+          "shutoff_lt600C_kPa": 119,
+          "actuator_kPa": {
+            "PC2111RA_110": 56.0
+          }
+        },
+        {
+          "size_inch": 4,
+          "size_mm": 100,
+          "shutoff_lt200C_kPa": 490,
+          "shutoff_lt400C_kPa": 94,
+          "shutoff_lt600C_kPa": 70,
+          "actuator_kPa": {
+            "PC2111RA_110": 28.6
+          }
+        },
+        {
+          "size_inch": 5,
+          "size_mm": 125,
+          "shutoff_lt200C_kPa": 392,
+          "shutoff_lt400C_kPa": 60,
+          "shutoff_lt600C_kPa": 45,
+          "actuator_kPa": {
+            "PC2111RA_110": 14.7
+          }
+        },
+        {
+          "size_inch": 6,
+          "size_mm": 150,
+          "shutoff_lt200C_kPa": 279,
+          "shutoff_lt400C_kPa": 78,
+          "shutoff_lt600C_kPa": 61,
+          "actuator_kPa": {
+            "PC2111RA_110": 8.5,
+            "PC2112RA_125": 27.4
+          }
+        },
+        {
+          "size_inch": 8,
+          "size_mm": 200,
+          "shutoff_lt200C_kPa": 190,
+          "shutoff_lt400C_kPa": 46,
+          "shutoff_lt600C_kPa": 34,
+          "actuator_kPa": {
+            "PC2111RA_110": 3.6,
+            "PC2112RA_125": 11.6
+          }
+        },
+        {
+          "size_inch": 10,
+          "size_mm": 250,
+          "shutoff_lt200C_kPa": 97,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": 19,
+          "actuator_kPa": {
+            "PC2112RA_125": 3.8,
+            "PC2116RA_160": 11.8
+          }
+        },
+        {
+          "size_inch": 12,
+          "size_mm": 300,
+          "shutoff_lt200C_kPa": 55,
+          "shutoff_lt400C_kPa": 16,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2112RA_125": 2.1,
+            "PC2116RA_160": 6.8
+          }
+        },
+        {
+          "size_inch": 14,
+          "size_mm": 350,
+          "shutoff_lt200C_kPa": 60,
+          "shutoff_lt400C_kPa": 17,
+          "shutoff_lt600C_kPa": 13,
+          "actuator_kPa": {
+            "PC2116RA_160": 4.3,
+            "PC2121RA_210": 11.4,
+            "PC4113RA_130": 11.1
+          }
+        },
+        {
+          "size_inch": 16,
+          "size_mm": 400,
+          "shutoff_lt200C_kPa": 41,
+          "shutoff_lt400C_kPa": 13,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2116RA_160": 2.8,
+            "PC2121RA_210": 7.7,
+            "PC4113RA_130": 7.9
+          }
+        },
+        {
+          "size_inch": 18,
+          "size_mm": 450,
+          "shutoff_lt200C_kPa": 28,
+          "shutoff_lt400C_kPa": 10,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC2116RA_160": 2.1,
+            "PC2121RA_210": 8.1,
+            "PC4113RA_130": 5.6
+          }
+        },
+        {
+          "size_inch": 20,
+          "size_mm": 500,
+          "shutoff_lt200C_kPa": 50,
+          "shutoff_lt400C_kPa": 22,
+          "shutoff_lt600C_kPa": 16,
+          "actuator_kPa": {
+            "PC2121RA_210": 3.5,
+            "PC2127RA_270": 9.9,
+            "PC4113RA_130": 3.2,
+            "PC4117RA_170": 8.3
+          }
+        },
+        {
+          "size_inch": 22,
+          "size_mm": 550,
+          "shutoff_lt200C_kPa": 37,
+          "shutoff_lt400C_kPa": 17,
+          "shutoff_lt600C_kPa": 14,
+          "actuator_kPa": {
+            "PC2121RA_210": 2.7,
+            "PC2127RA_270": 7.5,
+            "PC4113RA_130": 2.3,
+            "PC4117RA_170": 6.6
+          }
+        },
+        {
+          "size_inch": 24,
+          "size_mm": 600,
+          "shutoff_lt200C_kPa": 15,
+          "shutoff_lt400C_kPa": 15,
+          "shutoff_lt600C_kPa": 11,
+          "actuator_kPa": {
+            "PC2121RA_210": 2.1,
+            "PC2127RA_270": 5.9,
+            "PC4113RA_130": 1.8,
+            "PC4117RA_170": 5.0
+          }
+        },
+        {
+          "size_inch": 26,
+          "size_mm": 650,
+          "shutoff_lt200C_kPa": 13,
+          "shutoff_lt400C_kPa": 13,
+          "shutoff_lt600C_kPa": 10,
+          "actuator_kPa": {
+            "PC2121RA_210": 1.6,
+            "PC2127RA_270": 4.6,
+            "PC4113RA_130": 1.4,
+            "PC4117RA_170": 3.9
+          }
+        },
+        {
+          "size_inch": 28,
+          "size_mm": 700,
+          "shutoff_lt200C_kPa": 11,
+          "shutoff_lt400C_kPa": 11,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC2121RA_210": 1.2,
+            "PC2127RA_270": 3.6,
+            "PC4113RA_130": 1.1,
+            "PC4117RA_170": 3.2
+          }
+        },
+        {
+          "size_inch": 30,
+          "size_mm": 750,
+          "shutoff_lt200C_kPa": 26,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": 18,
+          "actuator_kPa": {
+            "PC2127RA_270": 2.7,
+            "PC4117RA_170": 2.5,
+            "PC4120RA_200": 7.1
+          }
+        },
+        {
+          "size_inch": 32,
+          "size_mm": 800,
+          "shutoff_lt200C_kPa": 23,
+          "shutoff_lt400C_kPa": 23,
+          "shutoff_lt600C_kPa": 17,
+          "actuator_kPa": {
+            "PC2127RA_270": 2.3,
+            "PC4117RA_170": 2.1,
+            "PC4120RA_200": 5.7
+          }
+        },
+        {
+          "size_inch": 34,
+          "size_mm": 850,
+          "shutoff_lt200C_kPa": 20,
+          "shutoff_lt400C_kPa": 20,
+          "shutoff_lt600C_kPa": 14,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.7,
+            "PC4117RA_170": 1.6,
+            "PC4120RA_200": 4.7
+          }
+        },
+        {
+          "size_inch": 36,
+          "size_mm": 900,
+          "shutoff_lt200C_kPa": 18,
+          "shutoff_lt400C_kPa": 18,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC2127RA_270": 1.5,
+            "PC4117RA_170": 1.3,
+            "PC4120RA_200": 3.9
+          }
+        },
+        {
+          "size_inch": 40,
+          "size_mm": 1000,
+          "shutoff_lt200C_kPa": 14,
+          "shutoff_lt400C_kPa": 14,
+          "shutoff_lt600C_kPa": 12,
+          "actuator_kPa": {
+            "PC4117RA_170": 0.9,
+            "PC4120RA_200": 2.8,
+            "PC4125RA_250": 4.6
+          }
+        },
+        {
+          "size_inch": 44,
+          "size_mm": 1100,
+          "shutoff_lt200C_kPa": 11,
+          "shutoff_lt400C_kPa": 11,
+          "shutoff_lt600C_kPa": 10,
+          "actuator_kPa": {
+            "PC4120RA_200": 2.2,
+            "PC4125RA_250": 3.4
+          }
+        },
+        {
+          "size_inch": 48,
+          "size_mm": 1200,
+          "shutoff_lt200C_kPa": 9,
+          "shutoff_lt400C_kPa": 9,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC4120RA_200": 1.6,
+            "PC4125RA_250": 2.6
+          }
+        },
+        {
+          "size_inch": 52,
+          "size_mm": 1300,
+          "shutoff_lt200C_kPa": 10,
+          "shutoff_lt400C_kPa": 10,
+          "shutoff_lt600C_kPa": 9,
+          "actuator_kPa": {
+            "PC4120RA_200": 1.2,
+            "PC4125RA_250": 2.0
+          }
+        },
+        {
+          "size_inch": 54,
+          "size_mm": 1350,
+          "shutoff_lt200C_kPa": 9,
+          "shutoff_lt400C_kPa": 9,
+          "shutoff_lt600C_kPa": 8,
+          "actuator_kPa": {
+            "PC4125RA_250": 1.8
+          }
+        },
+        {
+          "size_inch": 60,
+          "size_mm": 1500,
+          "shutoff_lt200C_kPa": 7,
+          "shutoff_lt400C_kPa": 7,
+          "shutoff_lt600C_kPa": 6,
+          "actuator_kPa": {
+            "PC4125RA_250": 1.3
+          }
+        },
+        {
+          "size_inch": 64,
+          "size_mm": 1600,
+          "shutoff_lt200C_kPa": 6,
+          "shutoff_lt400C_kPa": 6,
+          "shutoff_lt600C_kPa": 5,
+          "actuator_kPa": {
+            "PC4125RA_250": 1.0
+          }
+        }
+      ],
+      "stem_630_PH": [
+        {
+          "size_inch": 40,
+          "size_mm": 1000,
+          "shutoff_lt200C_kPa": 34,
+          "shutoff_lt400C_kPa": 34,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4117RA_170": 0.9,
+            "PC4120RA_200": 2.8,
+            "PC4125RA_250": 4.6
+          }
+        },
+        {
+          "size_inch": 44,
+          "size_mm": 1100,
+          "shutoff_lt200C_kPa": 27,
+          "shutoff_lt400C_kPa": 27,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4120RA_200": 2.2,
+            "PC4125RA_250": 3.4
+          }
+        },
+        {
+          "size_inch": 48,
+          "size_mm": 1200,
+          "shutoff_lt200C_kPa": 23,
+          "shutoff_lt400C_kPa": 23,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4120RA_200": 1.6,
+            "PC4125RA_250": 2.6
+          }
+        },
+        {
+          "size_inch": 52,
+          "size_mm": 1300,
+          "shutoff_lt200C_kPa": 26,
+          "shutoff_lt400C_kPa": 26,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4120RA_200": 1.2,
+            "PC4125RA_250": 2.0
+          }
+        },
+        {
+          "size_inch": 54,
+          "size_mm": 1350,
+          "shutoff_lt200C_kPa": 24,
+          "shutoff_lt400C_kPa": 24,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4125RA_250": 1.8
+          }
+        },
+        {
+          "size_inch": 60,
+          "size_mm": 1500,
+          "shutoff_lt200C_kPa": 18,
+          "shutoff_lt400C_kPa": 18,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4125RA_250": 1.3
+          }
+        },
+        {
+          "size_inch": 64,
+          "size_mm": 1600,
+          "shutoff_lt200C_kPa": 15,
+          "shutoff_lt400C_kPa": 15,
+          "shutoff_lt600C_kPa": null,
+          "actuator_kPa": {
+            "PC4125RA_250": 1.0
+          }
+        }
+      ]
+    }
+  },
+  "net_weight_table_5_1": {
+    "unit": "kg",
+    "rows": [
+      {
+        "size_inch": 3,
+        "size_mm": 80,
+        "inner_bearing_kg": 23,
+        "outer_bearing_kg": 28
+      },
+      {
+        "size_inch": 4,
+        "size_mm": 100,
+        "inner_bearing_kg": 26,
+        "outer_bearing_kg": 30
+      },
+      {
+        "size_inch": 5,
+        "size_mm": 125,
+        "inner_bearing_kg": 32,
+        "outer_bearing_kg": 37
+      },
+      {
+        "size_inch": 6,
+        "size_mm": 150,
+        "inner_bearing_kg": 37,
+        "outer_bearing_kg": 42
+      },
+      {
+        "size_inch": 8,
+        "size_mm": 200,
+        "inner_bearing_kg": 42,
+        "outer_bearing_kg": 47
+      },
+      {
+        "size_inch": 10,
+        "size_mm": 250,
+        "inner_bearing_kg": 54,
+        "outer_bearing_kg": 62
+      },
+      {
+        "size_inch": 12,
+        "size_mm": 300,
+        "inner_bearing_kg": 60,
+        "outer_bearing_kg": 67
+      },
+      {
+        "size_inch": 14,
+        "size_mm": 350,
+        "inner_bearing_kg": 76,
+        "outer_bearing_kg": 83
+      },
+      {
+        "size_inch": 16,
+        "size_mm": 400,
+        "inner_bearing_kg": 95,
+        "outer_bearing_kg": 102
+      },
+      {
+        "size_inch": 18,
+        "size_mm": 450,
+        "inner_bearing_kg": 105,
+        "outer_bearing_kg": 115
+      },
+      {
+        "size_inch": 20,
+        "size_mm": 500,
+        "inner_bearing_kg": 115,
+        "outer_bearing_kg": 125
+      },
+      {
+        "size_inch": 22,
+        "size_mm": 550,
+        "inner_bearing_kg": 135,
+        "outer_bearing_kg": 150
+      },
+      {
+        "size_inch": 24,
+        "size_mm": 600,
+        "inner_bearing_kg": null,
+        "outer_bearing_kg": 175
+      },
+      {
+        "size_inch": 26,
+        "size_mm": 650,
+        "inner_bearing_kg": null,
+        "outer_bearing_kg": 185
+      },
+      {
+        "size_inch": 28,
+        "size_mm": 700,
+        "inner_bearing_kg": null,
+        "outer_bearing_kg": 226
+      },
+      {
+        "size_inch": 30,
+        "size_mm": 750,
+        "inner_bearing_kg": null,
+        "outer_bearing_kg": 306
+      },
+      {
+        "size_inch": 32,
+        "size_mm": 800,
+        "inner_bearing_kg": null,
+        "outer_bearing_kg": 346
+      },
+      {
+        "size_inch": 34,
+        "size_mm": 850,
+        "inner_bearing_kg": null,
+        "outer_bearing_kg": 405
+      },
+      {
+        "size_inch": 36,
+        "size_mm": 900,
+        "inner_bearing_kg": null,
+        "outer_bearing_kg": 435
+      },
+      {
+        "size_inch": 40,
+        "size_mm": 1000,
+        "inner_bearing_kg": null,
+        "outer_bearing_kg": 465
+      },
+      {
+        "size_inch": 44,
+        "size_mm": 1100,
+        "inner_bearing_kg": null,
+        "outer_bearing_kg": 537
+      },
+      {
+        "size_inch": 48,
+        "size_mm": 1200,
+        "inner_bearing_kg": null,
+        "outer_bearing_kg": 607
+      },
+      {
+        "size_inch": 52,
+        "size_mm": 1300,
+        "inner_bearing_kg": null,
+        "outer_bearing_kg": 697
+      },
+      {
+        "size_inch": 54,
+        "size_mm": 1350,
+        "inner_bearing_kg": null,
+        "outer_bearing_kg": 737
+      },
+      {
+        "size_inch": 60,
+        "size_mm": 1500,
+        "inner_bearing_kg": null,
+        "outer_bearing_kg": 837
+      },
+      {
+        "size_inch": 64,
+        "size_mm": 1600,
+        "inner_bearing_kg": null,
+        "outer_bearing_kg": 1037
+      }
+    ]
+  },
+  "mounting_forms_fig4": {
+    "fig4_1": "PC2000RA安装方位 S/R1/R2/R3",
+    "fig4_2": "PC4000RA安装方位 S/R1/R2/R3"
+  },
+  "dimensions": {
+    "unit": "mm",
+    "rows": [
+      {
+        "size_inch": 3,
+        "size_mm": 80,
+        "face_to_face_L": 200,
+        "inner_h1": 150,
+        "inner_h2": 135,
+        "outer_h1": 230,
+        "outer_h2": 195
+      },
+      {
+        "size_inch": 4,
+        "size_mm": 100,
+        "face_to_face_L": 200,
+        "inner_h1": 160,
+        "inner_h2": 140,
+        "outer_h1": 240,
+        "outer_h2": 205
+      },
+      {
+        "size_inch": 5,
+        "size_mm": 125,
+        "face_to_face_L": 200,
+        "inner_h1": 180,
+        "inner_h2": 160,
+        "outer_h1": 260,
+        "outer_h2": 220
+      },
+      {
+        "size_inch": 6,
+        "size_mm": 150,
+        "face_to_face_L": 200,
+        "inner_h1": 195,
+        "inner_h2": 175,
+        "outer_h1": 275,
+        "outer_h2": 245
+      },
+      {
+        "size_inch": 8,
+        "size_mm": 200,
+        "face_to_face_L": 200,
+        "inner_h1": 260,
+        "inner_h2": 195,
+        "outer_h1": 360,
+        "outer_h2": 305
+      },
+      {
+        "size_inch": 10,
+        "size_mm": 250,
+        "face_to_face_L": 200,
+        "inner_h1": 295,
+        "inner_h2": 220,
+        "outer_h1": 395,
+        "outer_h2": 340
+      },
+      {
+        "size_inch": 12,
+        "size_mm": 300,
+        "face_to_face_L": 200,
+        "inner_h1": 315,
+        "inner_h2": 245,
+        "outer_h1": 415,
+        "outer_h2": 360
+      },
+      {
+        "size_inch": 14,
+        "size_mm": 350,
+        "face_to_face_L": 200,
+        "inner_h1": 340,
+        "inner_h2": 270,
+        "outer_h1": 440,
+        "outer_h2": 390
+      },
+      {
+        "size_inch": 16,
+        "size_mm": 400,
+        "face_to_face_L": 200,
+        "inner_h1": 380,
+        "inner_h2": 295,
+        "outer_h1": 480,
+        "outer_h2": 430
+      },
+      {
+        "size_inch": 18,
+        "size_mm": 450,
+        "face_to_face_L": 200,
+        "inner_h1": 410,
+        "inner_h2": 315,
+        "outer_h1": 510,
+        "outer_h2": 460
+      },
+      {
+        "size_inch": 20,
+        "size_mm": 500,
+        "face_to_face_L": 250,
+        "inner_h1": 440,
+        "inner_h2": 390,
+        "outer_h1": 490,
+        "outer_h2": 450
+      },
+      {
+        "size_inch": 22,
+        "size_mm": 550,
+        "face_to_face_L": 250,
+        "inner_h1": 445,
+        "inner_h2": 420,
+        "outer_h1": 545,
+        "outer_h2": 510
+      },
+      {
+        "size_inch": 24,
+        "size_mm": 600,
+        "face_to_face_L": 250,
+        "inner_h1": null,
+        "inner_h2": null,
+        "outer_h1": 565,
+        "outer_h2": 525
+      },
+      {
+        "size_inch": 26,
+        "size_mm": 650,
+        "face_to_face_L": 300,
+        "inner_h1": null,
+        "inner_h2": null,
+        "outer_h1": 610,
+        "outer_h2": 550
+      },
+      {
+        "size_inch": 28,
+        "size_mm": 700,
+        "face_to_face_L": 300,
+        "inner_h1": null,
+        "inner_h2": null,
+        "outer_h1": 710,
+        "outer_h2": 650
+      },
+      {
+        "size_inch": 30,
+        "size_mm": 750,
+        "face_to_face_L": 300,
+        "inner_h1": null,
+        "inner_h2": null,
+        "outer_h1": 670,
+        "outer_h2": 630
+      },
+      {
+        "size_inch": 32,
+        "size_mm": 800,
+        "face_to_face_L": 300,
+        "inner_h1": null,
+        "inner_h2": null,
+        "outer_h1": 695,
+        "outer_h2": 655
+      },
+      {
+        "size_inch": 34,
+        "size_mm": 850,
+        "face_to_face_L": 300,
+        "inner_h1": null,
+        "inner_h2": null,
+        "outer_h1": 720,
+        "outer_h2": 680
+      },
+      {
+        "size_inch": 36,
+        "size_mm": 900,
+        "face_to_face_L": 300,
+        "inner_h1": null,
+        "inner_h2": null,
+        "outer_h1": 750,
+        "outer_h2": 715
+      },
+      {
+        "size_inch": 40,
+        "size_mm": 1000,
+        "face_to_face_L": 400,
+        "inner_h1": null,
+        "inner_h2": null,
+        "outer_h1": 910,
+        "outer_h2": 870
+      },
+      {
+        "size_inch": 44,
+        "size_mm": 1100,
+        "face_to_face_L": 400,
+        "inner_h1": null,
+        "inner_h2": null,
+        "outer_h1": 960,
+        "outer_h2": 920
+      },
+      {
+        "size_inch": 48,
+        "size_mm": 1200,
+        "face_to_face_L": 400,
+        "inner_h1": null,
+        "inner_h2": null,
+        "outer_h1": 1010,
+        "outer_h2": 970
+      },
+      {
+        "size_inch": 52,
+        "size_mm": 1300,
+        "face_to_face_L": 450,
+        "inner_h1": null,
+        "inner_h2": null,
+        "outer_h1": 1055,
+        "outer_h2": 1020
+      },
+      {
+        "size_inch": 54,
+        "size_mm": 1350,
+        "face_to_face_L": 450,
+        "inner_h1": null,
+        "inner_h2": null,
+        "outer_h1": 1080,
+        "outer_h2": 1050
+      },
+      {
+        "size_inch": 60,
+        "size_mm": 1500,
+        "face_to_face_L": 500,
+        "inner_h1": null,
+        "inner_h2": null,
+        "outer_h1": 1155,
+        "outer_h2": 1120
+      },
+      {
+        "size_inch": 64,
+        "size_mm": 1600,
+        "face_to_face_L": 500,
+        "inner_h1": null,
+        "inner_h2": null,
+        "outer_h1": 1210,
+        "outer_h2": 1175
+      }
+    ]
+  },
+  "appendix": {
+    "table_1_body_material_pressure_temp_rating_MPaG": {
+      "rows": [
+        {
+          "temp_C": "-196~38",
+          "ANSI_Class_150_A352-LCB": null,
+          "ANSI_Class_150_A216-WCB": null,
+          "ANSI_Class_150_A217-WC6": null,
+          "ANSI_Class_150_A217-WC9": null,
+          "ANSI_Class_150_A351-CF8": 1.9,
+          "ANSI_Class_150_A351-CF8M": 1.9,
+          "ANSI_Class_300_A352-LCB": null,
+          "ANSI_Class_300_A216-WCB": null,
+          "ANSI_Class_300_A217-WC6": null,
+          "ANSI_Class_300_A217-WC9": null,
+          "ANSI_Class_300_A351-CF8": 4.95,
+          "ANSI_Class_300_A351-CF8M": 4.95,
+          "ANSI_Class_600_A352-LCB": null,
+          "ANSI_Class_600_A216-WCB": null,
+          "ANSI_Class_600_A217-WC6": null,
+          "ANSI_Class_600_A217-WC9": null,
+          "ANSI_Class_600_A351-CF8": 9.91,
+          "ANSI_Class_600_A351-CF8M": 9.92
+        },
+        {
+          "temp_C": "-45~38",
+          "ANSI_Class_150_A352-LCB": 1.84,
+          "ANSI_Class_150_A216-WCB": null,
+          "ANSI_Class_150_A217-WC6": null,
+          "ANSI_Class_150_A217-WC9": null,
+          "ANSI_Class_150_A351-CF8": 1.9,
+          "ANSI_Class_150_A351-CF8M": 1.9,
+          "ANSI_Class_300_A352-LCB": 4.78,
+          "ANSI_Class_300_A216-WCB": null,
+          "ANSI_Class_300_A217-WC6": null,
+          "ANSI_Class_300_A217-WC9": null,
+          "ANSI_Class_300_A351-CF8": 4.95,
+          "ANSI_Class_300_A351-CF8M": 4.95,
+          "ANSI_Class_600_A352-LCB": 9.57,
+          "ANSI_Class_600_A216-WCB": null,
+          "ANSI_Class_600_A217-WC6": null,
+          "ANSI_Class_600_A217-WC9": null,
+          "ANSI_Class_600_A351-CF8": 9.91,
+          "ANSI_Class_600_A351-CF8M": 9.92
+        },
+        {
+          "temp_C": "-5~38",
+          "ANSI_Class_150_A352-LCB": 1.84,
+          "ANSI_Class_150_A216-WCB": 1.96,
+          "ANSI_Class_150_A217-WC6": 1.99,
+          "ANSI_Class_150_A217-WC9": 1.99,
+          "ANSI_Class_150_A351-CF8": 1.9,
+          "ANSI_Class_150_A351-CF8M": 1.9,
+          "ANSI_Class_300_A352-LCB": 4.78,
+          "ANSI_Class_300_A216-WCB": 5.1,
+          "ANSI_Class_300_A217-WC6": 5.16,
+          "ANSI_Class_300_A217-WC9": 5.16,
+          "ANSI_Class_300_A351-CF8": 4.95,
+          "ANSI_Class_300_A351-CF8M": 4.95,
+          "ANSI_Class_600_A352-LCB": 9.57,
+          "ANSI_Class_600_A216-WCB": 10.2,
+          "ANSI_Class_600_A217-WC6": 10.32,
+          "ANSI_Class_600_A217-WC9": 10.32,
+          "ANSI_Class_600_A351-CF8": 9.91,
+          "ANSI_Class_600_A351-CF8M": 9.92
+        },
+        {
+          "temp_C": "50",
+          "ANSI_Class_150_A352-LCB": 1.81,
+          "ANSI_Class_150_A216-WCB": 1.92,
+          "ANSI_Class_150_A217-WC6": 1.92,
+          "ANSI_Class_150_A217-WC9": 1.92,
+          "ANSI_Class_150_A351-CF8": 1.84,
+          "ANSI_Class_150_A351-CF8M": 1.84,
+          "ANSI_Class_300_A352-LCB": 4.72,
+          "ANSI_Class_300_A216-WCB": 5.0,
+          "ANSI_Class_300_A217-WC6": 5.1,
+          "ANSI_Class_300_A217-WC9": 5.11,
+          "ANSI_Class_300_A351-CF8": 4.77,
+          "ANSI_Class_300_A351-CF8M": 4.8,
+          "ANSI_Class_600_A352-LCB": 9.46,
+          "ANSI_Class_600_A216-WCB": 10.01,
+          "ANSI_Class_600_A217-WC6": 10.22,
+          "ANSI_Class_600_A217-WC9": 10.22,
+          "ANSI_Class_600_A351-CF8": 9.56,
+          "ANSI_Class_600_A351-CF8M": 9.62
+        },
+        {
+          "temp_C": "100",
+          "ANSI_Class_150_A352-LCB": 1.72,
+          "ANSI_Class_150_A216-WCB": 1.76,
+          "ANSI_Class_150_A217-WC6": 1.76,
+          "ANSI_Class_150_A217-WC9": 1.76,
+          "ANSI_Class_150_A351-CF8": 1.56,
+          "ANSI_Class_150_A351-CF8M": 1.61,
+          "ANSI_Class_300_A352-LCB": 4.51,
+          "ANSI_Class_300_A216-WCB": 4.63,
+          "ANSI_Class_300_A217-WC6": 4.88,
+          "ANSI_Class_300_A217-WC9": 4.89,
+          "ANSI_Class_300_A351-CF8": 4.08,
+          "ANSI_Class_300_A351-CF8M": 4.21,
+          "ANSI_Class_600_A352-LCB": 9.02,
+          "ANSI_Class_600_A216-WCB": 9.27,
+          "ANSI_Class_600_A217-WC6": 9.74,
+          "ANSI_Class_600_A217-WC9": 9.79,
+          "ANSI_Class_600_A351-CF8": 8.17,
+          "ANSI_Class_600_A351-CF8M": 8.43
+        },
+        {
+          "temp_C": "150",
+          "ANSI_Class_150_A352-LCB": 1.57,
+          "ANSI_Class_150_A216-WCB": 1.57,
+          "ANSI_Class_150_A217-WC6": 1.57,
+          "ANSI_Class_150_A217-WC9": 1.57,
+          "ANSI_Class_150_A351-CF8": 1.39,
+          "ANSI_Class_150_A351-CF8M": 1.47,
+          "ANSI_Class_300_A352-LCB": 4.4,
+          "ANSI_Class_300_A216-WCB": 4.51,
+          "ANSI_Class_300_A217-WC6": 4.63,
+          "ANSI_Class_300_A217-WC9": 4.65,
+          "ANSI_Class_300_A351-CF8": 3.62,
+          "ANSI_Class_300_A351-CF8M": 3.85,
+          "ANSI_Class_600_A352-LCB": 8.78,
+          "ANSI_Class_600_A216-WCB": 9.04,
+          "ANSI_Class_600_A217-WC6": 9.26,
+          "ANSI_Class_600_A217-WC9": 9.31,
+          "ANSI_Class_600_A351-CF8": 7.26,
+          "ANSI_Class_600_A351-CF8M": 7.69
+        },
+        {
+          "temp_C": "200",
+          "ANSI_Class_150_A352-LCB": 1.4,
+          "ANSI_Class_150_A216-WCB": 1.4,
+          "ANSI_Class_150_A217-WC6": 1.4,
+          "ANSI_Class_150_A217-WC9": 1.4,
+          "ANSI_Class_150_A351-CF8": 1.25,
+          "ANSI_Class_150_A351-CF8M": 1.37,
+          "ANSI_Class_300_A352-LCB": 4.26,
+          "ANSI_Class_300_A216-WCB": 4.38,
+          "ANSI_Class_300_A217-WC6": 4.54,
+          "ANSI_Class_300_A217-WC9": 4.47,
+          "ANSI_Class_300_A351-CF8": 3.27,
+          "ANSI_Class_300_A351-CF8M": 3.56,
+          "ANSI_Class_600_A352-LCB": 8.54,
+          "ANSI_Class_600_A216-WCB": 8.75,
+          "ANSI_Class_600_A217-WC6": 9.09,
+          "ANSI_Class_600_A217-WC9": 8.95,
+          "ANSI_Class_600_A351-CF8": 6.54,
+          "ANSI_Class_600_A351-CF8M": 7.12
+        },
+        {
+          "temp_C": "250",
+          "ANSI_Class_150_A352-LCB": 1.2,
+          "ANSI_Class_150_A216-WCB": 1.2,
+          "ANSI_Class_150_A217-WC6": 1.2,
+          "ANSI_Class_150_A217-WC9": 1.2,
+          "ANSI_Class_150_A351-CF8": 1.16,
+          "ANSI_Class_150_A351-CF8M": 1.2,
+          "ANSI_Class_300_A352-LCB": 4.05,
+          "ANSI_Class_300_A216-WCB": 4.16,
+          "ANSI_Class_300_A217-WC6": 4.44,
+          "ANSI_Class_300_A217-WC9": 4.41,
+          "ANSI_Class_300_A351-CF8": 3.04,
+          "ANSI_Class_300_A351-CF8M": 3.34,
+          "ANSI_Class_600_A352-LCB": 8.11,
+          "ANSI_Class_600_A216-WCB": 8.33,
+          "ANSI_Class_600_A217-WC6": 8.88,
+          "ANSI_Class_600_A217-WC9": 8.82,
+          "ANSI_Class_600_A351-CF8": 6.1,
+          "ANSI_Class_600_A351-CF8M": 6.67
+        },
+        {
+          "temp_C": "300",
+          "ANSI_Class_150_A352-LCB": 1.01,
+          "ANSI_Class_150_A216-WCB": 1.01,
+          "ANSI_Class_150_A217-WC6": 1.01,
+          "ANSI_Class_150_A217-WC9": 1.01,
+          "ANSI_Class_150_A351-CF8": 1.01,
+          "ANSI_Class_150_A351-CF8M": 1.01,
+          "ANSI_Class_300_A352-LCB": 3.76,
+          "ANSI_Class_300_A216-WCB": 3.87,
+          "ANSI_Class_300_A217-WC6": 4.23,
+          "ANSI_Class_300_A217-WC9": 4.23,
+          "ANSI_Class_300_A351-CF8": 2.91,
+          "ANSI_Class_300_A351-CF8M": 3.15,
+          "ANSI_Class_600_A352-LCB": 7.54,
+          "ANSI_Class_600_A216-WCB": 7.74,
+          "ANSI_Class_600_A217-WC6": 8.48,
+          "ANSI_Class_600_A217-WC9": 8.47,
+          "ANSI_Class_600_A351-CF8": 5.8,
+          "ANSI_Class_600_A351-CF8M": 6.32
+        },
+        {
+          "temp_C": "350",
+          "ANSI_Class_150_A352-LCB": 0.84,
+          "ANSI_Class_150_A216-WCB": 0.84,
+          "ANSI_Class_150_A217-WC6": 0.84,
+          "ANSI_Class_150_A217-WC9": 0.84,
+          "ANSI_Class_150_A351-CF8": 0.84,
+          "ANSI_Class_150_A351-CF8M": 0.84,
+          "ANSI_Class_300_A352-LCB": 3.59,
+          "ANSI_Class_300_A216-WCB": 3.69,
+          "ANSI_Class_300_A217-WC6": 4.01,
+          "ANSI_Class_300_A217-WC9": 4.01,
+          "ANSI_Class_300_A351-CF8": 2.81,
+          "ANSI_Class_300_A351-CF8M": 3.03,
+          "ANSI_Class_600_A352-LCB": 7.18,
+          "ANSI_Class_600_A216-WCB": 7.38,
+          "ANSI_Class_600_A217-WC6": 8.04,
+          "ANSI_Class_600_A217-WC9": 8.04,
+          "ANSI_Class_600_A351-CF8": 5.6,
+          "ANSI_Class_600_A351-CF8M": 6.07
+        },
+        {
+          "temp_C": "375",
+          "ANSI_Class_150_A352-LCB": null,
+          "ANSI_Class_150_A216-WCB": 0.73,
+          "ANSI_Class_150_A217-WC6": 0.73,
+          "ANSI_Class_150_A217-WC9": 0.73,
+          "ANSI_Class_150_A351-CF8": 0.73,
+          "ANSI_Class_150_A351-CF8M": 0.73,
+          "ANSI_Class_300_A352-LCB": null,
+          "ANSI_Class_300_A216-WCB": 3.64,
+          "ANSI_Class_300_A217-WC6": 3.88,
+          "ANSI_Class_300_A217-WC9": 3.87,
+          "ANSI_Class_300_A351-CF8": 2.77,
+          "ANSI_Class_300_A351-CF8M": 2.96,
+          "ANSI_Class_600_A352-LCB": null,
+          "ANSI_Class_600_A216-WCB": 7.28,
+          "ANSI_Class_600_A217-WC6": 7.75,
+          "ANSI_Class_600_A217-WC9": 7.75,
+          "ANSI_Class_600_A351-CF8": 5.54,
+          "ANSI_Class_600_A351-CF8M": 5.93
+        },
+        {
+          "temp_C": "400",
+          "ANSI_Class_150_A352-LCB": null,
+          "ANSI_Class_150_A216-WCB": 0.64,
+          "ANSI_Class_150_A217-WC6": 0.64,
+          "ANSI_Class_150_A217-WC9": 0.64,
+          "ANSI_Class_150_A351-CF8": 0.64,
+          "ANSI_Class_150_A351-CF8M": 0.64,
+          "ANSI_Class_300_A352-LCB": null,
+          "ANSI_Class_300_A216-WCB": 3.44,
+          "ANSI_Class_300_A217-WC6": 3.65,
+          "ANSI_Class_300_A217-WC9": 3.65,
+          "ANSI_Class_300_A351-CF8": 2.74,
+          "ANSI_Class_300_A351-CF8M": 2.91,
+          "ANSI_Class_600_A352-LCB": null,
+          "ANSI_Class_600_A216-WCB": 6.89,
+          "ANSI_Class_600_A217-WC6": 7.31,
+          "ANSI_Class_600_A217-WC9": 7.31,
+          "ANSI_Class_600_A351-CF8": 5.48,
+          "ANSI_Class_600_A351-CF8M": 5.81
+        },
+        {
+          "temp_C": "425",
+          "ANSI_Class_150_A352-LCB": null,
+          "ANSI_Class_150_A216-WCB": 0.55,
+          "ANSI_Class_150_A217-WC6": 0.55,
+          "ANSI_Class_150_A217-WC9": 0.55,
+          "ANSI_Class_150_A351-CF8": 0.55,
+          "ANSI_Class_150_A351-CF8M": 0.55,
+          "ANSI_Class_300_A352-LCB": null,
+          "ANSI_Class_300_A216-WCB": 2.88,
+          "ANSI_Class_300_A217-WC6": 3.5,
+          "ANSI_Class_300_A217-WC9": 3.5,
+          "ANSI_Class_300_A351-CF8": 2.71,
+          "ANSI_Class_300_A351-CF8M": 2.87,
+          "ANSI_Class_600_A352-LCB": null,
+          "ANSI_Class_600_A216-WCB": 5.74,
+          "ANSI_Class_600_A217-WC6": 7.01,
+          "ANSI_Class_600_A217-WC9": 7.01,
+          "ANSI_Class_600_A351-CF8": 5.42,
+          "ANSI_Class_600_A351-CF8M": 5.72
+        },
+        {
+          "temp_C": "450",
+          "ANSI_Class_150_A352-LCB": null,
+          "ANSI_Class_150_A216-WCB": 0.47,
+          "ANSI_Class_150_A217-WC6": 0.47,
+          "ANSI_Class_150_A217-WC9": 0.47,
+          "ANSI_Class_150_A351-CF8": 0.47,
+          "ANSI_Class_150_A351-CF8M": 0.47,
+          "ANSI_Class_300_A352-LCB": null,
+          "ANSI_Class_300_A216-WCB": 1.99,
+          "ANSI_Class_300_A217-WC6": 3.38,
+          "ANSI_Class_300_A217-WC9": 3.37,
+          "ANSI_Class_300_A351-CF8": 2.68,
+          "ANSI_Class_300_A351-CF8M": 2.81,
+          "ANSI_Class_600_A352-LCB": null,
+          "ANSI_Class_600_A216-WCB": 4.0,
+          "ANSI_Class_600_A217-WC6": 6.75,
+          "ANSI_Class_600_A217-WC9": 6.75,
+          "ANSI_Class_600_A351-CF8": 5.37,
+          "ANSI_Class_600_A351-CF8M": 5.61
+        },
+        {
+          "temp_C": "475",
+          "ANSI_Class_150_A352-LCB": null,
+          "ANSI_Class_150_A216-WCB": 0.37,
+          "ANSI_Class_150_A217-WC6": 0.37,
+          "ANSI_Class_150_A217-WC9": 0.37,
+          "ANSI_Class_150_A351-CF8": 0.37,
+          "ANSI_Class_150_A351-CF8M": 0.37,
+          "ANSI_Class_300_A352-LCB": null,
+          "ANSI_Class_300_A216-WCB": 1.35,
+          "ANSI_Class_300_A217-WC6": 3.16,
+          "ANSI_Class_300_A217-WC9": 3.16,
+          "ANSI_Class_300_A351-CF8": 2.65,
+          "ANSI_Class_300_A351-CF8M": 2.73,
+          "ANSI_Class_600_A352-LCB": null,
+          "ANSI_Class_600_A216-WCB": 2.7,
+          "ANSI_Class_600_A217-WC6": 6.32,
+          "ANSI_Class_600_A217-WC9": 6.32,
+          "ANSI_Class_600_A351-CF8": 5.3,
+          "ANSI_Class_600_A351-CF8M": 5.46
+        },
+        {
+          "temp_C": "500",
+          "ANSI_Class_150_A352-LCB": null,
+          "ANSI_Class_150_A216-WCB": 0.28,
+          "ANSI_Class_150_A217-WC6": 0.28,
+          "ANSI_Class_150_A217-WC9": 0.28,
+          "ANSI_Class_150_A351-CF8": 0.28,
+          "ANSI_Class_150_A351-CF8M": 0.28,
+          "ANSI_Class_300_A352-LCB": null,
+          "ANSI_Class_300_A216-WCB": 0.88,
+          "ANSI_Class_300_A217-WC6": 2.77,
+          "ANSI_Class_300_A217-WC9": 2.77,
+          "ANSI_Class_300_A351-CF8": 2.6,
+          "ANSI_Class_300_A351-CF8M": 2.67,
+          "ANSI_Class_600_A352-LCB": null,
+          "ANSI_Class_600_A216-WCB": 1.75,
+          "ANSI_Class_600_A217-WC6": 5.55,
+          "ANSI_Class_600_A217-WC9": 5.55,
+          "ANSI_Class_600_A351-CF8": 5.2,
+          "ANSI_Class_600_A351-CF8M": 5.37
+        },
+        {
+          "temp_C": "525",
+          "ANSI_Class_150_A352-LCB": null,
+          "ANSI_Class_150_A216-WCB": 0.18,
+          "ANSI_Class_150_A217-WC6": 0.18,
+          "ANSI_Class_150_A217-WC9": 0.18,
+          "ANSI_Class_150_A351-CF8": 0.18,
+          "ANSI_Class_150_A351-CF8M": 0.18,
+          "ANSI_Class_300_A352-LCB": null,
+          "ANSI_Class_300_A216-WCB": 0.51,
+          "ANSI_Class_300_A217-WC6": 2.02,
+          "ANSI_Class_300_A217-WC9": 2.18,
+          "ANSI_Class_300_A351-CF8": 2.19,
+          "ANSI_Class_300_A351-CF8M": 2.57,
+          "ANSI_Class_600_A352-LCB": null,
+          "ANSI_Class_600_A216-WCB": 1.03,
+          "ANSI_Class_600_A217-WC6": 4.04,
+          "ANSI_Class_600_A217-WC9": 4.36,
+          "ANSI_Class_600_A351-CF8": 4.77,
+          "ANSI_Class_600_A351-CF8M": 5.15
+        },
+        {
+          "temp_C": "538",
+          "ANSI_Class_150_A352-LCB": null,
+          "ANSI_Class_150_A216-WCB": 0.13,
+          "ANSI_Class_150_A217-WC6": 0.15,
+          "ANSI_Class_150_A217-WC9": 0.15,
+          "ANSI_Class_150_A351-CF8": 0.15,
+          "ANSI_Class_150_A351-CF8M": 0.15,
+          "ANSI_Class_300_A352-LCB": null,
+          "ANSI_Class_300_A216-WCB": 0.34,
+          "ANSI_Class_300_A217-WC6": 1.63,
+          "ANSI_Class_300_A217-WC9": 1.63,
+          "ANSI_Class_300_A351-CF8": 2.18,
+          "ANSI_Class_300_A351-CF8M": 2.53,
+          "ANSI_Class_600_A352-LCB": null,
+          "ANSI_Class_600_A216-WCB": 0.72,
+          "ANSI_Class_600_A217-WC6": 3.26,
+          "ANSI_Class_600_A217-WC9": 3.26,
+          "ANSI_Class_600_A351-CF8": 4.55,
+          "ANSI_Class_600_A351-CF8M": 5.06
+        }
+      ]
+    },
+    "table_2_PN_rating_MPaG": {
+      "ZG230-450": [
+        {
+          "temp_C": "-5~200",
+          "PN16": 1.6,
+          "PN40": 4.0,
+          "PN63": 6.3,
+          "PN100": 10.0
+        },
+        {
+          "temp_C": "~250",
+          "PN16": 1.4,
+          "PN40": 3.5,
+          "PN63": 5.4,
+          "PN100": 9.0
+        },
+        {
+          "temp_C": "~300",
+          "PN16": 1.2,
+          "PN40": 3.0,
+          "PN63": 4.8,
+          "PN100": 7.5
+        },
+        {
+          "temp_C": "~350",
+          "PN16": 1.1,
+          "PN40": 2.6,
+          "PN63": 4.0,
+          "PN100": 6.6
+        },
+        {
+          "temp_C": "~400",
+          "PN16": 0.9,
+          "PN40": 2.3,
+          "PN63": 3.7,
+          "PN100": 5.8
+        },
+        {
+          "temp_C": "~425",
+          "PN16": 0.8,
+          "PN40": 2.0,
+          "PN63": 3.2,
+          "PN100": 5.0
+        },
+        {
+          "temp_C": "~435",
+          "PN16": 0.7,
+          "PN40": 1.8,
+          "PN63": 2.8,
+          "PN100": 4.5
+        },
+        {
+          "temp_C": "~445",
+          "PN16": 0.62,
+          "PN40": 1.6,
+          "PN63": 2.5,
+          "PN100": 4.2
+        },
+        {
+          "temp_C": "~455",
+          "PN16": 0.57,
+          "PN40": 1.4,
+          "PN63": 2.3,
+          "PN100": 3.6
+        }
+      ],
+      "ZG0Cr18Ni9": [
+        {
+          "temp_C": "-45~200",
+          "PN16": 1.6,
+          "PN40": 4.0,
+          "PN63": 6.3,
+          "PN100": 10.0
+        },
+        {
+          "temp_C": "~300",
+          "PN16": 1.4,
+          "PN40": 3.5,
+          "PN63": 5.4,
+          "PN100": 9.0
+        },
+        {
+          "temp_C": "~400",
+          "PN16": 1.2,
+          "PN40": 3.0,
+          "PN63": 4.8,
+          "PN100": 7.5
+        },
+        {
+          "temp_C": "~480",
+          "PN16": 1.1,
+          "PN40": 2.6,
+          "PN63": 4.0,
+          "PN100": 6.6
+        },
+        {
+          "temp_C": "~520",
+          "PN16": 0.9,
+          "PN40": 2.3,
+          "PN63": 3.7,
+          "PN100": 5.8
+        },
+        {
+          "temp_C": "~560",
+          "PN16": 0.8,
+          "PN40": 2.0,
+          "PN63": 3.2,
+          "PN100": 5.0
+        }
+      ]
+    },
+    "table_3_pressure_class_cross": {
+      "美国标准": [
+        "ANSI 150#",
+        "ANSI 300#",
+        "ANSI 600#",
+        "ANSI 900#",
+        "ANSI 1500#",
+        "ANSI 2500#"
+      ],
+      "中国标准": [
+        "PN 16",
+        "PN 40",
+        "PN 63, PN 100",
+        null,
+        null,
+        null
+      ]
+    },
+    "table_4_material_cross": {
+      "美国标准": [
+        "A216-WCB",
+        "A351-CF8",
+        "A351-CF8M",
+        "A217-WC6",
+        "A217-WC9",
+        "A352-LCB"
+      ],
+      "中国标准": [
+        "ZG230-450",
+        "ZG0Cr18nI9",
+        "ZG0Cr18Ni12Mo2Ti",
+        "ZG15CrMo",
+        null,
+        null
+      ]
+    }
+  },
+  "original_document_notes": [
+    "表3标题\"RATER CV\"系原文档拼写瑕疵（应为RATED CV）；表头\"90°开度 60° Open\"第二个60°应为90°，原文如此。",
+    "表2-3标题\"OPEARTING TEMP.\"系原文档拼写瑕疵（应为OPERATING）。",
+    "附表材质对照\"ZG0Cr18nI9\"系原文档错别字（正确牌号ZG0Cr18Ni9），PDF文字层原文即如此。",
+    "表4-4B 18in(DN450) 210执行机构允许压差8.1 kPa，大于16in(DN400)同列7.7 kPa，数值随口径反序，PDF放大确认原文如此。",
+    "尺寸表 28in(DN700) 外部轴承型h1=710，大于30in(DN750) h1=670，随口径反序，PDF放大确认原文如此。",
+    "控制附件中文\"电气、气气、智能定位器\"与英文E/P·P/P对应，原文如此。"
+  ]
+}

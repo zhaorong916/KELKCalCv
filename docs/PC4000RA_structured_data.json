@@ -1,0 +1,1000 @@
+{
+  "label": "PC4000RA",
+  "series": "PC4000RA SERIES",
+  "product_name_cn": "气动角行程执行机构",
+  "product_name_en": "Rotary Stem Motion Type Pneumatic Cylinder Actuators",
+  "doc_code": "SD-PC4000RA-A",
+  "source": {
+    "authoritative": "参考文件/选型样本/PC4000RA(压缩).pdf",
+    "reference_ocr": "参考文件/选型样本/PC4000RA(压缩).docx",
+    "pdf_pages": 13,
+    "page_scan": "docs/PC4000RA_pdf_page_scan.json",
+    "docx_tables_raw": "docs/PC4000RA_all_tables_raw.json",
+    "compare_report": "docs/PC4000RA_pdf_docx_compare.md",
+    "note": "全部数值以 PDF 渲染图/文字层为准；docx 仅用于结构与定位，其数值未采信。"
+  },
+  "application": {
+    "cn": "该系列是一种大输出力、高性能的气动活塞式执行机构，分为双作用型和单动作型两种，与角行程调节阀组合使用，可用于调节和开关的场合。该系列也可用于其它回转运动的场合。缸体内壁镀硬铬抛光或喷涂特氟龙涂层，活塞杆镀硬铬抛光，有很好的抗磨性；所有滑动部件之间均配有无油润滑轴承和导向环以降低摩擦系数，延长使用寿命。该系列气缸执行机构的 U 型曲线特性输出扭矩更适用于大口径球阀、蝶阀的开关和调节，也可用于其他 90° 回转场合。",
+    "en": "This Series provides double-acting and spring return preu-matic cylinder actuators characterized by large output and high-performance. Combined with rotary stem motion type control valves, the actuators of this Series are suited for modulating and on-off services. Uses with other rotary motion devices are also good. The inner wall of the cylinder is plated with hard lead polishing or Teflon coating. And the piston rod is plated with hard fault polishing. So that they have good abrasion resistance. All sliding parts are equipped with non oil lubricated bearings and the guide to reduce the friction coefficient and extend the service life. The series of pneumatic actuator is more applicable to switch large caliber ball valve and butterfly wide and adjustment with U type characteristic curve. It can also be used for other 90° rotary occasions."
+  },
+  "general_data": {
+    "specifications": {
+      "型号 Type": "PC4000RA",
+      "作用方式 Action Type": "双动作型：PC4200RA（Double acting type: PC4200RA）；单动作型：PC4100RA（Spring return type: PC4100RA）",
+      "回转角度 Angle Rotation": "0~90°",
+      "供气压力 Air Supply": "PC4200RA：300~600kPa G（双动作型 Double acting type）；PC4100RA：400、500kPa G（单动作型 Spring return type）",
+      "输出力矩 Output Torque": "请参见表1（See Table.1）",
+      "配管接口 Air Connection": "G1/4~G1/2",
+      "标准涂层色 Painting": "银灰色（Gray）"
+    },
+    "performance": {
+      "滞后 Hysteresis": "带定位器时 1.5%FS 以内（Less than 1.5% of full stroke with positioner）",
+      "直线度 Linearity": "带定位器时 ±2.0%FS 以内（Less than ±2.0% of Full stroke with positioner.）",
+      "环境温度 AMB Temp": {
+        "标准型 Standard type": "-20~+90℃",
+        "高温型 High temperature service (option)": "-15~+150℃",
+        "低温型 Low temperature service (option)": "-40~+80℃"
+      }
+    },
+    "materials": {
+      "缸筒 Cylinder": "碳钢（Steel pipe）",
+      "活塞 Piston": "铸铁（Cast iron）",
+      "活塞密封圈 Piston-Ring": "丁腈橡胶或氟橡胶（NBR or Viton）",
+      "输出轴 Drive Shaft": "碳钢（Carbon steel）",
+      "曲柄 Torque Lever": "碳钢（Carbon steel）",
+      "箱体 Case": "铸铁（Cast iron）"
+    }
+  },
+  "accessories": {
+    "控制附件 Control Accessories": "电气、气/气、智能定位器，过滤减压阀，电磁阀，限位开关，调速器/增速器，锁止阀等等。（E/P·P/P·Smart-Positioner, Air-set, Solenoid valve, Limit switch, Speed controller, Lock valve, Lock-up valve, etc.）",
+    "选购设备 Option": "手动操作机构、行程限位件、特殊空气配管及特殊气接头、低温环境用、高温环境用、防盐腐蚀型等。（Manual handle, Stroke stopper, Special air piping, Special air fitting, Low temperature service, High temperature service, Salty environment proof, etc.）"
+  },
+  "table_1_1_double_acting": {
+    "title_cn": "表1-1. 行程、输出力矩、容量及重量（双动作型）",
+    "title_en": "Table 1-1 STORKE, OUTPUT TORQUE, VOLUME & WEIGHT (DOUBLE ACTING TYPE)",
+    "pdf_page": 5,
+    "columns": [
+      "型号Type",
+      "尺寸Size(mm)",
+      "输出力矩300(kPa G)",
+      "输出力矩400(kPa G)",
+      "输出力矩500(kPa G)",
+      "输出力矩600(kPa G)",
+      "容量A(L)",
+      "容量B(L)",
+      "重量不带手轮(kg)",
+      "重量带手轮(kg)"
+    ],
+    "rows": [
+      {
+        "type": "PC4213RA",
+        "size_mm": "130",
+        "torque": {
+          "300": 695,
+          "400": 925,
+          "500": 1160,
+          "600": 1390
+        },
+        "volume_A_L": 3.26,
+        "volume_B_L": 3.26,
+        "weight_kg": {
+          "without_handle": 48,
+          "with_handle": 68
+        }
+      },
+      {
+        "type": "PC4217RA",
+        "size_mm": "170",
+        "torque": {
+          "300": 1425,
+          "400": 1900,
+          "500": 2380,
+          "600": 2855
+        },
+        "volume_A_L": 7.03,
+        "volume_B_L": 7.03,
+        "weight_kg": {
+          "without_handle": 82,
+          "with_handle": 102
+        }
+      },
+      {
+        "type": "PC4220RA",
+        "size_mm": "200",
+        "torque": {
+          "300": 3225,
+          "400": 4300,
+          "500": 5380,
+          "600": 6455
+        },
+        "volume_A_L": 14.98,
+        "volume_B_L": 14.98,
+        "weight_kg": {
+          "without_handle": 170,
+          "with_handle": 200
+        }
+      },
+      {
+        "type": "PC4225RA",
+        "size_mm": "250",
+        "torque": {
+          "300": 5040,
+          "400": 6725,
+          "500": 8405,
+          "600": 10085
+        },
+        "volume_A_L": 23.63,
+        "volume_B_L": 23.63,
+        "weight_kg": {
+          "without_handle": 195,
+          "with_handle": 225
+        }
+      },
+      {
+        "type": "PC4228RA",
+        "size_mm": "280",
+        "torque": {
+          "300": 7680,
+          "400": 10240,
+          "500": 12800,
+          "600": 15365
+        },
+        "volume_A_L": 36.23,
+        "volume_B_L": 36.23,
+        "weight_kg": {
+          "without_handle": 325,
+          "with_handle": 375
+        }
+      },
+      {
+        "type": "PC4235RA",
+        "size_mm": "350",
+        "torque": {
+          "300": 15130,
+          "400": 20170,
+          "500": 25215,
+          "600": 30260
+        },
+        "volume_A_L": 69.0,
+        "volume_B_L": 69.0,
+        "weight_kg": {
+          "without_handle": 600,
+          "with_handle": 700
+        }
+      },
+      {
+        "type": "PC4240RA",
+        "size_mm": "400",
+        "torque": {
+          "300": 19760,
+          "400": 26350,
+          "500": 32935,
+          "600": 39525
+        },
+        "volume_A_L": 91.06,
+        "volume_B_L": 91.06,
+        "weight_kg": {
+          "without_handle": 800,
+          "with_handle": 900
+        }
+      },
+      {
+        "type": "PC4250RA",
+        "size_mm": "500",
+        "torque": {
+          "300": 37055,
+          "400": 49405,
+          "500": 61755,
+          "600": 74110
+        },
+        "volume_A_L": 173.45,
+        "volume_B_L": 173.45,
+        "weight_kg": {
+          "without_handle": 1070,
+          "with_handle": 1270
+        }
+      },
+      {
+        "type": "PC4260RA",
+        "size_mm": "600",
+        "torque": {
+          "300": 65215,
+          "400": 86950,
+          "500": 108690,
+          "600": 130430
+        },
+        "volume_A_L": 303.05,
+        "volume_B_L": 303.05,
+        "weight_kg": {
+          "without_handle": 1580,
+          "with_handle": 1780
+        }
+      }
+    ]
+  },
+  "table_1_2_spring_return": {
+    "title_cn": "表1-2. 行程、输出力、容量及重量（单动作型）",
+    "title_en": "Table 1-2 STORKE, OUTPUT TORQUE, VOLUME & WEIGHT (SPRING RETURN TYPE)",
+    "pdf_page": 6,
+    "columns": [
+      "型号Type",
+      "尺寸Size(mm)",
+      "行程位置Angle",
+      "供气压力400(kPa G)",
+      "供气压力500(kPa G)",
+      "弹簧扭矩Spring",
+      "容量A(L)",
+      "重量不带手轮(kg)",
+      "重量带手轮(kg)"
+    ],
+    "note": "*PC4100RA单动作执行机构选型时，通常气源压力选用400kPa G，扭矩依照0°时弹簧扭矩为参考。如有特殊需求，可与KELK厂家联系。",
+    "rows": [
+      {
+        "type": "PC4113RA",
+        "size_mm": "130",
+        "angle_0": {
+          "air_400": 620,
+          "air_500": 855,
+          "spring": 305
+        },
+        "angle_90": {
+          "air_400": 315,
+          "air_500": 545,
+          "spring": 610
+        },
+        "volume_A_L": 3.26,
+        "weight_kg": {
+          "without_handle": 65,
+          "with_handle": 85
+        }
+      },
+      {
+        "type": "PC4117RA",
+        "size_mm": "170",
+        "angle_0": {
+          "air_400": 1290,
+          "air_500": 1765,
+          "spring": 610
+        },
+        "angle_90": {
+          "air_400": 685,
+          "air_500": 1160,
+          "spring": 1215
+        },
+        "volume_A_L": 7.03,
+        "weight_kg": {
+          "without_handle": 116,
+          "with_handle": 136
+        }
+      },
+      {
+        "type": "PC4120RA",
+        "size_mm": "200",
+        "angle_0": {
+          "air_400": 2730,
+          "air_500": 3805,
+          "spring": 1570
+        },
+        "angle_90": {
+          "air_400": 1570,
+          "air_500": 2645,
+          "spring": 2730
+        },
+        "volume_A_L": 14.98,
+        "weight_kg": {
+          "without_handle": 223,
+          "with_handle": 253
+        }
+      },
+      {
+        "type": "PC4125RA",
+        "size_mm": "250",
+        "angle_0": {
+          "air_400": 4380,
+          "air_500": 6060,
+          "spring": 2345
+        },
+        "angle_90": {
+          "air_400": 2740,
+          "air_500": 4425,
+          "spring": 3980
+        },
+        "volume_A_L": 23.63,
+        "weight_kg": {
+          "without_handle": 280,
+          "with_handle": 310
+        }
+      },
+      {
+        "type": "PC4128RA",
+        "size_mm": "280",
+        "angle_0": {
+          "air_400": 6730,
+          "air_500": 9290,
+          "spring": 3510
+        },
+        "angle_90": {
+          "air_400": 3350,
+          "air_500": 5910,
+          "spring": 6895
+        },
+        "volume_A_L": 36.23,
+        "weight_kg": {
+          "without_handle": 450,
+          "with_handle": 500
+        }
+      },
+      {
+        "type": "PC4135RA",
+        "size_mm": "350",
+        "angle_0": {
+          "air_400": 13475,
+          "air_500": 18515,
+          "spring": 6700
+        },
+        "angle_90": {
+          "air_400": 6715,
+          "air_500": 11760,
+          "spring": 13455
+        },
+        "volume_A_L": 69.0,
+        "weight_kg": {
+          "without_handle": 845,
+          "with_handle": 945
+        }
+      },
+      {
+        "type": "PC4140RA",
+        "size_mm": "400",
+        "angle_0": {
+          "air_400": 17420,
+          "air_500": 24005,
+          "spring": 8925
+        },
+        "angle_90": {
+          "air_400": 9080,
+          "air_500": 15670,
+          "spring": 17265
+        },
+        "volume_A_L": 91.06,
+        "weight_kg": {
+          "without_handle": 1070,
+          "with_handle": 1170
+        }
+      },
+      {
+        "type": "PC4150RA",
+        "size_mm": "500",
+        "angle_0": {
+          "air_400": 33405,
+          "air_500": 45755,
+          "spring": 16000
+        },
+        "angle_90": {
+          "air_400": 15950,
+          "air_500": 28300,
+          "spring": 33455
+        },
+        "volume_A_L": 173.45,
+        "weight_kg": {
+          "without_handle": 1400,
+          "with_handle": 1600
+        }
+      }
+    ]
+  },
+  "air_consumption": {
+    "title_cn": "执行机构耗气量 AIR CONSUMPTION",
+    "formula": "C=M·V(P+101.3)/101.3",
+    "symbols": {
+      "C": "耗气量 Air consumption，单位 L/min",
+      "M": "动作次数/分钟 Action cycle，单位 /min",
+      "V": "容量 Volume：双作用为 A+B（表1-1）；单作用为 A（表1-2），单位 L",
+      "P": "供气压力（表压）Air supply，单位 kPa G",
+      "101.3": "一个标准大气压 Standard atmospheric pressure，单位 kPa"
+    },
+    "pdf_page": 6
+  },
+  "parts_list": {
+    "table_2_1_double_acting": {
+      "title_cn": "表2-1. 结构清单 PARTS LIST（双动作型 PC3200LA）",
+      "pdf_page": 7,
+      "items": [
+        {
+          "no": 1,
+          "name": "缸筒A Cylinder A"
+        },
+        {
+          "no": 2,
+          "name": "活塞A Piston A"
+        },
+        {
+          "no": 3,
+          "name": "活塞杆 Piston rod"
+        },
+        {
+          "no": 4,
+          "name": "输出轴 Drive shaft"
+        },
+        {
+          "no": 5,
+          "name": "拨叉 Fork"
+        },
+        {
+          "no": 6,
+          "name": "缸筒B Cylinder B"
+        },
+        {
+          "no": 7,
+          "name": "活塞B Piston B"
+        },
+        {
+          "no": 8,
+          "name": "箱体 Box"
+        }
+      ]
+    },
+    "table_2_2_spring_return": {
+      "title_cn": "表2-2. 结构清单 PARTS LIST（单动作型 PC3100LA）",
+      "pdf_page": 7,
+      "items": [
+        {
+          "no": 1,
+          "name": "缸筒A Cylinder A"
+        },
+        {
+          "no": 2,
+          "name": "活塞A Piston A"
+        },
+        {
+          "no": 3,
+          "name": "活塞杆 Piston rod"
+        },
+        {
+          "no": 4,
+          "name": "输出轴 Drive shaft"
+        },
+        {
+          "no": 5,
+          "name": "拨叉 Fork"
+        },
+        {
+          "no": 6,
+          "name": "缸筒B Cylinder B"
+        },
+        {
+          "no": 7,
+          "name": "弹簧 Spring"
+        },
+        {
+          "no": 8,
+          "name": "活塞B Piston B"
+        },
+        {
+          "no": 9,
+          "name": "箱体 Box"
+        }
+      ]
+    }
+  },
+  "dimensions": {
+    "unit": "mm",
+    "double_acting_part1": {
+      "title_cn": "尺寸表 Dimensions（双作用执行机构 PC4200RA，p9）",
+      "pdf_page": 9,
+      "columns": [
+        "型号Type",
+        "L",
+        "L1",
+        "L2",
+        "H",
+        "h",
+        "H1",
+        "H2",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "G",
+        "n",
+        "M"
+      ],
+      "rows": [
+        {
+          "type": "PC4213RA",
+          "L": 210,
+          "L1": 168,
+          "L2": 10,
+          "H": 685,
+          "h": 342.5,
+          "H1": 202,
+          "H2": 37.3,
+          "A": 34,
+          "B": 55,
+          "C": 88,
+          "D": "132",
+          "E": "100",
+          "G": "G1/4",
+          "n": 4,
+          "M": "M16×20"
+        },
+        {
+          "type": "PC4217RA",
+          "L": 258,
+          "L1": 230,
+          "L2": 14,
+          "H": 835,
+          "h": 417.5,
+          "H1": 270,
+          "H2": 51.8,
+          "A": 48,
+          "B": 72,
+          "C": 120,
+          "D": "190",
+          "E": "160",
+          "G": "G3/8",
+          "n": 4,
+          "M": "M16×20"
+        },
+        {
+          "type": "PC4220RA",
+          "L": 306,
+          "L1": 270,
+          "L2": 18,
+          "H": 1140,
+          "h": 570,
+          "H1": 349,
+          "H2": 64.4,
+          "A": 60,
+          "B": 90,
+          "C": 140,
+          "D": "232",
+          "E": "200",
+          "G": "G1/2",
+          "n": 8,
+          "M": "M16×20"
+        },
+        {
+          "type": "PC4225RA",
+          "L": 326,
+          "L1": 320,
+          "L2": 18,
+          "H": 1140,
+          "h": 570,
+          "H1": 374,
+          "H2": 64.4,
+          "A": 60,
+          "B": 90,
+          "C": 140,
+          "D": "232",
+          "E": "200",
+          "G": "G1/2",
+          "n": 8,
+          "M": "M16×20"
+        },
+        {
+          "type": "PC4228RA",
+          "L": 368,
+          "L1": 362,
+          "L2": 20,
+          "H": 1405,
+          "h": 702.5,
+          "H1": 460,
+          "H2": 74.9,
+          "A": 70,
+          "B": 110,
+          "C": 220,
+          "D": "318",
+          "E": "280",
+          "G": "G1/2",
+          "n": 8,
+          "M": "M20×24"
+        }
+      ]
+    },
+    "double_acting_part2": {
+      "title_cn": "尺寸表 Dimensions（双作用执行机构 PC4200RA，p10）",
+      "pdf_page": 10,
+      "columns": [
+        "型号Type",
+        "L",
+        "L1",
+        "L2",
+        "H",
+        "h",
+        "H1",
+        "H2",
+        "A",
+        "C",
+        "D",
+        "E",
+        "G",
+        "n",
+        "M"
+      ],
+      "note": "本表（原文档 p10）缺 B 列，列为 15 列。",
+      "rows": [
+        {
+          "type": "PC4235RA",
+          "L": 440,
+          "L1": 318,
+          "L2": 28,
+          "H": 1870,
+          "h": 935,
+          "H1": 545,
+          "H2": 117.8,
+          "A": 105,
+          "C": 220,
+          "D": 350,
+          "E": 300,
+          "G": "G1/2",
+          "n": 8,
+          "M": "M24×30"
+        },
+        {
+          "type": "PC4240RA",
+          "L": 490,
+          "L1": 318,
+          "L2": 28,
+          "H": 1870,
+          "h": 935,
+          "H1": 570,
+          "H2": 117.8,
+          "A": 105,
+          "C": 220,
+          "D": 350,
+          "E": 300,
+          "G": "G1/2",
+          "n": 8,
+          "M": "M24×30"
+        },
+        {
+          "type": "PC4250RA",
+          "L": 602,
+          "L1": 380,
+          "L2": 32,
+          "H": 2344,
+          "h": 1172,
+          "H1": 681,
+          "H2": 127.4,
+          "A": 120,
+          "C": 280,
+          "D": 400,
+          "E": 350,
+          "G": "G1/2",
+          "n": 12,
+          "M": "M24×30"
+        },
+        {
+          "type": "PC4260RA",
+          "L": 700,
+          "L1": 423,
+          "L2": 36,
+          "H": 2790,
+          "h": 1395,
+          "H1": 820,
+          "H2": 148.5,
+          "A": 140,
+          "C": 360,
+          "D": 500,
+          "E": 450,
+          "G": "G1/2",
+          "n": 12,
+          "M": "M27×36"
+        }
+      ]
+    },
+    "spring_return": {
+      "title_cn": "尺寸表 Dimensions（单作用执行机构 PC4100RA，p11）",
+      "pdf_page": 11,
+      "columns": [
+        "型号Type",
+        "L",
+        "L1",
+        "L2",
+        "H",
+        "h",
+        "H1",
+        "H2",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "G",
+        "n",
+        "M"
+      ],
+      "rows": [
+        {
+          "type": "PC4113RA",
+          "L": 210,
+          "L1": 168,
+          "L2": 10,
+          "H": 910,
+          "h": 342.5,
+          "H1": 202,
+          "H2": 37.3,
+          "A": 34,
+          "B": 55,
+          "C": 88,
+          "D": "132",
+          "E": "100",
+          "G": "G1/4",
+          "n": 4,
+          "M": "M16×20"
+        },
+        {
+          "type": "PC4117RA",
+          "L": 258,
+          "L1": 230,
+          "L2": 14,
+          "H": 1100,
+          "h": 417.5,
+          "H1": 270,
+          "H2": 51.8,
+          "A": 48,
+          "B": 72,
+          "C": 120,
+          "D": "190",
+          "E": "160",
+          "G": "G3/8",
+          "n": 4,
+          "M": "M16×20"
+        },
+        {
+          "type": "PC4120RA",
+          "L": 306,
+          "L1": 270,
+          "L2": 18,
+          "H": 1460,
+          "h": 570,
+          "H1": 349,
+          "H2": 64.4,
+          "A": 60,
+          "B": 90,
+          "C": 140,
+          "D": "232",
+          "E": "200",
+          "G": "G1/2",
+          "n": 8,
+          "M": "M16×20"
+        },
+        {
+          "type": "PC4125RA",
+          "L": 326,
+          "L1": 320,
+          "L2": 18,
+          "H": 1610,
+          "h": 570,
+          "H1": 374,
+          "H2": 64.4,
+          "A": 60,
+          "B": 90,
+          "C": 140,
+          "D": "232",
+          "E": "200",
+          "G": "G1/2",
+          "n": 8,
+          "M": "M16×20"
+        },
+        {
+          "type": "PC4128RA",
+          "L": 368,
+          "L1": 362,
+          "L2": 20,
+          "H": 1910,
+          "h": 702.5,
+          "H1": 460,
+          "H2": 74.9,
+          "A": 70,
+          "B": 110,
+          "C": 220,
+          "D": "318",
+          "E": "280",
+          "G": "G1/2",
+          "n": 8,
+          "M": "M20×24"
+        },
+        {
+          "type": "PC4135RA",
+          "L": 440,
+          "L1": 318,
+          "L2": 28,
+          "H": 2515,
+          "h": 935,
+          "H1": 545,
+          "H2": 117.8,
+          "A": 105,
+          "B": "—",
+          "C": 220,
+          "D": "350",
+          "E": "300",
+          "G": "G1/2",
+          "n": 8,
+          "M": "M24×30"
+        },
+        {
+          "type": "PC4140RA",
+          "L": 490,
+          "L1": 318,
+          "L2": 28,
+          "H": 2515,
+          "h": 935,
+          "H1": 570,
+          "H2": 117.8,
+          "A": 105,
+          "B": "—",
+          "C": 220,
+          "D": "350",
+          "E": "300",
+          "G": "G1/2",
+          "n": 8,
+          "M": "M24×30"
+        },
+        {
+          "type": "PC4150RA",
+          "L": 602,
+          "L1": 380,
+          "L2": 32,
+          "H": 3270,
+          "h": 1172,
+          "H1": 681,
+          "H2": 127.4,
+          "A": 120,
+          "B": "—",
+          "C": 280,
+          "D": "400",
+          "E": "350",
+          "G": "G1/2",
+          "n": 12,
+          "M": "M24×30"
+        }
+      ]
+    }
+  },
+  "module_selection": {
+    "title_cn": "图2. 各种模块选用",
+    "title_en": "Fig.2 MODULARS FOR SELECTION",
+    "pdf_page": 8,
+    "modules": {
+      "双动作基本型": "无标识",
+      "单动作基本型": "无标识",
+      "手动液压泵": "顶部（双动作基本型上方）",
+      "手动液压缸(PC4028RA-PC4060RA)": "左侧",
+      "手动液压缸": "右侧",
+      "全行程限位螺杆": "左下",
+      "手动离合器操作器(PC4213RA-PC4225RA)": "下方",
+      "操作手柄(PC4113RA-PC4128RA)": "右下"
+    }
+  },
+  "actuator_model_coding_rule": {
+    "title_cn": "附表一 执行机构型号编制说明",
+    "title_en": "ACTUATOR MODEL CODING RULE",
+    "pdf_page": 12,
+    "example_code": "P D 3 0 00 L A - D - N",
+    "positions": [
+      {
+        "pos": 1,
+        "code": "P",
+        "meaning": "执行机构"
+      },
+      {
+        "pos": 2,
+        "code": "D / C",
+        "meaning": "薄膜式执行机构 / 气缸式执行机构"
+      },
+      {
+        "pos": 3,
+        "code": "3 / 2 / 6 / 4 / 8",
+        "meaning": "薄膜式·气缸式直行程 / VT式角行程 / AT式角行程 / 拨叉式角行程 / 气缸式角行程"
+      },
+      {
+        "pos": 4,
+        "code": "1 / 2",
+        "meaning": "单动作执行机构 / 双动作执行机构（示例代码使用 0 作系列占位）"
+      },
+      {
+        "pos": 5,
+        "code": "00 / 000",
+        "meaning": "缸径型号"
+      },
+      {
+        "pos": 6,
+        "code": "L / R",
+        "meaning": "直行程执行机构 / 角行程执行机构"
+      },
+      {
+        "pos": 7,
+        "code": "A",
+        "meaning": "版本号"
+      },
+      {
+        "pos": 8,
+        "code": "D / R / W",
+        "meaning": "正动作型 / 反动作型 / 双动作型"
+      },
+      {
+        "pos": 9,
+        "code": "N / S / H",
+        "meaning": "无手轮 / 旁式手轮 / 顶部手轮"
+      }
+    ]
+  },
+  "covers_and_contacts": {
+    "cover": "PC4000RA SERIES 气动角行程执行机构 Rotary Stem Motion Type Pneumatic Cylinder Actuators",
+    "manufacturer": "无锡凯尔克仪表阀门有限公司",
+    "company_intro": "KELK 无锡公司是一家中国与加拿大合资的专业控制阀制造商，是专业生产各类电动、气动控制阀、控制装置，并集成工业控制系统的一家高科技企业。",
+    "contact_web": "www.kelkflow.com.cn",
+    "contact_email": "info@kelkflow.com.cn",
+    "head_office": "地址：无锡市新区鸿山镇后宅机光电集中区德育路6号 (214115)；电话：+86-510-85141699；传真：+86-510-85141819",
+    "branches": [
+      {
+        "name": "KELK 重庆分公司",
+        "address": "重庆市北部新区金渝大道68号新科国际5-706",
+        "zip": "401122",
+        "phone_fax": "023-67303323 / 023-67303870"
+      },
+      {
+        "name": "KELK 北京分公司",
+        "address": "北京市朝阳区北辰西路69号峻峰华亭D座2210室",
+        "zip": "100029",
+        "phone_fax": "010-58773822 / 010-58773818"
+      },
+      {
+        "name": "KELK 杭州分公司",
+        "address": "杭州市下城区三塘高层公寓3幢605室",
+        "zip": "310004",
+        "phone_fax": "0517-81953576 / 0517-81953576"
+      },
+      {
+        "name": "KELK 广州分公司",
+        "address": "广州市天河区天河北路705号东方之珠D栋1303房",
+        "zip": "510000",
+        "phone_fax": "020-38042159 / 020-38042387"
+      },
+      {
+        "name": "KELK 武汉分公司",
+        "address": "武汉市武昌区福星惠誉国际城芭莎公馆1-1-3603室",
+        "zip": "430060",
+        "phone_fax": "027-86708711 / 027-87453500"
+      },
+      {
+        "name": "KELK 西安分公司",
+        "address": "陕西省西安市西影路63号雁影华庭3-501",
+        "zip": "710054",
+        "phone_fax": "029-85537596 / 029-85519533"
+      },
+      {
+        "name": "KELK 成都分公司",
+        "address": "成都市高新区天府大道中段177号天鹅湖花园公寓北岛23栋2单元28楼7号",
+        "zip": "630031",
+        "phone_fax": "028-87359772 / 028-87359772"
+      }
+    ],
+    "footer_note": "规格数据可能因技术进步而改变"
+  },
+  "document_anomalies_preserved": [
+    {
+      "location": "表1-1/1-2 英文标题",
+      "issue": "STORKE 系原文档错字，应为 STROKE",
+      "action": "保留原样"
+    },
+    {
+      "location": "表1-2 标题",
+      "issue": "中文“输出力”与英文“OUTPUT TORQUE”不一致，且与表1-1 中文“输出力矩”不一致",
+      "action": "保留原样"
+    },
+    {
+      "location": "图1-1/1-2 图题（p7）",
+      "issue": "标注为 PC3200LA / PC3100LA，与本样本 PC4200RA/PC4100RA 不符；图1-1 英文序号印作 Fig. I-1",
+      "action": "保留原样，见图注"
+    },
+    {
+      "location": "p10 vs p11",
+      "issue": "同 500 缸径 E 值跨表不一致（PC4250RA E=350；PC4150RA 原PDF=300）",
+      "action": "已按人工复核意见统一取 350（2026-10-14 执行）"
+    }
+  ]
+}

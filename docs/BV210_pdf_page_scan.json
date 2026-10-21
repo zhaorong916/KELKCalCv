@@ -1,0 +1,272 @@
+{
+  "label": "BV210",
+  "pdf": "BV210（22版）.pdf",
+  "n_pages": 16,
+  "pages": [
+    {
+      "page": 1,
+      "text_len": 45,
+      "table_count": 1,
+      "tables": [
+        {
+          "n_rows": 29,
+          "n_cols": 26,
+          "first_row": "Metal-Seated Ball Valves |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | "
+        }
+      ],
+      "preview": "BV210 SERIES | 金属硬密封球阀 | Metal-Seated Ball Valves"
+    },
+    {
+      "page": 2,
+      "text_len": 1012,
+      "table_count": 0,
+      "tables": [],
+      "preview": "KELK控制阀在中国 | KELK无锡公司是一家中国与加拿大合资的专业控制阀制造商，是专业生产各类电动、气动控制阀、控制装置 | ，并集成工业控制系统的一家高科技企业。公司在质量体系保证下生产出高质量和高可靠性的控制仪表，适用于各 | 行各业及各种场合。 | 该资料是KELK控制阀选型样本，主要介绍不同类型的控制阀，帮助您在不同的工况条件下更合理选择KELK的 | 产品。如果您对此选型样本有任何问题或需要更详细资料，"
+    },
+    {
+      "page": 3,
+      "text_len": 1432,
+      "table_count": 0,
+      "tables": [],
+      "preview": "KELK FLOW | Specification Data | BV Series BV210 | 2022/9/1 | Ball Valves | SD-BV210-A BV Ball Valve | 金属硬密封球阀 Metal-seated Ball Valve | 应用 | BV210系列金属密封球阀采用超音 高精度加工的球体和阀座密 封面使得严密切断达到ANSI Class V（可选VI） | 速喷涂或热喷焊工艺在球体表面"
+    },
+    {
+      "page": 4,
+      "text_len": 990,
+      "table_count": 3,
+      "tables": [
+        {
+          "n_rows": 6,
+          "n_cols": 2,
+          "first_row": "公称通径 Body size | 1\" ～12\"（DN25～DN300）"
+        },
+        {
+          "n_rows": 1,
+          "n_cols": 2,
+          "first_row": "标 准 型 Standard type | －45 ～ ＋538℃"
+        },
+        {
+          "n_rows": 5,
+          "n_cols": 2,
+          "first_row": "阀内件形式 Trim form | 浮动球型（1\"～4\"）, 固定球型（6\"～24\"）\nFloating(1\"～4\"), Trunnion(6\"～24\")"
+        }
+      ],
+      "preview": "标准规格 GENERAL DATA | 阀体 Body | 公称通径 Body size 1\" ～12\"（DN25～DN300） | ANSI 150#, 300#, 600# | 公称压力 Body rating | JB/T79.1-94 & HG/T20592-2009 PN1.6Mpa ~ PN10.0Mpa, | 连接方式 Body connection 法兰式(,RF,RTJ) Flanges(,RF,RTJ"
+    },
+    {
+      "page": 5,
+      "text_len": 1348,
+      "table_count": 3,
+      "tables": [
+        {
+          "n_rows": 8,
+          "n_cols": 2,
+          "first_row": "形 式 Type | 气缸式 Pneumatic Cylinder type"
+        },
+        {
+          "n_rows": 2,
+          "n_cols": 2,
+          "first_row": "气动执行机构控制附件\nPneumatic Actuator Control\nAccessories | 电气、气气、智能定位器，过滤减压阀，电磁阀，限位开关，调速器，增速器，锁止阀\n等等。\nE/P·P/P·Smart-Positioner,Air-set, Solenoid valveLimit switch, Speed controller, Lock valve,\nLock-up valve"
+        },
+        {
+          "n_rows": 4,
+          "n_cols": 2,
+          "first_row": "本体特殊检查\nSpecial testing for Body | 材料检查 {液体渗透探伤检查（PT）、放射线检查（RT）}、流量特性检查、低温试验\n、蒸汽试验\nMaterial certificate, Liquid penetrant testing, Radiographic testing,\nFlow characteristic testing, Low temperature tes"
+        }
+      ],
+      "preview": "执行机构 Actuator | 形 式 Type 气缸式 Pneumatic Cylinder type | 用 途 Purpose 调节 、开关 Modulation or On-off | 供气压力 Air supply 400~500 KPa G | 接 口 Connection Rc1/4 ~ Rc1 | 作用方式 Action Type 随输入定位器信号增加阀开或阀闭。Valve open or shut "
+    },
+    {
+      "page": 6,
+      "text_len": 1056,
+      "table_count": 2,
+      "tables": [
+        {
+          "n_rows": 20,
+          "n_cols": 2,
+          "first_row": "No. | 名称 Part Name"
+        },
+        {
+          "n_rows": 24,
+          "n_cols": 2,
+          "first_row": "No. | 名称 Part Name"
+        }
+      ],
+      "preview": "本体部构造 BODY STRUCTURE | 图1. 本体部构造 Fig. 1 BODY SECTION VIEW 表1 结构清单 Table.1 PARTS LIST | 图1-1 浮动球 Fig. 1-1 Floating （1\"-4\"） 表1-1 浮动球 Table 1-1 Floating | ⑨ ⑩ 11 12 13 14 15 16 17 18 No. 名称 Part Name | 1 阀体帽 Bod"
+    },
+    {
+      "page": 7,
+      "text_len": 1285,
+      "table_count": 2,
+      "tables": [
+        {
+          "n_rows": 13,
+          "n_cols": 7,
+          "first_row": "阀体材质 Body material |  | WCB,WC6,C5,LCB |  |  |  | "
+        },
+        {
+          "n_rows": 11,
+          "n_cols": 6,
+          "first_row": "阀体材质 Body material |  | CF8,CF8M |  |  | "
+        }
+      ],
+      "preview": "基本选型 SELECTION | 表2. 阀体、阀内件材质组合及使用温度范围·阀座允许泄漏量 | Table 2. Body/Trim standard material combination,operating temperature and seat leakage | 表 2-1 本体部材质：碳钢 | Table 2-1 Body Material: Carbon Steel | 阀体材质 Body mate"
+    },
+    {
+      "page": 8,
+      "text_len": 800,
+      "table_count": 2,
+      "tables": [
+        {
+          "n_rows": 15,
+          "n_cols": 6,
+          "first_row": "零件名称\nParts Name | 材质\nMaterial | 硬化涂层\nHarden Coating | 涂层厚度\nCoating Thickness | 使用温度范围\nOperating Temperature | 表面硬度\nFace Hardness（HCR）"
+        },
+        {
+          "n_rows": 11,
+          "n_cols": 3,
+          "first_row": "公称通径\nValve size\ninch (mm) | ANSI 150# 300# | ANSI 600#"
+        }
+      ],
+      "preview": "表2-3 密封面硬化处理硬度 | Table 2-3 Hardness for Seal Surface | 零件名称 材质 硬化涂层 涂层厚度 使用温度范围 表面硬度 | Parts Name Material Harden Coating Coating Thickness Operating Temperature Face Hardness（HCR） | 球体 Ball 410/316 WC | 150~18"
+    },
+    {
+      "page": 9,
+      "text_len": 774,
+      "table_count": 6,
+      "tables": [
+        {
+          "n_rows": 13,
+          "n_cols": 15,
+          "first_row": " |  | MPa G |  |  |  |  |  |  |  |  |  |  |  | "
+        },
+        {
+          "n_rows": 12,
+          "n_cols": 17,
+          "first_row": "MPa G |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | "
+        },
+        {
+          "n_rows": 2,
+          "n_cols": 1,
+          "first_row": ""
+        },
+        {
+          "n_rows": 2,
+          "n_cols": 1,
+          "first_row": ""
+        },
+        {
+          "n_rows": 12,
+          "n_cols": 17,
+          "first_row": "MPa G |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | "
+        },
+        {
+          "n_rows": 13,
+          "n_cols": 15,
+          "first_row": " |  | MPa G |  |  |  |  |  |  |  |  |  |  |  | "
+        }
+      ],
+      "preview": "图2 填料的使用温度·压力范围 | Fig. 2 GLAND PACKING OPERATING PRESSURE-TEMPERATURE RATINGS | 图2-1 高强度碳纤维+强化聚四氟乙烯纤维 图2-2 柔性石墨 | F i g. 2-1 CARBON+PTFE FIBRE Fig. 2-2 GRAFOIL | 图3 垫圈的使用温度·压力范围 | Fig. 3 GASKET PRESSURE-TEMPERA"
+    },
+    {
+      "page": 10,
+      "text_len": 1624,
+      "table_count": 1,
+      "tables": [
+        {
+          "n_rows": 39,
+          "n_cols": 22,
+          "first_row": "执行机构\n尺寸及型号\nActuator\nsize & code | 气源压力\nAir SUP.\nkPa | ANSI 150、ANSI 300 |  |  |  |  |  |  |  |  |  | ANSI 600 |  |  |  |  |  |  |  |  | "
+        }
+      ],
+      "preview": "允许压差 PRESSURE DROPS | 表4 最大允许压差（ 单位：MPa ） | Table 4 ALLOWABLE PRESSURE DROPS ( UNIT : MPa ) | 配电动执行机构、气缸式执行机构最大允许压差请向工厂咨询。 | 表4-1 双动作型执行机构 | Table 4-1 DOUBLE ACTING PNEUMATIC CYLINDER ACTUATOR | 表4-1 ANSI 150/ANS"
+    },
+    {
+      "page": 11,
+      "text_len": 1160,
+      "table_count": 1,
+      "tables": [
+        {
+          "n_rows": 28,
+          "n_cols": 22,
+          "first_row": "执行机构\n尺寸及型号\nActuator\nsize & code | 气源压力\nAir SUP.\nkPa | ANSI 150、ANSI 300 |  |  |  |  |  |  |  |  |  | ANSI 600 |  |  |  |  |  |  |  |  | "
+        }
+      ],
+      "preview": "表4-2 单动作执行机构 | Table 4-2 SPRING RETURN PNEUMATIC CYLINDER ACTUATOR | 表4-2 ANSI 150/ANSI 300/ANSI 600# | Table 4-2 ANSI 150/ANSI 300#/ANSI 600# | 执行机构 气源压力 ANSI 150、ANSI 300 ANSI 600 | 尺寸及型号 Air SUP. 浮动球型 Floati"
+    },
+    {
+      "page": 12,
+      "text_len": 358,
+      "table_count": 1,
+      "tables": [
+        {
+          "n_rows": 11,
+          "n_cols": 3,
+          "first_row": "公称通径\nValve size\ninch (mm) | ANSI 150# 300# | ANSI 600#"
+        }
+      ],
+      "preview": "产品重量 NET WEIGHT | 表5 产品重量（单位：kg） (不包括控制附件重量) | Table 5 NET WEIGHT OF STANDARD VALVE AND DIAPHRAGM ACTUATOR (UNIT: kg) | 公称通径 | Valve size ANSI 150# 300# ANSI 600# | inch (mm) | 1 (25) 10 12 | 1-1/2 (40) 16 20 | 2 (50"
+    },
+    {
+      "page": 13,
+      "text_len": 228,
+      "table_count": 0,
+      "tables": [],
+      "preview": "安装方位 MOUNTING FORMS | 图4 控制阀安装方位 | Fig 4 ACTUATOR MOUNTING FORMS | 图4-1 PC2000RA/ PC60000RA安装方位 | Fig 4-1 ACTUATOR MOUNTING FORMS FOR PC2000RA/ PC60000RA | 图4-2 PC4000RA安装方位 | Fig 4-2 ACTUATOR MOUNTING FORMS FOR "
+    },
+    {
+      "page": 14,
+      "text_len": 705,
+      "table_count": 1,
+      "tables": [
+        {
+          "n_rows": 13,
+          "n_cols": 11,
+          "first_row": "公称通径Valve size |  |  | ANSI150# |  |  | ANSI300# |  |  | ANSI600# | "
+        }
+      ],
+      "preview": "外形尺寸 OVERALL DIMENSIONS | 图5 控制阀外形尺寸 | Fig 5 OUTLINE DIMENSION OF CONTROL VALVE | 尺寸表 Dimensions 单位 unit: mm | ANSI150# ANSI300# ANSI600# | 公称通径Valve size | PN1.6MPa PN 2.5MPa、PN 4.0MPa PN 6.3MPa、PN 10.0MPa | （inch"
+    },
+    {
+      "page": 15,
+      "text_len": 2567,
+      "table_count": 4,
+      "tables": [
+        {
+          "n_rows": 20,
+          "n_cols": 19,
+          "first_row": "温 度\nTemp.\n℃ | ANSI Class 150 |  |  |  |  |  | ANSI Class 300 |  |  |  |  |  | ANSI Class 600 |  |  |  |  | "
+        },
+        {
+          "n_rows": 11,
+          "n_cols": 10,
+          "first_row": "温度\nTemp. ℃ | PN16 | PN40 | PN63 | PN100 | 温度\nTemp. ℃ | PN16 | PN40 | PN63 | PN100"
+        },
+        {
+          "n_rows": 2,
+          "n_cols": 7,
+          "first_row": "美国标准 | ANSI 150# | ANSI 300# | ANSI 600# | ANSI 900# | ANSI 1500# | ANSI 2500#"
+        },
+        {
+          "n_rows": 2,
+          "n_cols": 7,
+          "first_row": "美国标准 | A216-WCB | A351-CF8 | A351-CF8M | A217-WC6 | A217-WC9 | A352-LCB"
+        }
+      ],
+      "preview": "附表一 | 阀体材质的使用温度·压力限制 | BODY MATERIAL/OPERATING PRESSURE-TEMPERATURE RATING | UNIT : MPa G | 温 度 ANSI Class 150 ANSI Class 300 ANSI Class 600 | Temp. A352 A216 A217 A217 A351 A351 A352 A216 A217 A217 A351 A351 A"
+    },
+    {
+      "page": 16,
+      "text_len": 757,
+      "table_count": 1,
+      "tables": [
+        {
+          "n_rows": 19,
+          "n_cols": 20,
+          "first_row": " |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | "
+        }
+      ],
+      "preview": "分公司联系方式 | KELK 重庆分公司 KELK 北京分公司 | 地址 ：重庆市北部新区金渝大道68号新科国际5-706 地址 ：北京市朝阳区北辰西路69号峻峰华亭D座2210室 | 邮编 ：401122 邮编 ：100029 | 电话/传真 ：023-67303323 023-67303870 电话/传真 ：010-58773822 010-58773818 | KELK 杭州分公司 KELK 广州分公司 | 地址 "
+    }
+  ]
+}

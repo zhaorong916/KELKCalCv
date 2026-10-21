@@ -1,0 +1,990 @@
+{
+  "label": "PD3000LA",
+  "docx": "PD3000LA(压缩).docx",
+  "n_tables": 15,
+  "tables": [
+    {
+      "table_index": 0,
+      "n_rows": 7,
+      "n_cols": 2,
+      "first_row": "型号\nType | PD3021LA、PD3027LA、PD3035LA、PD304SLA、PD304LLA、PD306SLA、PD306LLA",
+      "rows": [
+        [
+          "型号\nType",
+          "PD3021LA、PD3027LA、PD3035LA、PD304SLA、PD304LLA、PD306SLA、PD306LLA"
+        ],
+        [
+          "作用方式\nAction Type",
+          "正作用：气压增加阀闭 Directaction : Air to valve shut反作用：气压增加阀开\nReverse action : Air to valve open"
+        ],
+        [
+          "供气压力\nAir Supply",
+          "300kPa G\n340kPa G\n400kPa G"
+        ],
+        [
+          "弹簧范围\nSpring Range",
+          "80~200kPa G\n120~300kPa G (PD3021LA、PD3027LA)\n120~280kPa  G  (PD3035LA、PD304SLA、PD304LLA)"
+        ],
+        [
+          "输出力\nOutputForce",
+          "请参见表l\nSee Table.l"
+        ],
+        [
+          "配管接口\nAir Connection",
+          "Re1/4 (0650: Rc3/8)"
+        ],
+        [
+          "标准涂层色\nPainting",
+          "银灰色\nGray"
+        ]
+      ]
+    },
+    {
+      "table_index": 1,
+      "n_rows": 3,
+      "n_cols": 2,
+      "first_row": "滞后\nHysteresis | 带定位器时0.8%FS以内。\nLess than 0.8% ofFull stroke with positioner.\n带定位器时（弹簧范围120~280/300) 1.0¾FS以内。\nLess than 1.0% ofFull stroke with positioner for Spring range 120~280/300.\n不带定位器时5%FS以内。\nLess than 5% ofFull stroke withoutpositioner.",
+      "rows": [
+        [
+          "滞后\nHysteresis",
+          "带定位器时0.8%FS以内。\nLess than 0.8% ofFull stroke with positioner.\n带定位器时（弹簧范围120~280/300) 1.0¾FS以内。\nLess than 1.0% ofFull stroke with positioner for Spring range 120~280/300.\n不带定位器时5%FS以内。\nLess than 5% ofFull stroke withoutpositioner."
+        ],
+        [
+          "直线度\nLinearity",
+          "带定位器时叫5%FS以内。\nLinearity : Less than士1.5% ofFull stroke with positioner.带定位器时（弹簧范围120~280/300)士2.0¾FS以内。\nLess than士2% ofFull stroke with positioner for Spring range 120~280/300.\n不带定位器时士4%FS以内。\nLess than士4% ofFull stroke withoutpositioner."
+        ],
+        [
+          "环境温度\nAMBTemp",
+          "标准型Standard type -10-+ 70·c\n高温型High temperature service (option) 0~+100C\n低温型Low temperature service (option) -40~+4o·c"
+        ]
+      ]
+    },
+    {
+      "table_index": 2,
+      "n_rows": 4,
+      "n_cols": 2,
+      "first_row": "膜盖\nDiaphragm Case | 碳钢SPHE",
+      "rows": [
+        [
+          "膜盖\nDiaphragm Case",
+          "碳钢SPHE"
+        ],
+        [
+          "膜片\nDiaphragm",
+          "三元乙丙胶EPDM"
+        ],
+        [
+          "输出轴\nDrive Shaft",
+          "不锈钢304"
+        ],
+        [
+          "支架\nYoke",
+          "球墨铸铁QT400"
+        ]
+      ]
+    },
+    {
+      "table_index": 3,
+      "n_rows": 2,
+      "n_cols": 2,
+      "first_row": "控制附件\nControl Accessories | 电气、气气、智能定位淄，过滤减压阀，电磁阀，限位开关，调速器／增速器，\n锁止阀等等。\nE/P•P/P•Smart-Positioner, Air-set,Solenoid valve, Limitswitch, Speed controller, Lock valve, Lock-up valve, etc.",
+      "rows": [
+        [
+          "控制附件\nControl Accessories",
+          "电气、气气、智能定位淄，过滤减压阀，电磁阀，限位开关，调速器／增速器，\n锁止阀等等。\nE/P•P/P•Smart-Positioner, Air-set,Solenoid valve, Limitswitch, Speed controller, Lock valve, Lock-up valve, etc."
+        ],
+        [
+          "选购设备\nOption",
+          "手动操作机构、支架材料、特殊空气配管及特殊气接头、低温环境用、高温环\n境用、防盐腐蚀型等。\nManual handle, Yoke material, Special air piping,Special air fitting,Low temperature service, High temperature service, Salty environmentproof,etc."
+        ]
+      ]
+    },
+    {
+      "table_index": 4,
+      "n_rows": 14,
+      "n_cols": 8,
+      "first_row": "型号\nType | 尺寸 Size (mm) | 行程 Stroke (mm) | 供气压力 Air supply (kPa G) | 输出力 Outputforce (N) | 谷厂旦里\n\nVolume (L) | 重量Weight (kg) | 重量Weight (kg)",
+      "rows": [
+        [
+          "型号\nType",
+          "尺寸 Size (mm)",
+          "行程 Stroke (mm)",
+          "供气压力 Air supply (kPa G)",
+          "输出力 Outputforce (N)",
+          "谷厂旦里\n\nVolume (L)",
+          "重量Weight (kg)",
+          "重量Weight (kg)"
+        ],
+        [
+          "型号\nType",
+          "尺寸 Size (mm)",
+          "行程 Stroke (mm)",
+          "供气压力 Air supply (kPa G)",
+          "输出力 Outputforce (N)",
+          "谷厂旦里\n\nVolume (L)",
+          "不带手轮\nWithouthandle",
+          "带手轮\nWith handle"
+        ],
+        [
+          "PD3021LA",
+          "心218",
+          "20",
+          "300",
+          "1451",
+          "0.7",
+          "9",
+          "13"
+        ],
+        [
+          "PD3021LA",
+          "心218",
+          "20",
+          "340",
+          "2186",
+          "0.7",
+          "9",
+          "13"
+        ],
+        [
+          "PD3027LA",
+          "<1>270",
+          "20、25、30",
+          "300",
+          "2432",
+          "1.6",
+          "15",
+          "25"
+        ],
+        [
+          "PD3027LA",
+          "<1>270",
+          "20、25、30",
+          "340",
+          "3648",
+          "1.6",
+          "15",
+          "25"
+        ],
+        [
+          "PD3035LA",
+          "中350",
+          "20、25\n30、40",
+          "300",
+          "4314",
+          "3.3",
+          "37",
+          "47"
+        ],
+        [
+          "PD3035LA",
+          "中350",
+          "20、25\n30、40",
+          "400",
+          "6460",
+          "3.6",
+          "38.5",
+          "50"
+        ],
+        [
+          "PD304SLA",
+          "<D450S",
+          "20、25\n30、40",
+          "300",
+          "7453",
+          "6",
+          "65",
+          "77"
+        ],
+        [
+          "PD304SLA",
+          "<D450S",
+          "20、25\n30、40",
+          "400",
+          "11170",
+          "6.5",
+          "68",
+          "82"
+        ],
+        [
+          "PD304LLA",
+          "中450L",
+          "50、60\n70、80",
+          "300",
+          "7453",
+          "10",
+          "87",
+          "100"
+        ],
+        [
+          "PD304LLA",
+          "中450L",
+          "50、60\n70、80",
+          "400",
+          "11170",
+          "11",
+          "92",
+          "108"
+        ],
+        [
+          "PD306SLA",
+          "([)650S",
+          "30、40\n50、60",
+          "300",
+          "16480",
+          "30",
+          "195",
+          "235"
+        ],
+        [
+          "PD306LLA",
+          "<1>650L",
+          "70、80、90\n100、110",
+          "300",
+          "16480",
+          "42",
+          "226",
+          "275"
+        ]
+      ]
+    },
+    {
+      "table_index": 5,
+      "n_rows": 5,
+      "n_cols": 3,
+      "first_row": "C:耗气最\nM：动作次数／分钟 | Air consumption Action cycle | L/min\n/min",
+      "rows": [
+        [
+          "C:耗气最\nM：动作次数／分钟",
+          "Air consumption Action cycle",
+          "L/min\n/min"
+        ],
+        [
+          "V:容量－双作用为A+B（表1-1)",
+          "Volume-Double  acting:A+B(Table. 1-1)",
+          "L"
+        ],
+        [
+          "－单作用为A（表1-2)",
+          "-Spring return:A(Table. 1-2)",
+          "L"
+        ],
+        [
+          "P:供气压力（表压）",
+          "Air supply",
+          "kPa G"
+        ],
+        [
+          "101.3:一个标准大气压",
+          "Standard atmospheric pressure",
+          "kPa"
+        ]
+      ]
+    },
+    {
+      "table_index": 6,
+      "n_rows": 11,
+      "n_cols": 4,
+      "first_row": "No | 名称PartName | 11 | 上模盖Upper cover",
+      "rows": [
+        [
+          "No",
+          "名称PartName",
+          "11",
+          "上模盖Upper cover"
+        ],
+        [
+          "l",
+          "支架Yoke",
+          "12",
+          "防雨帽Rain roofs"
+        ],
+        [
+          "2",
+          "六角螺栓Hex bolt",
+          "13",
+          "弹簧Spring"
+        ],
+        [
+          "3",
+          "连接器Connector",
+          "14",
+          "螺栓＆螺母Bolt& Nut"
+        ],
+        [
+          "4",
+          "开合螺母Stopper",
+          "15",
+          "弹簧座Spring seat"
+        ],
+        [
+          "5",
+          "活塞杆Piston rod",
+          "16",
+          "膜片托盘Diaphragm tray"
+        ],
+        [
+          "6",
+          "密封圈0-ring",
+          "17",
+          "膜片Diaphragm"
+        ],
+        [
+          "7",
+          "下膜盖Lower cover",
+          "18",
+          "密封圈0-ring"
+        ],
+        [
+          "8",
+          "楼角螺栓Hex bolt",
+          "19",
+          "导向套Guide"
+        ],
+        [
+          "9",
+          "六角螺母Hex nut",
+          "20",
+          "轴套Bush"
+        ],
+        [
+          "l0",
+          "吊环Lifting eye",
+          "21",
+          "刻度板Scale board"
+        ]
+      ]
+    },
+    {
+      "table_index": 7,
+      "n_rows": 6,
+      "n_cols": 15,
+      "first_row": " |  |  |  |  |  |  |  |  |  |  |  |  |  | ",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "table_index": 8,
+      "n_rows": 6,
+      "n_cols": 15,
+      "first_row": " |  |  |  |  |  |  |  |  |  |  |  |  |  | ",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "table_index": 9,
+      "n_rows": 4,
+      "n_cols": 15,
+      "first_row": " |  |  |  |  |  |  |  |  |  |  |  |  |  | ",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "table_index": 10,
+      "n_rows": 4,
+      "n_cols": 15,
+      "first_row": "型号\nType | D | C | F | L | A | B | E | G | H | M | 行程\nStroke | 带手轮With Handle | 带手轮With Handle | 带手轮With Handle",
+      "rows": [
+        [
+          "型号\nType",
+          "D",
+          "C",
+          "F",
+          "L",
+          "A",
+          "B",
+          "E",
+          "G",
+          "H",
+          "M",
+          "行程\nStroke",
+          "带手轮With Handle",
+          "带手轮With Handle",
+          "带手轮With Handle"
+        ],
+        [
+          "型号\nType",
+          "D",
+          "C",
+          "F",
+          "L",
+          "A",
+          "B",
+          "E",
+          "G",
+          "H",
+          "M",
+          "行程\nStroke",
+          "Ll",
+          "L2",
+          "w"
+        ],
+        [
+          "PD304LLA",
+          "450",
+          "472",
+          "100",
+          "675",
+          "165",
+          "135",
+          "190",
+          "80",
+          "30",
+          "MI6xl.5",
+          "50,60\n70,80",
+          "229.8",
+          "32",
+          "350"
+        ],
+        [
+          "PD304ELA",
+          "450",
+          "472",
+          "130",
+          "695",
+          "185",
+          "155",
+          "190",
+          "100",
+          "30",
+          "M24x3",
+          "50,60\n70,80",
+          "229.8",
+          "32",
+          "350"
+        ]
+      ]
+    },
+    {
+      "table_index": 11,
+      "n_rows": 3,
+      "n_cols": 17,
+      "first_row": "型号\nType | D | C | F | L | A | B | E | G | H | M | 行程\nStroke | 带手轮With Handle | 带手轮With Handle | 带手轮With Handle | 带手轮With Handle | 带手轮With Handle",
+      "rows": [
+        [
+          "型号\nType",
+          "D",
+          "C",
+          "F",
+          "L",
+          "A",
+          "B",
+          "E",
+          "G",
+          "H",
+          "M",
+          "行程\nStroke",
+          "带手轮With Handle",
+          "带手轮With Handle",
+          "带手轮With Handle",
+          "带手轮With Handle",
+          "带手轮With Handle"
+        ],
+        [
+          "型号\nType",
+          "D",
+          "C",
+          "F",
+          "L",
+          "A",
+          "B",
+          "E",
+          "G",
+          "H",
+          "M",
+          "行程\nStroke",
+          "W",
+          "Ll",
+          "L2",
+          "L3",
+          "L4"
+        ],
+        [
+          "PD306SLA",
+          "650",
+          "678",
+          "130",
+          "717",
+          "245",
+          "215",
+          "300",
+          "100",
+          "30",
+          "M24x3",
+          "30,40\n50,60",
+          "400",
+          "1117",
+          "885",
+          "302",
+          "65"
+        ]
+      ]
+    },
+    {
+      "table_index": 12,
+      "n_rows": 3,
+      "n_cols": 17,
+      "first_row": "型号\nType | D | CF |  | LAB |  |  | E | G | HM |  | 行程\nStroke | 带手轮With Handle | 带手轮With Handle | 带手轮With Handle | 带手轮With Handle | 带手轮With Handle",
+      "rows": [
+        [
+          "型号\nType",
+          "D",
+          "CF",
+          "",
+          "LAB",
+          "",
+          "",
+          "E",
+          "G",
+          "HM",
+          "",
+          "行程\nStroke",
+          "带手轮With Handle",
+          "带手轮With Handle",
+          "带手轮With Handle",
+          "带手轮With Handle",
+          "带手轮With Handle"
+        ],
+        [
+          "型号\nType",
+          "D",
+          "CF",
+          "",
+          "LAB",
+          "",
+          "",
+          "E",
+          "G",
+          "HM",
+          "",
+          "行程\nStroke",
+          "W",
+          "L1",
+          "L2",
+          "L3",
+          "L4"
+        ],
+        [
+          "PD306SLA",
+          "650",
+          "678",
+          "130",
+          "717",
+          "185",
+          "155",
+          "300",
+          "100",
+          "30",
+          "M24x3",
+          "30,40\n50,60",
+          "400",
+          "1117",
+          "885",
+          "302",
+          "65"
+        ]
+      ]
+    },
+    {
+      "table_index": 13,
+      "n_rows": 3,
+      "n_cols": 17,
+      "first_row": " |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | ",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "table_index": 14,
+      "n_rows": 3,
+      "n_cols": 17,
+      "first_row": "型号\nType | D | C | F | L | A | B | E | G | H | M | 行程\nStroke | 带手轮With Handle | 带手轮With Handle | 带手轮With Handle | 带手轮With Handle | 带手轮With Handle",
+      "rows": [
+        [
+          "型号\nType",
+          "D",
+          "C",
+          "F",
+          "L",
+          "A",
+          "B",
+          "E",
+          "G",
+          "H",
+          "M",
+          "行程\nStroke",
+          "带手轮With Handle",
+          "带手轮With Handle",
+          "带手轮With Handle",
+          "带手轮With Handle",
+          "带手轮With Handle"
+        ],
+        [
+          "型号\nType",
+          "D",
+          "C",
+          "F",
+          "L",
+          "A",
+          "B",
+          "E",
+          "G",
+          "H",
+          "M",
+          "行程\nStroke",
+          "w",
+          "L1",
+          "L2",
+          "L3",
+          "L4"
+        ],
+        [
+          "PD306LLA",
+          "650",
+          "678",
+          "130",
+          "817",
+          "185",
+          "155",
+          "300",
+          "100",
+          "30",
+          "M24X3",
+          "70,80,90\n100,110",
+          "400",
+          "12l7",
+          "985",
+          "302",
+          "65"
+        ]
+      ]
+    }
+  ]
+}

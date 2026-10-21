@@ -6,11 +6,19 @@
 - GV120/GV410: 修复 header 检测 + 数据起始行
 - GV110: 独立解析器 (有 Cv 数据)
 """
+import os
+
 import pyodbc
 import openpyxl
 import re
+from dotenv import load_dotenv
 
-DB_CONN_STR = 'DRIVER={ODBC Driver 17 for SQL Server};SERVER=192.168.1.112;DATABASE=KELKCalCv;UID=Sa;PWD=QraLBZngRU0PipBmIun4'
+load_dotenv()
+DB_CONN_STR = (
+    f"DRIVER={{ODBC Driver 17 for SQL Server}};"
+    f"SERVER={os.environ['DB_HOST']},{os.environ.get('DB_PORT', '1433')};"
+    f"DATABASE={os.environ['DB_NAME']};UID={os.environ['DB_USER']};PWD={os.environ['DB_PASSWORD']}"
+)
 EXCEL_PATH = r'd:\KELK办公\信息化工作\207 自研系统\KELKCalCv\参考文件\KELK CalcCv Valve & Trim Factors.xlsm'
 
 TARGET_SHEETS = {

@@ -1,0 +1,1353 @@
+{
+  "label": "GV110",
+  "name_cn": "小流量单座调节阀",
+  "name_en": "SMALL FLOW CONTROL GLOBE VALVES",
+  "spec_no": "SD-GV110-A",
+  "data_source": "GV110.pdf (13页, 唯一权威数据源) 与本报告 GV110_pdf_docx_compare.md 核对后重建",
+  "general_data": {
+    "body": {
+      "公称通径 Body": "1/2\"~1\" (DN15~DN25)",
+      "公称压力 Body Rating": "ANSI 150#, 300#, 600#; JB/T79.1-94 & HG/T20592-2009 PN1.6MPa, PN4.0MPa, PN6.3MPa, PN10.0MPa",
+      "连接方式 Body Connection": "法兰型 (RF, RTJ, MFM)、焊接型 (SW)、螺纹连接 / Flanged (RF, RTJ, MFM), Weld ends (SW), Threaded",
+      "设计标准 Design Standard": "ANSI B16.34, ANSI B16.47, API598 等",
+      "法兰距 FF Dimen": "IEC60534, ISA.S75.03-1985",
+      "表面涂层 Painting Color": "德国劳尔色标RAL 7046（银灰色环氧树脂），阀体材质为不锈钢时，本体部不加涂层 / RAL 7046 is standard. In the case of stainless steel body, no painting is standard."
+    },
+    "bonnet": {
+      "标准型 Standard Type": "-17 ~ +230℃",
+      "散热片型 Fin-Extension Type": "-45 ~ -5℃ or > +230℃",
+      "加长型 Long-Extension Type": "-196 ~ -45℃"
+    },
+    "trim": {
+      "阀内件形式 Trim Form": "不平衡阀芯型 / Unbalance plug type",
+      "阀芯形式 Plug Form": "V型阀芯单座，针型阀芯单座 / V type plug single seated, needle type plug single seated",
+      "额定Cv值 Rated Cv": "见表3 / See Tab.3 for selection.",
+      "流量特性 Characteristics": "等百分比EQ%、线性Linear、开关On-off",
+      "可调比 Range Ratio": "6:1 ~ 8:1",
+      "阀座泄漏量 Seat Leakage": "ANSI Class IV，特殊情况下也可选用 Class V。 / ANSI Class IV (Class V is option).",
+      "填料 Packing": "聚四氟乙烯V形填料、聚四氟乙烯碳纤维、高强度碳纤维+聚四氟乙烯纤维、聚四氟乙烯纤维+纯聚四氟乙烯(禁油)及柔性石墨。各种填料的使用温度·压力范围，请参见图4。 / Teflon V-ring, PTFE & carbon fiber, P6528-Carbon fiber, PTFE fiber, Grafoil, etc. See Fig.4 for selection.",
+      "垫圈 Gasket": "锯齿形垫圈（极软碳钢、316、其它合金钢）/ Grooved metal gasket (Soft steel, stainless steel or other alloy steels)."
+    }
+  },
+  "actuator": {
+    "_note": "docx 漏表，按 PDF p5/印刷3 补入",
+    "形式 Type": "气动薄膜式 / Diaphragm type",
+    "用途 Purpose": "调节、开关 / Modulation or On-off",
+    "供气压力 Air Supply": "300 (80~200) kPa G; 340 (80~200) kPa G; 340 (120~300) kPa G",
+    "接口 Connection": "Rc1/4 (65: Rc3/8)",
+    "作用方式 Action Type": "正作用：气压增加阀闭 / Direct action: Air to valve shut；反作用：气压增加阀开 / Reverse action: Air to valve open",
+    "环境温度 AMB Temp": "-40 ~ +100℃",
+    "标准涂层色 Painting": "银灰色环氧树脂 RAL 7046",
+    "手轮机构 Handwheel": "可选 / Option",
+    "其他执行机构 Option": "电动式 / Electric Motor type"
+  },
+  "control_accessories": {
+    "气动执行机构控制附件 Pneumatic Actuator Control Accessories": "电/气、电气智能定位器，过滤减压阀，电磁阀，限位开关，调速器/增速器，锁止阀等等。 / E/P·P/P·Smart-Positioner, Air-set, Solenoid valve, Limit switch, Speed controller, Lock valve, Lock-up valve, etc.",
+    "电动执行机构控制附件 Electric Actuator Accessories": "加热器，控制箱，手轮机构等。 / Space heater, Junction box, Manual handle, etc."
+  },
+  "special_options": {
+    "本体特殊检查 Special Testing for Body": "材料检查，液体渗透探伤检查(PT)，放射线检查(RT)，流量特性检查，低温试验，蒸汽试验。 / Material certificate, Liquid penetrant testing, Radiographic testing, Flow characteristic testing, Low temperature testing, Steam testing.",
+    "本体特殊清洗 Cleaning for Body": "氧气清洁，完全禁油，除水处理。 / Oxygen clean, Oil-free, Water-free.",
+    "本体及执行机构特殊规格 Special Specification for Body and Actuator": "防砂，防尘型，防盐腐蚀型，无铜处理，特殊空气配管及特殊气接头，真空工作条件用，接触大气部分的螺栓·螺母采用不锈钢，指定涂层色，NACE处理，阀内件特殊设计，阀内件特殊材质。 / Sand and Dust proof, Salty environment proof, Tropical area proof, Copper-free alloy, Special piping and fitting, Vacuum service proof, SUS bolt and nut for exposed parts, Non-standard painting.",
+    "认证 Authorization": "各种认证 / All kinds of certifications"
+  },
+  "parts_list": {
+    "_note": "表1-1 结构清单 PARTS LIST (p6/印刷4, 20项)",
+    "items": [
+      {
+        "no": 1,
+        "name_cn": "阀体",
+        "name_en": "Body"
+      },
+      {
+        "no": 2,
+        "name_cn": "阀座",
+        "name_en": "Seat gasket"
+      },
+      {
+        "no": 3,
+        "name_cn": "密封环",
+        "name_en": "Sealing ring"
+      },
+      {
+        "no": 4,
+        "name_cn": "导向套",
+        "name_en": "Guide sleeve"
+      },
+      {
+        "no": 5,
+        "name_cn": "压圈",
+        "name_en": "Pressing ring"
+      },
+      {
+        "no": 6,
+        "name_cn": "导向套",
+        "name_en": "Guide sleeve"
+      },
+      {
+        "no": 7,
+        "name_cn": "垫圈",
+        "name_en": "Bonnet gasket"
+      },
+      {
+        "no": 8,
+        "name_cn": "阀芯",
+        "name_en": "Plug"
+      },
+      {
+        "no": 9,
+        "name_cn": "六角螺母",
+        "name_en": "Nut"
+      },
+      {
+        "no": 10,
+        "name_cn": "阀体螺柱",
+        "name_en": "Body stud bolt"
+      },
+      {
+        "no": 11,
+        "name_cn": "阀盖",
+        "name_en": "Bonnet"
+      },
+      {
+        "no": 12,
+        "name_cn": "填料压板",
+        "name_en": "Gland flange"
+      },
+      {
+        "no": 13,
+        "name_cn": "六角螺母",
+        "name_en": "Nut"
+      },
+      {
+        "no": 14,
+        "name_cn": "压板螺柱",
+        "name_en": "Gland stud bolt"
+      },
+      {
+        "no": 15,
+        "name_cn": "阀杆",
+        "name_en": "Stem"
+      },
+      {
+        "no": 16,
+        "name_cn": "防尘圈",
+        "name_en": "Wiper"
+      },
+      {
+        "no": 17,
+        "name_cn": "填料压盖",
+        "name_en": "Gland ring"
+      },
+      {
+        "no": 18,
+        "name_cn": "填料隔套",
+        "name_en": "Lantern ring"
+      },
+      {
+        "no": 19,
+        "name_cn": "填料",
+        "name_en": "Gland packing"
+      },
+      {
+        "no": 20,
+        "name_cn": "填料座",
+        "name_en": "Packing seat"
+      }
+    ]
+  },
+  "material_combinations": {
+    "_note": "表2 阀体·阀内件材质组合及使用温度范围—阀座允许泄漏量 (p7/印刷5)",
+    "columns": [
+      "A216-WCB",
+      "A351-CF8, A351-CF8M"
+    ],
+    "rows": [
+      {
+        "part": "阀体 Body",
+        "field": "材质 Material",
+        "A216-WCB": "A216-WCB",
+        "A351-CF8/CF8M": "A351-CF8, A351-CF8M"
+      },
+      {
+        "part": "阀芯 Plug",
+        "field": "材质 Material",
+        "A216-WCB": "316",
+        "A351-CF8/CF8M": "316"
+      },
+      {
+        "part": "阀芯 Plug",
+        "field": "处理 Treatment",
+        "A216-WCB": "SF",
+        "A351-CF8/CF8M": "SF"
+      },
+      {
+        "part": "阀座 Seat Ring",
+        "field": "材质 Material",
+        "A216-WCB": "316",
+        "A351-CF8/CF8M": "316"
+      },
+      {
+        "part": "阀座 Seat Ring",
+        "field": "处理 Treatment",
+        "A216-WCB": "SF",
+        "A351-CF8/CF8M": "SF"
+      },
+      {
+        "part": "导向套 Guide",
+        "field": "材质 Material",
+        "A216-WCB": "316",
+        "A351-CF8/CF8M": "316"
+      },
+      {
+        "part": "导向套 Guide",
+        "field": "处理 Treatment",
+        "A216-WCB": "SF",
+        "A351-CF8/CF8M": "SF"
+      },
+      {
+        "part": "垫圈 Gasket",
+        "field": "材质 Material",
+        "A216-WCB": "T/#1890-S",
+        "A351-CF8/CF8M": "T/#1890-316"
+      },
+      {
+        "part": "阀座允许泄漏量 Seat Leakage",
+        "field": "ANSI",
+        "A216-WCB": "Class IV",
+        "A351-CF8/CF8M": "Class IV"
+      },
+      {
+        "part": "阀座允许泄漏量 Seat Leakage",
+        "field": "Rated Cv×",
+        "A216-WCB": "0.01%",
+        "A351-CF8/CF8M": "0.01%"
+      },
+      {
+        "part": "使用温度 Operating Temperature ℃",
+        "field": "",
+        "A216-WCB": "-5~+230",
+        "A351-CF8/CF8M": "-45~+538"
+      }
+    ],
+    "notes": [
+      "① 阀内件材质·处理的使用温度·压力范围请参见图2。 / Trim material/treatment and operating temperature-pressure range: See Fig. 2.",
+      "② 当泄漏等级要求达到 ANSI CLASS V 时，请询问工厂咨询。 / When ANSI CLASS V for seat leakage is required, please consult with us.",
+      "SS：部分堆焊司太莱合金 / Stellite seat surface",
+      "SF：全部堆焊司太莱合金 / Stellite full surface"
+    ]
+  },
+  "rated_cv_stroke": {
+    "_note": "表3 额定Cv·行程 (p7/印刷5)",
+    "table_3_1_needle_type": {
+      "title": "表3-1 针型阀芯 / Table 3-1. NEEDLE TYPE PLUG",
+      "columns": [
+        "阀芯尺寸 inch",
+        "阀芯尺寸 mm",
+        "额定Cv Rated Cv",
+        "行程 Stroke (mm)"
+      ],
+      "rows": [
+        [
+          "1/64",
+          "1",
+          "0.003",
+          "6"
+        ],
+        [
+          "1/32",
+          "1.6",
+          "0.015",
+          "6"
+        ],
+        [
+          "1/16",
+          "3",
+          "0.06",
+          "12"
+        ]
+      ]
+    },
+    "table_3_2_v_type": {
+      "_note": "docx 漏表，按 PDF 补入",
+      "title": "表3-2 V型阀芯 / Table 3-2. V TYPE PLUG",
+      "columns": [
+        "阀芯尺寸 inch",
+        "阀芯尺寸 mm",
+        "额定Cv Rated Cv",
+        "行程 Stroke (mm)"
+      ],
+      "rows": [
+        {
+          "size_inch": "1/64",
+          "size_mm": "1",
+          "rated_cv": [
+            "0.001",
+            "0.002",
+            "0.005"
+          ],
+          "stroke": "12"
+        },
+        {
+          "size_inch": "1/32",
+          "size_mm": "1.6",
+          "rated_cv": [
+            "0.01",
+            "0.02",
+            "0.05"
+          ],
+          "stroke": "12"
+        },
+        {
+          "size_inch": "1/16",
+          "size_mm": "3",
+          "rated_cv": [
+            "0.1",
+            "0.15"
+          ],
+          "stroke": "12"
+        }
+      ]
+    }
+  },
+  "packing_temp_pressure_figures": {
+    "_note": "图2 填料使用温度·压力范围 (p7)，为三张曲线图，无表格数值；此处仅记录图名",
+    "fig_2_1": "图2-1 高强度碳纤维+聚四氟乙烯纤维 / Fig. 2-1 CARBON + PTFE FIBRE",
+    "fig_2_2": "图2-2 强化聚四氟乙烯V形填料 / Fig. 2-2 R.TFE V-RING",
+    "fig_2_3": "图2-3 柔性石墨 / Fig. 2-3 GRAFOIL"
+  },
+  "allowable_pressure_drops": {
+    "_note": "表4 最大允许压差 (单位：MPa) (p8/印刷6)。金属密封Class IV泄漏、软密封Class VI泄漏（金属密封Class V最大允许压差请向工厂咨询），配电动执行机构请向工厂咨询。DA=正作用(气压增加时阀闭)，RA=反作用(气压增加时阀开)。",
+    "table_4_1_v_type": {
+      "title": "表4-1 V型阀芯 / Table 4-1. V TYPE PLUG",
+      "columns": [
+        "执行机构尺寸 Actuator size",
+        "气源压力 Air supply (kPa G)",
+        "弹簧范围 Spring range (kPa G)",
+        "填料:低摩擦型 / Packing: Low torque type",
+        "填料:柔性石墨 / Packing: Grafoil"
+      ],
+      "rows": [
+        [
+          "218",
+          "300(80)",
+          "DA&RA 80~200",
+          "9.0",
+          "5.0"
+        ],
+        [
+          "218",
+          "340(120)",
+          "DA:80~200 RA:120~300",
+          "11.0",
+          "11.0"
+        ],
+        [
+          "270",
+          "300(80)",
+          "DA&RA 80~200",
+          "8.5",
+          "5.0"
+        ],
+        [
+          "270",
+          "340(120)",
+          "DA:80~200 RA:120~300",
+          "11.0",
+          "11.0"
+        ]
+      ]
+    },
+    "table_4_2_needle_type": {
+      "title": "表4-2 针型阀芯 / Table 4-2. NEEDLE TYPE PLUG",
+      "columns": [
+        "执行机构尺寸 Actuator size",
+        "气源压力 Air supply (kPa G)",
+        "弹簧范围 Spring range (kPa G)",
+        "填料:低摩擦型 / Packing: Low torque type",
+        "填料:柔性石墨 / Packing: Grafoil"
+      ],
+      "rows": [
+        [
+          "218",
+          "300(80)",
+          "DA&RA 80~200",
+          "7.52",
+          "4.49"
+        ],
+        [
+          "218",
+          "340(120)",
+          "DA:80~200 RA:120~300",
+          "9.90",
+          "8.59"
+        ]
+      ]
+    }
+  },
+  "net_weight": {
+    "_note": "表5 产品重量 (单位：kg) (p8/印刷6)",
+    "table_5_1_body": {
+      "_note": "docx 漏表，按 PDF 补入",
+      "title": "表5-1 本体部重量 / Table 5-1. NET WEIGHT OF STANDARD VALVE",
+      "columns": [
+        "阀门口径 inch",
+        "阀门口径 mm",
+        "ANSI 150# PN1.6MPa",
+        "ANSI 300# PN4.0MPa",
+        "ANSI 600# PN6.3MPa PN10MPa"
+      ],
+      "rows": [
+        [
+          "1/2",
+          "15",
+          "10",
+          "11",
+          "12"
+        ],
+        [
+          "3/4",
+          "20",
+          "10",
+          "11",
+          "12"
+        ],
+        [
+          "1",
+          "25",
+          "10",
+          "11",
+          "12"
+        ]
+      ]
+    },
+    "table_5_2_actuator": {
+      "_note": "docx 漏表，按 PDF 补入",
+      "title": "表5-2 执行机构重量 / Table 5-2. NET WEIGHT OF ACTUATOR",
+      "columns": [
+        "执行机构 Actuator type",
+        "不带手轮 Without Handle",
+        "带手轮 With Handle"
+      ],
+      "rows": [
+        [
+          "PD3021LA",
+          "9",
+          "12"
+        ],
+        [
+          "PD3027LA",
+          "15",
+          "25"
+        ]
+      ]
+    }
+  },
+  "mounting_forms": {
+    "_note": "图3 控制阀安装方位 (p9/印刷7)，图示无表格数值",
+    "symbols": [
+      "执行机构",
+      "控制阀",
+      "手轮机构",
+      "定位器",
+      "液体方向"
+    ],
+    "types": [
+      "TYPE S (标准)",
+      "TYPE R1",
+      "TYPE R2",
+      "TYPE R3"
+    ]
+  },
+  "dimensions": {
+    "_note": "尺寸表 Dimensions (单位:mm)。L 共7列：150#/PN16·RF、ANSI300#/PN40·RF、SW/BW、RTJ、ANSI600#/PN63 PN100·RF、SW/BW、RTJ。每口径对应两支执行机构(218→PD3021LA、270→PD3027LA)。",
+    "direct_acting": {
+      "model": "GV110-PD3000LA-D",
+      "title": "正作用执行机构 DIRECT ACTING (p10/印刷8)",
+      "_docx_table": "表12",
+      "rows": [
+        {
+          "size_inch": "1/2",
+          "size_mm": 15,
+          "L": {
+            "RF_150PN16": 184,
+            "RF_ANSI300PN40": 194,
+            "SW_BW_ANSI300": 206,
+            "RTJ_ANSI300": 206,
+            "RF_ANSI600": 206,
+            "SW_BW_ANSI600": 206,
+            "RTJ_ANSI600": 206
+          },
+          "H2": 32,
+          "h1": 129,
+          "H1_standard": 430,
+          "H1_fin": 530,
+          "A": 218,
+          "B": 231,
+          "L1": 170,
+          "L2": "133~113",
+          "W": 125,
+          "model": "PD3021LA",
+          "H": 550
+        },
+        {
+          "size_inch": "1/2",
+          "size_mm": 15,
+          "L": {
+            "RF_150PN16": 184,
+            "RF_ANSI300PN40": 194,
+            "SW_BW_ANSI300": 206,
+            "RTJ_ANSI300": 206,
+            "RF_ANSI600": 206,
+            "SW_BW_ANSI600": 206,
+            "RTJ_ANSI600": 206
+          },
+          "H2": 32,
+          "h1": 129,
+          "H1_standard": 525,
+          "H1_fin": 625,
+          "A": 270,
+          "B": 283,
+          "L1": 208,
+          "L2": "155~135",
+          "W": 160,
+          "model": "PD3027LA",
+          "H": 550
+        },
+        {
+          "size_inch": "3/4",
+          "size_mm": 20,
+          "L": {
+            "RF_150PN16": 184,
+            "RF_ANSI300PN40": 194,
+            "SW_BW_ANSI300": 206,
+            "RTJ_ANSI300": 206,
+            "RF_ANSI600": 206,
+            "SW_BW_ANSI600": 206,
+            "RTJ_ANSI600": 206
+          },
+          "H2": 32,
+          "h1": 129,
+          "H1_standard": 430,
+          "H1_fin": 530,
+          "A": 218,
+          "B": 231,
+          "L1": 170,
+          "L2": "133~113",
+          "W": 125,
+          "model": "PD3021LA",
+          "H": 550
+        },
+        {
+          "size_inch": "3/4",
+          "size_mm": 20,
+          "L": {
+            "RF_150PN16": 184,
+            "RF_ANSI300PN40": 194,
+            "SW_BW_ANSI300": 206,
+            "RTJ_ANSI300": 206,
+            "RF_ANSI600": 206,
+            "SW_BW_ANSI600": 206,
+            "RTJ_ANSI600": 206
+          },
+          "H2": 32,
+          "h1": 129,
+          "H1_standard": 525,
+          "H1_fin": 625,
+          "A": 270,
+          "B": 283,
+          "L1": 208,
+          "L2": "155~135",
+          "W": 160,
+          "model": "PD3027LA",
+          "H": 550
+        },
+        {
+          "size_inch": "1",
+          "size_mm": 25,
+          "L": {
+            "RF_150PN16": 184,
+            "RF_ANSI300PN40": 197,
+            "SW_BW_ANSI300": 210,
+            "RTJ_ANSI300": 210,
+            "RF_ANSI600": 210,
+            "SW_BW_ANSI600": 210,
+            "RTJ_ANSI600": 210
+          },
+          "H2": 36,
+          "h1": 129,
+          "H1_standard": 430,
+          "H1_fin": 530,
+          "A": 218,
+          "B": 231,
+          "L1": 170,
+          "L2": "133~113",
+          "W": 125,
+          "model": "PD3021LA",
+          "H": 550
+        },
+        {
+          "size_inch": "1",
+          "size_mm": 25,
+          "L": {
+            "RF_150PN16": 184,
+            "RF_ANSI300PN40": 197,
+            "SW_BW_ANSI300": 210,
+            "RTJ_ANSI300": 210,
+            "RF_ANSI600": 210,
+            "SW_BW_ANSI600": 210,
+            "RTJ_ANSI600": 210
+          },
+          "H2": 36,
+          "h1": 129,
+          "H1_standard": 525,
+          "H1_fin": 625,
+          "A": 270,
+          "B": 283,
+          "L1": 208,
+          "L2": "155~135",
+          "W": 160,
+          "model": "PD3027LA",
+          "H": 550
+        }
+      ]
+    },
+    "reverse_acting": {
+      "model": "GV110-PD3000LA-R",
+      "title": "反作用执行机构 REVERSE ACTING (p11/印刷9)",
+      "_docx_table": "表13",
+      "rows": [
+        {
+          "size_inch": "1/2",
+          "size_mm": 15,
+          "L": {
+            "RF_150PN16": 184,
+            "RF_ANSI300PN40": 194,
+            "SW_BW_ANSI300": 206,
+            "RTJ_ANSI300": 206,
+            "RF_ANSI600": 206,
+            "SW_BW_ANSI600": 206,
+            "RTJ_ANSI600": 206
+          },
+          "H2": 32,
+          "h1": 129,
+          "H1_standard": 470,
+          "H1_fin": 570,
+          "A": 218,
+          "B": 231,
+          "L1": 170,
+          "L2": "113~133",
+          "W": 125,
+          "model": "PD3021LA",
+          "H": 550
+        },
+        {
+          "size_inch": "1/2",
+          "size_mm": 15,
+          "L": {
+            "RF_150PN16": 184,
+            "RF_ANSI300PN40": 194,
+            "SW_BW_ANSI300": 206,
+            "RTJ_ANSI300": 206,
+            "RF_ANSI600": 206,
+            "SW_BW_ANSI600": 206,
+            "RTJ_ANSI600": 206
+          },
+          "H2": 32,
+          "h1": 129,
+          "H1_standard": 565,
+          "H1_fin": 665,
+          "A": 270,
+          "B": 283,
+          "L1": 208,
+          "L2": "118~138",
+          "W": 160,
+          "model": "PD3027LA",
+          "H": 550
+        },
+        {
+          "size_inch": "3/4",
+          "size_mm": 20,
+          "L": {
+            "RF_150PN16": 184,
+            "RF_ANSI300PN40": 194,
+            "SW_BW_ANSI300": 206,
+            "RTJ_ANSI300": 206,
+            "RF_ANSI600": 206,
+            "SW_BW_ANSI600": 206,
+            "RTJ_ANSI600": 206
+          },
+          "H2": 32,
+          "h1": 129,
+          "H1_standard": 470,
+          "H1_fin": 570,
+          "A": 218,
+          "B": 231,
+          "L1": 170,
+          "L2": "113~133",
+          "W": 125,
+          "model": "PD3021LA",
+          "H": 550
+        },
+        {
+          "size_inch": "3/4",
+          "size_mm": 20,
+          "L": {
+            "RF_150PN16": 184,
+            "RF_ANSI300PN40": 194,
+            "SW_BW_ANSI300": 206,
+            "RTJ_ANSI300": 206,
+            "RF_ANSI600": 206,
+            "SW_BW_ANSI600": 206,
+            "RTJ_ANSI600": 206
+          },
+          "H2": 32,
+          "h1": 129,
+          "H1_standard": 565,
+          "H1_fin": 665,
+          "A": 270,
+          "B": 283,
+          "L1": 208,
+          "L2": "118~138",
+          "W": 160,
+          "model": "PD3027LA",
+          "H": 550
+        },
+        {
+          "size_inch": "1",
+          "size_mm": 25,
+          "L": {
+            "RF_150PN16": 184,
+            "RF_ANSI300PN40": 197,
+            "SW_BW_ANSI300": 210,
+            "RTJ_ANSI300": 210,
+            "RF_ANSI600": 210,
+            "SW_BW_ANSI600": 210,
+            "RTJ_ANSI600": 210
+          },
+          "H2": 36,
+          "h1": 129,
+          "H1_standard": 470,
+          "H1_fin": 570,
+          "A": 218,
+          "B": 231,
+          "L1": 170,
+          "L2": "113~133",
+          "W": 125,
+          "model": "PD3021LA",
+          "H": 550
+        },
+        {
+          "size_inch": "1",
+          "size_mm": 25,
+          "L": {
+            "RF_150PN16": 184,
+            "RF_ANSI300PN40": 197,
+            "SW_BW_ANSI300": 210,
+            "RTJ_ANSI300": 210,
+            "RF_ANSI600": 210,
+            "SW_BW_ANSI600": 210,
+            "RTJ_ANSI600": 210
+          },
+          "H2": 36,
+          "h1": 129,
+          "H1_standard": 565,
+          "H1_fin": 665,
+          "A": 270,
+          "B": 283,
+          "L1": 208,
+          "L2": "118~138",
+          "W": 160,
+          "model": "PD3027LA",
+          "H": 550
+        }
+      ]
+    }
+  },
+  "appendices": {
+    "附表一_body_material_pressure_temperature_ANSI": {
+      "_note": "阀体材质的使用温度·压力限制 / BODY MATERIAL/OPERATING PRESSURE-TEMPERATURE RATING, UNIT: MPa G (p12/印刷10, docx 表14)",
+      "columns": [
+        "温度 Temp.℃",
+        "150-LCB",
+        "150-WCB",
+        "150-WC6",
+        "150-WC9",
+        "150-CF8",
+        "150-CF8M",
+        "300-LCB",
+        "300-WCB",
+        "300-WC6",
+        "300-WC9",
+        "300-CF8",
+        "300-CF8M",
+        "600-LCB",
+        "600-WCB",
+        "600-WC6",
+        "600-WC9",
+        "600-CF8",
+        "600-CF8M"
+      ],
+      "rows": [
+        [
+          "-196~38",
+          "—",
+          "—",
+          "—",
+          "—",
+          "1.90",
+          "1.90",
+          "—",
+          "—",
+          "—",
+          "—",
+          "4.95",
+          "4.95",
+          "—",
+          "—",
+          "—",
+          "—",
+          "9.91",
+          "9.92"
+        ],
+        [
+          "-45~38",
+          "1.84",
+          "—",
+          "—",
+          "—",
+          "1.90",
+          "1.90",
+          "4.78",
+          "—",
+          "—",
+          "—",
+          "4.95",
+          "4.95",
+          "9.57",
+          "—",
+          "—",
+          "—",
+          "9.91",
+          "9.92"
+        ],
+        [
+          "-5~38",
+          "1.84",
+          "1.96",
+          "1.99",
+          "1.99",
+          "1.90",
+          "1.90",
+          "4.78",
+          "5.10",
+          "5.16",
+          "5.16",
+          "4.95",
+          "4.95",
+          "9.57",
+          "10.20",
+          "10.32",
+          "10.32",
+          "9.91",
+          "9.92"
+        ],
+        [
+          "50",
+          "1.81",
+          "1.92",
+          "1.92",
+          "1.92",
+          "1.84",
+          "1.84",
+          "4.72",
+          "5.00",
+          "5.10",
+          "5.11",
+          "4.77",
+          "4.80",
+          "9.46",
+          "10.01",
+          "10.22",
+          "10.22",
+          "9.56",
+          "9.62"
+        ],
+        [
+          "100",
+          "1.72",
+          "1.76",
+          "1.76",
+          "1.76",
+          "1.56",
+          "1.61",
+          "4.51",
+          "4.63",
+          "4.88",
+          "4.89",
+          "4.08",
+          "4.21",
+          "9.02",
+          "9.27",
+          "9.74",
+          "9.79",
+          "8.17",
+          "8.43"
+        ],
+        [
+          "150",
+          "1.57",
+          "1.57",
+          "1.57",
+          "1.57",
+          "1.39",
+          "1.47",
+          "4.40",
+          "4.51",
+          "4.63",
+          "4.65",
+          "3.62",
+          "3.85",
+          "8.78",
+          "9.04",
+          "9.26",
+          "9.31",
+          "7.26",
+          "7.69"
+        ],
+        [
+          "200",
+          "1.40",
+          "1.40",
+          "1.40",
+          "1.40",
+          "1.25",
+          "1.37",
+          "4.26",
+          "4.38",
+          "4.54",
+          "4.47",
+          "3.27",
+          "3.56",
+          "8.54",
+          "8.75",
+          "9.09",
+          "8.95",
+          "6.54",
+          "7.12"
+        ],
+        [
+          "250",
+          "1.20",
+          "1.20",
+          "1.20",
+          "1.20",
+          "1.16",
+          "1.20",
+          "4.05",
+          "4.16",
+          "4.44",
+          "4.41",
+          "3.04",
+          "3.34",
+          "8.11",
+          "8.33",
+          "8.88",
+          "8.82",
+          "6.10",
+          "6.67"
+        ],
+        [
+          "300",
+          "1.01",
+          "1.01",
+          "1.01",
+          "1.01",
+          "1.01",
+          "1.01",
+          "3.76",
+          "3.87",
+          "4.23",
+          "4.23",
+          "2.91",
+          "3.15",
+          "7.54",
+          "7.74",
+          "8.48",
+          "8.47",
+          "5.80",
+          "6.32"
+        ],
+        [
+          "350",
+          "0.84",
+          "0.84",
+          "0.84",
+          "0.84",
+          "0.84",
+          "0.84",
+          "3.59",
+          "3.69",
+          "4.01",
+          "4.01",
+          "2.81",
+          "3.03",
+          "7.18",
+          "7.38",
+          "8.04",
+          "8.04",
+          "5.60",
+          "6.07"
+        ],
+        [
+          "375",
+          "",
+          "0.73",
+          "0.73",
+          "0.73",
+          "0.73",
+          "0.73",
+          "",
+          "3.64",
+          "3.88",
+          "3.87",
+          "2.77",
+          "2.96",
+          "",
+          "7.28",
+          "7.75",
+          "7.75",
+          "5.54",
+          "5.93"
+        ],
+        [
+          "400",
+          "",
+          "0.64",
+          "0.64",
+          "0.64",
+          "0.64",
+          "0.64",
+          "",
+          "3.44",
+          "3.65",
+          "3.65",
+          "2.74",
+          "2.91",
+          "",
+          "6.89",
+          "7.31",
+          "7.31",
+          "5.48",
+          "5.81"
+        ],
+        [
+          "425",
+          "",
+          "0.55",
+          "0.55",
+          "0.55",
+          "0.55",
+          "0.55",
+          "",
+          "2.88",
+          "3.50",
+          "3.50",
+          "2.71",
+          "2.87",
+          "",
+          "5.74",
+          "7.01",
+          "7.01",
+          "5.42",
+          "5.72"
+        ],
+        [
+          "450",
+          "",
+          "0.47",
+          "0.47",
+          "0.47",
+          "0.47",
+          "0.47",
+          "",
+          "1.99",
+          "3.38",
+          "3.37",
+          "2.68",
+          "2.81",
+          "",
+          "4.00",
+          "6.75",
+          "6.75",
+          "5.37",
+          "5.61"
+        ],
+        [
+          "475",
+          "",
+          "0.37",
+          "0.37",
+          "0.37",
+          "0.37",
+          "0.37",
+          "",
+          "1.35",
+          "3.16",
+          "3.16",
+          "2.65",
+          "2.73",
+          "",
+          "2.70",
+          "6.32",
+          "6.32",
+          "5.30",
+          "5.46"
+        ],
+        [
+          "500",
+          "",
+          "0.28",
+          "0.28",
+          "0.28",
+          "0.28",
+          "0.28",
+          "",
+          "0.88",
+          "2.77",
+          "2.77",
+          "2.60",
+          "2.67",
+          "",
+          "1.75",
+          "5.55",
+          "5.55",
+          "5.20",
+          "5.37"
+        ],
+        [
+          "525",
+          "",
+          "0.18",
+          "0.18",
+          "0.18",
+          "0.18",
+          "0.18",
+          "",
+          "0.51",
+          "2.02",
+          "2.18",
+          "2.19",
+          "2.57",
+          "",
+          "1.03",
+          "4.04",
+          "4.36",
+          "4.77",
+          "5.15"
+        ],
+        [
+          "538",
+          "",
+          "0.13",
+          "0.15",
+          "0.15",
+          "0.15",
+          "0.15",
+          "",
+          "0.34",
+          "1.63",
+          "1.63",
+          "2.18",
+          "2.53",
+          "",
+          "0.72",
+          "3.26",
+          "3.26",
+          "4.55",
+          "5.06"
+        ]
+      ]
+    },
+    "附表一_body_material_pressure_temperature_JB_PN": {
+      "_note": "JB/T79-94 或 HG/T20592-2009, UNIT: MPa G (p12/印刷10, docx 表15)",
+      "left": {
+        "material": "ZG230-450",
+        "columns": [
+          "温度 Temp.℃",
+          "PN16",
+          "PN40",
+          "PN63",
+          "PN100"
+        ],
+        "rows": [
+          [
+            "-5~200",
+            "1.60",
+            "4.00",
+            "6.30",
+            "10.00"
+          ],
+          [
+            "~250",
+            "1.40",
+            "3.50",
+            "5.40",
+            "9.00"
+          ],
+          [
+            "~300",
+            "1.20",
+            "3.00",
+            "4.80",
+            "7.50"
+          ],
+          [
+            "~350",
+            "1.10",
+            "2.60",
+            "4.00",
+            "6.60"
+          ],
+          [
+            "~400",
+            "0.90",
+            "2.30",
+            "3.70",
+            "5.80"
+          ],
+          [
+            "~425",
+            "0.80",
+            "2.00",
+            "3.20",
+            "5.00"
+          ],
+          [
+            "~435",
+            "0.70",
+            "1.80",
+            "2.80",
+            "4.50"
+          ],
+          [
+            "~445",
+            "0.62",
+            "1.60",
+            "2.50",
+            "4.20"
+          ],
+          [
+            "~455",
+            "0.57",
+            "1.40",
+            "2.30",
+            "3.60"
+          ]
+        ]
+      },
+      "right": {
+        "material": "ZG0Cr18Ni9",
+        "columns": [
+          "温度 Temp.℃",
+          "PN16",
+          "PN40",
+          "PN63",
+          "PN100"
+        ],
+        "rows": [
+          [
+            "-45~200",
+            "1.60",
+            "4.00",
+            "6.30",
+            "10.00"
+          ],
+          [
+            "~300",
+            "1.40",
+            "3.50",
+            "5.40",
+            "9.00"
+          ],
+          [
+            "~400",
+            "1.20",
+            "3.00",
+            "4.80",
+            "7.50"
+          ],
+          [
+            "~480",
+            "1.10",
+            "2.60",
+            "4.00",
+            "6.60"
+          ],
+          [
+            "~520",
+            "0.90",
+            "2.30",
+            "3.70",
+            "5.80"
+          ],
+          [
+            "~560",
+            "0.80",
+            "2.00",
+            "3.20",
+            "5.00"
+          ]
+        ]
+      }
+    },
+    "附表二_公称压力对照表": {
+      "_note": "p12/印刷10, docx 表16",
+      "美国标准": [
+        "ANSI 150#",
+        "ANSI 300#",
+        "ANSI 600#",
+        "ANSI 900#",
+        "ANSI 1500#",
+        "ANSI 2500#"
+      ],
+      "中国标准": [
+        "PN 16",
+        "PN 40",
+        "PN 63, PN 100",
+        "",
+        "",
+        ""
+      ]
+    },
+    "附表三_常用材质对照表": {
+      "_note": "p12/印刷10, docx 表17。中国标准 ZG0Cr18nI9 为原文档错别字(应为 ZG0Cr18Ni9)，PDF 原文即如此，保留原样。",
+      "美国标准": [
+        "A216-WCB",
+        "A351-CF8",
+        "A351-CF8M",
+        "A217-WC6",
+        "A217-WC9",
+        "A352-LCB"
+      ],
+      "中国标准": [
+        "ZG230-450",
+        "ZG0Cr18nI9",
+        "ZG0Cr18Ni12Mo2Ti",
+        "ZG15CrMo",
+        "",
+        ""
+      ]
+    }
+  },
+  "application_notes": {
+    "_note": "p3/印刷1 应用介绍（文字）",
+    "series": "本系列为顶部导向控制阀，阀内件区域被设计成结构化的，是用来保护其因细小而到机械性能薄弱的阀芯。GV110 系列微小的阀芯尺寸是对 GV120 系列的补充，其标准形式通常采用材料为不锈钢。",
+    "design_pressure": "阀体的设计压力可达 32MPa，阀芯最小口径可以达到 1mm，最小可控 Cv 可达到 0.001。",
+    "plug_shape": "阀芯形状可选择 V 型或针型口——针形阀芯更容易调节，调节灵敏度高；V 型口阀芯不容易折断，哪怕是在压差很高的情况下。"
+  },
+  "original_document_issues": [
+    "p4 阀内件'填料'说明引用「图4 (See Fig.4)」，但本样本填料温度·压力范围图为「图2」，疑为原文引用笔误（PDF 原文即如此，保留原样）。",
+    "附表三 中国标准牌号 ZG0Cr18nI9 系原文档错别字（正确应为 ZG0Cr18Ni9），PDF 文字层与渲染图均确认原文即如此，保留原样。"
+  ]
+}

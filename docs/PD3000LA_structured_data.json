@@ -1,0 +1,949 @@
+{
+  "document": {
+    "source_file": "参考文件/选型样本/PD3000LA(压缩).pdf + PD3000LA(压缩).docx",
+    "series": "PD3000LA",
+    "product": "气动薄膜式执行机构 Linear Stem Motion Type Pneumatic Diaphragm Actuators",
+    "manufacturer": "KELK 无锡凯尔克仪表阀门有限公司",
+    "pages": 16,
+    "extraction_method": "python-docx (15 tables, 定位参考) + pypdfium2 render PNG (p3-p14 文字转曲页图像识别, 1310x1778 scale=1.0) + PIL 区域放大 1.9~2 倍复核",
+    "note": "本样本正文 p3-p14 全部为文字转曲页(text_len=0)；仅 p1/p2/p15/p16 有文字层。PDF 为唯一权威数据源。",
+    "cross_check": "2026-10-14 完成 PDF(16页) <-> docx(15表) 全表双向核对；docx 表7/表8/表9/表13 为空表，docx 漏项(4张尺寸表、p4性能脚注、附表一型号编制、联系方式)已按 PDF 补入。详见 docs/PD3000LA_pdf_docx_compare.md。"
+  },
+  "general_data": {
+    "model_specifications": {
+      "型号 Type": "PD3021LA、PD3027LA、PD3035LA、PD304SLA、PD304LLA、PD306SLA、PD306LLA",
+      "作用方式 Action Type": "正作用：气压增加阀闭 Direct action : Air to valve shut\n反作用：气压增加阀开 Reverse action : Air to valve open",
+      "供气压力 Air Supply": "300kPa G\n340kPa G\n400kPa G",
+      "弹簧范围 Spring Range": "80~200kPa G\n120~300kPa G (PD3021LA、PD3027LA)\n120~280kPa G (PD3035LA、PD304SLA、PD304LLA)",
+      "输出力 Output Force": "请参见表1 See Table.1",
+      "配管接口 Air Connection": "Rc1/4 (650: Rc3/8)",
+      "标准涂层色 Painting": "银灰色 Gray"
+    },
+    "performance": {
+      "滞后 Hysteresis": "带定位器时 0.8%FS 以内。Less than 0.8% of Full stroke with positioner.\n带定位器时（弹簧范围120~280/300）1.0%FS 以内。Less than 1.0% of Full stroke with positioner for Spring range 120~280/300.\n不带定位器时 5%FS 以内。Less than 5% of Full stroke without positioner.",
+      "直线度 Linearity": "带定位器时 ±1.5%FS 以内。Linearity : Less than ±1.5% of Full stroke with positioner.\n带定位器时（弹簧范围120~280/300）±2.0%FS 以内。Less than ±2% of Full stroke with positioner for Spring range 120~280/300.\n不带定位器时 ±4%FS 以内。Less than ±4% of Full stroke without positioner.",
+      "环境温度 AMB Temp": "标准型 Standard type -10~+70℃\n高温型 High temperature service (option) 0~+100℃\n低温型 Low temperature service (option) -40~+40℃",
+      "footnote": "* 调节阀的滞后和直线度因使用填料材质的不同而有所差异。The above hysteresis and linearity vary depending on the gland packing material of the control valves."
+    },
+    "materials": {
+      "膜盖 Diaphragm Case": "碳钢 SPHE",
+      "膜片 Diaphragm": "三元乙丙胶 EPDM",
+      "输出轴 Drive Shaft": "不锈钢 304",
+      "支架 Yoke": "球墨铸铁 QT400"
+    },
+    "accessories": {
+      "控制附件 Control Accessories": "电气、气气、智能定位器，过滤减压阀，电磁阀，限位开关，调速器/增速器，锁止阀等等。\nE/P·P/P·Smart-Positioner, Air-set, Solenoid valve, Limit switch, Speed controller, Lock valve, Lock-up valve, etc.",
+      "选购设备 Option": "手动操作机构、支架材料、特殊空气配管及特殊气接头、低温环境用、高温环境用、防盐腐蚀型等。\nManual handle, Yoke material, Special air piping, Special air fitting, Low temperature service, High temperature service, Salty environment proof, etc."
+    }
+  },
+  "characteristics": {
+    "table_1_stroke_outputforce_volume_weight": {
+      "title_cn": "表1. 行程、输出力、容量及重量",
+      "title_en": "Table 1  STORKE, OUTPUT FORCE, VOLUME & WEIGHT",
+      "page_pdf": 5,
+      "note": "PDF 英文标题原文拼写为 STORKE（应为 STROKE），系原文档错字，保留原样。",
+      "columns": [
+        "型号 Type",
+        "尺寸 Size (mm)",
+        "行程 Stroke (mm)",
+        "供气压力 Air supply (kPa G)",
+        "输出力 Output force (N)",
+        "容量 Volume (L)",
+        "重量-不带手轮 Weight-Without handle (kg)",
+        "重量-带手轮 Weight-With handle (kg)"
+      ],
+      "rows": [
+        [
+          "PD3021LA",
+          "218",
+          "20",
+          "300",
+          "1451",
+          "0.7",
+          "9",
+          "13"
+        ],
+        [
+          "PD3021LA",
+          "218",
+          "20",
+          "340",
+          "2186",
+          "0.7",
+          "9",
+          "13"
+        ],
+        [
+          "PD3027LA",
+          "270",
+          "20、25、30",
+          "300",
+          "2432",
+          "1.6",
+          "15",
+          "25"
+        ],
+        [
+          "PD3027LA",
+          "270",
+          "20、25、30",
+          "340",
+          "3648",
+          "1.6",
+          "15",
+          "25"
+        ],
+        [
+          "PD3035LA",
+          "350",
+          "20、25 / 30、40",
+          "300",
+          "4314",
+          "3.3",
+          "37",
+          "47"
+        ],
+        [
+          "PD3035LA",
+          "350",
+          "20、25 / 30、40",
+          "400",
+          "6460",
+          "3.6",
+          "38.5",
+          "50"
+        ],
+        [
+          "PD304SLA",
+          "450S",
+          "20、25 / 30、40",
+          "300",
+          "7453",
+          "6",
+          "65",
+          "77"
+        ],
+        [
+          "PD304SLA",
+          "450S",
+          "20、25 / 30、40",
+          "400",
+          "11170",
+          "6.5",
+          "68",
+          "82"
+        ],
+        [
+          "PD304LLA",
+          "450L",
+          "50、60 / 70、80",
+          "300",
+          "7453",
+          "10",
+          "87",
+          "100"
+        ],
+        [
+          "PD304LLA",
+          "450L",
+          "50、60 / 70、80",
+          "400",
+          "11170",
+          "11",
+          "92",
+          "108"
+        ],
+        [
+          "PD306SLA",
+          "650S",
+          "30、40 / 50、60",
+          "300",
+          "16480",
+          "30",
+          "195",
+          "235"
+        ],
+        [
+          "PD306LLA",
+          "650L",
+          "70、80、90 / 100、110",
+          "300",
+          "16480",
+          "42",
+          "226",
+          "275"
+        ]
+      ]
+    },
+    "air_consumption": {
+      "title": "*执行机构耗气量 AIR CONSUMPTION",
+      "formula": "C = M · V · (P + 101.3) / 101.3",
+      "symbols": [
+        {
+          "sym": "C",
+          "cn": "耗气量",
+          "en": "Air consumption",
+          "unit": "L/min"
+        },
+        {
+          "sym": "M",
+          "cn": "动作次数/分钟",
+          "en": "Action cycle",
+          "unit": "/min"
+        },
+        {
+          "sym": "V",
+          "cn": "容量-双作用为 A+B（表1-1）；单作用为 A（表1-2）",
+          "en": "Volume-Double acting: A+B (Table.1-1); -Spring return: A (Table.1-2)",
+          "unit": "L"
+        },
+        {
+          "sym": "P",
+          "cn": "供气压力（表压）",
+          "en": "Air supply",
+          "unit": "kPa G"
+        },
+        {
+          "sym": "101.3",
+          "cn": "一个标准大气压",
+          "en": "Standard atmospheric pressure",
+          "unit": "kPa"
+        }
+      ]
+    }
+  },
+  "parts_list": {
+    "title_cn": "表2. 结构清单",
+    "title_en": "Table 2  PARTS LIST",
+    "page_pdf": 6,
+    "figure": "图1. 本体部构造 Fig.1 BODY SECTION VIEW",
+    "items": [
+      {
+        "no": 1,
+        "cn": "支架",
+        "en": "Yoke"
+      },
+      {
+        "no": 2,
+        "cn": "六角螺栓",
+        "en": "Hex bolt"
+      },
+      {
+        "no": 3,
+        "cn": "连接器",
+        "en": "Connector"
+      },
+      {
+        "no": 4,
+        "cn": "开合螺母",
+        "en": "Stopper"
+      },
+      {
+        "no": 5,
+        "cn": "活塞杆",
+        "en": "Piston rod"
+      },
+      {
+        "no": 6,
+        "cn": "密封圈",
+        "en": "O-ring"
+      },
+      {
+        "no": 7,
+        "cn": "下膜盖",
+        "en": "Lower cover"
+      },
+      {
+        "no": 8,
+        "cn": "棱角螺栓",
+        "en": "Hex bolt"
+      },
+      {
+        "no": 9,
+        "cn": "六角螺母",
+        "en": "Hex nut"
+      },
+      {
+        "no": 10,
+        "cn": "吊环",
+        "en": "Lifting eye"
+      },
+      {
+        "no": 11,
+        "cn": "上模盖",
+        "en": "Upper cover"
+      },
+      {
+        "no": 12,
+        "cn": "防雨帽",
+        "en": "Rain roofs"
+      },
+      {
+        "no": 13,
+        "cn": "弹簧",
+        "en": "Spring"
+      },
+      {
+        "no": 14,
+        "cn": "螺栓&螺母",
+        "en": "Bolt & Nut"
+      },
+      {
+        "no": 15,
+        "cn": "弹簧座",
+        "en": "Spring seat"
+      },
+      {
+        "no": 16,
+        "cn": "膜片托盘",
+        "en": "Diaphragm tray"
+      },
+      {
+        "no": 17,
+        "cn": "膜片",
+        "en": "Diaphragm"
+      },
+      {
+        "no": 18,
+        "cn": "密封圈",
+        "en": "O-ring"
+      },
+      {
+        "no": 19,
+        "cn": "导向套",
+        "en": "Guide"
+      },
+      {
+        "no": 20,
+        "cn": "轴套",
+        "en": "Bush"
+      },
+      {
+        "no": 21,
+        "cn": "刻度板",
+        "en": "Scale board"
+      }
+    ]
+  },
+  "dimensions": {
+    "unit": "mm",
+    "note": "尺寸表列结构分两类：PD3000LA/PD304(E)LA 类含列 [型号Type,D,C,F,L,A,B,E,G,H,M,行程Stroke,L1,L2,W]；PD306SLA/PD306LLA 类含列 [型号Type,D,C,F,L,A,B,E,G,H,M,行程Stroke,W,L1,L2,L3,L4]。M 列合并双值(如 M9×1 / M12×1)表示两种可选规格。",
+    "tables": [
+      {
+        "id": "PD3000LA_D",
+        "title_cn": "尺寸表 Dimensions",
+        "title_en": "正作用执行机构 DIRECT ACTION  PD3000LA-D-N/S",
+        "page_pdf": 7,
+        "printed_page": 5,
+        "action": "direct",
+        "columns": [
+          "型号 Type",
+          "D",
+          "C",
+          "F",
+          "L",
+          "A",
+          "B",
+          "E",
+          "G",
+          "H",
+          "M",
+          "行程 Stroke",
+          "L1",
+          "L2",
+          "W"
+        ],
+        "rows": [
+          [
+            "PD3021LA",
+            "218",
+            "231",
+            "80",
+            "297",
+            "139",
+            "120",
+            "130",
+            "60",
+            "20",
+            "M9×1 / M12×1",
+            "20",
+            "170.5",
+            "18.5",
+            "160"
+          ],
+          [
+            "PD3027LA",
+            "270",
+            "283",
+            "80",
+            "395",
+            "149",
+            "130",
+            "160",
+            "60",
+            "20",
+            "M9×1 / M12×1",
+            "20、25、30",
+            "207.8",
+            "27.5",
+            "250"
+          ],
+          [
+            "PD3035LA",
+            "350",
+            "367",
+            "80",
+            "430",
+            "160",
+            "140",
+            "160",
+            "60",
+            "20",
+            "M12×1",
+            "20、25 / 30、40",
+            "207.5",
+            "27.5",
+            "250"
+          ],
+          [
+            "PD304SLA",
+            "450",
+            "472",
+            "100",
+            "495",
+            "205",
+            "175",
+            "190",
+            "80",
+            "30",
+            "M16×1.5",
+            "20、25 / 30、40",
+            "229.8",
+            "32",
+            "350"
+          ]
+        ]
+      },
+      {
+        "id": "PD3000LA_R",
+        "title_cn": "尺寸表 Dimensions",
+        "title_en": "反作用执行机构 REVERSE ACTION  PD3000LA-R-N/S",
+        "page_pdf": 8,
+        "printed_page": 6,
+        "action": "reverse",
+        "columns": [
+          "型号 Type",
+          "D",
+          "C",
+          "F",
+          "L",
+          "A",
+          "B",
+          "E",
+          "G",
+          "H",
+          "M",
+          "行程 Stroke",
+          "L1",
+          "L2",
+          "W"
+        ],
+        "rows": [
+          [
+            "PD3021LA",
+            "218",
+            "231",
+            "80",
+            "337",
+            "119",
+            "100",
+            "130",
+            "60",
+            "20",
+            "M9×1 / M12×1",
+            "20",
+            "170.5",
+            "18.5",
+            "160"
+          ],
+          [
+            "PD3027LA",
+            "270",
+            "283",
+            "80",
+            "435",
+            "119",
+            "100",
+            "160",
+            "60",
+            "20",
+            "M9×1 / M12×1",
+            "20、25、30",
+            "207.8",
+            "27.5",
+            "250"
+          ],
+          [
+            "PD3035LA",
+            "350",
+            "367",
+            "80",
+            "470",
+            "120",
+            "100",
+            "160",
+            "60",
+            "20",
+            "M12×1",
+            "20、25 / 30、40",
+            "207.8",
+            "27.5",
+            "250"
+          ],
+          [
+            "PD304SLA",
+            "450",
+            "472",
+            "100",
+            "535",
+            "165",
+            "135",
+            "190",
+            "80",
+            "30",
+            "M16×1.5",
+            "20、25 / 30、40",
+            "229.8",
+            "32",
+            "350"
+          ]
+        ]
+      },
+      {
+        "id": "PD304LA_D",
+        "title_cn": "尺寸表 Dimensions",
+        "title_en": "正作用执行机构 DIRECT ACTION  PD304(E)LA-D-N/S",
+        "page_pdf": 9,
+        "printed_page": 7,
+        "action": "direct",
+        "columns": [
+          "型号 Type",
+          "D",
+          "C",
+          "F",
+          "L",
+          "A",
+          "B",
+          "E",
+          "G",
+          "H",
+          "M",
+          "行程 Stroke",
+          "L1",
+          "L2",
+          "W"
+        ],
+        "rows": [
+          [
+            "PD304LLA",
+            "450",
+            "472",
+            "100",
+            "635",
+            "245",
+            "215",
+            "190",
+            "80",
+            "30",
+            "M16×1.5",
+            "50、60 / 70、80",
+            "229.8",
+            "32",
+            "350"
+          ],
+          [
+            "PD304ELA",
+            "450",
+            "472",
+            "130",
+            "635",
+            "265",
+            "235",
+            "190",
+            "100",
+            "30",
+            "M24×3",
+            "50、60 / 70、80",
+            "229.8",
+            "32",
+            "350"
+          ]
+        ]
+      },
+      {
+        "id": "PD304LA_R",
+        "title_cn": "尺寸表 Dimensions",
+        "title_en": "反作用执行机构 REVERSE ACTION  PD304(E)LA-R-N/S",
+        "page_pdf": 10,
+        "printed_page": 8,
+        "action": "reverse",
+        "columns": [
+          "型号 Type",
+          "D",
+          "C",
+          "F",
+          "L",
+          "A",
+          "B",
+          "E",
+          "G",
+          "H",
+          "M",
+          "行程 Stroke",
+          "L1",
+          "L2",
+          "W"
+        ],
+        "rows": [
+          [
+            "PD304LLA",
+            "450",
+            "472",
+            "100",
+            "675",
+            "165",
+            "135",
+            "190",
+            "80",
+            "30",
+            "M16×1.5",
+            "50、60 / 70、80",
+            "229.8",
+            "32",
+            "350"
+          ],
+          [
+            "PD304ELA",
+            "450",
+            "472",
+            "130",
+            "695",
+            "185",
+            "155",
+            "190",
+            "100",
+            "30",
+            "M24×3",
+            "50、60 / 70、80",
+            "229.8",
+            "32",
+            "350"
+          ]
+        ]
+      },
+      {
+        "id": "PD306SLA_D",
+        "title_cn": "尺寸表 Dimensions",
+        "title_en": "正作用执行机构 DIRECT ACTION  PD306SLA-D-N/S",
+        "page_pdf": 11,
+        "printed_page": 9,
+        "action": "direct",
+        "columns": [
+          "型号 Type",
+          "D",
+          "C",
+          "F",
+          "L",
+          "A",
+          "B",
+          "E",
+          "G",
+          "H",
+          "M",
+          "行程 Stroke",
+          "W",
+          "L1",
+          "L2",
+          "L3",
+          "L4"
+        ],
+        "rows": [
+          [
+            "PD306SLA",
+            "650",
+            "678",
+            "130",
+            "717",
+            "245",
+            "215",
+            "300",
+            "100",
+            "30",
+            "M24×3",
+            "30、40 / 50、60",
+            "400",
+            "1117",
+            "885",
+            "302",
+            "65"
+          ]
+        ]
+      },
+      {
+        "id": "PD306SLA_R",
+        "title_cn": "尺寸表 Dimensions",
+        "title_en": "反作用执行机构 REVERSE ACTION  PD306SLA-R-N/S",
+        "page_pdf": 12,
+        "printed_page": 10,
+        "action": "reverse",
+        "columns": [
+          "型号 Type",
+          "D",
+          "C",
+          "F",
+          "L",
+          "A",
+          "B",
+          "E",
+          "G",
+          "H",
+          "M",
+          "行程 Stroke",
+          "W",
+          "L1",
+          "L2",
+          "L3",
+          "L4"
+        ],
+        "rows": [
+          [
+            "PD306SLA",
+            "650",
+            "678",
+            "130",
+            "717",
+            "185",
+            "155",
+            "300",
+            "100",
+            "30",
+            "M24×3",
+            "30、40 / 50、60",
+            "400",
+            "1117",
+            "885",
+            "302",
+            "65"
+          ]
+        ]
+      },
+      {
+        "id": "PD306LLA_D",
+        "title_cn": "尺寸表 Dimensions",
+        "title_en": "正作用执行机构 DIRECT ACTION  PD306LLA-D-N/S",
+        "page_pdf": 13,
+        "printed_page": 11,
+        "action": "direct",
+        "columns": [
+          "型号 Type",
+          "D",
+          "C",
+          "F",
+          "L",
+          "A",
+          "B",
+          "E",
+          "G",
+          "H",
+          "M",
+          "行程 Stroke",
+          "W",
+          "L1",
+          "L2",
+          "L3",
+          "L4"
+        ],
+        "rows": [
+          [
+            "PD306LLA",
+            "650",
+            "678",
+            "130",
+            "817",
+            "295",
+            "265",
+            "300",
+            "100",
+            "30",
+            "M24×3",
+            "70、80、90 / 100、110",
+            "400",
+            "1217",
+            "985",
+            "302",
+            "65"
+          ]
+        ]
+      },
+      {
+        "id": "PD306LLA_R",
+        "title_cn": "尺寸表 Dimensions",
+        "title_en": "反作用执行机构 REVERSE ACTION  PD306LLA-R-N/S",
+        "page_pdf": 14,
+        "printed_page": 12,
+        "action": "reverse",
+        "columns": [
+          "型号 Type",
+          "D",
+          "C",
+          "F",
+          "L",
+          "A",
+          "B",
+          "E",
+          "G",
+          "H",
+          "M",
+          "行程 Stroke",
+          "W",
+          "L1",
+          "L2",
+          "L3",
+          "L4"
+        ],
+        "rows": [
+          [
+            "PD306LLA",
+            "650",
+            "678",
+            "130",
+            "817",
+            "185",
+            "155",
+            "300",
+            "100",
+            "30",
+            "M24×3",
+            "70、80、90 / 100、110",
+            "400",
+            "1217",
+            "985",
+            "302",
+            "65"
+          ]
+        ]
+      }
+    ]
+  },
+  "actuator_model_coding": {
+    "title_cn": "附表一 执行机构型号编制说明",
+    "title_en": "ACTUATOR MODEL CODING RULE",
+    "page_pdf": 15,
+    "skeleton": "P D 3 0 00 L A - D - N",
+    "note": "原图第4字符盒印为占位『0』，其说明定义为『1 单动作/2 双动作』；示意骨架与实际型号(如 PD3021LA)不完全对应，系原文档示意性质，照录。",
+    "positions": [
+      {
+        "pos": 1,
+        "box": "P",
+        "definition": "P 执行机构"
+      },
+      {
+        "pos": 2,
+        "box": "D",
+        "definition": "D 薄膜式执行机构 / C 气缸式执行机构"
+      },
+      {
+        "pos": 3,
+        "box": "3",
+        "definition": "3 薄膜式/气缸式直行程；2 VT式角行程；6 AT式角行程；4 拨叉式角行程；8 气缸式角行程"
+      },
+      {
+        "pos": 4,
+        "box": "0",
+        "definition": "1 单动作执行机构 / 2 双动作执行机构"
+      },
+      {
+        "pos": "5-6",
+        "box": "00",
+        "definition": "00/000 缸径型号"
+      },
+      {
+        "pos": 7,
+        "box": "L",
+        "definition": "L 直行程执行机构 / R 角行程执行机构"
+      },
+      {
+        "pos": 8,
+        "box": "A",
+        "definition": "A 版本号"
+      },
+      {
+        "pos": 9,
+        "box": "D",
+        "definition": "D 正动作型 / R 反动作型 / W 双动作型"
+      },
+      {
+        "pos": 10,
+        "box": "N",
+        "definition": "N 无手轮 / S 旁式手轮 / H 顶部手轮"
+      }
+    ]
+  },
+  "contact": {
+    "page_pdf": 16,
+    "title": "分公司联系方式",
+    "offices": [
+      {
+        "name": "KELK 重庆分公司",
+        "addr": "重庆市北部新区金渝大道68号新科国际5-706",
+        "zip": "401122",
+        "tel_fax": "023-67303323 023-67303870"
+      },
+      {
+        "name": "KELK 北京分公司",
+        "addr": "北京市朝阳区北辰西路69号峻峰华亭D座2210室",
+        "zip": "100029",
+        "tel_fax": "010-58773822 010-58773818"
+      },
+      {
+        "name": "KELK 杭州分公司",
+        "addr": "杭州市下城区三塘汶漾公寓3幢605室",
+        "zip": "310004",
+        "tel_fax": "0571-81953576 0571-81953576"
+      },
+      {
+        "name": "KELK 广州分公司",
+        "addr": "广州市天河区大河北街70号东方之珠D栋14C房",
+        "zip": "510000",
+        "tel_fax": "020-38042159 020-38042382"
+      },
+      {
+        "name": "KELK 武汉分公司",
+        "addr": "武汉市武昌区中南路爱尚国际城芝华公馆1栋1803室",
+        "zip": "430064",
+        "tel_fax": "027-68708711 027-87435380"
+      },
+      {
+        "name": "KELK 西安分公司",
+        "addr": "西安市雁塔区太白南路63号雁影华庭3-901",
+        "zip": "710054",
+        "tel_fax": "029-88457596 029-85519533"
+      },
+      {
+        "name": "KELK 成都分公司",
+        "addr": "成都市高新区天府大道中段177号天鹅湖花园公寓北区23栋2单元28楼7号",
+        "zip": "610041",
+        "tel_fax": "028-26761538"
+      }
+    ],
+    "headquarters": {
+      "name": "无锡凯尔克仪表阀门有限公司",
+      "addr": "无锡市新区鸿山镇后宅电机光电集中区德育路6号 (214115)",
+      "tel": "+86-510-85141699",
+      "fax": "+86-510-85141819",
+      "web": "www.kelkflow.com.cn",
+      "email": "info@kelkflow.com.cn"
+    },
+    "footnote": "规格数据可能因技术进步而改变"
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "label": "PC3000LA",
+  "pdf": "PC3000LA(压缩).pdf",
+  "n_pages": 13,
+  "pages": [
+    {
+      "page": 1,
+      "text_len": 76,
+      "table_count": 1,
+      "tables": [
+        {
+          "n_rows": 32,
+          "n_cols": 25,
+          "first_row": "Linear Stem Motion Type Pneumatic Cylinder Actuators |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | "
+        }
+      ],
+      "preview": "PC3000LA | SERIES | 气缸式执行机构 | Linear Stem Motion Type Pneumatic Cylinder Actuators"
+    },
+    {
+      "page": 2,
+      "text_len": 1012,
+      "table_count": 0,
+      "tables": [],
+      "preview": "KELK控制阀在中国 | KELK无锡公司是一家中国与加拿大合资的专业控制阀制造商，是专业生产各类电动、气动控制阀、控制装置 | ，并集成工业控制系统的一家高科技企业。公司在质量体系保证下生产出高质量和高可靠性的控制仪表，适用于各 | 行各业及各种场合。 | 该资料是KELK控制阀选型样本，主要介绍不同类型的控制阀，帮助您在不同的工况条件下更合理选择KELK的 | 产品。如果您对此选型样本有任何问题或需要更详细资料，"
+    },
+    {
+      "page": 3,
+      "text_len": 0,
+      "table_count": 0,
+      "tables": [],
+      "preview": ""
+    },
+    {
+      "page": 4,
+      "text_len": 0,
+      "table_count": 3,
+      "tables": [
+        {
+          "n_rows": 6,
+          "n_cols": 1,
+          "first_row": ""
+        },
+        {
+          "n_rows": 3,
+          "n_cols": 1,
+          "first_row": ""
+        },
+        {
+          "n_rows": 7,
+          "n_cols": 1,
+          "first_row": ""
+        }
+      ],
+      "preview": ""
+    },
+    {
+      "page": 5,
+      "text_len": 0,
+      "table_count": 2,
+      "tables": [
+        {
+          "n_rows": 2,
+          "n_cols": 1,
+          "first_row": ""
+        },
+        {
+          "n_rows": 5,
+          "n_cols": 5,
+          "first_row": " |  |  |  | "
+        }
+      ],
+      "preview": ""
+    },
+    {
+      "page": 6,
+      "text_len": 0,
+      "table_count": 1,
+      "tables": [
+        {
+          "n_rows": 5,
+          "n_cols": 2,
+          "first_row": " | "
+        }
+      ],
+      "preview": ""
+    },
+    {
+      "page": 7,
+      "text_len": 0,
+      "table_count": 1,
+      "tables": [
+        {
+          "n_rows": 2,
+          "n_cols": 2,
+          "first_row": " | "
+        }
+      ],
+      "preview": ""
+    },
+    {
+      "page": 8,
+      "text_len": 0,
+      "table_count": 5,
+      "tables": [
+        {
+          "n_rows": 2,
+          "n_cols": 1,
+          "first_row": ""
+        },
+        {
+          "n_rows": 1,
+          "n_cols": 2,
+          "first_row": " | "
+        },
+        {
+          "n_rows": 7,
+          "n_cols": 4,
+          "first_row": " |  |  | "
+        },
+        {
+          "n_rows": 2,
+          "n_cols": 2,
+          "first_row": " | "
+        },
+        {
+          "n_rows": 5,
+          "n_cols": 12,
+          "first_row": " |  |  |  |  |  |  |  |  |  |  | "
+        }
+      ],
+      "preview": ""
+    },
+    {
+      "page": 9,
+      "text_len": 0,
+      "table_count": 4,
+      "tables": [
+        {
+          "n_rows": 2,
+          "n_cols": 1,
+          "first_row": ""
+        },
+        {
+          "n_rows": 2,
+          "n_cols": 2,
+          "first_row": " | "
+        },
+        {
+          "n_rows": 2,
+          "n_cols": 1,
+          "first_row": ""
+        },
+        {
+          "n_rows": 3,
+          "n_cols": 9,
+          "first_row": " |  |  |  |  |  |  |  | "
+        }
+      ],
+      "preview": ""
+    },
+    {
+      "page": 10,
+      "text_len": 0,
+      "table_count": 2,
+      "tables": [
+        {
+          "n_rows": 9,
+          "n_cols": 4,
+          "first_row": " |  |  | "
+        },
+        {
+          "n_rows": 6,
+          "n_cols": 14,
+          "first_row": " |  |  |  |  |  |  |  |  |  |  |  |  | "
+        }
+      ],
+      "preview": ""
+    },
+    {
+      "page": 11,
+      "text_len": 0,
+      "table_count": 1,
+      "tables": [
+        {
+          "n_rows": 4,
+          "n_cols": 5,
+          "first_row": " |  |  |  | "
+        }
+      ],
+      "preview": ""
+    },
+    {
+      "page": 12,
+      "text_len": 239,
+      "table_count": 0,
+      "tables": [],
+      "preview": "附表一 | 执行机构型号编制说明 | ACTUATOR MODEL CODING RULE | P D 3 0 00 L A - D - N | N 无手轮 | S 旁式手轮 | H 顶部手轮 | D 正动作型 | R 反动作型 | W 双动作型 | A 版本号 | L 直行程执行机构 | R 角行程执行机构 | 00/000 缸径型号 | 1 单动作执行机构 | 2 双动作执行机构 | 3 薄膜式/气缸式直行程 | 2 VT式角行程 | 6 AT式角行程 | 4 拨叉式"
+    },
+    {
+      "page": 13,
+      "text_len": 757,
+      "table_count": 1,
+      "tables": [
+        {
+          "n_rows": 19,
+          "n_cols": 20,
+          "first_row": " |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | "
+        }
+      ],
+      "preview": "分公司联系方式 | KELK 重庆分公司 KELK 北京分公司 | 地址 ：重庆市北部新区金渝大道68号新科国际5-706 地址 ：北京市朝阳区北辰西路69号峻峰华亭D座2210室 | 邮编 ：401122 邮编 ：100029 | 电话/传真 ：023-67303323 023-67303870 电话/传真 ：010-58773822 010-58773818 | KELK 杭州分公司 KELK 广州分公司 | 地址 "
+    }
+  ]
+}

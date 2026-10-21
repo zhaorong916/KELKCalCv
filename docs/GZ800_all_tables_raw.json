@@ -1,0 +1,5618 @@
+{
+  "label": "GZ800",
+  "docx": "GZ800(压缩).docx",
+  "n_tables": 41,
+  "tables": [
+    {
+      "table_index": 0,
+      "n_rows": 5,
+      "n_cols": 2,
+      "first_row": "公称通径\nBody | 1/2\"~8\" (DN15~DN200)",
+      "rows": [
+        [
+          "公称通径\nBody",
+          "1/2\"~8\" (DN15~DN200)"
+        ],
+        [
+          "公称压力\nBody Rating",
+          "ANSI I 50#, 300#, 600#\nJB/T79.l-94 & HG/T20592-2009 PNl.6MPa, PN4.0MPa, PN6.3MPa, PNlO.OMPa"
+        ],
+        [
+          "连接方式\nBody Connection",
+          "法兰型(RF,  RTJ,MFM)、焊接型(2”以下为SW,3”以上为BW)、对央式 Flanged (RF, RTJ,MFM), Weld ends (SW: 2\" and under, BW: 3\" and over), Wafer"
+        ],
+        [
+          "设计标准\nDesign Standard",
+          "ANSI B16.34, ANSI B16.47, API598等"
+        ],
+        [
+          "法竺距\nFFDimen",
+          "IEC60534, ISA.S75.03-l 985"
+        ]
+      ]
+    },
+    {
+      "table_index": 1,
+      "n_rows": 7,
+      "n_cols": 2,
+      "first_row": "阀内件形式\nTrimFo兀n | 流休压力不平衡阀芯型\t流休压力平衡型阀芯\nPressure unbalance plug type\tPressure balance plug type",
+      "rows": [
+        [
+          "阀内件形式\nTrimFo兀n",
+          "流休压力不平衡阀芯型\t流休压力平衡型阀芯\nPressure unbalance plug type\tPressure balance plug type"
+        ],
+        [
+          "阀芯形式\nPlug Form",
+          "P孔单座\t笼式单座\nP-portsingle seated\tCage single seated"
+        ],
+        [
+          "额定Cv值\nRated Cv",
+          "见表3\nSee Tab.3 for selection."
+        ],
+        [
+          "流歇特性\nCharacteristics",
+          "线性、等百分比（特殊加工）、快开\nLinear, Equal percentage (Special processing),Quick open."
+        ],
+        [
+          "阀座泄掘散\nSeatLeakage",
+          "金属阀座标准泄漏等级为Cv x 0.003;软阀座标准泄漏等级为Class VI。 Hard-sealing:Cvx0.003; Soft-sealing:Class VI."
+        ],
+        [
+          "密封形式\nSealing Type",
+          "长波纹管型（非填料形式）\nLong bellow structure(No Packing)"
+        ],
+        [
+          "阀盖垫圈\nGasketof Bonnet",
+          "缠绕垫圈(304/316＋柔性石墨；304/316＋强化聚四娠乙烯）。\nWindinggasket(304/316+Graphite; 304/316+PTEF)."
+        ]
+      ]
+    },
+    {
+      "table_index": 2,
+      "n_rows": 9,
+      "n_cols": 2,
+      "first_row": "型号代码\nModel Number | 型号说明\nModel Specification",
+      "rows": [
+        [
+          "型号代码\nModel Number",
+          "型号说明\nModel Specification"
+        ],
+        [
+          "GZ810",
+          "自力式单座压力调节阀"
+        ],
+        [
+          "GZ820",
+          "自力式笼式压力调节阀"
+        ],
+        [
+          "GZ830",
+          "波纹管平衡自力式压力调节阀"
+        ],
+        [
+          "GZ840",
+          "小流掀自力式微压调节阀"
+        ],
+        [
+          "GZ850",
+          "自力式压力调节阀"
+        ],
+        [
+          "GZ860",
+          "带指挥盎操作自力式微压阀"
+        ],
+        [
+          "GZ870",
+          "自力式低压泄压阀"
+        ],
+        [
+          "GZ880",
+          "自力式微压调节阀"
+        ]
+      ]
+    },
+    {
+      "table_index": 3,
+      "n_rows": 9,
+      "n_cols": 7,
+      "first_row": "型号\nModel | 公称压力\nBody Rating | 公称通径\nBody Size | 使用温度\nFluid Temp. | 调压范围\nPressure Range | 作用方式\nControl Situation | 连接方式\nConnections",
+      "rows": [
+        [
+          "型号\nModel",
+          "公称压力\nBody Rating",
+          "公称通径\nBody Size",
+          "使用温度\nFluid Temp.",
+          "调压范围\nPressure Range",
+          "作用方式\nControl Situation",
+          "连接方式\nConnections"
+        ],
+        [
+          "GZ810",
+          "ANSI Class 150#~600#",
+          "1/2\"(ND15)~2\"(DN50)",
+          "-48°C~+300°C",
+          "3KPa~3600kPa",
+          "阀前、阀后兼用型\nUpstream & Downstream",
+          "法兰式(RF) Flanges(RF)"
+        ],
+        [
+          "GZ820",
+          "ANSI Class 150#~600#",
+          "1-1/2\"(ND40)~8\"(DN200)",
+          "-48°C~+300°C",
+          "3KPa~3600kPa",
+          "阀前、阀后兼用型\nUpstream & Downstream",
+          "法兰式(RF) Flanges(RF)"
+        ],
+        [
+          "GZ830",
+          "ANSI Class 150#~600#",
+          "1-1/2\"(ND40)~8\"(DN200)",
+          "-48°C~+300°C",
+          "3KPa~3600kPa",
+          "阀前、阀后兼用型\nUpstream & Downstream",
+          "法兰式(RF) Flanges(RF)"
+        ],
+        [
+          "GZ840",
+          "ANSI Class\n150#",
+          "1/2\"(NDl5)~l\"(DN25)",
+          "-48°C~+120°C",
+          "0.3KPa~15kPa",
+          "阀后控制Downstream",
+          "对夹式Wafer"
+        ],
+        [
+          "GZ850",
+          "ANSI Class 150#~600#",
+          "1/2\"(NDl5)~2\"(DN50)",
+          "-48°C~+120°C",
+          "l.3KPa~3600kPa",
+          "阀后控制Downstream",
+          "法兰式(RF) Flanges(RF)"
+        ],
+        [
+          "GZ860",
+          "ANSI Class 150#~600#",
+          "1/2\"(ND15)~4\"(DNIOO)",
+          "-48°C~+120°C",
+          "0.15KPa~12kPa",
+          "阀后控制Downstream",
+          "法兰式(RF) Flanges(RF)"
+        ],
+        [
+          "GZ870",
+          "ANSI Class 150#~600#",
+          "1/2\"(ND15)~8\"(DN200)",
+          "-48°C~+120°C",
+          "O.SKPa~15kPa",
+          "阀前控制Upstream",
+          "法兰式(RF) Flanges(RF)"
+        ],
+        [
+          "GZ880",
+          "ANSI Class 150#~600#",
+          "l/2\"(NDl5)~2\"(DN50)",
+          "-48°C~+120°C",
+          "0.3KPa~15kPa",
+          "阀后控制Downstream",
+          "法兰式(RF) Flanges(RF)"
+        ]
+      ]
+    },
+    {
+      "table_index": 4,
+      "n_rows": 4,
+      "n_cols": 2,
+      "first_row": "本体特殊检查\nSpecial Testing for Body | 材料检查，液休渗透探伤检查（PT)'放射线检查(RT),流攸特性检查，低温试验，蒸汽试验。\nMaterial certificate, Liquid penetranttesting,Radiographic testing,Flow characteristic\ntesting,Low temperature testing,Steam testing",
+      "rows": [
+        [
+          "本体特殊检查\nSpecial Testing for Body",
+          "材料检查，液休渗透探伤检查（PT)'放射线检查(RT),流攸特性检查，低温试验，蒸汽试验。\nMaterial certificate, Liquid penetranttesting,Radiographic testing,Flow characteristic\ntesting,Low temperature testing,Steam testing"
+        ],
+        [
+          "本体特殊清洗\nCleaningfor Body",
+          "氧气清洁，完全禁油，除水处理。\nOxygen clean, Oil-free, Water-free."
+        ],
+        [
+          "本休及执行机构特殊规格 Special Specification for Body and Actuator",
+          "防砂，防尘型，防盐腐蚀型，尤铜处理，特殊空气配管及特殊气接头，真空工作条件用，接触大气部分的螺栓，螺母采用不锈钢，指定涂层色，NACE处理，阀内件特殊设计，阀内件特殊材质。\nSand and Dustproof,Salty environmentproof,Tropical area proof\nCopper-free alloy,Special piping and fitting,Vacuum service proof,\nSUS boltand nutfor exposed parts, Non-standard painting."
+        ],
+        [
+          "认证\nAuthorization",
+          "各种认证\nAll kinds ofcertifications"
+        ]
+      ]
+    },
+    {
+      "table_index": 5,
+      "n_rows": 15,
+      "n_cols": 4,
+      "first_row": "N0 | 名称PartName | 15 | 套筒Cage",
+      "rows": [
+        [
+          "N0",
+          "名称PartName",
+          "15",
+          "套筒Cage"
+        ],
+        [
+          "l",
+          "压垫Press cushion",
+          "16",
+          "减压阀芯Reducing valve plug"
+        ],
+        [
+          "2",
+          "转接板Connecting plate",
+          "17",
+          "阀垫Valve cushion"
+        ],
+        [
+          "3",
+          "支架Bracket",
+          "18",
+          "阀座Valve seat"
+        ],
+        [
+          "4",
+          "荨单簧座Up spring seat",
+          "19",
+          "阀座垫圈Sealing ring ofvalva seat"
+        ],
+        [
+          "5",
+          "垫圈1 Washer I",
+          "20",
+          "阀体Body"
+        ],
+        [
+          "6",
+          "导套Guide bush",
+          "21",
+          "销子Pin"
+        ],
+        [
+          "7",
+          "密封垫圈Sealing ring",
+          "22",
+          "键Block"
+        ],
+        [
+          "8",
+          "连接法兰Connection flange",
+          "23",
+          "滑动垫片Sliding cushion"
+        ],
+        [
+          "9",
+          "波纹管阀杆组件Bellows valve stem component",
+          "24",
+          "垫圈Cushion"
+        ],
+        [
+          "l0",
+          "下弹簧座Down spring seat",
+          "25",
+          "阀芯Plug"
+        ],
+        [
+          "1l",
+          "调节螺母Adjusting nut",
+          "26",
+          "阀垫Cushion"
+        ],
+        [
+          "l2",
+          "调节螺母罩Adjusting nutcover",
+          "27",
+          "压板Press plate"
+        ],
+        [
+          "l3",
+          "阀盖Bonnet",
+          "28",
+          "设定弹簧Setting spring"
+        ],
+        [
+          "l4",
+          "阀盖垫圈Sealing ring of bonnet",
+          "29",
+          "调节杆Adjustment lever"
+        ]
+      ]
+    },
+    {
+      "table_index": 6,
+      "n_rows": 17,
+      "n_cols": 4,
+      "first_row": " | 名称PartName | 17 | 减压阀芯Reducing valve plug",
+      "rows": [
+        [
+          "",
+          "名称PartName",
+          "17",
+          "减压阀芯Reducing valve plug"
+        ],
+        [
+          "",
+          "垫困Cushion",
+          "18",
+          "阀座垫圈Sealing ring ofvalva seat"
+        ],
+        [
+          "",
+          "滑动垫片Sliding cushion",
+          "19",
+          "导套Guide bush"
+        ],
+        [
+          "",
+          "压垫Press Cushion",
+          "20",
+          "套筒Cage"
+        ],
+        [
+          "",
+          "转接板Connecting plate",
+          "21",
+          "导套Guide bush"
+        ],
+        [
+          "",
+          "支架Bracket",
+          "22",
+          "压板Press plate"
+        ],
+        [
+          "",
+          "上弹簧座Up spring seat",
+          "23",
+          "阀垫Valve cushion"
+        ],
+        [
+          "",
+          "垫囡l Washer I",
+          "24",
+          "螺钉Screw"
+        ],
+        [
+          "",
+          "导套Guide bush",
+          "25",
+          "阀座Valve seat"
+        ],
+        [
+          "",
+          "密封垫圈Sealing ring",
+          "26",
+          "阀座垫圉Sealing ring of valve seat"
+        ],
+        [
+          "",
+          "连接法兰Connection flange",
+          "27",
+          "阀体Body"
+        ],
+        [
+          "",
+          "波纹管阀杆组件Bellows valve stem component",
+          "28",
+          "销Pin"
+        ],
+        [
+          "",
+          "设定弹簧Setting spring",
+          "29",
+          "键Block"
+        ],
+        [
+          "",
+          "下弹簧座Down spring seat",
+          "30",
+          "阀芯Valve plug"
+        ],
+        [
+          "",
+          "调节螺母Adjusting nut",
+          "31",
+          "压板Press plate"
+        ],
+        [
+          "",
+          "调节螺母罩Adjusting nutcover",
+          "32",
+          "调节杆Adjustmentlever"
+        ],
+        [
+          "",
+          "阀盖Bonnet",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "table_index": 7,
+      "n_rows": 20,
+      "n_cols": 4,
+      "first_row": "No. | 名称PartName | 20 | 减压阀芯Reducing valve plug",
+      "rows": [
+        [
+          "No.",
+          "名称PartName",
+          "20",
+          "减压阀芯Reducing valve plug"
+        ],
+        [
+          "1",
+          "垫囡Cush10n",
+          "21",
+          "导套Guide bush"
+        ],
+        [
+          "2",
+          "滑动垫片Sliding cushion",
+          "22",
+          "套筒Cage"
+        ],
+        [
+          "3",
+          "压垫Press cushion",
+          "23",
+          "压板Press plate"
+        ],
+        [
+          "4",
+          "转接板Connecting plate",
+          "24",
+          "阀垫Valve cushion"
+        ],
+        [
+          "5",
+          "支架Bracket",
+          "25",
+          "螺钉Screw"
+        ],
+        [
+          "6",
+          "上弹簧座Up spring seat",
+          "26",
+          "阀座Valve seat"
+        ],
+        [
+          "7",
+          "垫圉1 Washer 1",
+          "27",
+          "阀座垫团Sealing ring ofvalva seat"
+        ],
+        [
+          "8",
+          "导套Guide bush",
+          "28",
+          "阀体Body"
+        ],
+        [
+          "9",
+          "密封垫圉Sealing ring",
+          "29",
+          "连接管Connecting pipe"
+        ],
+        [
+          "10",
+          "连接法兰Connection flange",
+          "30",
+          "键Block"
+        ],
+        [
+          "11",
+          "波纹管阀杆组件Bellows valve stem component",
+          "31",
+          "销子Pin"
+        ],
+        [
+          "12",
+          "设定弹簧Setting spring",
+          "32",
+          "阀芯Plug"
+        ],
+        [
+          "13",
+          "下弹簧座Down spring seat",
+          "33",
+          "背压阀波纹管组件Back press bellows component"
+        ],
+        [
+          "14",
+          "调节螺母Adjusting nut",
+          "34",
+          "背压阀阀芯Back-press valve plug"
+        ],
+        [
+          "15",
+          "调节螺母罩Adjusting nutcover",
+          "35",
+          "导套Guide bush"
+        ],
+        [
+          "16",
+          "阀盖Bonnet",
+          "36",
+          "压板Press plate"
+        ],
+        [
+          "17",
+          "减压波纹管组件Reduce bellows component",
+          "37",
+          "调节杆Adjustment lever"
+        ],
+        [
+          "18",
+          "阀盖垫圈Sealing ring of bonnet",
+          "38",
+          "阀芯Plug"
+        ],
+        [
+          "19",
+          "垫圈Washer",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "table_index": 8,
+      "n_rows": 18,
+      "n_cols": 2,
+      "first_row": "No. | 名称PartName",
+      "rows": [
+        [
+          "No.",
+          "名称PartName"
+        ],
+        [
+          "",
+          "弹簧Spring"
+        ],
+        [
+          "2",
+          "端盖End cover"
+        ],
+        [
+          "3",
+          "连接螺栓Connecting bolt"
+        ],
+        [
+          "4",
+          "销Pin"
+        ],
+        [
+          "5",
+          "垫圈Washer"
+        ],
+        [
+          "6",
+          "下销Bottom pin"
+        ],
+        [
+          "7",
+          "杠杆Lever"
+        ],
+        [
+          "8",
+          "轴套Shaftset"
+        ],
+        [
+          "9",
+          "阀芯Valve plug"
+        ],
+        [
+          "10",
+          "阀座Valve seat"
+        ],
+        [
+          "11",
+          "阀体Body"
+        ],
+        [
+          "12",
+          "保护罩Protective cover"
+        ],
+        [
+          "13",
+          "弹簧罩Spring cover"
+        ],
+        [
+          "14",
+          "膜盖Diaphragm case"
+        ],
+        [
+          "15",
+          "盘Diaphragm plate"
+        ],
+        [
+          "16",
+          "膜片Diaphragm"
+        ],
+        [
+          "17",
+          "膜盖趴aphragm case"
+        ]
+      ]
+    },
+    {
+      "table_index": 9,
+      "n_rows": 13,
+      "n_cols": 4,
+      "first_row": "No. | 名称PartName | 13 | 端盖End cover",
+      "rows": [
+        [
+          "No.",
+          "名称PartName",
+          "13",
+          "端盖End cover"
+        ],
+        [
+          "I",
+          "阀体Body",
+          "14",
+          "销Pin"
+        ],
+        [
+          "2",
+          "阀座垫厮Sealing ring of valve seat",
+          "15",
+          "连接螺栓Connecting bolt"
+        ],
+        [
+          "3",
+          "阀座Valve seat",
+          "16",
+          "套管Casing"
+        ],
+        [
+          "4",
+          "阀芯Valve plug",
+          "17",
+          "下销Bottom pin"
+        ],
+        [
+          "5",
+          "阀盖垫阳Sealing ring ofbonnet",
+          "18",
+          "轴套Shaftset"
+        ],
+        [
+          "6",
+          "阀杆Valve stem",
+          "19",
+          "滚轮Roller"
+        ],
+        [
+          "7",
+          "弹簧座Spnng seat",
+          "20",
+          "右杠杆Rightlever"
+        ],
+        [
+          "8",
+          "O型圈0-Ring",
+          "21",
+          "左杠杆Leftlever"
+        ],
+        [
+          "9",
+          "弹簧罩Spring cover",
+          "22",
+          "硬密封阀芯Hard-sealing plug"
+        ],
+        [
+          "10",
+          "保护罩Protective cover",
+          "23",
+          "堆焊阀芯Bead-welding plug"
+        ],
+        [
+          "JI",
+          "膜盖Diaphragm case",
+          "24",
+          "堆焊阀座Bead-welding seat"
+        ],
+        [
+          "12",
+          "弹簧Spring",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "table_index": 10,
+      "n_rows": 29,
+      "n_cols": 6,
+      "first_row": " | 名称PartName | 29 | 弹簧座Spring seat | 58 | 阀体Body",
+      "rows": [
+        [
+          "",
+          "名称PartName",
+          "29",
+          "弹簧座Spring seat",
+          "58",
+          "阀体Body"
+        ],
+        [
+          "l",
+          "接头Connect",
+          "30",
+          "膜盖Diaphragm case",
+          "59",
+          "连接螺栓Connecting bolt"
+        ],
+        [
+          "2",
+          "左阀体Leftpilotvalve body",
+          "31",
+          "挡图Block ring",
+          "60",
+          "销Pin"
+        ],
+        [
+          "3",
+          "阀垫Valve cushion",
+          "32",
+          "销Pin",
+          "61",
+          "螺钉Screw"
+        ],
+        [
+          "4",
+          "弹簧Spring",
+          "33",
+          "弹簧罩Spring cover",
+          "62",
+          "套管Casing"
+        ],
+        [
+          "5",
+          "阀芯Plug",
+          "34",
+          "设定弹簧Setting spring",
+          "63",
+          "左杠杆Leftlever"
+        ],
+        [
+          "6",
+          "盘Diaphragm plate",
+          "35",
+          "螺杆Screw",
+          "64",
+          "滚轮Roller"
+        ],
+        [
+          "7",
+          "膜片Diaphragm",
+          "36",
+          "螺母Nut",
+          "65",
+          "右杠杆Rightlever"
+        ],
+        [
+          "8",
+          "垫圉Washer",
+          "37",
+          "垫圈Washer",
+          "66",
+          "轴套Shaftset"
+        ],
+        [
+          "9",
+          "恒节流件Constantthrottle",
+          "38",
+          "保护罩Protective cover",
+          "67",
+          "下销Bo甘om pin"
+        ],
+        [
+          "10",
+          "盖Cover",
+          "39",
+          "销Pin",
+          "68",
+          "安装板Connecting plate"
+        ],
+        [
+          "11",
+          "右阀体Rightpilotvalve body",
+          "40",
+          "垫圈Washer",
+          "69",
+          "端盖End cover"
+        ],
+        [
+          "12",
+          "弹簧Spring",
+          "41",
+          "连接螺栓Connecting bolt",
+          "70",
+          "阀杆Valve stem"
+        ],
+        [
+          "13",
+          "阀垫Valve cushion",
+          "42",
+          "下销Bo甘om pin",
+          "71",
+          "平衡圈Balance ring"
+        ],
+        [
+          "14",
+          "挡板Baffie",
+          "43",
+          "轴套Shaftset",
+          "72",
+          "弹簧Spring"
+        ],
+        [
+          "15",
+          "杠杆Lever",
+          "44",
+          "膜盖Diaphragm case",
+          "73",
+          "挡环Baffle ring"
+        ],
+        [
+          "16",
+          "端盖End cover",
+          "45",
+          "膜片Diaphragm",
+          "74",
+          "法兰Flange"
+        ],
+        [
+          "17",
+          "压圈Press ring",
+          "46",
+          "盘Diaphragm plate",
+          "75",
+          "弹簧座Spring seat"
+        ],
+        [
+          "18",
+          "恒节流件Constantthrottle",
+          "47",
+          "连杆Connecting rod",
+          "76",
+          "弹簧座Spring seat"
+        ],
+        [
+          "19",
+          "喷嘴Nozzle",
+          "48",
+          "垫圈Washer",
+          "77",
+          "下销Bottom pin"
+        ],
+        [
+          "20",
+          "螺套Screw set",
+          "49",
+          "膜盖Diaphragm case",
+          "78",
+          "导套Guide bush"
+        ],
+        [
+          "21",
+          "弹簧Spring",
+          "50",
+          "阀盖Bonnet",
+          "79",
+          "阀杆Valve stem"
+        ],
+        [
+          "22",
+          "连接套Connecting set",
+          "51",
+          "阀盖垫圈Sealing ring ofbonnet",
+          "80",
+          "阀芯Plug"
+        ],
+        [
+          "23",
+          "连杆Connecting rod",
+          "52",
+          "套筒Cage",
+          "81",
+          "平衡圈Balance ring"
+        ],
+        [
+          "24",
+          "销Pin",
+          "53",
+          "阀芯Plug",
+          "82",
+          "导套Guide bush"
+        ],
+        [
+          "25",
+          "膜盖Diaphragm case",
+          "54",
+          "阀座Valve seat",
+          "83",
+          "阀座Valve seat"
+        ],
+        [
+          "26",
+          "腴片Diaphragm",
+          "55",
+          "阀座垫圈Sealing ring ofseat",
+          "84",
+          "螺钉Screw"
+        ],
+        [
+          "27",
+          "盘Diaphragm plate",
+          "56",
+          "阀垫Valve cushion",
+          "85",
+          "阀垫Valve cushion"
+        ],
+        [
+          "28",
+          "垫陨Washer",
+          "57",
+          "压圈Press ring",
+          "86",
+          "压圈Press ring"
+        ]
+      ]
+    },
+    {
+      "table_index": 11,
+      "n_rows": 15,
+      "n_cols": 4,
+      "first_row": "No. | 名称PartName | 15 | 保护罩Protective cover",
+      "rows": [
+        [
+          "No.",
+          "名称PartName",
+          "15",
+          "保护罩Protective cover"
+        ],
+        [
+          "l",
+          "设定弹簧Setting spring",
+          "16",
+          "螺杆Screw"
+        ],
+        [
+          "2",
+          "弹簧罩Spring cover",
+          "17",
+          "箭头Arrow"
+        ],
+        [
+          "3",
+          "膜盖Diaphragm case",
+          "18",
+          "弹簧座Spring seat"
+        ],
+        [
+          "4",
+          "盘Diaphragm plate",
+          "19",
+          "阀杆Valve stem"
+        ],
+        [
+          "5",
+          "膜片Diaphragm",
+          "20",
+          "导套Guide bush"
+        ],
+        [
+          "6",
+          "阀盖Bonnet",
+          "21",
+          "垫块Cushion block"
+        ],
+        [
+          "7",
+          "阀盖垫阳Sealing ring ofbonnet",
+          "22",
+          "阀芯Valve plug"
+        ],
+        [
+          "8",
+          "导套Guide bush",
+          "23",
+          "膜盖Diaphragm case"
+        ],
+        [
+          "9",
+          "套筒Cage",
+          "24",
+          "接管Connecting pipe"
+        ],
+        [
+          "10",
+          "销Pin",
+          "25",
+          "导压管Pressure pipe"
+        ],
+        [
+          "11",
+          "阀垫Valve cushion",
+          "26",
+          "膜盖Diaphragm case"
+        ],
+        [
+          "12",
+          "阀座Valve seat",
+          "27",
+          "盘Diaphragm plate"
+        ],
+        [
+          "13",
+          "阀座垫圈Sealing nng ofvalve seat",
+          "28",
+          "膜片Diaphragm"
+        ],
+        [
+          "14",
+          "阀体Body",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "table_index": 12,
+      "n_rows": 11,
+      "n_cols": 4,
+      "first_row": "No. | 名称PartName | 11 | 阀芯Valve plug",
+      "rows": [
+        [
+          "No.",
+          "名称PartName",
+          "11",
+          "阀芯Valve plug"
+        ],
+        [
+          "1",
+          "弹簧Spring",
+          "12",
+          "阀座Valve seat"
+        ],
+        [
+          "2",
+          "端盖End cover",
+          "13",
+          "阀座垫圈Sealing ring ofvalve seat"
+        ],
+        [
+          "3",
+          "连接螺栓Connecting bolt",
+          "14",
+          "阀体Body"
+        ],
+        [
+          "4",
+          "销Pin",
+          "15",
+          "保护罩Protective cover"
+        ],
+        [
+          "5",
+          "垫阳Washer",
+          "16",
+          "弹簧罩Spring cover"
+        ],
+        [
+          "6",
+          "下销Bottom pin",
+          "17",
+          "O型圉0-Ring"
+        ],
+        [
+          "7",
+          "杠杆Lever",
+          "18",
+          "膜盖Diaphragm case"
+        ],
+        [
+          "8",
+          "轴套Shaftset",
+          "19",
+          "盘Diaphragm plate"
+        ],
+        [
+          "9",
+          "阀杆Spring stem",
+          "20",
+          "膜片Diaphragm"
+        ],
+        [
+          "10",
+          "阀盖垫圈Sealing ring ofbonnet",
+          "21",
+          "膜盖Diaphragm case"
+        ]
+      ]
+    },
+    {
+      "table_index": 13,
+      "n_rows": 7,
+      "n_cols": 2,
+      "first_row": "No. | 名称PartName",
+      "rows": [
+        [
+          "No.",
+          "名称PartName"
+        ],
+        [
+          "",
+          "上模盖Upper diaphra郪n case"
+        ],
+        [
+          "2",
+          "膜片Diaphragm"
+        ],
+        [
+          "3盘",
+          "Diaphragm plate"
+        ],
+        [
+          "4",
+          "下膜盖Lower diaphragm case"
+        ],
+        [
+          "5",
+          "推杆Push stem"
+        ],
+        [
+          "6",
+          "导套Guiding bush"
+        ]
+      ]
+    },
+    {
+      "table_index": 14,
+      "n_rows": 7,
+      "n_cols": 2,
+      "first_row": "No. | 名称PartName",
+      "rows": [
+        [
+          "No.",
+          "名称PartName"
+        ],
+        [
+          "",
+          "上盖Upper case"
+        ],
+        [
+          "2",
+          "波纹管组件Bellow assembly"
+        ],
+        [
+          "3",
+          "推杆Push stem"
+        ],
+        [
+          "4",
+          "下盖Lower case"
+        ],
+        [
+          "5",
+          "导套Guiding bush"
+        ],
+        [
+          "6",
+          "卡簧Circlip"
+        ]
+      ]
+    },
+    {
+      "table_index": 15,
+      "n_rows": 6,
+      "n_cols": 2,
+      "first_row": "O\nN | 名称PartName",
+      "rows": [
+        [
+          "O\nN",
+          "名称PartName"
+        ],
+        [
+          "l",
+          "螺塞Screw plug"
+        ],
+        [
+          "2",
+          "密封图Sealing ring"
+        ],
+        [
+          "3",
+          "接头Joint"
+        ],
+        [
+          "4",
+          "隔离罐Isolation tank"
+        ],
+        [
+          "5",
+          "接头Joint"
+        ]
+      ]
+    },
+    {
+      "table_index": 16,
+      "n_rows": 4,
+      "n_cols": 2,
+      "first_row": "N | 名称PartName",
+      "rows": [
+        [
+          "N",
+          "名称PartName"
+        ],
+        [
+          "l",
+          "密封圈Sealing ring"
+        ],
+        [
+          "2",
+          "复合接头Composite-joint"
+        ],
+        [
+          "3",
+          "排气寒Ventplug"
+        ]
+      ]
+    },
+    {
+      "table_index": 17,
+      "n_rows": 6,
+      "n_cols": 2,
+      "first_row": "O | 名称PartName",
+      "rows": [
+        [
+          "O",
+          "名称PartName"
+        ],
+        [
+          "l",
+          "缸盖Cylinder cover"
+        ],
+        [
+          "2",
+          "活塞Piston"
+        ],
+        [
+          "3",
+          "气缸Cylinder"
+        ],
+        [
+          "4",
+          "压垫Press pad"
+        ],
+        [
+          "5",
+          "下盖Lower case"
+        ]
+      ]
+    },
+    {
+      "table_index": 18,
+      "n_rows": 12,
+      "n_cols": 8,
+      "first_row": "阀体Body | 材质Material | ZG230-450/A216-WCB, A352-LCB | ZG230-450/A216-WCB, A352-LCB | ZG230-450/A216-WCB, A352-LCB | ZG230-450/A216-WCB, A352-LCB | ZG230-450/A216-WCB, A352-LCB | ZG230-450/A216-WCB, A352-LCB",
+      "rows": [
+        [
+          "阀体Body",
+          "材质Material",
+          "ZG230-450/A216-WCB, A352-LCB",
+          "ZG230-450/A216-WCB, A352-LCB",
+          "ZG230-450/A216-WCB, A352-LCB",
+          "ZG230-450/A216-WCB, A352-LCB",
+          "ZG230-450/A216-WCB, A352-LCB",
+          "ZG230-450/A216-WCB, A352-LCB"
+        ],
+        [
+          "阀芯\nPlug",
+          "材质Material",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316"
+        ],
+        [
+          "阀芯\nPlug",
+          "处理Treatment",
+          "NBR",
+          "FKM",
+          "SR",
+          "EPDM",
+          "PTFE",
+          "SF"
+        ],
+        [
+          "阀座\nSeatRing",
+          "材质Material",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316"
+        ],
+        [
+          "阀座\nSeatRing",
+          "处理Treatment",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "SF"
+        ],
+        [
+          "导向套／套筒\nGmde/Cage",
+          "材质Material",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316"
+        ],
+        [
+          "导向套／套筒\nGmde/Cage",
+          "处理Treatment",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "垫圈\nGasket",
+          "材质Material",
+          "304/316＋石墨\n304/316+PTFE",
+          "304/316＋石墨\n304/316+PTFE",
+          "304/316＋石墨\n304/316+PTFE",
+          "304/316＋石墨\n304/316+PTFE",
+          "304/316＋石墨\n304/316+PTFE",
+          "304/316＋石墨"
+        ],
+        [
+          "阀座允许泄漏量\nSeatLeakage",
+          "ANSI",
+          "Class VI",
+          "Class VI",
+          "Class VI",
+          "Class VI",
+          "Class Vl",
+          "Cvx0.003"
+        ],
+        [
+          "阀座允许泄漏量\nSeatLeakage",
+          "Rated Cvx",
+          "Bubble-tight",
+          "Bubble-tight",
+          "Bubble-tight",
+          "Bubble-tight",
+          "Bubble-tight",
+          "Cvx0.003"
+        ],
+        [
+          "使用温度\nOperatmg Temperature °C",
+          "WCBBody",
+          "-5~+82",
+          "-5~+120",
+          "-5~+85",
+          "-5~+150",
+          "-5~+115",
+          "-5~+300"
+        ],
+        [
+          "使用温度\nOperatmg Temperature °C",
+          "LCB Body",
+          "-29~+82",
+          "-8~+120",
+          "-29~+85",
+          "-29~+115",
+          "-29~+150",
+          "-29~+300"
+        ]
+      ]
+    },
+    {
+      "table_index": 19,
+      "n_rows": 11,
+      "n_cols": 8,
+      "first_row": "阀体 Body | 材质Material | ZGOCr I SNi9/A35 l -CF8, ZGOCr l 8Nil 2Mo2Ti/A35 l -CF8M*® | ZGOCr I SNi9/A35 l -CF8, ZGOCr l 8Nil 2Mo2Ti/A35 l -CF8M*® | ZGOCr I SNi9/A35 l -CF8, ZGOCr l 8Nil 2Mo2Ti/A35 l -CF8M*® | ZGOCr I SNi9/A35 l -CF8, ZGOCr l 8Nil 2Mo2Ti/A35 l -CF8M*® | ZGOCr I SNi9/A35 l -CF8, ZGOCr l ",
+      "rows": [
+        [
+          "阀体 Body",
+          "材质Material",
+          "ZGOCr I SNi9/A35 l -CF8, ZGOCr l 8Nil 2Mo2Ti/A35 l -CF8M*®",
+          "ZGOCr I SNi9/A35 l -CF8, ZGOCr l 8Nil 2Mo2Ti/A35 l -CF8M*®",
+          "ZGOCr I SNi9/A35 l -CF8, ZGOCr l 8Nil 2Mo2Ti/A35 l -CF8M*®",
+          "ZGOCr I SNi9/A35 l -CF8, ZGOCr l 8Nil 2Mo2Ti/A35 l -CF8M*®",
+          "ZGOCr I SNi9/A35 l -CF8, ZGOCr l 8Nil 2Mo2Ti/A35 l -CF8M*®",
+          "ZGOCr I SNi9/A35 l -CF8, ZGOCr l 8Nil 2Mo2Ti/A35 l -CF8M*®"
+        ],
+        [
+          "阀芯\nPlug",
+          "材质Material",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316"
+        ],
+        [
+          "阀芯\nPlug",
+          "处理Treatment",
+          "NBR",
+          "FKM",
+          "SR",
+          "EPDM",
+          "PTFE",
+          "SF"
+        ],
+        [
+          "阀座\nSeatRing",
+          "材质Material",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316"
+        ],
+        [
+          "阀座\nSeatRing",
+          "处理Treatment",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "SF"
+        ],
+        [
+          "导向套／套筒\nGuide/Cage",
+          "材质Material",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316",
+          "304/316"
+        ],
+        [
+          "导向套／套筒\nGuide/Cage",
+          "处理Treatment",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "垫圈\nGasket",
+          "材质Material",
+          "304/316＋石墨\n304/316+PTFE",
+          "304/316＋石墨\n304/316+PTFE",
+          "304/316＋石墨\n304/316+PTFE",
+          "304/316＋石墨\n304/316+PTFE",
+          "304/316＋石墨\n304/316+PTFE",
+          "304/316＋石墨"
+        ],
+        [
+          "阀座允许泄漏量\nSeatLeakage",
+          "ANSI",
+          "Class VI",
+          "Class VI",
+          "Class VI",
+          "Class VI",
+          "Class VI",
+          "Cvx0.003"
+        ],
+        [
+          "阀座允许泄漏量\nSeatLeakage",
+          "Rated Cvx",
+          "Bubble-tight",
+          "Bubble-tight",
+          "Bubble-tight",
+          "Bubble-tight",
+          "Bubble-tight",
+          "Cvx0.003"
+        ],
+        [
+          "使用温度＊心Operating Temperature'C",
+          "使用温度＊心Operating Temperature'C",
+          "-29~+82",
+          "-8~+120",
+          "-48~+85",
+          "-38~+115",
+          "-40~+150",
+          "-29~+300"
+        ]
+      ]
+    },
+    {
+      "table_index": 20,
+      "n_rows": 22,
+      "n_cols": 13,
+      "first_row": "执行机构型号\nActuator type | 弹簧型号\nSpring type | 调压范围 Spring range (kPa G) | 不同阀芯下的许用压差(MPa)\nPerrmtted difference pressure ofdifferentvalve plug (MPa) | 不同阀芯下的许用压差(MPa)\nPerrmtted difference pressure ofdifferentvalve plug (MPa) | 不同阀芯下的许用压差(MPa)\nPerrmtted difference pressure ofdifferentvalve plug (MPa) | 不同",
+      "rows": [
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "不同阀芯下的许用压差(MPa)\nPerrmtted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPerrmtted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPerrmtted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPerrmtted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPerrmtted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPerrmtted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPerrmtted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPerrmtted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPerrmtted difference pressure ofdifferentvalve plug (MPa)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "2",
+          "4",
+          "6",
+          "8",
+          "10",
+          "12",
+          "14",
+          "16",
+          "18",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "01.01.00\n04.01.00",
+          "HSOOS",
+          "150~450",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.8",
+          "3.8",
+          "2.7",
+          "2.0",
+          "1.2",
+          "0.8",
+          "2500"
+        ],
+        [
+          "01.01.00\n04.01.00",
+          "HS006",
+          "200~610",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.1",
+          "3.6",
+          "2.5",
+          "1.6",
+          "1.0",
+          "2500"
+        ],
+        [
+          "01.01.00\n04.01.00",
+          "HS007",
+          "280~850",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.8",
+          "4.8",
+          "3.5",
+          "2.2",
+          "1.5",
+          "2500"
+        ],
+        [
+          "01.02.00\n04.02.00",
+          "HS004",
+          "50~150",
+          "6.5",
+          "6.5",
+          "6.5",
+          "4.0",
+          "2.5",
+          "1.8",
+          "1.3",
+          "0.8",
+          "0.5",
+          "2000"
+        ],
+        [
+          "01.02.00\n04.02.00",
+          "HS005",
+          "78~230",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.8",
+          "3.8",
+          "2.7",
+          "2.0",
+          "1.2",
+          "0.8",
+          "2000"
+        ],
+        [
+          "01.02.00\n04.02.00",
+          "HS006",
+          "110~310",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.1",
+          "3.6",
+          "2.5",
+          "1.6",
+          "1.0",
+          "2000"
+        ],
+        [
+          "01.02.00\n04.02.00",
+          "HS007",
+          "140~430",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.8",
+          "4.8",
+          "3.5",
+          "2.2",
+          "1.5",
+          "2000"
+        ],
+        [
+          "01.03.00\n04.03.00",
+          "HSOOl",
+          "7~21",
+          "1.5",
+          "1.5",
+          "1.0",
+          "1.0",
+          "0.7",
+          "0.4",
+          "0.4",
+          "0.2",
+          "0.2",
+          "1500"
+        ],
+        [
+          "01.03.00\n04.03.00",
+          "HS002",
+          "14~40",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.3",
+          "0.9",
+          "0.7",
+          "0.4",
+          "0.3",
+          "1500"
+        ],
+        [
+          "01.03.00\n04.03.00",
+          "HS003",
+          "20~60",
+          "1.8",
+          "1.8",
+          "1.8",
+          "1.8",
+          "1.8",
+          "1.4",
+          "1.0",
+          "0.6",
+          "0.4",
+          "1500"
+        ],
+        [
+          "01.03.00\n04.03.00",
+          "HS004",
+          "28~85",
+          "2.5",
+          "2.5",
+          "2.5",
+          "2.5",
+          "2.5",
+          "1.8",
+          "1.3",
+          "0.8",
+          "0.5",
+          "1500"
+        ],
+        [
+          "01.03.00\n04.03.00",
+          "HS005",
+          "40~120",
+          "3.8",
+          "3.8",
+          "3.8",
+          "3.8",
+          "3.8",
+          "2.5",
+          "2.0",
+          "1.2",
+          "0.8",
+          "1500"
+        ],
+        [
+          "01.03.00\n04.03.00",
+          "HS006",
+          "55~170",
+          "3.8",
+          "3.8",
+          "3.8",
+          "3.8",
+          "3.8",
+          "3.6",
+          "2.5",
+          "l.6",
+          "1.0",
+          "1500"
+        ],
+        [
+          "01.04.00\n04.04.00",
+          "HSOOl",
+          "3~8",
+          "1.0",
+          "1.0",
+          "1.0",
+          "1.0",
+          "0.7",
+          "0.4",
+          "0.4",
+          "0.2",
+          "0.2",
+          "800"
+        ],
+        [
+          "01.04.00\n04.04.00",
+          "HS002",
+          "5~17",
+          "1.0",
+          "1.0",
+          "1.0",
+          "1.0",
+          "1.0",
+          "0.9",
+          "0.7",
+          "0.4",
+          "0.3",
+          "800"
+        ],
+        [
+          "01.04.00\n04.04.00",
+          "HS003",
+          "8~25",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.4",
+          "1.0",
+          "0.6",
+          "0.4",
+          "800"
+        ],
+        [
+          "01.04.00\n04.04.00",
+          "HS004",
+          "11~34",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.3",
+          "0.8",
+          "0.5",
+          "800"
+        ],
+        [
+          "01.09.00",
+          "HS007",
+          "500~1500",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.8",
+          "4.8",
+          "3.5",
+          "2.2",
+          "1.5",
+          "3500"
+        ],
+        [
+          "01.10.00",
+          "HS007",
+          "1000~3000",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.8",
+          "4.8",
+          "3.5",
+          "2.2",
+          "1.5",
+          "3500"
+        ]
+      ]
+    },
+    {
+      "table_index": 21,
+      "n_rows": 7,
+      "n_cols": 13,
+      "first_row": "执行机构型号\nActuator type | 弹簧型号\nSpring type | 调压范围 Spring range (kPa G) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 不同",
+      "rows": [
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "2",
+          "4",
+          "6",
+          "8",
+          "10",
+          "12",
+          "14",
+          "16",
+          "18",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "01.12.00",
+          "HSOOl",
+          "8~25",
+          "0.8",
+          "0.8",
+          "0.8",
+          "0.8",
+          "0.5",
+          "0.4",
+          "0.3",
+          "0.2",
+          "0.1",
+          "450"
+        ],
+        [
+          "01.12.00",
+          "HS002",
+          "16~50",
+          "0.8",
+          "0.8",
+          "0.8",
+          "0.8",
+          "0.8",
+          "0.7",
+          "0.6",
+          "0.4",
+          "0.2",
+          "450"
+        ],
+        [
+          "01.13.00",
+          "HSOOl",
+          "3~9",
+          "0.5",
+          "0.5",
+          "0.5",
+          "0.5",
+          "0.5",
+          "0.4",
+          "0.3",
+          "0.2",
+          "0.1",
+          "350"
+        ],
+        [
+          "01.13.00",
+          "HS002",
+          "6~18",
+          "0.5",
+          "0.5",
+          "0.5",
+          "0.5",
+          "0.5",
+          "0.5",
+          "0.5",
+          "0.4",
+          "0.2",
+          "350"
+        ]
+      ]
+    },
+    {
+      "table_index": 22,
+      "n_rows": 12,
+      "n_cols": 13,
+      "first_row": "执行机构型号\nActuator type | 弹簧型号\nSpringtype | 调压范围 Spring range (kPa G) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa) | 不同阀芯下的",
+      "rows": [
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "阀芯尺寸Plugsize (mm)",
+          "阀芯尺寸Plugsize (mm)",
+          "阀芯尺寸Plugsize (mm)",
+          "阀芯尺寸Plugsize (mm)",
+          "阀芯尺寸Plugsize (mm)",
+          "阀芯尺寸Plugsize (mm)",
+          "阀芯尺寸Plugsize (mm)",
+          "阀芯尺寸Plugsize (mm)",
+          "阀芯尺寸Plugsize (mm)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "2",
+          "4",
+          "6",
+          "8",
+          "10",
+          "12",
+          "14",
+          "16",
+          "18",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "03.01.00",
+          "HS007",
+          "650~2000",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.8",
+          "4.1",
+          "3.0",
+          "1.8",
+          "1.2",
+          "4500"
+        ],
+        [
+          "03.02.00",
+          "HS007",
+          "265~800",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.8",
+          "4.1",
+          "3.0",
+          "1.8",
+          "1.2",
+          "3000"
+        ],
+        [
+          "03.03.00",
+          "HS007",
+          "100~320",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.8",
+          "4.1",
+          "3.0",
+          "1.8",
+          "1.2",
+          "1500"
+        ],
+        [
+          "03.03.00",
+          "HS006",
+          "76~230",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "4.5",
+          "3.0",
+          "2.2",
+          "1.3",
+          "0.9",
+          "1200"
+        ],
+        [
+          "03.03.00",
+          "HS005",
+          "60~180",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.8",
+          "4.1",
+          "3.0",
+          "1.8",
+          "1.2",
+          "1200"
+        ],
+        [
+          "03.04.00",
+          "HS004",
+          "25~75",
+          "6.5",
+          "6.5",
+          "6.0",
+          "3.4",
+          "2.2",
+          "1.5",
+          "1.1",
+          "0.7",
+          "0.5",
+          "800"
+        ],
+        [
+          "03.04.00",
+          "HS005",
+          "35~110",
+          "6.5",
+          "6.5",
+          "6.0",
+          "5.1",
+          "3.3",
+          "2.2",
+          "1.6",
+          "1.0",
+          "0.7",
+          "800"
+        ],
+        [
+          "03.04.00",
+          "HS006",
+          "50~150",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "4.5",
+          "3.0",
+          "2.2",
+          "1.3",
+          "0.9",
+          "800"
+        ],
+        [
+          "03.04.00",
+          "HS007",
+          "65~200",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.8",
+          "4.1",
+          "3.0",
+          "1.8",
+          "1.2",
+          "800"
+        ]
+      ]
+    },
+    {
+      "table_index": 23,
+      "n_rows": 22,
+      "n_cols": 6,
+      "first_row": "执行机构型号\nActuator type | 弹簧型号\nSpringtype | 调压范围 Spring range (kPa G) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa) | 执行机构耐压 Max. actuator pressure\n(kPa G)",
+      "rows": [
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "阀芯尺寸Plugsize (mm)",
+          "阀芯尺寸Plugsize (mm)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "40",
+          "50",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "01.01.00\n04.01.00",
+          "HSOOS",
+          "150~450",
+          "1.3",
+          "1.3",
+          "2500"
+        ],
+        [
+          "01.01.00\n04.01.00",
+          "HS006",
+          "200~610",
+          "1.7",
+          "1.7",
+          "2500"
+        ],
+        [
+          "01.01.00\n04.01.00",
+          "HS007",
+          "280~850",
+          "2.4",
+          "2.4",
+          "2500"
+        ],
+        [
+          "01.02.00\n04.02.00",
+          "HS004",
+          "50~150",
+          "0.9",
+          "0.9",
+          "2000"
+        ],
+        [
+          "01.02.00\n04.02.00",
+          "HSOOS",
+          "78~230",
+          "1.3",
+          "1.3",
+          "2000"
+        ],
+        [
+          "01.02.00\n04.02.00",
+          "HS006",
+          "110~310",
+          "1.7",
+          "1.7",
+          "2000"
+        ],
+        [
+          "01.02.00\n04.02.00",
+          "HS007",
+          "140~430",
+          "2.4",
+          "2.4",
+          "2000"
+        ],
+        [
+          "01.03.00\n04.03.00",
+          "HSOOl",
+          "7~21",
+          "0.3",
+          "0.3",
+          "1500"
+        ],
+        [
+          "01.03.00\n04.03.00",
+          "HS002",
+          "14~40",
+          "0.5",
+          "0.5",
+          "1500"
+        ],
+        [
+          "01.03.00\n04.03.00",
+          "HS003",
+          "20~60",
+          "0.7",
+          "0.7",
+          "1500"
+        ],
+        [
+          "01.03.00\n04.03.00",
+          "HS004",
+          "28~85",
+          "0.9",
+          "0.9",
+          "1500"
+        ],
+        [
+          "01.03.00\n04.03.00",
+          "HS005",
+          "40~120",
+          "1.3",
+          "1.3",
+          "1500"
+        ],
+        [
+          "01.03.00\n04.03.00",
+          "HS006",
+          "55~170",
+          "1.7",
+          "1.7",
+          "1500"
+        ],
+        [
+          "01.04.00\n04.04.00",
+          "HSOOI",
+          "3~8",
+          "0.3",
+          "0.3",
+          "800"
+        ],
+        [
+          "01.04.00\n04.04.00",
+          "HS002",
+          "5~17",
+          "0.5",
+          "0.5",
+          "800"
+        ],
+        [
+          "01.04.00\n04.04.00",
+          "HS003",
+          "8~25",
+          "0.7",
+          "0.7",
+          "800"
+        ],
+        [
+          "01.04.00\n04.04.00",
+          "HS004",
+          "11~34",
+          "0.9",
+          "0.9",
+          "800"
+        ],
+        [
+          "01.09.00",
+          "HS007",
+          "500~1500",
+          "2.4",
+          "2.0",
+          "4500"
+        ],
+        [
+          "01.10.00",
+          "HS007",
+          "1000~3000",
+          "2.4",
+          "2.0",
+          "4500"
+        ]
+      ]
+    },
+    {
+      "table_index": 24,
+      "n_rows": 37,
+      "n_cols": 8,
+      "first_row": "执行机构型号\nActuator type | 弹簧型号\nSpring type | 调压范围 Spring range (kPa G) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa) | 不同阀芯下",
+      "rows": [
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "65",
+          "80",
+          "80",
+          "100",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "01.05.00\n04.05.00",
+          "HS033",
+          "120~360",
+          "1.0",
+          "1.0",
+          "1.0",
+          "1.0",
+          "2000"
+        ],
+        [
+          "01.05.00\n04.05.00",
+          "HS034",
+          "165~500",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "2000"
+        ],
+        [
+          "01.05.00\n04.05.00",
+          "HS032+034",
+          "270~820",
+          "2.4",
+          "2.4",
+          "2.4",
+          "2.4",
+          "2000"
+        ],
+        [
+          "01.06.00\n04.06.00",
+          "HS031",
+          "33~100",
+          "0.6",
+          "0.6",
+          "0.6",
+          "0.6",
+          "1500"
+        ],
+        [
+          "01.06.00\n04.06.00",
+          "HS033",
+          "65~190",
+          "1.0",
+          "1.0",
+          "1.0",
+          "1.0",
+          "1500"
+        ],
+        [
+          "01.06.00\n04.06.00",
+          "HS034",
+          "90~270",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.4",
+          "1500"
+        ],
+        [
+          "01.06.00\n04.06.00",
+          "HS032+034",
+          "150~450",
+          "2.4",
+          "2.4",
+          "2.4",
+          "2.4",
+          "1500"
+        ],
+        [
+          "01.07.00\n04.07.00",
+          "HS029",
+          "7~21",
+          "0.3",
+          "0.3",
+          "0.3",
+          "0.3",
+          "800"
+        ],
+        [
+          "01.07.00\n04.07.00",
+          "HS030",
+          "10~30",
+          "0.4",
+          "0.4",
+          "0.4",
+          "0.4",
+          "800"
+        ],
+        [
+          "01.07.00\n04.07.00",
+          "HS031",
+          "14~42",
+          "0.6",
+          "0.6",
+          "0.6",
+          "0.6",
+          "800"
+        ],
+        [
+          "01.07.00\n04.07.00",
+          "HS033",
+          "25~75",
+          "1.0",
+          "1.0",
+          "1.0",
+          "1.0",
+          "800"
+        ],
+        [
+          "01.07.00\n04.07.00",
+          "HS034",
+          "36~110",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "800"
+        ],
+        [
+          "01.08.00\n04.08.00",
+          "HS029",
+          "3~10",
+          "0.3",
+          "0.3",
+          "0.3",
+          "0.3",
+          "500"
+        ],
+        [
+          "01.08.00\n04.08.00",
+          "HS030",
+          "5~15",
+          "0.4",
+          "0.4",
+          "0.4",
+          "0.4",
+          "500"
+        ],
+        [
+          "01.08.00\n04.08.00",
+          "HS031",
+          "7~21",
+          "0.6",
+          "0.6",
+          "0.6",
+          "0.6",
+          "500"
+        ],
+        [
+          "01.08.00\n04.08.00",
+          "HS033",
+          "13~39",
+          "1.0",
+          "1.0",
+          "1.0",
+          "1.0",
+          "500"
+        ],
+        [
+          "01.11.00",
+          "HS032+034",
+          "600~1800",
+          "2.4",
+          "2.4",
+          "2.4",
+          "2.4",
+          "3500"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve seat(MPa)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "150",
+          "150",
+          "200",
+          "200",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "01.15.00\n04.15.00",
+          "HS036",
+          "65~195",
+          "0.35",
+          "0.35",
+          "0.35",
+          "0.35",
+          "2000"
+        ],
+        [
+          "01.15.00\n04.15.00",
+          "HS037",
+          "130~390",
+          "0.7",
+          "0.7",
+          "0.7",
+          "0.7",
+          "2000"
+        ],
+        [
+          "01.15.00\n04.15.00",
+          "HS038",
+          "260~780",
+          "1.4",
+          "1.4",
+          "1.4",
+          "1.4",
+          "2000"
+        ],
+        [
+          "01.16.00\n04.16.00",
+          "HS035",
+          "17~51",
+          "0.18",
+          "0.18",
+          "0.18",
+          "0.18",
+          "1500"
+        ],
+        [
+          "01.16.00\n04.16.00",
+          "HS036",
+          "35~105",
+          "0.35",
+          "0.35",
+          "0.35",
+          "0.35",
+          "1500"
+        ],
+        [
+          "01.16.00\n04.16.00",
+          "HS037",
+          "70~210",
+          "0.7",
+          "0.7",
+          "0.7",
+          "0.7",
+          "1500"
+        ],
+        [
+          "01.16.00\n04.16.00",
+          "HS038",
+          "140~420",
+          "1.4",
+          "1.4",
+          "1.4",
+          "1.4",
+          "1500"
+        ],
+        [
+          "01.17.00\n04.17.00",
+          "HS035",
+          "7~21",
+          "0.18",
+          "0.18",
+          "0.18",
+          "0.18",
+          "800"
+        ],
+        [
+          "01.17.00\n04.17.00",
+          "HS036",
+          "14~42",
+          "0.35",
+          "0.35",
+          "0.35",
+          "0.35",
+          "800"
+        ],
+        [
+          "01.17.00\n04.17.00",
+          "HS037",
+          "28~84",
+          "0.7",
+          "0.7",
+          "0.7",
+          "0.7",
+          "800"
+        ],
+        [
+          "01.17.00\n04.17.00",
+          "HS038",
+          "56~168",
+          "1.4",
+          "1.4",
+          "1.4",
+          "1.4",
+          "800"
+        ],
+        [
+          "01.18.00\n04.18.00",
+          "HS035",
+          "3.5~11",
+          "0.18",
+          "0.18",
+          "0.18",
+          "0.18",
+          "500"
+        ],
+        [
+          "01.18.00\n04.18.00",
+          "HS036",
+          "7~21",
+          "0.35",
+          "0.35",
+          "0.35",
+          "0.35",
+          "500"
+        ],
+        [
+          "01.18.00\n04.18.00",
+          "HS037",
+          "14~42",
+          "0.7",
+          "0.7",
+          "0.7",
+          "0.7",
+          "500"
+        ]
+      ]
+    },
+    {
+      "table_index": 25,
+      "n_rows": 14,
+      "n_cols": 11,
+      "first_row": "执行机构型号\nActuator type | 弹簧型号\nSpring type | 调压范围 Spring range (kPa G) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 不同",
+      "rows": [
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "40",
+          "50",
+          "65",
+          "80",
+          "JOO",
+          "150",
+          "200",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "01.12.00",
+          "HSOOl",
+          "8~25",
+          "0.3",
+          "0.3",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "450"
+        ],
+        [
+          "01.12.00",
+          "HS002",
+          "16~50",
+          "0.5",
+          "0.5",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "450"
+        ],
+        [
+          "01.13.00",
+          "HSOOI",
+          "3~9",
+          "0.3",
+          "0.3",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "350"
+        ],
+        [
+          "01.13.00",
+          "HS002",
+          "6~18",
+          "0.5",
+          "0.5",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "350"
+        ],
+        [
+          "01.14.00",
+          "HS029",
+          "3~10",
+          "",
+          "",
+          "0.3",
+          "0.3",
+          "0.3",
+          "",
+          "",
+          "300"
+        ],
+        [
+          "01.14.00",
+          "HS030",
+          "5~15",
+          "",
+          "",
+          "0.4",
+          "0.4",
+          "0.4",
+          "",
+          "",
+          "300"
+        ],
+        [
+          "01.14.00",
+          "HS031",
+          "7~21",
+          "",
+          "",
+          "0.6",
+          "0.6",
+          "0.6",
+          "",
+          "",
+          "300"
+        ],
+        [
+          "01.14.00",
+          "HS032",
+          "13~39",
+          "",
+          "",
+          "1.0",
+          "1.0",
+          "1.0",
+          "",
+          "",
+          "300"
+        ],
+        [
+          "01.19.00",
+          "HS035",
+          "3.5~11",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "0.18",
+          "0.18",
+          "300"
+        ],
+        [
+          "01.19.00",
+          "HS036",
+          "7~21",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "0.35",
+          "0.35",
+          "300"
+        ],
+        [
+          "01.19.00",
+          "HS037",
+          "14~42",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "0.7",
+          "0.7",
+          "300"
+        ]
+      ]
+    },
+    {
+      "table_index": 26,
+      "n_rows": 14,
+      "n_cols": 6,
+      "first_row": "执行机构型号\nActuator type | 弹簧型号\nSpring type | 调压范围 Spring range (kPa G) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 执行机构耐压 Max. actuator pressure\n(kPa G)",
+      "rows": [
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "40",
+          "50",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "03.01.00",
+          "HS007",
+          "650~2000",
+          "2.4",
+          "2.4",
+          "4500"
+        ],
+        [
+          "03.02.00",
+          "HS007",
+          "265~800",
+          "2.4",
+          "2.4",
+          "3000"
+        ],
+        [
+          "03.02.00",
+          "HS006",
+          "180~560",
+          "1.7",
+          "1.7",
+          "3000"
+        ],
+        [
+          "03.03.00",
+          "HS007",
+          "100~320",
+          "2.4",
+          "2.4",
+          "1500"
+        ],
+        [
+          "03.03.00",
+          "HS006",
+          "76~230",
+          "1.7",
+          "1.7",
+          "1500"
+        ],
+        [
+          "03.03.00",
+          "HS005",
+          "60~180",
+          "1.3",
+          "1.3",
+          "1500"
+        ],
+        [
+          "03.04.00",
+          "HS002",
+          "12~36",
+          "0.7",
+          "0.7",
+          "800"
+        ],
+        [
+          "03.04.00",
+          "HS004",
+          "25~75",
+          "0.9",
+          "0.9",
+          "800"
+        ],
+        [
+          "03.04.00",
+          "HS005",
+          "35~110",
+          "1.3",
+          "1.3",
+          "800"
+        ],
+        [
+          "03.04.00",
+          "HS006",
+          "50~150",
+          "1.7",
+          "1.7",
+          "800"
+        ],
+        [
+          "03.04.00",
+          "HS007",
+          "65~200",
+          "2.4",
+          "2.4",
+          "800"
+        ]
+      ]
+    },
+    {
+      "table_index": 27,
+      "n_rows": 19,
+      "n_cols": 7,
+      "first_row": "执行机构型号\nActuator type | 弹簧型号\nSpringtype | 调压范围 Spring range (kPa G) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 执行机",
+      "rows": [
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "65",
+          "80",
+          "100",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "03.05.00",
+          "HS033",
+          "530~1600",
+          "1.0",
+          "1.0",
+          "1.0",
+          "4500"
+        ],
+        [
+          "03.05.00",
+          "HS034",
+          "720~2200",
+          "1.5",
+          "1.5",
+          "1.5",
+          "4500"
+        ],
+        [
+          "03.05.00",
+          "HS032+034",
+          "1200~3600",
+          "2.4",
+          "2.5",
+          "2.5",
+          "4500"
+        ],
+        [
+          "03.06.00",
+          "HS031",
+          "I 10~330",
+          "0.6",
+          "0.6",
+          "0.6",
+          "3000"
+        ],
+        [
+          "03.06.00",
+          "HS033",
+          "210~630",
+          "1.0",
+          "1.0",
+          "1.0",
+          "3000"
+        ],
+        [
+          "03.06.00",
+          "HS034",
+          "300~900",
+          "1.5",
+          "1.5",
+          "1.5",
+          "3000"
+        ],
+        [
+          "03.06.00",
+          "HS032+034",
+          "480~1450",
+          "2.4",
+          "2.4",
+          "2.4",
+          "3000"
+        ],
+        [
+          "03.07.00",
+          "HS029",
+          "23~69",
+          "0.3",
+          "0.3",
+          "0.3",
+          "800"
+        ],
+        [
+          "03.07.00",
+          "HS030",
+          "35~100",
+          "0.4",
+          "0.4",
+          "0.4",
+          "800"
+        ],
+        [
+          "03.07.00",
+          "HS031",
+          "45~135",
+          "0.6",
+          "0.6",
+          "0.6",
+          "800"
+        ],
+        [
+          "03.07.00",
+          "HS033",
+          "85~250",
+          "1.0",
+          "1.0",
+          "1.0",
+          "800"
+        ],
+        [
+          "03.07.00",
+          "HS034",
+          "120~360",
+          "1.5",
+          "1.5",
+          "1.5",
+          "800"
+        ],
+        [
+          "03.08.00",
+          "HS029",
+          "15~45",
+          "0.3",
+          "0.3",
+          "0.3",
+          "800"
+        ],
+        [
+          "03.08.00",
+          "HS030",
+          "22~66",
+          "0.4",
+          "0.4",
+          "0.4",
+          "800"
+        ],
+        [
+          "03.08.00",
+          "HS031",
+          "31~94",
+          "0.6",
+          "0.6",
+          "0.6",
+          "800"
+        ],
+        [
+          "03.08.00",
+          "HS033",
+          "56~170",
+          "1.0",
+          "1.0",
+          "1.0",
+          "800"
+        ]
+      ]
+    },
+    {
+      "table_index": 28,
+      "n_rows": 17,
+      "n_cols": 6,
+      "first_row": "执行机构型号\nActuator type | 弹簧型号\nSpringtype | 调压范围 Spring range (kPa G) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 执行机构耐压 Max. actuator pressure\n(kPa G)",
+      "rows": [
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "150",
+          "200",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "03.09.00",
+          "HS036",
+          "290~875",
+          "0.35",
+          "0.35",
+          "4500"
+        ],
+        [
+          "03.09.00",
+          "HS037",
+          "580~1750",
+          "0.7",
+          "0.7",
+          "4500"
+        ],
+        [
+          "03.09.00",
+          "HS038",
+          "1160~3500",
+          "1.4",
+          "1.4",
+          "4500"
+        ],
+        [
+          "03.10.00",
+          "HS035",
+          "56~175",
+          "0.18",
+          "0.18",
+          "3000"
+        ],
+        [
+          "03.10.00",
+          "HS036",
+          "112~350",
+          "0.35",
+          "0.35",
+          "3000"
+        ],
+        [
+          "03.10.00",
+          "HS037",
+          "225~700",
+          "0.7",
+          "0.7",
+          "3000"
+        ],
+        [
+          "03.10.00",
+          "HS038",
+          "450~1400",
+          "1.4",
+          "1.4",
+          "3000"
+        ],
+        [
+          "03.11.00",
+          "HS035",
+          "23~71",
+          "0.18",
+          "0.18",
+          "800"
+        ],
+        [
+          "03.11.00",
+          "HS036",
+          "47~142",
+          "0.35",
+          "0.35",
+          "800"
+        ],
+        [
+          "03.11.00",
+          "HS037",
+          "95~285",
+          "0.7",
+          "0.7",
+          "800"
+        ],
+        [
+          "03.11.00",
+          "HS038",
+          "190~570",
+          "1.4",
+          "1.4",
+          "800"
+        ],
+        [
+          "03.12.00",
+          "HS035",
+          "6~19",
+          "0.18",
+          "0.18",
+          "800"
+        ],
+        [
+          "03.12.00",
+          "HS036",
+          "31~93",
+          "0.35",
+          "0.35",
+          "800"
+        ],
+        [
+          "03.12.00",
+          "HS037",
+          "60~180",
+          "0.7",
+          "0.7",
+          "800"
+        ]
+      ]
+    },
+    {
+      "table_index": 29,
+      "n_rows": 17,
+      "n_cols": 11,
+      "first_row": "执行机构型号\nActuator type | 弹簧型号\nSpring type | 调压范围 Spring range (kPa G) | 不同阀芯下的许用压差(MPa)\nPenmtted difference pressure ofdifferentvalve plug (MPa) | 不同阀芯下的许用压差(MPa)\nPenmtted difference pressure ofdifferentvalve plug (MPa) | 不同阀芯下的许用压差(MPa)\nPenmtted difference pressure ofdifferentvalve plug (MPa) | 不同阀芯下",
+      "rows": [
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "不同阀芯下的许用压差(MPa)\nPenmtted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPenmtted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPenmtted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPenmtted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPenmtted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPenmtted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPenmtted difference pressure ofdifferentvalve plug (MPa)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpring type",
+          "调压范围 Spring range (kPa G)",
+          "2",
+          "4",
+          "6",
+          "8",
+          "10",
+          "12",
+          "14",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "02.11.00",
+          "HS008",
+          "0.2~0.5",
+          "1.5",
+          "0.9",
+          "0.4",
+          "0.2",
+          "0.14",
+          "",
+          "",
+          "800"
+        ],
+        [
+          "02.11.00",
+          "HS009",
+          "0.3~0.8",
+          "1.5",
+          "1.5",
+          "0.7",
+          "0.4",
+          "0.24",
+          "0.16",
+          "",
+          "800"
+        ],
+        [
+          "02.11.00",
+          "HSOIO",
+          "0.45~1.4",
+          "1.5",
+          "1.5",
+          "1.2",
+          "0.7",
+          "0.4",
+          "0.3",
+          "",
+          "800"
+        ],
+        [
+          "02.11.00",
+          "HSOll",
+          "l~3",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.0",
+          "0.7",
+          "0.5",
+          "800"
+        ],
+        [
+          "02.11.00",
+          "HS012",
+          "2.4~7",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.1",
+          "800"
+        ],
+        [
+          "02.11.00",
+          "HS013",
+          "3.3~10",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "800"
+        ],
+        [
+          "02.11.00",
+          "HS014",
+          "5~15",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "800"
+        ],
+        [
+          "02.12.00",
+          "HS020",
+          "0.2~0.4",
+          "1.5",
+          "1.5",
+          "0.9",
+          "0.5",
+          "0.3",
+          "0.2",
+          "0.15",
+          "500"
+        ],
+        [
+          "02.12.00",
+          "HS021",
+          "0.25~0.75",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.0",
+          "0.6",
+          "0.4",
+          "0.3",
+          "500"
+        ],
+        [
+          "02.12.00",
+          "HS022",
+          "0.5~1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.2",
+          "0.8",
+          "0.6",
+          "500"
+        ],
+        [
+          "02.12.00",
+          "HS023",
+          "0.8~2.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.4",
+          "1.0",
+          "500"
+        ],
+        [
+          "02.12.00",
+          "HS024",
+          "1.3~3.9",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "500"
+        ],
+        [
+          "02.12.00",
+          "HS025",
+          "2~6",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "500"
+        ],
+        [
+          "02.12.00",
+          "HS026",
+          "5~15",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "500"
+        ]
+      ]
+    },
+    {
+      "table_index": 30,
+      "n_rows": 17,
+      "n_cols": 13,
+      "first_row": "执行机构型号\nActuator type | 弹簧型号\nSpringtype | 调压范围 Spring range (kPa G) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 不同阀",
+      "rows": [
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "2",
+          "4",
+          "6",
+          "8",
+          "10",
+          "12",
+          "14",
+          "18",
+          "22",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "02.11.00",
+          "HS008",
+          "0.3~0.5",
+          "1.5",
+          "0.9",
+          "0.4",
+          "0.2",
+          "0.14",
+          "",
+          "",
+          "",
+          "",
+          "800"
+        ],
+        [
+          "02.11.00",
+          "HS009",
+          "0.3~0.8",
+          "1.5",
+          "1.5",
+          "0.7",
+          "0.4",
+          "0.24",
+          "0.16",
+          "",
+          "",
+          "",
+          "800"
+        ],
+        [
+          "02.11.00",
+          "HSOlO",
+          "0.45~l.4",
+          "1.5",
+          "1.5",
+          "1.2",
+          "0.7",
+          "0.4",
+          "0.3",
+          "",
+          "",
+          "",
+          "800"
+        ],
+        [
+          "02.11.00",
+          "HSOll",
+          "l~3",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.0",
+          "0.7",
+          "0.5",
+          "0.3",
+          "",
+          "800"
+        ],
+        [
+          "02.11.00",
+          "HS012",
+          "2.4~7",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "l.5",
+          "1.1",
+          "0.6",
+          "0.4",
+          "800"
+        ],
+        [
+          "02.11.00",
+          "HS013",
+          "3.3~10",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "0.9",
+          "0.6",
+          "800"
+        ],
+        [
+          "02.11.00",
+          "HS014",
+          "5~15",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "l.5",
+          "1.5",
+          "1.2",
+          "0.8",
+          "800"
+        ],
+        [
+          "02.12.00",
+          "HS020",
+          "0.3~0.45",
+          "1.5",
+          "1.5",
+          "0.9",
+          "0.5",
+          "0.3",
+          "0.2",
+          "0.15",
+          "0.1",
+          "0.06",
+          "500"
+        ],
+        [
+          "02.12.00",
+          "HS021",
+          "0.25~0.75",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.0",
+          "0.6",
+          "0.4",
+          "0.3",
+          "0.18",
+          "0.12",
+          "500"
+        ],
+        [
+          "02.12.00",
+          "HS022",
+          "0.5~1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.2",
+          "0.8",
+          "0.6",
+          "0.36",
+          "0.23",
+          "500"
+        ],
+        [
+          "02.12.00",
+          "HS023",
+          "0.8~2.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.4",
+          "1.0",
+          "0.6",
+          "0.4",
+          "500"
+        ],
+        [
+          "02.12.00",
+          "HS024",
+          "1.3~3.9",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "0.9",
+          "0.6",
+          "500"
+        ],
+        [
+          "02.12.00",
+          "HS025",
+          "2~6",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.2",
+          "0.8",
+          "500"
+        ],
+        [
+          "02.12.00",
+          "HS026",
+          "5~15",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.2",
+          "500"
+        ]
+      ]
+    },
+    {
+      "table_index": 31,
+      "n_rows": 36,
+      "n_cols": 13,
+      "first_row": "执行机构型号\nActuator type | 弹簧型号\nSpringtype | 调压范围 Spring range (kPa G) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa) | 不同阀",
+      "rows": [
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "不同阀芯下的许用压差(MPa)\nPermitted difference pressure ofdifferentvalve plug (MPa)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "阀芯尺寸Plug size (mm)",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "执行机构型号\nActuator type",
+          "弹簧型号\nSpringtype",
+          "调压范围 Spring range (kPa G)",
+          "2",
+          "4",
+          "6",
+          "8",
+          "IO",
+          "12",
+          "14",
+          "16",
+          "18",
+          "执行机构耐压 Max. actuator pressure\n(kPa G)"
+        ],
+        [
+          "02.01.00",
+          "HS016",
+          "70~210",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "4.5",
+          "3.1",
+          "2.3",
+          "1.3",
+          "0.9",
+          "2500"
+        ],
+        [
+          "02.01.00",
+          "HS017",
+          "125~380",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.3",
+          "4.0",
+          "2.4",
+          "1.6",
+          "2500"
+        ],
+        [
+          "02.01.00",
+          "HS018",
+          "160~490",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.2",
+          "3.1",
+          "2.1",
+          "2500"
+        ],
+        [
+          "02.01.00",
+          "HS019",
+          "255~770",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "4.9",
+          "3.2",
+          "2500"
+        ],
+        [
+          "02.02.00",
+          "HS014",
+          "10~30",
+          "3.0",
+          "3.0",
+          "3.0",
+          "1.9",
+          "1.2",
+          "0.8",
+          "0.6",
+          "0.4",
+          "0.3",
+          "2000"
+        ],
+        [
+          "02.02.00",
+          "HS015",
+          "18~56",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "2.3",
+          "1.6",
+          "1.2",
+          "0.7",
+          "0.5",
+          "2000"
+        ],
+        [
+          "02.02.00",
+          "HS016",
+          "37~110",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "4.5",
+          "3.1",
+          "2.3",
+          "1.3",
+          "0.9",
+          "2000"
+        ],
+        [
+          "02.02.00",
+          "HS017",
+          "63~190",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.3",
+          "4.0",
+          "2.4",
+          "1.6",
+          "2000"
+        ],
+        [
+          "02.02.00",
+          "HS018",
+          "90~270",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.2",
+          "3.1",
+          "2.1",
+          "2000"
+        ],
+        [
+          "02.02.00",
+          "HS019",
+          "130~390",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "4.9",
+          "3.2",
+          "2000"
+        ],
+        [
+          "02.03.00",
+          "HS013",
+          "3~10",
+          "1.8",
+          "1.8",
+          "1.8",
+          "1.2",
+          "0.8",
+          "0.5",
+          "0.4",
+          "0.2",
+          "0.15",
+          "1500"
+        ],
+        [
+          "02.03.00",
+          "HS014",
+          "5~16",
+          "3.0",
+          "3.0",
+          "3.0",
+          "1.9",
+          "1.2",
+          "0.8",
+          "0.6",
+          "0.4",
+          "0.3",
+          "1500"
+        ],
+        [
+          "02.03.00",
+          "HS015",
+          "10~30",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "2.3",
+          "1.6",
+          "1.2",
+          "0.7",
+          "0.5",
+          "1500"
+        ],
+        [
+          "02.03.00",
+          "HS016",
+          "20~60",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "4.5",
+          "3.1",
+          "2.3",
+          "1.3",
+          "0.9",
+          "1500"
+        ],
+        [
+          "02.09.00",
+          "HS018",
+          "320~960",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "5.2",
+          "3.1",
+          "2.1",
+          "3000"
+        ],
+        [
+          "02.09.00",
+          "HS019",
+          "500~1500",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "4.9",
+          "3.2",
+          "3000"
+        ],
+        [
+          "02.12.00",
+          "HS024",
+          "1.3~3.9",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.2",
+          "0.8",
+          "0.5",
+          "0.5",
+          "0.3",
+          "0.15",
+          "500"
+        ],
+        [
+          "02.12.00",
+          "HS025",
+          "2~6",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.2",
+          "0.8",
+          "0.6",
+          "0.4",
+          "0.2",
+          "500"
+        ],
+        [
+          "02.12.00",
+          "HS026",
+          "5~15",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.4",
+          "0.8",
+          "0.5",
+          "500"
+        ],
+        [
+          "02.12.00",
+          "HS027",
+          "8~26",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "2.0",
+          "1.2",
+          "0.8",
+          "500"
+        ],
+        [
+          "02.12.00",
+          "HS028A",
+          "15~45",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "2.5",
+          "1.6",
+          "500"
+        ],
+        [
+          "02.13.00",
+          "HS025",
+          "8~26",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.2",
+          "0.8",
+          "0.6",
+          "0.4",
+          "0.2",
+          "2000"
+        ],
+        [
+          "02.13.00",
+          "HS026",
+          "20~60",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "l.4",
+          "0.8",
+          "0.5",
+          "2000"
+        ],
+        [
+          "02.13.00",
+          "HS027",
+          "33~100",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "2.0",
+          "1.2",
+          "0.8",
+          "2000"
+        ],
+        [
+          "02.13.00",
+          "HS028A",
+          "60~180",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "2.5",
+          "1.6",
+          "2000"
+        ],
+        [
+          "02.13.00",
+          "HS028B",
+          "125~370",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "4.9",
+          "3.3",
+          "2000"
+        ],
+        [
+          "02.13.00",
+          "HS028C",
+          "200~600",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "4.6",
+          "2000"
+        ],
+        [
+          "02.14.00",
+          "HS024",
+          "3~9",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.2",
+          "0.8",
+          "0.5",
+          "0.5",
+          "0.3",
+          "0.15",
+          "1500"
+        ],
+        [
+          "02.14.00",
+          "HS025",
+          "5~15",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.2",
+          "0.8",
+          "0.6",
+          "0.4",
+          "0.2",
+          "1500"
+        ],
+        [
+          "02.14.00",
+          "HS026",
+          "II~33",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.5",
+          "1.4",
+          "0.8",
+          "0.5",
+          "1500"
+        ],
+        [
+          "02.14.00",
+          "HS027",
+          "19~57",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "3.0",
+          "2.0",
+          "1.2",
+          "0.8",
+          "1500"
+        ],
+        [
+          "02.19.00",
+          "HS019",
+          "1200~3600",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "4.9",
+          "3.2",
+          "4500"
+        ],
+        [
+          "02.20.00",
+          "HS028C",
+          "400~1200",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "6.5",
+          "4.6",
+          "2500"
+        ]
+      ]
+    },
+    {
+      "table_index": 32,
+      "n_rows": 24,
+      "n_cols": 5,
+      "first_row": "阀门型号\nValve type | 阀门口径 Valve size (mm) | ANSI 150# PNl.6MPa | ANSI 300# PN4.0MPa | ANSI 600# PN6.3MPa",
+      "rows": [
+        [
+          "阀门型号\nValve type",
+          "阀门口径 Valve size (mm)",
+          "ANSI 150# PNl.6MPa",
+          "ANSI 300# PN4.0MPa",
+          "ANSI 600# PN6.3MPa"
+        ],
+        [
+          "GZ860",
+          "15",
+          "20",
+          "20",
+          "22"
+        ],
+        [
+          "GZ860",
+          "20",
+          "22",
+          "22",
+          "25"
+        ],
+        [
+          "GZ860",
+          "25",
+          "23",
+          "23",
+          "27"
+        ],
+        [
+          "GZ860",
+          "40",
+          "28",
+          "28",
+          "33"
+        ],
+        [
+          "GZ860",
+          "50",
+          "31",
+          "31",
+          "36"
+        ],
+        [
+          "GZ860",
+          "65",
+          "45",
+          "45",
+          "53"
+        ],
+        [
+          "GZ860",
+          "80",
+          "58",
+          "60",
+          "65"
+        ],
+        [
+          "GZ860",
+          "100",
+          "71",
+          "75",
+          "83"
+        ],
+        [
+          "GZ870",
+          "15",
+          "11",
+          "11",
+          "13"
+        ],
+        [
+          "GZ870",
+          "20",
+          "11",
+          "11",
+          "13"
+        ],
+        [
+          "GZ870",
+          "25",
+          "13",
+          "13",
+          "16"
+        ],
+        [
+          "GZ870",
+          "40",
+          "20",
+          "20",
+          "25"
+        ],
+        [
+          "GZ870",
+          "50",
+          "28",
+          "30",
+          "36"
+        ],
+        [
+          "GZ870",
+          "65",
+          "52",
+          "55",
+          "63"
+        ],
+        [
+          "GZ870",
+          "80",
+          "68",
+          "72",
+          "81"
+        ],
+        [
+          "GZ870",
+          "100",
+          "75",
+          "83",
+          "92"
+        ],
+        [
+          "GZ870",
+          "150",
+          "118",
+          "138",
+          "165"
+        ],
+        [
+          "GZ870",
+          "200",
+          "172",
+          "195",
+          "236"
+        ],
+        [
+          "GZ880 (02.11.00/ 02.12.00)",
+          "15",
+          "11/14",
+          "11/14",
+          "12/15"
+        ],
+        [
+          "GZ880 (02.11.00/ 02.12.00)",
+          "20",
+          "12/15",
+          "12/15",
+          "15/18"
+        ],
+        [
+          "GZ880 (02.11.00/ 02.12.00)",
+          "25",
+          "13/16",
+          "13/16",
+          "17/20"
+        ],
+        [
+          "GZ880 (02.11.00/ 02.12.00)",
+          "40",
+          "18/21",
+          "18/21",
+          "22/25"
+        ],
+        [
+          "GZ880 (02.11.00/ 02.12.00)",
+          "50",
+          "21/24",
+          "21/24",
+          "25/28"
+        ]
+      ]
+    },
+    {
+      "table_index": 33,
+      "n_rows": 7,
+      "n_cols": 3,
+      "first_row": "执行机构\nActuator Number | 02.11.00 | 02.12.00",
+      "rows": [
+        [
+          "执行机构\nActuator Number",
+          "02.11.00",
+          "02.12.00"
+        ],
+        [
+          "L",
+          "60",
+          "60"
+        ],
+        [
+          "L1",
+          "253",
+          "336"
+        ],
+        [
+          "L2",
+          "317",
+          "402"
+        ],
+        [
+          "H",
+          "319",
+          "386"
+        ],
+        [
+          "Hl",
+          "203",
+          "223"
+        ],
+        [
+          "A",
+          "233",
+          "327"
+        ]
+      ]
+    },
+    {
+      "table_index": 34,
+      "n_rows": 9,
+      "n_cols": 10,
+      "first_row": " |  |  |  |  |  |  |  |  | ",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "table_index": 35,
+      "n_rows": 12,
+      "n_cols": 13,
+      "first_row": "阀门直径Valve Size | 阀门直径Valve Size | 阀门直径Valve Size | 15 | 20 | 25 | 40 | 50 | 65 | 80 | 100 | 150 | 200",
+      "rows": [
+        [
+          "阀门直径Valve Size",
+          "阀门直径Valve Size",
+          "阀门直径Valve Size",
+          "15",
+          "20",
+          "25",
+          "40",
+          "50",
+          "65",
+          "80",
+          "100",
+          "150",
+          "200"
+        ],
+        [
+          "PNl.6 (150#)",
+          "PNl.6 (150#)",
+          "L",
+          "181",
+          "181",
+          "184",
+          "222",
+          "254",
+          "276",
+          "298",
+          "352",
+          "451",
+          "600"
+        ],
+        [
+          "PN4.0 (300#)",
+          "PN4.0 (300#)",
+          "L",
+          "181",
+          "194",
+          "197",
+          "235",
+          "267",
+          "292",
+          "317",
+          "368",
+          "473",
+          "600"
+        ],
+        [
+          "PN6.3(600#)",
+          "PN6.3(600#)",
+          "L",
+          "206",
+          "206",
+          "210",
+          "251",
+          "286",
+          "311",
+          "337",
+          "394",
+          "508",
+          "650"
+        ],
+        [
+          "o i e n p v ¥l1¥ 9 '1#",
+          "02.04.00",
+          "H",
+          "347",
+          "347",
+          "357",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "o i e n p v ¥l1¥ 9 '1#",
+          "02.04.00",
+          "A",
+          "327",
+          "327",
+          "327",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "o i e n p v ¥l1¥ 9 '1#",
+          "02.12.00",
+          "H",
+          "",
+          "",
+          "",
+          "440",
+          "450",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "o i e n p v ¥l1¥ 9 '1#",
+          "02.12.00",
+          "A",
+          "",
+          "",
+          "",
+          "327",
+          "327",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "o i e n p v ¥l1¥ 9 '1#",
+          "02.16.00",
+          "H",
+          "",
+          "",
+          "",
+          "440",
+          "450",
+          "500",
+          "500",
+          "505",
+          "",
+          ""
+        ],
+        [
+          "o i e n p v ¥l1¥ 9 '1#",
+          "02.16.00",
+          "A",
+          "",
+          "",
+          "",
+          "494",
+          "494",
+          "494",
+          "494",
+          "494",
+          "",
+          ""
+        ],
+        [
+          "o i e n p v ¥l1¥ 9 '1#",
+          "02.18.00",
+          "H",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "630",
+          "630",
+          "635",
+          "730",
+          "800"
+        ],
+        [
+          "o i e n p v ¥l1¥ 9 '1#",
+          "02.18.00",
+          "A",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "494",
+          "494",
+          "494",
+          "494",
+          "494"
+        ]
+      ]
+    },
+    {
+      "table_index": 36,
+      "n_rows": 5,
+      "n_cols": 7,
+      "first_row": "公称通径\nNominal Diameter | 公称通径\nNominal Diameter | DNlS\n1/2\" | DN20\n3/4\" | DN25\n1\" | DN40\n11/2\" | DNSO\n2\"",
+      "rows": [
+        [
+          "公称通径\nNominal Diameter",
+          "公称通径\nNominal Diameter",
+          "DNlS\n1/2\"",
+          "DN20\n3/4\"",
+          "DN25\n1\"",
+          "DN40\n11/2\"",
+          "DNSO\n2\""
+        ],
+        [
+          "L",
+          "PNl.6(150#)",
+          "181",
+          "181",
+          "184",
+          "222",
+          "254"
+        ],
+        [
+          "L",
+          "PN4.0(300#)",
+          "181",
+          "194",
+          "197",
+          "235",
+          "267"
+        ],
+        [
+          "L",
+          "PN6.3(600#)",
+          "206",
+          "206",
+          "210",
+          "251",
+          "286"
+        ],
+        [
+          "H",
+          "H",
+          "227",
+          "227",
+          "237",
+          "246",
+          "256"
+        ]
+      ]
+    },
+    {
+      "table_index": 37,
+      "n_rows": 20,
+      "n_cols": 19,
+      "first_row": "温 度\nTemp.\n℃ | ANSI Class 150 | ANSI Class 150 | ANSI Class 150 | ANSI Class 150 | ANSI Class 150 | ANSI Class 150 | ANSI Class 300 | ANSI Class 300 | ANSI Class 300 | ANSI Class 300 | ANSI Class 300 | ANSI Class 300 | ANSI Class 600 | ANSI Class 600 | ANSI Class 600 | ANSI Class 600 | ANSI Class 600",
+      "rows": [
+        [
+          "温 度\nTemp.\n℃",
+          "ANSI Class 150",
+          "ANSI Class 150",
+          "ANSI Class 150",
+          "ANSI Class 150",
+          "ANSI Class 150",
+          "ANSI Class 150",
+          "ANSI Class 300",
+          "ANSI Class 300",
+          "ANSI Class 300",
+          "ANSI Class 300",
+          "ANSI Class 300",
+          "ANSI Class 300",
+          "ANSI Class 600",
+          "ANSI Class 600",
+          "ANSI Class 600",
+          "ANSI Class 600",
+          "ANSI Class 600",
+          "ANSI Class 600"
+        ],
+        [
+          "温 度\nTemp.\n℃",
+          "A352 LCB",
+          "A216 WCB",
+          "A217 WC6",
+          "A217 WC9",
+          "A351 CF8",
+          "A351 CF8M",
+          "A352 LCB",
+          "A216 WCB",
+          "A217 WC6",
+          "A217 WC9",
+          "A351 CF8",
+          "A351 CF8M",
+          "A352 LCB",
+          "A216 WCB",
+          "A217 WC6",
+          "A217 WC9",
+          "A351 CF8",
+          "A351 CF8M"
+        ],
+        [
+          "-196~38",
+          "—",
+          "—",
+          "—",
+          "—",
+          "1.90",
+          "1.90",
+          "—",
+          "—",
+          "—",
+          "—",
+          "4.95",
+          "4.95",
+          "—",
+          "—",
+          "—",
+          "—",
+          "9.91",
+          "9.92"
+        ],
+        [
+          "-45~38",
+          "1.84",
+          "—",
+          "—",
+          "—",
+          "1.90",
+          "1.90",
+          "4.78",
+          "—",
+          "—",
+          "—",
+          "4.95",
+          "4.95",
+          "9.57",
+          "—",
+          "—",
+          "—",
+          "9.91",
+          "9.92"
+        ],
+        [
+          "-5~38",
+          "1.84",
+          "1.96",
+          "1.99",
+          "1.99",
+          "1.90",
+          "1.90",
+          "4.78",
+          "5.10",
+          "5.16",
+          "5.16",
+          "4.95",
+          "4.95",
+          "9.57",
+          "10.20",
+          "10.32",
+          "10.32",
+          "9.91",
+          "9.92"
+        ],
+        [
+          "50",
+          "1.81",
+          "1.92",
+          "1.92",
+          "1.92",
+          "1.84",
+          "1.84",
+          "4.72",
+          "5.00",
+          "5.10",
+          "5.11",
+          "4.77",
+          "4.80",
+          "9.46",
+          "10.01",
+          "10.22",
+          "10.22",
+          "9.56",
+          "9.62"
+        ],
+        [
+          "100",
+          "1.72",
+          "1.76",
+          "1.76",
+          "1.76",
+          "1.56",
+          "1.61",
+          "4.51",
+          "4.63",
+          "4.88",
+          "4.89",
+          "4.08",
+          "4.21",
+          "9.02",
+          "9.27",
+          "9.74",
+          "9.79",
+          "8.17",
+          "8.43"
+        ],
+        [
+          "150",
+          "1.57",
+          "1.57",
+          "1.57",
+          "1.57",
+          "1.39",
+          "1.47",
+          "4.40",
+          "4.51",
+          "4.63",
+          "4.65",
+          "3.62",
+          "3.85",
+          "8.78",
+          "9.04",
+          "9.26",
+          "9.31",
+          "7.26",
+          "7.69"
+        ],
+        [
+          "200",
+          "1.40",
+          "1.40",
+          "1.40",
+          "1.40",
+          "1.25",
+          "1.37",
+          "4.26",
+          "4.38",
+          "4.54",
+          "4.47",
+          "3.27",
+          "3.56",
+          "8.54",
+          "8.75",
+          "9.09",
+          "8.95",
+          "6.54",
+          "7.12"
+        ],
+        [
+          "250",
+          "1.20",
+          "1.20",
+          "1.20",
+          "1.20",
+          "1.16",
+          "1.20",
+          "4.05",
+          "4.16",
+          "4.44",
+          "4.41",
+          "3.04",
+          "3.34",
+          "8.11",
+          "8.33",
+          "8.88",
+          "8.82",
+          "6.10",
+          "6.67"
+        ],
+        [
+          "300",
+          "1.01",
+          "1.01",
+          "1.01",
+          "1.01",
+          "1.01",
+          "1.01",
+          "3.76",
+          "3.87",
+          "4.23",
+          "4.23",
+          "2.91",
+          "3.15",
+          "7.54",
+          "7.74",
+          "8.48",
+          "8.47",
+          "5.80",
+          "6.32"
+        ],
+        [
+          "350",
+          "0.84",
+          "0.84",
+          "0.84",
+          "0.84",
+          "0.84",
+          "0.84",
+          "3.59",
+          "3.69",
+          "4.01",
+          "4.01",
+          "2.81",
+          "3.03",
+          "7.18",
+          "7.38",
+          "8.04",
+          "8.04",
+          "5.60",
+          "6.07"
+        ],
+        [
+          "375",
+          "",
+          "0.73",
+          "0.73",
+          "0.73",
+          "0.73",
+          "0.73",
+          "",
+          "3.64",
+          "3.88",
+          "3.87",
+          "2.77",
+          "2.96",
+          "",
+          "7.28",
+          "7.75",
+          "7.75",
+          "5.54",
+          "5.93"
+        ],
+        [
+          "400",
+          "",
+          "0.64",
+          "0.64",
+          "0.64",
+          "0.64",
+          "0.64",
+          "",
+          "3.44",
+          "3.65",
+          "3.65",
+          "2.74",
+          "2.91",
+          "",
+          "6.89",
+          "7.31",
+          "7.31",
+          "5.48",
+          "5.81"
+        ],
+        [
+          "425",
+          "",
+          "0.55",
+          "0.55",
+          "0.55",
+          "0.55",
+          "0.55",
+          "",
+          "2.88",
+          "3.50",
+          "3.50",
+          "2.71",
+          "2.87",
+          "",
+          "5.74",
+          "7.01",
+          "7.01",
+          "5.42",
+          "5.72"
+        ],
+        [
+          "450",
+          "",
+          "0.47",
+          "0.47",
+          "0.47",
+          "0.47",
+          "0.47",
+          "",
+          "1.99",
+          "3.38",
+          "3.37",
+          "2.68",
+          "2.81",
+          "",
+          "4.00",
+          "6.75",
+          "6.75",
+          "5.37",
+          "5.61"
+        ],
+        [
+          "475",
+          "",
+          "0.37",
+          "0.37",
+          "0.37",
+          "0.37",
+          "0.37",
+          "",
+          "1.35",
+          "3.16",
+          "3.16",
+          "2.65",
+          "2.73",
+          "",
+          "2.70",
+          "6.32",
+          "6.32",
+          "5.30",
+          "5.46"
+        ],
+        [
+          "500",
+          "",
+          "0.28",
+          "0.28",
+          "0.28",
+          "0.28",
+          "0.28",
+          "",
+          "0.88",
+          "2.77",
+          "2.77",
+          "2.60",
+          "2.67",
+          "",
+          "1.75",
+          "5.55",
+          "5.55",
+          "5.20",
+          "5.37"
+        ],
+        [
+          "525",
+          "",
+          "0.18",
+          "0.18",
+          "0.18",
+          "0.18",
+          "0.18",
+          "",
+          "0.51",
+          "2.02",
+          "2.18",
+          "2.19",
+          "2.57",
+          "",
+          "1.03",
+          "4.04",
+          "4.36",
+          "4.77",
+          "5.15"
+        ],
+        [
+          "538",
+          "",
+          "0.13",
+          "0.15",
+          "0.15",
+          "0.15",
+          "0.15",
+          "",
+          "0.34",
+          "1.63",
+          "1.63",
+          "2.18",
+          "2.53",
+          "",
+          "0.72",
+          "3.26",
+          "3.26",
+          "4.55",
+          "5.06"
+        ]
+      ]
+    },
+    {
+      "table_index": 38,
+      "n_rows": 11,
+      "n_cols": 10,
+      "first_row": "温度\nTemp. ℃ | PN16 | PN40 | PN63 | PN100 | 温度\nTemp. ℃ | PN16 | PN40 | PN63 | PN100",
+      "rows": [
+        [
+          "温度\nTemp. ℃",
+          "PN16",
+          "PN40",
+          "PN63",
+          "PN100",
+          "温度\nTemp. ℃",
+          "PN16",
+          "PN40",
+          "PN63",
+          "PN100"
+        ],
+        [
+          "温度\nTemp. ℃",
+          "ZG230-450",
+          "ZG230-450",
+          "ZG230-450",
+          "ZG230-450",
+          "温度\nTemp. ℃",
+          "ZG0Cr18Ni9",
+          "ZG0Cr18Ni9",
+          "ZG0Cr18Ni9",
+          "ZG0Cr18Ni9"
+        ],
+        [
+          "-5~200",
+          "1.60",
+          "4.00",
+          "6.30",
+          "10.00",
+          "-45~200",
+          "1.60",
+          "4.00",
+          "6.30",
+          "10.00"
+        ],
+        [
+          "~250",
+          "1.40",
+          "3.50",
+          "5.40",
+          "9.00",
+          "~300",
+          "1.40",
+          "3.50",
+          "5.40",
+          "9.00"
+        ],
+        [
+          "~300",
+          "1.20",
+          "3.00",
+          "4.80",
+          "7.50",
+          "~400",
+          "1.20",
+          "3.00",
+          "4.80",
+          "7.50"
+        ],
+        [
+          "~350",
+          "1.10",
+          "2.60",
+          "4.00",
+          "6.60",
+          "~480",
+          "1.10",
+          "2.60",
+          "4.00",
+          "6.60"
+        ],
+        [
+          "~400",
+          "0.90",
+          "2.30",
+          "3.70",
+          "5.80",
+          "~520",
+          "0.90",
+          "2.30",
+          "3.70",
+          "5.80"
+        ],
+        [
+          "~425",
+          "0.80",
+          "2.00",
+          "3.20",
+          "5.00",
+          "~560",
+          "0.80",
+          "2.00",
+          "3.20",
+          "5.00"
+        ],
+        [
+          "~435",
+          "0.70",
+          "1.80",
+          "2.80",
+          "4.50",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "~445",
+          "0.62",
+          "1.60",
+          "2.50",
+          "4.20",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "~455",
+          "0.57",
+          "1.40",
+          "2.30",
+          "3.60",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "table_index": 39,
+      "n_rows": 2,
+      "n_cols": 7,
+      "first_row": "美国标准 | ANSI 150# | ANSI 300# | ANSI 600# | ANSI 900# | ANSI 1500# | ANSI 2500#",
+      "rows": [
+        [
+          "美国标准",
+          "ANSI 150#",
+          "ANSI 300#",
+          "ANSI 600#",
+          "ANSI 900#",
+          "ANSI 1500#",
+          "ANSI 2500#"
+        ],
+        [
+          "中国标准",
+          "PN 16",
+          "PN 40",
+          "PN 63, PN 100",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "table_index": 40,
+      "n_rows": 2,
+      "n_cols": 7,
+      "first_row": "美国标准 | A216-WCB | A351-CF8 | A351-CF8M | A217-WC6 | A217-WC9 | A352-LCB",
+      "rows": [
+        [
+          "美国标准",
+          "A216-WCB",
+          "A351-CF8",
+          "A351-CF8M",
+          "A217-WC6",
+          "A217-WC9",
+          "A352-LCB"
+        ],
+        [
+          "中国标准",
+          "ZG230-450",
+          "ZG0Cr18nI9",
+          "ZG0Cr18Ni12Mo2Ti",
+          "ZG15CrMo",
+          "",
+          ""
+        ]
+      ]
+    }
+  ]
+}

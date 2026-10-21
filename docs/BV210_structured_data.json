@@ -1,0 +1,3411 @@
+{
+  "document": {
+    "source_file": "参考文件/选型样本/BV210（22版）.pdf + BV210（22版）.docx",
+    "series": "BV210",
+    "product": "金属硬密封球阀 Metal-Seated Ball Valves",
+    "manufacturer": "KELK (无锡凯尔克仪表阀门有限公司)",
+    "pages": 16,
+    "extraction_method": "pdfplumber (PDF 文字层, 全 16 页) + docx 表结构定位; 合并单元格以 pypdfium2 渲染图 (scale=3) 复核",
+    "cross_check": "2026-10-14 完成 16 页 PDF 与 19 张 docx 表逐表双向核对, 数值全部一致; docx 漏表1-1/1-2(结构清单)已按 PDF 补入。详见 docs/BV210_pdf_docx_compare.md"
+  },
+  "general_data": {
+    "body": {
+      "nominal_size": "1\" ～12\"（DN25～DN300）",
+      "body_rating": "ANSI 150#, 300#, 600#\nJB/T79.1-94 & HG/T20592-2009 PN1.6Mpa ~ PN10.0Mpa,",
+      "connection": "法兰式(,RF,RTJ)  Flanges(,RF,RTJ)",
+      "design_standard": "ANSI B16.34, API 6D等",
+      "flange_face_to_face": "ASME B16.10, API 6D",
+      "painting_color": "银灰色（环氧树脂）。但是阀体材质为不锈钢时，本体部不加涂层。 Munsell N-6（Epoxy resin group）is standard. In the case of stainless steel body, no painting is standard."
+    },
+    "bonnet": {
+      "standard_type": "-45 ～ ＋538℃"
+    },
+    "trim": {
+      "form": "浮动球型（1\"～4\"）, 固定球型（6\"～24\"）  Floating(1\"～4\"), Trunnion(6\"～24\")",
+      "rated_cv": "见表3. See Tab.3 for selection.",
+      "seat_leakage": "硬密封Metal seat: ANSI Class V（可选VI）",
+      "packing": "聚四氟乙烯V形填料、聚四氟乙烯碳纤维、高强度碳纤维+聚四氟乙烯纤维、聚四氟乙烯纤维+纯聚四氟乙烯(禁油)及柔性石墨。Teflon V-ring, PTFE & carbon fiber, P6528-Carbon fiber, PTFE fiber, Grafoil, etc.",
+      "gasket": "缠绕式垫圈（不锈钢+PTFE,不锈钢+柔性石墨） Spiral wound gasket (stainless steel + PTFE, stainless steel + flexible graphite)"
+    }
+  },
+  "actuator": {
+    "type": "气缸式 Pneumatic Cylinder type",
+    "purpose": "调节、开关 Modulation or On-off",
+    "air_supply": "400~500 KPa G",
+    "connection": "Rc1/4 ~ Rc1",
+    "action_type": "随输入定位器信号增加阀开或阀闭。Valve open or shut by air or electric signal.",
+    "ambient_temp": "－40～＋100℃",
+    "painting": "银色环氧树脂Munsell : N-6",
+    "handwheel": "可选Option",
+    "accessories": {
+      "pneumatic_actuator_control": "电气、气气、智能定位器，过滤减压阀，电磁阀，限位开关，调速器，增速器，锁止阀等等。 E/P·P/P·Smart-Positioner,Air-set, Solenoid valve, Limit switch, Speed controller, Lock valve, Lock-up valve, etc",
+      "electric_actuator": "加热器、控制箱、手轮机构等。 Space heater, Junction box, Manual handle, etc."
+    },
+    "options": {
+      "special_testing_for_body": "材料检查{液体渗透探伤检查（PT）、放射线检查（RT）}、流量特性检查、低温试验、蒸汽试验。 Material certificate, Liquid penetrant testing, Radiographic testing, Flow characteristic testing, Low temperature testing, Steam testing.",
+      "cleaning_for_body": "氧气清洁，完全禁油、除水处理 Oxygen clean, Oil-free, Water-free",
+      "special_specification": "防砂、防尘型、防盐腐蚀型、无铜处理、特殊空气配管及特殊气接头、真空工作条件用、接触大气部分的螺栓、螺母采用不锈钢、指定涂层色，NACE处理，阀内件特殊设计，阀内件特殊材质。 Sand and Dust proof, Salty environment proof, Tropical area proof, Copper-free alloy, Special piping and fitting, Vacuum service proof, SUS bolt and nut for exposed parts, Non-standard painting.",
+      "authorization": "各种认证 All kinds of certifications"
+    }
+  },
+  "parts_list": {
+    "table_1_1_floating_1in_4in": [
+      [
+        1,
+        "阀体帽 Body Cap"
+      ],
+      [
+        2,
+        "隔离圈 Isolation Ring"
+      ],
+      [
+        3,
+        "隔离垫 Isolation Spacer"
+      ],
+      [
+        4,
+        "碟形弹簧 Disk Spring"
+      ],
+      [
+        5,
+        "压环 Press Ring"
+      ],
+      [
+        6,
+        "阀体 Body"
+      ],
+      [
+        7,
+        "阀座密封圈 Seat Gasket"
+      ],
+      [
+        8,
+        "阀座 Seat"
+      ],
+      [
+        9,
+        "螺母 Nut"
+      ],
+      [
+        10,
+        "螺柱 Stud"
+      ],
+      [
+        11,
+        "填料 Gland Packing"
+      ],
+      [
+        12,
+        "阀杆 Stem"
+      ],
+      [
+        13,
+        "填料压板 Gland Flange"
+      ],
+      [
+        14,
+        "填料压盖 Gland Ring"
+      ],
+      [
+        15,
+        "轴环 Shaft Bearing"
+      ],
+      [
+        16,
+        "阀体垫圈 Body Gasket"
+      ],
+      [
+        17,
+        "螺母 Nut"
+      ],
+      [
+        18,
+        "螺柱 Stud"
+      ],
+      [
+        19,
+        "球芯 Ball"
+      ]
+    ],
+    "table_1_2_trunnion_6in_12in": [
+      [
+        1,
+        "阀体 Body"
+      ],
+      [
+        2,
+        "弹簧 Spring"
+      ],
+      [
+        3,
+        "弹簧座 Spring Seat"
+      ],
+      [
+        4,
+        "阀座密封圈 Seat Gasket"
+      ],
+      [
+        5,
+        "阀座 Seat"
+      ],
+      [
+        6,
+        "固定垫套 Gasket"
+      ],
+      [
+        7,
+        "球 Ball"
+      ],
+      [
+        8,
+        "阀体缠绕垫 Body Winding Gasket"
+      ],
+      [
+        9,
+        "螺母 Nut"
+      ],
+      [
+        10,
+        "螺柱 Stud"
+      ],
+      [
+        11,
+        "阀体帽 Body Cap"
+      ],
+      [
+        12,
+        "轴环 Shaft Bearing"
+      ],
+      [
+        13,
+        "填料函缠绕垫 Gland Winding Gasket"
+      ],
+      [
+        14,
+        "填料函 Gland Box"
+      ],
+      [
+        15,
+        "内六角螺栓 Inner Hexagonal Bolt"
+      ],
+      [
+        16,
+        "填料 Gland Packing"
+      ],
+      [
+        17,
+        "填料压盖 Gland Ring"
+      ],
+      [
+        18,
+        "填料压板 Gland Flange"
+      ],
+      [
+        19,
+        "轴 Stem"
+      ],
+      [
+        20,
+        "螺柱 Stud"
+      ],
+      [
+        21,
+        "螺母 Nut"
+      ],
+      [
+        22,
+        "销钉 Pin"
+      ],
+      [
+        23,
+        "轴承 Bearing"
+      ]
+    ]
+  },
+  "material_combinations": {
+    "table_2_1_carbon_steel": {
+      "body_material": "WCB, WC6, C5, LCB",
+      "columns": [
+        "410/WC",
+        "410/WCrC",
+        "316/Ni60",
+        "316/WCrC",
+        "316/CrC"
+      ],
+      "ball_material": [
+        "410",
+        "410",
+        "316",
+        "316",
+        "316"
+      ],
+      "ball_treatment": [
+        "WC",
+        "WCrC",
+        "Ni60",
+        "WCrC",
+        "CrC"
+      ],
+      "seat_material": [
+        "410",
+        "410",
+        "316",
+        "316",
+        "316"
+      ],
+      "seat_treatment": [
+        "WC",
+        "WCrC",
+        "Ni55",
+        "WCrC",
+        "CrC"
+      ],
+      "stem_material": [
+        "630",
+        "630",
+        "630",
+        "660",
+        "660"
+      ],
+      "stem_treatment": "HT+QPQ",
+      "belleville_spring": "Inconel 750",
+      "seat_seal": "柔性石墨 GRAFOIL",
+      "operating_temp_c": {
+        "WCB_body": [
+          "-29～+400",
+          "-29～+400",
+          "-29～+400",
+          "-29～+425",
+          "-29～+425"
+        ],
+        "WC6_C5_body": [
+          "-29～+400",
+          "-29～+400",
+          "-29～+400",
+          "-29～+500",
+          "-29～+538"
+        ],
+        "LCB": [
+          "-45～+350"
+        ]
+      },
+      "seat_leakage": "ANSI Class V or ANSI Class VI"
+    },
+    "table_2_2_stainless_steel": {
+      "body_material": "CF8, CF8M",
+      "columns": [
+        "316/WC",
+        "316/Ni60",
+        "316/WCrC",
+        "316/CrC"
+      ],
+      "ball_material": [
+        "316",
+        "316",
+        "316",
+        "316"
+      ],
+      "ball_treatment": [
+        "WC",
+        "Ni60",
+        "WCrC",
+        "CrC"
+      ],
+      "seat_material": [
+        "316",
+        "316",
+        "316",
+        "316"
+      ],
+      "seat_treatment": [
+        "WC",
+        "Ni55",
+        "WCrC",
+        "CrC"
+      ],
+      "stem_material": [
+        "630",
+        "630",
+        "660",
+        "660"
+      ],
+      "stem_treatment": "HT+QPQ",
+      "belleville_spring": "Inconel 750",
+      "seat_seal": "柔性石墨 GRAFOIL",
+      "operating_temp_c": [
+        "-45～+400",
+        "-45～+400",
+        "-45～+500",
+        "-45～+538"
+      ],
+      "seat_leakage": "ANSI Class V or ANSI Class VI"
+    },
+    "notes": {
+      "CrC": "碳化铬 Chrome Carbide",
+      "WC": "碳化钨 Tungsten Chrome",
+      "WCrC": "碳化钨铬 Tungsten Chrome Carbide",
+      "QPQ": "低温盐浴渗氮 Quench-Polish-Quench",
+      "HT": "热处理 Heat Treatment",
+      "Ni60/Ni55": "镍基合金 Ni-base Alloy"
+    }
+  },
+  "seal_surface_hardness": {
+    "table_2_3": [
+      {
+        "parts": "球体 Ball / 阀座 Seat ring",
+        "material": "410/316",
+        "coating": "WC",
+        "thickness_um": "150~180",
+        "temp_c": "-45～+400℃",
+        "hardness_HCR": "≥70"
+      },
+      {
+        "parts": "球体 Ball / 阀座 Seat ring",
+        "material": "410",
+        "coating": "WCrC",
+        "thickness_um": "150~180",
+        "temp_c": "-45～+400℃",
+        "hardness_HCR": "≥67"
+      },
+      {
+        "parts": "球体 Ball / 阀座 Seat ring",
+        "material": "316",
+        "coating": "WCrC",
+        "thickness_um": "150~180",
+        "temp_c": "-45～+500℃",
+        "hardness_HCR": "≥67"
+      },
+      {
+        "parts": "球体 Ball / 阀座 Seat ring",
+        "material": "316",
+        "coating": "CrC",
+        "thickness_um": "150~180",
+        "temp_c": "-196～+538℃",
+        "hardness_HCR": "≥70"
+      },
+      {
+        "parts": "球体 Ball",
+        "material": "316",
+        "coating": "Ni60",
+        "thickness_um": "500~1000",
+        "temp_c": "-196～+400℃",
+        "hardness_HCR": "≥60"
+      },
+      {
+        "parts": "阀座 Seat ring",
+        "material": "316",
+        "coating": "Ni55",
+        "thickness_um": "500~1000",
+        "temp_c": "-196～+400℃",
+        "hardness_HCR": "≥55"
+      }
+    ]
+  },
+  "rated_cv": {
+    "table_3": [
+      {
+        "size_inch": "1",
+        "size_mm": "25",
+        "cv_ANSI150_300": "75",
+        "cv_ANSI600": "65"
+      },
+      {
+        "size_inch": "1 1/2",
+        "size_mm": "40",
+        "cv_ANSI150_300": "235",
+        "cv_ANSI600": "210"
+      },
+      {
+        "size_inch": "2",
+        "size_mm": "50",
+        "cv_ANSI150_300": "400",
+        "cv_ANSI600": "345"
+      },
+      {
+        "size_inch": "2 1/2",
+        "size_mm": "65",
+        "cv_ANSI150_300": "755",
+        "cv_ANSI600": "645"
+      },
+      {
+        "size_inch": "3",
+        "size_mm": "80",
+        "cv_ANSI150_300": "1,105",
+        "cv_ANSI600": "985"
+      },
+      {
+        "size_inch": "4",
+        "size_mm": "100",
+        "cv_ANSI150_300": "1,930",
+        "cv_ANSI600": "1,755"
+      },
+      {
+        "size_inch": "6",
+        "size_mm": "150",
+        "cv_ANSI150_300": "4,940",
+        "cv_ANSI600": "4,475"
+      },
+      {
+        "size_inch": "8",
+        "size_mm": "200",
+        "cv_ANSI150_300": "10,135",
+        "cv_ANSI600": "8,615"
+      },
+      {
+        "size_inch": "10",
+        "size_mm": "250",
+        "cv_ANSI150_300": "16,900",
+        "cv_ANSI600": "13,110"
+      },
+      {
+        "size_inch": "12",
+        "size_mm": "300",
+        "cv_ANSI150_300": "25,520",
+        "cv_ANSI600": "21,860"
+      }
+    ]
+  },
+  "allowable_pressure_drops": {
+    "unit": "MPa",
+    "table_4_1_double_acting": {
+      "valve_size_inch": {
+        "ANSI150_300_inch_floating": [
+          "1",
+          "1.5",
+          "2",
+          "2.5",
+          "3",
+          "4"
+        ],
+        "ANSI150_300_inch_trunnion": [
+          "6",
+          "8",
+          "10",
+          "12"
+        ],
+        "ANSI600_inch_floating": [
+          "1",
+          "1.5",
+          "2",
+          "2.5",
+          "3",
+          "4"
+        ],
+        "ANSI600_inch_trunnion": [
+          "6",
+          "8",
+          "10",
+          "12"
+        ]
+      },
+      "rows": [
+        {
+          "actuator": "PC2208RA 085D",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "3.2",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "1.9",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2208RA 085D",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "5",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "4.1",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2209RA 095D",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "5",
+            "0.9",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "5.8",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2209RA 095D",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "5",
+            "2.1",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "8.6",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2211RA 110D",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "2.1",
+            "0.4",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "8.9",
+            "0.3",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2211RA 110D",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "4.1",
+            "1.6",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "10.2",
+            "0.9",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2212RA 125D",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "5",
+            "2.5",
+            "0.2",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "3.7",
+            "0.2",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2212RA 125D",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "5",
+            "3.5",
+            "0.6",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "6",
+            "0.7",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2214RA 140D",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "4",
+            "1",
+            "0.2",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "8.2",
+            "1.5",
+            "0.2",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2214RA 140D",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "5",
+            "1.6",
+            "0.7",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "10.2",
+            "1.9",
+            "0.6",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2216RA 160D",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "5",
+            "2.3",
+            "1.1",
+            "0.2"
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "3.4",
+            "0.8",
+            "0.2",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2216RA 160D",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "5",
+            "2.8",
+            "1.6",
+            "0.7"
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "5.5",
+            "1.5",
+            "0.7",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2219RA 190D",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "4.2",
+            "2.6",
+            "0.9"
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "7.9",
+            "3",
+            "0.9",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2219RA 190D",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "5",
+            "3.8",
+            "1.4"
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "10.2",
+            "3.8",
+            "1.8",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2221RA 210D",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "4.2",
+            "1.8"
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "5.2",
+            "3.2",
+            "0.3"
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2221RA 210D",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "5",
+            "2.6"
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "7.6",
+            "4.9",
+            "0.9"
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2224RA 240D",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "3.6"
+          ],
+          "ANSI150_300_Trunnion": [
+            "0.3",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "10.2",
+            "6.1",
+            "1.9"
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2224RA 240D",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "4.8"
+          ],
+          "ANSI150_300_Trunnion": [
+            "0.9",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "10.2",
+            "8.6",
+            "3.6"
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2227RA 270D",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "5"
+          ],
+          "ANSI150_300_Trunnion": [
+            "1.3",
+            "0.2",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "10.2",
+            "4.8"
+          ],
+          "ANSI600_Trunnion": [
+            "0.3",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2227RA 270D",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "5"
+          ],
+          "ANSI150_300_Trunnion": [
+            "2",
+            "0.7",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "10.2",
+            "6"
+          ],
+          "ANSI600_Trunnion": [
+            "0.9",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4213RA 130",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "2.6",
+            "1.2",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "0.7",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4213RA 130",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "3.8",
+            "1.9",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "1.6",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4217RA 170",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "5",
+            "4.8",
+            "1.8"
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "5.6",
+            "3.4",
+            "0.3"
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4217RA 170",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "5",
+            "5",
+            "2.8"
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "8",
+            "5.2",
+            "0.9"
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4220RA 200",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "5"
+          ],
+          "ANSI150_300_Trunnion": [
+            "1.5",
+            "0.3",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "10.2",
+            "10.2",
+            "5.3"
+          ],
+          "ANSI600_Trunnion": [
+            "0.3",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4220RA 200",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "5"
+          ],
+          "ANSI150_300_Trunnion": [
+            "2.2",
+            "0.8",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "10.2",
+            "10.2",
+            "7.4"
+          ],
+          "ANSI600_Trunnion": [
+            "1",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4225RA 250",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "3.8",
+            "1.3",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "10.2"
+          ],
+          "ANSI600_Trunnion": [
+            "2.1",
+            "0.3",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4225RA 250",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "5",
+            "2",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "10.2"
+          ],
+          "ANSI600_Trunnion": [
+            "3.8",
+            "1",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4228RA 280",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "3",
+            "0.9",
+            "0.3"
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "5.5",
+            "1.9",
+            "0.4",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4228RA 280",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "4.7",
+            "1.6",
+            "0.9"
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "7.6",
+            "3.4",
+            "1",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4235RA 350",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "3.8",
+            "2.1"
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "10.2",
+            "6.2",
+            "2.5",
+            "1"
+          ]
+        },
+        {
+          "actuator": "PC4235RA 350",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "5",
+            "3.1"
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "10.2",
+            "8.4",
+            "4.8",
+            "1.3"
+          ]
+        },
+        {
+          "actuator": "PC4240RA 400",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            "3.6"
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "9.2",
+            "5",
+            "2"
+          ]
+        },
+        {
+          "actuator": "PC4240RA 400",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            "4.8"
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "10.2",
+            "6.8",
+            "3.4"
+          ]
+        }
+      ],
+      "note_316_stem_max": [
+        "5",
+        "4",
+        "5",
+        "1",
+        "1",
+        "1",
+        "5",
+        "5",
+        "5",
+        "5",
+        "10.2",
+        "10.2",
+        "10.2",
+        "10.2",
+        "10.2",
+        "10.2",
+        "10.2",
+        "10.2",
+        "10.2",
+        "10.2"
+      ]
+    },
+    "table_4_2_spring_return": {
+      "valve_size_inch": {
+        "ANSI150_300_inch_floating": [
+          "1",
+          "1.5",
+          "2",
+          "2.5",
+          "3",
+          "4"
+        ],
+        "ANSI150_300_inch_trunnion": [
+          "6",
+          "8",
+          "10",
+          "12"
+        ],
+        "ANSI600_inch_floating": [
+          "1",
+          "1.5",
+          "2",
+          "2.5",
+          "3",
+          "4"
+        ],
+        "ANSI600_inch_trunnion": [
+          "6",
+          "8",
+          "10",
+          "12"
+        ]
+      },
+      "rows": [
+        {
+          "actuator": "PC2111RA 110S",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "1",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "0.3",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2111RA 110S",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "2.8",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "1.6",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2112RA 125S",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "5",
+            "0.4",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "4",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2112RA 125S",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "5",
+            "1.5",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "7.5",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2114RA 140S",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "3",
+            "0.5",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "10.2",
+            "0.7",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2114RA 140S",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "4.8",
+            "1.6",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "10.2",
+            "1",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2116RA 160S",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "5",
+            "1.8",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "1.8",
+            "0.2",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2116RA 160S",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "5",
+            "2.2",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "3.8",
+            "0.6",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2119RA 190S",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "3.6",
+            "0.9",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "7.4",
+            "1.3",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2119RA 190S",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "4.5",
+            "1.4",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "10.2",
+            "1.7",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2121RA 210S",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "5",
+            "1.6",
+            "0.7",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "1.8",
+            "0.6",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2121RA 210S",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "5",
+            "2.5",
+            "1.4",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "3.8",
+            "1.3",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2124RA 240S",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "4",
+            "2.4",
+            "0.8"
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "7.5",
+            "2.8",
+            "0.8",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2124RA 240S",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "5",
+            "3.5",
+            "1.3"
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "10.2",
+            "3.6",
+            "1.6",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2127RA 270S",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "3.8",
+            "1.6"
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "3.8",
+            "1.9",
+            "0.3"
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC2127RA 270S",
+          "air_supply_kPa": "500",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "5",
+            "2.4"
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "6",
+            "3.6",
+            "0.8"
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4117RA 170",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "2.5",
+            "1.4",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "0.7",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4120RA 200",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "5",
+            "5",
+            "2.5"
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "7.3",
+            "3.8",
+            "0.9"
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4125RA 250",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "4"
+          ],
+          "ANSI150_300_Trunnion": [
+            "0.8",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "10.2",
+            "7.8",
+            "3.2"
+          ],
+          "ANSI600_Trunnion": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4128RA 280",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "5"
+          ],
+          "ANSI150_300_Trunnion": [
+            "2.6",
+            "0.8",
+            "",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "10.2",
+            "7.1"
+          ],
+          "ANSI600_Trunnion": [
+            "1",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4135RA 350",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "5",
+            "2.9",
+            "0.9",
+            ""
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "10.2"
+          ],
+          "ANSI600_Trunnion": [
+            "5.4",
+            "1.9",
+            "0.4",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4140RA 400",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "4.8",
+            "1.9",
+            "0.9"
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "7.9",
+            "3.4",
+            "1.6",
+            ""
+          ]
+        },
+        {
+          "actuator": "PC4150RA 400",
+          "air_supply_kPa": "400",
+          "ANSI150_300_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI150_300_Trunnion": [
+            "",
+            "",
+            "5",
+            "3"
+          ],
+          "ANSI600_Floating": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "ANSI600_Trunnion": [
+            "10.2",
+            "8.7",
+            "4.2",
+            "1.9"
+          ]
+        }
+      ],
+      "note_316_stem_max": [
+        "5",
+        "4",
+        "5",
+        "1",
+        "1",
+        "1",
+        "5",
+        "5",
+        "5",
+        "5",
+        "10.2",
+        "10.2",
+        "10.2",
+        "10.2",
+        "10.2",
+        "10.2",
+        "10.2",
+        "10.2",
+        "10.2",
+        "10.2"
+      ]
+    },
+    "note": "配电动执行机构、气缸式执行机构最大允许压差请向工厂咨询。"
+  },
+  "net_weight": {
+    "unit": "kg",
+    "note": "不包括控制附件重量",
+    "table_5": [
+      {
+        "size_inch": "1",
+        "size_mm": "(25)",
+        "ANSI150_300_kg": "10",
+        "ANSI600_kg": "12"
+      },
+      {
+        "size_inch": "1-1/2",
+        "size_mm": "(40)",
+        "ANSI150_300_kg": "16",
+        "ANSI600_kg": "20"
+      },
+      {
+        "size_inch": "2",
+        "size_mm": "(50)",
+        "ANSI150_300_kg": "20",
+        "ANSI600_kg": "24"
+      },
+      {
+        "size_inch": "2-1/2",
+        "size_mm": "(65)",
+        "ANSI150_300_kg": "26",
+        "ANSI600_kg": "35"
+      },
+      {
+        "size_inch": "3",
+        "size_mm": "(80)",
+        "ANSI150_300_kg": "32",
+        "ANSI600_kg": "43"
+      },
+      {
+        "size_inch": "4",
+        "size_mm": "(100)",
+        "ANSI150_300_kg": "54",
+        "ANSI600_kg": "60"
+      },
+      {
+        "size_inch": "6",
+        "size_mm": "(150)",
+        "ANSI150_300_kg": "120",
+        "ANSI600_kg": "160"
+      },
+      {
+        "size_inch": "8",
+        "size_mm": "(200)",
+        "ANSI150_300_kg": "190",
+        "ANSI600_kg": "220"
+      },
+      {
+        "size_inch": "10",
+        "size_mm": "(250)",
+        "ANSI150_300_kg": "300",
+        "ANSI600_kg": "350"
+      },
+      {
+        "size_inch": "12",
+        "size_mm": "(300)",
+        "ANSI150_300_kg": "440",
+        "ANSI600_kg": "520"
+      }
+    ]
+  },
+  "dimensions": {
+    "unit": "mm",
+    "table": [
+      {
+        "size_inch": "1",
+        "size_mm": "25",
+        "ANSI150_PN1.6": {
+          "L": "165",
+          "H1": "44.5",
+          "H2": "44.5"
+        },
+        "ANSI300_PN2.5_4.0": {
+          "L": "165",
+          "H1": "44.5",
+          "H2": "44.5"
+        },
+        "ANSI600_PN6.3_10.0": {
+          "L": "216",
+          "H1": "60",
+          "H2": "45"
+        }
+      },
+      {
+        "size_inch": "1.5",
+        "size_mm": "40",
+        "ANSI150_PN1.6": {
+          "L": "165",
+          "H1": "59.5",
+          "H2": "54"
+        },
+        "ANSI300_PN2.5_4.0": {
+          "L": "190",
+          "H1": "59.5",
+          "H2": "54"
+        },
+        "ANSI600_PN6.3_10.0": {
+          "L": "241",
+          "H1": "90",
+          "H2": "72"
+        }
+      },
+      {
+        "size_inch": "2",
+        "size_mm": "50",
+        "ANSI150_PN1.6": {
+          "L": "178",
+          "H1": "79",
+          "H2": "62.5"
+        },
+        "ANSI300_PN2.5_4.0": {
+          "L": "216",
+          "H1": "79",
+          "H2": "62.5"
+        },
+        "ANSI600_PN6.3_10.0": {
+          "L": "292",
+          "H1": "102.5",
+          "H2": "87.5"
+        }
+      },
+      {
+        "size_inch": "2.5",
+        "size_mm": "65",
+        "ANSI150_PN1.6": {
+          "L": "190",
+          "H1": "101",
+          "H2": "85"
+        },
+        "ANSI300_PN2.5_4.0": {
+          "L": "241",
+          "H1": "101",
+          "H2": "83.3"
+        },
+        "ANSI600_PN6.3_10.0": {
+          "L": "330",
+          "H1": "135",
+          "H2": "100"
+        }
+      },
+      {
+        "size_inch": "3",
+        "size_mm": "80",
+        "ANSI150_PN1.6": {
+          "L": "203",
+          "H1": "116",
+          "H2": "98"
+        },
+        "ANSI300_PN2.5_4.0": {
+          "L": "282",
+          "H1": "116",
+          "H2": "98"
+        },
+        "ANSI600_PN6.3_10.0": {
+          "L": "356",
+          "H1": "155",
+          "H2": "110"
+        }
+      },
+      {
+        "size_inch": "4",
+        "size_mm": "100",
+        "ANSI150_PN1.6": {
+          "L": "229",
+          "H1": "131",
+          "H2": "112"
+        },
+        "ANSI300_PN2.5_4.0": {
+          "L": "305",
+          "H1": "131",
+          "H2": "111"
+        },
+        "ANSI600_PN6.3_10.0": {
+          "L": "432",
+          "H1": "168.5",
+          "H2": "145"
+        }
+      },
+      {
+        "size_inch": "6",
+        "size_mm": "150",
+        "ANSI150_PN1.6": {
+          "L": "394",
+          "H1": "206",
+          "H2": "170"
+        },
+        "ANSI300_PN2.5_4.0": {
+          "L": "403",
+          "H1": "206",
+          "H2": "170"
+        },
+        "ANSI600_PN6.3_10.0": {
+          "L": "559",
+          "H1": "230",
+          "H2": "192.5"
+        }
+      },
+      {
+        "size_inch": "8",
+        "size_mm": "200",
+        "ANSI150_PN1.6": {
+          "L": "457",
+          "H1": "250",
+          "H2": "215"
+        },
+        "ANSI300_PN2.5_4.0": {
+          "L": "502",
+          "H1": "250",
+          "H2": "215"
+        },
+        "ANSI600_PN6.3_10.0": {
+          "L": "660",
+          "H1": "290",
+          "H2": "245"
+        }
+      },
+      {
+        "size_inch": "10",
+        "size_mm": "250",
+        "ANSI150_PN1.6": {
+          "L": "533",
+          "H1": "302.5",
+          "H2": "257.5"
+        },
+        "ANSI300_PN2.5_4.0": {
+          "L": "568",
+          "H1": "302.5",
+          "H2": "257.5"
+        },
+        "ANSI600_PN6.3_10.0": {
+          "L": "787",
+          "H1": "360",
+          "H2": "310"
+        }
+      },
+      {
+        "size_inch": "12",
+        "size_mm": "300",
+        "ANSI150_PN1.6": {
+          "L": "610",
+          "H1": "355",
+          "H2": "300"
+        },
+        "ANSI300_PN2.5_4.0": {
+          "L": "648",
+          "H1": "355",
+          "H2": "300"
+        },
+        "ANSI600_PN6.3_10.0": {
+          "L": "838",
+          "H1": "425",
+          "H2": "370"
+        }
+      }
+    ]
+  },
+  "appendix": {
+    "appendix_1_body_material_pt_ANSI": {
+      "unit": "MPa G",
+      "classes": {
+        "ANSI Class 150": [
+          "A352 LCB",
+          "A216 WCB",
+          "A217 WC6",
+          "A217 WC9",
+          "A351 CF8",
+          "A351 CF8M"
+        ],
+        "ANSI Class 300": [
+          "A352 LCB",
+          "A216 WCB",
+          "A217 WC6",
+          "A217 WC9",
+          "A351 CF8",
+          "A351 CF8M"
+        ],
+        "ANSI Class 600": [
+          "A352 LCB",
+          "A216 WCB",
+          "A217 WC6",
+          "A217 WC9",
+          "A351 CF8",
+          "A351 CF8M"
+        ]
+      },
+      "rows": [
+        {
+          "temp_range_c": "-196~38",
+          "ANSI150": {
+            "A352 LCB": "—",
+            "A216 WCB": "—",
+            "A217 WC6": "—",
+            "A217 WC9": "—",
+            "A351 CF8": "1.90",
+            "A351 CF8M": "1.90"
+          },
+          "ANSI300": {
+            "A352 LCB": "—",
+            "A216 WCB": "—",
+            "A217 WC6": "—",
+            "A217 WC9": "—",
+            "A351 CF8": "4.95",
+            "A351 CF8M": "4.95"
+          },
+          "ANSI600": {
+            "A352 LCB": "—",
+            "A216 WCB": "—",
+            "A217 WC6": "—",
+            "A217 WC9": "—",
+            "A351 CF8": "9.91",
+            "A351 CF8M": "9.92"
+          }
+        },
+        {
+          "temp_range_c": "-45~38",
+          "ANSI150": {
+            "A352 LCB": "1.84",
+            "A216 WCB": "—",
+            "A217 WC6": "—",
+            "A217 WC9": "—",
+            "A351 CF8": "1.90",
+            "A351 CF8M": "1.90"
+          },
+          "ANSI300": {
+            "A352 LCB": "4.78",
+            "A216 WCB": "—",
+            "A217 WC6": "—",
+            "A217 WC9": "—",
+            "A351 CF8": "4.95",
+            "A351 CF8M": "4.95"
+          },
+          "ANSI600": {
+            "A352 LCB": "9.57",
+            "A216 WCB": "—",
+            "A217 WC6": "—",
+            "A217 WC9": "—",
+            "A351 CF8": "9.91",
+            "A351 CF8M": "9.92"
+          }
+        },
+        {
+          "temp_range_c": "-5~38",
+          "ANSI150": {
+            "A352 LCB": "1.84",
+            "A216 WCB": "1.96",
+            "A217 WC6": "1.99",
+            "A217 WC9": "1.99",
+            "A351 CF8": "1.90",
+            "A351 CF8M": "1.90"
+          },
+          "ANSI300": {
+            "A352 LCB": "4.78",
+            "A216 WCB": "5.10",
+            "A217 WC6": "5.16",
+            "A217 WC9": "5.16",
+            "A351 CF8": "4.95",
+            "A351 CF8M": "4.95"
+          },
+          "ANSI600": {
+            "A352 LCB": "9.57",
+            "A216 WCB": "10.20",
+            "A217 WC6": "10.32",
+            "A217 WC9": "10.32",
+            "A351 CF8": "9.91",
+            "A351 CF8M": "9.92"
+          }
+        },
+        {
+          "temp_range_c": "50",
+          "ANSI150": {
+            "A352 LCB": "1.81",
+            "A216 WCB": "1.92",
+            "A217 WC6": "1.92",
+            "A217 WC9": "1.92",
+            "A351 CF8": "1.84",
+            "A351 CF8M": "1.84"
+          },
+          "ANSI300": {
+            "A352 LCB": "4.72",
+            "A216 WCB": "5.00",
+            "A217 WC6": "5.10",
+            "A217 WC9": "5.11",
+            "A351 CF8": "4.77",
+            "A351 CF8M": "4.80"
+          },
+          "ANSI600": {
+            "A352 LCB": "9.46",
+            "A216 WCB": "10.01",
+            "A217 WC6": "10.22",
+            "A217 WC9": "10.22",
+            "A351 CF8": "9.56",
+            "A351 CF8M": "9.62"
+          }
+        },
+        {
+          "temp_range_c": "100",
+          "ANSI150": {
+            "A352 LCB": "1.72",
+            "A216 WCB": "1.76",
+            "A217 WC6": "1.76",
+            "A217 WC9": "1.76",
+            "A351 CF8": "1.56",
+            "A351 CF8M": "1.61"
+          },
+          "ANSI300": {
+            "A352 LCB": "4.51",
+            "A216 WCB": "4.63",
+            "A217 WC6": "4.88",
+            "A217 WC9": "4.89",
+            "A351 CF8": "4.08",
+            "A351 CF8M": "4.21"
+          },
+          "ANSI600": {
+            "A352 LCB": "9.02",
+            "A216 WCB": "9.27",
+            "A217 WC6": "9.74",
+            "A217 WC9": "9.79",
+            "A351 CF8": "8.17",
+            "A351 CF8M": "8.43"
+          }
+        },
+        {
+          "temp_range_c": "150",
+          "ANSI150": {
+            "A352 LCB": "1.57",
+            "A216 WCB": "1.57",
+            "A217 WC6": "1.57",
+            "A217 WC9": "1.57",
+            "A351 CF8": "1.39",
+            "A351 CF8M": "1.47"
+          },
+          "ANSI300": {
+            "A352 LCB": "4.40",
+            "A216 WCB": "4.51",
+            "A217 WC6": "4.63",
+            "A217 WC9": "4.65",
+            "A351 CF8": "3.62",
+            "A351 CF8M": "3.85"
+          },
+          "ANSI600": {
+            "A352 LCB": "8.78",
+            "A216 WCB": "9.04",
+            "A217 WC6": "9.26",
+            "A217 WC9": "9.31",
+            "A351 CF8": "7.26",
+            "A351 CF8M": "7.69"
+          }
+        },
+        {
+          "temp_range_c": "200",
+          "ANSI150": {
+            "A352 LCB": "1.40",
+            "A216 WCB": "1.40",
+            "A217 WC6": "1.40",
+            "A217 WC9": "1.40",
+            "A351 CF8": "1.25",
+            "A351 CF8M": "1.37"
+          },
+          "ANSI300": {
+            "A352 LCB": "4.26",
+            "A216 WCB": "4.38",
+            "A217 WC6": "4.54",
+            "A217 WC9": "4.47",
+            "A351 CF8": "3.27",
+            "A351 CF8M": "3.56"
+          },
+          "ANSI600": {
+            "A352 LCB": "8.54",
+            "A216 WCB": "8.75",
+            "A217 WC6": "9.09",
+            "A217 WC9": "8.95",
+            "A351 CF8": "6.54",
+            "A351 CF8M": "7.12"
+          }
+        },
+        {
+          "temp_range_c": "250",
+          "ANSI150": {
+            "A352 LCB": "1.20",
+            "A216 WCB": "1.20",
+            "A217 WC6": "1.20",
+            "A217 WC9": "1.20",
+            "A351 CF8": "1.16",
+            "A351 CF8M": "1.20"
+          },
+          "ANSI300": {
+            "A352 LCB": "4.05",
+            "A216 WCB": "4.16",
+            "A217 WC6": "4.44",
+            "A217 WC9": "4.41",
+            "A351 CF8": "3.04",
+            "A351 CF8M": "3.34"
+          },
+          "ANSI600": {
+            "A352 LCB": "8.11",
+            "A216 WCB": "8.33",
+            "A217 WC6": "8.88",
+            "A217 WC9": "8.82",
+            "A351 CF8": "6.10",
+            "A351 CF8M": "6.67"
+          }
+        },
+        {
+          "temp_range_c": "300",
+          "ANSI150": {
+            "A352 LCB": "1.01",
+            "A216 WCB": "1.01",
+            "A217 WC6": "1.01",
+            "A217 WC9": "1.01",
+            "A351 CF8": "1.01",
+            "A351 CF8M": "1.01"
+          },
+          "ANSI300": {
+            "A352 LCB": "3.76",
+            "A216 WCB": "3.87",
+            "A217 WC6": "4.23",
+            "A217 WC9": "4.23",
+            "A351 CF8": "2.91",
+            "A351 CF8M": "3.15"
+          },
+          "ANSI600": {
+            "A352 LCB": "7.54",
+            "A216 WCB": "7.74",
+            "A217 WC6": "8.48",
+            "A217 WC9": "8.47",
+            "A351 CF8": "5.80",
+            "A351 CF8M": "6.32"
+          }
+        },
+        {
+          "temp_range_c": "350",
+          "ANSI150": {
+            "A352 LCB": "0.84",
+            "A216 WCB": "0.84",
+            "A217 WC6": "0.84",
+            "A217 WC9": "0.84",
+            "A351 CF8": "0.84",
+            "A351 CF8M": "0.84"
+          },
+          "ANSI300": {
+            "A352 LCB": "3.59",
+            "A216 WCB": "3.69",
+            "A217 WC6": "4.01",
+            "A217 WC9": "4.01",
+            "A351 CF8": "2.81",
+            "A351 CF8M": "3.03"
+          },
+          "ANSI600": {
+            "A352 LCB": "7.18",
+            "A216 WCB": "7.38",
+            "A217 WC6": "8.04",
+            "A217 WC9": "8.04",
+            "A351 CF8": "5.60",
+            "A351 CF8M": "6.07"
+          }
+        },
+        {
+          "temp_range_c": "375",
+          "ANSI150": {
+            "A352 LCB": "",
+            "A216 WCB": "0.73",
+            "A217 WC6": "0.73",
+            "A217 WC9": "0.73",
+            "A351 CF8": "0.73",
+            "A351 CF8M": "0.73"
+          },
+          "ANSI300": {
+            "A352 LCB": "",
+            "A216 WCB": "3.64",
+            "A217 WC6": "3.88",
+            "A217 WC9": "3.87",
+            "A351 CF8": "2.77",
+            "A351 CF8M": "2.96"
+          },
+          "ANSI600": {
+            "A352 LCB": "",
+            "A216 WCB": "7.28",
+            "A217 WC6": "7.75",
+            "A217 WC9": "7.75",
+            "A351 CF8": "5.54",
+            "A351 CF8M": "5.93"
+          }
+        },
+        {
+          "temp_range_c": "400",
+          "ANSI150": {
+            "A352 LCB": "",
+            "A216 WCB": "0.64",
+            "A217 WC6": "0.64",
+            "A217 WC9": "0.64",
+            "A351 CF8": "0.64",
+            "A351 CF8M": "0.64"
+          },
+          "ANSI300": {
+            "A352 LCB": "",
+            "A216 WCB": "3.44",
+            "A217 WC6": "3.65",
+            "A217 WC9": "3.65",
+            "A351 CF8": "2.74",
+            "A351 CF8M": "2.91"
+          },
+          "ANSI600": {
+            "A352 LCB": "",
+            "A216 WCB": "6.89",
+            "A217 WC6": "7.31",
+            "A217 WC9": "7.31",
+            "A351 CF8": "5.48",
+            "A351 CF8M": "5.81"
+          }
+        },
+        {
+          "temp_range_c": "425",
+          "ANSI150": {
+            "A352 LCB": "",
+            "A216 WCB": "0.55",
+            "A217 WC6": "0.55",
+            "A217 WC9": "0.55",
+            "A351 CF8": "0.55",
+            "A351 CF8M": "0.55"
+          },
+          "ANSI300": {
+            "A352 LCB": "",
+            "A216 WCB": "2.88",
+            "A217 WC6": "3.50",
+            "A217 WC9": "3.50",
+            "A351 CF8": "2.71",
+            "A351 CF8M": "2.87"
+          },
+          "ANSI600": {
+            "A352 LCB": "",
+            "A216 WCB": "5.74",
+            "A217 WC6": "7.01",
+            "A217 WC9": "7.01",
+            "A351 CF8": "5.42",
+            "A351 CF8M": "5.72"
+          }
+        },
+        {
+          "temp_range_c": "450",
+          "ANSI150": {
+            "A352 LCB": "",
+            "A216 WCB": "0.47",
+            "A217 WC6": "0.47",
+            "A217 WC9": "0.47",
+            "A351 CF8": "0.47",
+            "A351 CF8M": "0.47"
+          },
+          "ANSI300": {
+            "A352 LCB": "",
+            "A216 WCB": "1.99",
+            "A217 WC6": "3.38",
+            "A217 WC9": "3.37",
+            "A351 CF8": "2.68",
+            "A351 CF8M": "2.81"
+          },
+          "ANSI600": {
+            "A352 LCB": "",
+            "A216 WCB": "4.00",
+            "A217 WC6": "6.75",
+            "A217 WC9": "6.75",
+            "A351 CF8": "5.37",
+            "A351 CF8M": "5.61"
+          }
+        },
+        {
+          "temp_range_c": "475",
+          "ANSI150": {
+            "A352 LCB": "",
+            "A216 WCB": "0.37",
+            "A217 WC6": "0.37",
+            "A217 WC9": "0.37",
+            "A351 CF8": "0.37",
+            "A351 CF8M": "0.37"
+          },
+          "ANSI300": {
+            "A352 LCB": "",
+            "A216 WCB": "1.35",
+            "A217 WC6": "3.16",
+            "A217 WC9": "3.16",
+            "A351 CF8": "2.65",
+            "A351 CF8M": "2.73"
+          },
+          "ANSI600": {
+            "A352 LCB": "",
+            "A216 WCB": "2.70",
+            "A217 WC6": "6.32",
+            "A217 WC9": "6.32",
+            "A351 CF8": "5.30",
+            "A351 CF8M": "5.46"
+          }
+        },
+        {
+          "temp_range_c": "500",
+          "ANSI150": {
+            "A352 LCB": "",
+            "A216 WCB": "0.28",
+            "A217 WC6": "0.28",
+            "A217 WC9": "0.28",
+            "A351 CF8": "0.28",
+            "A351 CF8M": "0.28"
+          },
+          "ANSI300": {
+            "A352 LCB": "",
+            "A216 WCB": "0.88",
+            "A217 WC6": "2.77",
+            "A217 WC9": "2.77",
+            "A351 CF8": "2.60",
+            "A351 CF8M": "2.67"
+          },
+          "ANSI600": {
+            "A352 LCB": "",
+            "A216 WCB": "1.75",
+            "A217 WC6": "5.55",
+            "A217 WC9": "5.55",
+            "A351 CF8": "5.20",
+            "A351 CF8M": "5.37"
+          }
+        },
+        {
+          "temp_range_c": "525",
+          "ANSI150": {
+            "A352 LCB": "",
+            "A216 WCB": "0.18",
+            "A217 WC6": "0.18",
+            "A217 WC9": "0.18",
+            "A351 CF8": "0.18",
+            "A351 CF8M": "0.18"
+          },
+          "ANSI300": {
+            "A352 LCB": "",
+            "A216 WCB": "0.51",
+            "A217 WC6": "2.02",
+            "A217 WC9": "2.18",
+            "A351 CF8": "2.19",
+            "A351 CF8M": "2.57"
+          },
+          "ANSI600": {
+            "A352 LCB": "",
+            "A216 WCB": "1.03",
+            "A217 WC6": "4.04",
+            "A217 WC9": "4.36",
+            "A351 CF8": "4.77",
+            "A351 CF8M": "5.15"
+          }
+        },
+        {
+          "temp_range_c": "538",
+          "ANSI150": {
+            "A352 LCB": "",
+            "A216 WCB": "0.13",
+            "A217 WC6": "0.15",
+            "A217 WC9": "0.15",
+            "A351 CF8": "0.15",
+            "A351 CF8M": "0.15"
+          },
+          "ANSI300": {
+            "A352 LCB": "",
+            "A216 WCB": "0.34",
+            "A217 WC6": "1.63",
+            "A217 WC9": "1.63",
+            "A351 CF8": "2.18",
+            "A351 CF8M": "2.53"
+          },
+          "ANSI600": {
+            "A352 LCB": "",
+            "A216 WCB": "0.72",
+            "A217 WC6": "3.26",
+            "A217 WC9": "3.26",
+            "A351 CF8": "4.55",
+            "A351 CF8M": "5.06"
+          }
+        }
+      ]
+    },
+    "appendix_1_china_standard_PN": {
+      "unit": "MPa G",
+      "standard": "JB/T79-94或HG/T20592-2009",
+      "blocks": [
+        {
+          "material": "ZG230-450",
+          "rows": [
+            {
+              "temp_c": "-5~200",
+              "PN16": "1.60",
+              "PN40": "4.00",
+              "PN63": "6.30",
+              "PN100": "10.00"
+            },
+            {
+              "temp_c": "~250",
+              "PN16": "1.40",
+              "PN40": "3.50",
+              "PN63": "5.40",
+              "PN100": "9.00"
+            },
+            {
+              "temp_c": "~300",
+              "PN16": "1.20",
+              "PN40": "3.00",
+              "PN63": "4.80",
+              "PN100": "7.50"
+            },
+            {
+              "temp_c": "~350",
+              "PN16": "1.10",
+              "PN40": "2.60",
+              "PN63": "4.00",
+              "PN100": "6.60"
+            },
+            {
+              "temp_c": "~400",
+              "PN16": "0.90",
+              "PN40": "2.30",
+              "PN63": "3.70",
+              "PN100": "5.80"
+            },
+            {
+              "temp_c": "~425",
+              "PN16": "0.80",
+              "PN40": "2.00",
+              "PN63": "3.20",
+              "PN100": "5.00"
+            },
+            {
+              "temp_c": "~435",
+              "PN16": "0.70",
+              "PN40": "1.80",
+              "PN63": "2.80",
+              "PN100": "4.50"
+            },
+            {
+              "temp_c": "~445",
+              "PN16": "0.62",
+              "PN40": "1.60",
+              "PN63": "2.50",
+              "PN100": "4.20"
+            },
+            {
+              "temp_c": "~455",
+              "PN16": "0.57",
+              "PN40": "1.40",
+              "PN63": "2.30",
+              "PN100": "3.60"
+            }
+          ]
+        },
+        {
+          "material": "ZG0Cr18Ni9",
+          "rows": [
+            {
+              "temp_c": "-45~200",
+              "PN16": "1.60",
+              "PN40": "4.00",
+              "PN63": "6.30",
+              "PN100": "10.00"
+            },
+            {
+              "temp_c": "~300",
+              "PN16": "1.40",
+              "PN40": "3.50",
+              "PN63": "5.40",
+              "PN100": "9.00"
+            },
+            {
+              "temp_c": "~400",
+              "PN16": "1.20",
+              "PN40": "3.00",
+              "PN63": "4.80",
+              "PN100": "7.50"
+            },
+            {
+              "temp_c": "~480",
+              "PN16": "1.10",
+              "PN40": "2.60",
+              "PN63": "4.00",
+              "PN100": "6.60"
+            },
+            {
+              "temp_c": "~520",
+              "PN16": "0.90",
+              "PN40": "2.30",
+              "PN63": "3.70",
+              "PN100": "5.80"
+            },
+            {
+              "temp_c": "~560",
+              "PN16": "0.80",
+              "PN40": "2.00",
+              "PN63": "3.20",
+              "PN100": "5.00"
+            }
+          ]
+        }
+      ]
+    },
+    "appendix_2_pressure_rating_comparison": {
+      "美国标准": [
+        "ANSI 150#",
+        "ANSI 300#",
+        "ANSI 600#",
+        "ANSI 900#",
+        "ANSI 1500#",
+        "ANSI 2500#"
+      ],
+      "中国标准": [
+        "PN 16",
+        "PN 40",
+        "PN 63, PN 100",
+        "",
+        "",
+        ""
+      ]
+    },
+    "appendix_3_material_comparison": {
+      "美国标准": [
+        "A216-WCB",
+        "A351-CF8",
+        "A351-CF8M",
+        "A217-WC6",
+        "A217-WC9",
+        "A352-LCB"
+      ],
+      "中国标准": [
+        "ZG230-450",
+        "ZG0Cr18nI9",
+        "ZG0Cr18Ni12Mo2Ti",
+        "ZG15CrMo",
+        "",
+        ""
+      ]
+    }
+  },
+  "pressure_temp_curves": {
+    "note": "p9(印刷页7) 为图形曲线, 无数据表",
+    "fig_2_gland_packing": {
+      "fig_2_1_carbon_plus_ptfe_fibre": {
+        "x_temp_c": [
+          -45,
+          0,
+          50,
+          100,
+          150,
+          230
+        ],
+        "y_pressure_MPa_G": [
+          0,
+          2.0
+        ]
+      },
+      "fig_2_2_grafoil": {
+        "x_temp_c": [
+          -196,
+          -100,
+          0,
+          100,
+          200,
+          300,
+          400,
+          538
+        ],
+        "y_pressure_MPa_G": [
+          0,
+          10.5
+        ]
+      }
+    },
+    "fig_3_gasket": {
+      "fig_3_1_T9090_316_316L": {
+        "x_temp_c": [
+          -196,
+          0,
+          100,
+          150,
+          230
+        ],
+        "y_pressure_MPa_G": [
+          0,
+          2.0
+        ]
+      },
+      "fig_3_2_T1806GR_316_316L": {
+        "x_temp_c": [
+          -196,
+          -100,
+          0,
+          100,
+          200,
+          300,
+          400,
+          538
+        ],
+        "y_pressure_MPa_G": [
+          0,
+          10.5
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,1054 @@
+{
+  "label": "PC3000LA",
+  "source_pdf": "参考文件/选型样本/PC3000LA(压缩).pdf",
+  "doc_code": "SD-PC3000LA-A",
+  "spec_data_rev": "PC3000LA 01/15",
+  "series": {
+    "zh": "PC3000LA系列 气缸式执行机构",
+    "en": "PC3000LA SERIES Linear Stem Motion Type Pneumatic Cylinder Actuators"
+  },
+  "page_offset": "PDF页 = 印刷页 + 2",
+  "general_data": {
+    "source_page": "PDF p4 (印刷页2)",
+    "specifications": {
+      "type": "PC3000LA",
+      "action_type": {
+        "double_acting": {
+          "zh": "双动作型",
+          "model": "PC3200LA",
+          "en": "Double acting type: PC3200LA"
+        },
+        "spring_return": {
+          "zh": "单动作型",
+          "model": "PC3100LA",
+          "en": "Spring return type: PC3100LA"
+        }
+      },
+      "air_supply": {
+        "double_acting": "300~500kPa G",
+        "spring_return": "500kPa G"
+      },
+      "output_force": {
+        "zh": "请参见表1",
+        "en": "See Table.1",
+        "note": "原文引用表1,实际为表1-1/表1-2"
+      },
+      "air_connection": "Rc3/8 ~ Rc3/4",
+      "painting": {
+        "zh": "银灰色",
+        "en": "Gray"
+      }
+    },
+    "performance": {
+      "hysteresis": {
+        "double_acting_with_positioner": {
+          "zh": "双动作带定位器时 1.0%FS 以内",
+          "en": "Double acting type with positioner: Less than 1.0% of Full stroke."
+        },
+        "spring_return_with_positioner": {
+          "zh": "单动作带定位器时 1.5%FS 以内",
+          "en": "Spring return type with positioner: Less than 1.5% of Full stroke."
+        }
+      },
+      "linearity": {
+        "zh": "带定位器时 ±2.0%FS 以内",
+        "en": "Less than ±2.0% of Full stroke with positioner."
+      },
+      "ambient_temp": {
+        "standard": "-20~+60℃",
+        "high_temperature_option": "0~+100℃",
+        "low_temperature_option": "-50~+60℃"
+      }
+    },
+    "materials": [
+      {
+        "part_zh": "缸筒",
+        "part_en": "Cylinder",
+        "material_zh": "钢管",
+        "material_en": "Steel pipe"
+      },
+      {
+        "part_zh": "活塞",
+        "part_en": "Piston",
+        "material_zh": "铝合金或碳钢",
+        "material_en": "Aluminum or Steel"
+      },
+      {
+        "part_zh": "活塞密封圈",
+        "part_en": "Piston-Ring",
+        "material_zh": "丁腈橡胶或氟橡胶",
+        "material_en": "NBR or Viton"
+      },
+      {
+        "part_zh": "输出轴",
+        "part_en": "Drive Shaft",
+        "material_zh": "不锈钢",
+        "material_en": "Stainless steel"
+      },
+      {
+        "part_zh": "气缸端盖",
+        "part_en": "Cylinder Cover",
+        "material_zh": "碳钢",
+        "material_en": "Steel"
+      },
+      {
+        "part_zh": "螺栓螺母",
+        "part_en": "Bolts & Nuts",
+        "material_zh": "钢表面镀铬",
+        "material_en": "Uni-chrome plated steel"
+      },
+      {
+        "part_zh": "支架",
+        "part_en": "Yoke",
+        "material_zh": "碳钢",
+        "material_en": "Steel"
+      }
+    ],
+    "control_accessories": {
+      "zh": "电气、气气、智能定位器,过滤减压阀,电磁阀,限位开关,调速器/增速器,锁止阀等等。",
+      "en": "E/P・P/P・Smart-Positioner, Air-set, Solenoid valve, Limit switch, Speed controller, Lock valve, Lock-up valve, etc."
+    },
+    "options": {
+      "zh": "手动操作机构、行程限位件、特殊空气配管及特殊气接头、低温环境用、高温环境用、防盐腐蚀型等。",
+      "en": "Manual handle, Stroke stopper, Special air piping, Special air fitting, Low temperature service, High temperature service, Salty environment proof, etc."
+    }
+  },
+  "table_1_1_double_acting": {
+    "source_page": "PDF p5 (印刷页3)",
+    "title_zh": "表1-1. 行程、输出力、容量及重量(双动作型)",
+    "title_en": "Table 1-1 STORKE, OUTPUT FORCE, VOLUME & WEIGHT (DOUBLE ACTING TYPE)",
+    "title_en_note": "STORKE 系原文档 STROKE 拼写瑕疵,保留原样",
+    "columns": [
+      "型号",
+      "尺寸(mm)",
+      "最大行程(mm)",
+      "输出力(N)@300kPaG",
+      "输出力(N)@400kPaG",
+      "输出力(N)@500kPaG",
+      "容量A(L)",
+      "容量B(L)",
+      "重量不带手轮(kg)",
+      "重量侧面手轮(kg)"
+    ],
+    "rows": [
+      {
+        "type": "PC3220LA",
+        "size_mm": 200,
+        "max_stroke_mm": 210,
+        "output_force_N": {
+          "300kPaG": 8700,
+          "400kPaG": 11700,
+          "500kPaG": 14600
+        },
+        "volume_L": {
+          "A": 0.9,
+          "B": 7.2
+        },
+        "weight_kg": {
+          "without_handle": 35,
+          "top_side_handle": 70
+        }
+      },
+      {
+        "type": "PC3230LA",
+        "size_mm": 300,
+        "max_stroke_mm": 210,
+        "output_force_N": {
+          "300kPaG": 19700,
+          "400kPaG": 26300,
+          "500kPaG": 32900
+        },
+        "volume_L": {
+          "A": 2,
+          "B": 16
+        },
+        "weight_kg": {
+          "without_handle": 85,
+          "top_side_handle": 145
+        }
+      },
+      {
+        "type": "PC3245LA",
+        "size_mm": 450,
+        "max_stroke_mm": 410,
+        "output_force_N": {
+          "300kPaG": 44700,
+          "400kPaG": 59600,
+          "500kPaG": 74500
+        },
+        "volume_L": {
+          "A": 6,
+          "B": 69
+        },
+        "weight_kg": {
+          "without_handle": 250,
+          "top_side_handle": 380
+        }
+      },
+      {
+        "type": "PC3260LA",
+        "size_mm": 600,
+        "max_stroke_mm": 410,
+        "output_force_N": {
+          "300kPaG": 79500,
+          "400kPaG": 106000,
+          "500kPaG": 132500
+        },
+        "volume_L": {
+          "A": 12,
+          "B": 125
+        },
+        "weight_kg": {
+          "without_handle": 600,
+          "top_side_handle": 890
+        }
+      }
+    ]
+  },
+  "table_1_2_spring_return": {
+    "source_page": "PDF p6 (印刷页4)",
+    "title_zh": "表1-2. 行程、输出力、容量及重量(单动作型)",
+    "title_en": "Table 1-2 STORKE, OUTPUT FORCE, VOLUME & WEIGHT (SPRING RETURN TYPE)",
+    "title_en_note": "STORKE 系原文档 STROKE 拼写瑕疵,保留原样",
+    "columns": [
+      "型号",
+      "尺寸(mm)",
+      "最大行程(mm)",
+      "供气压力(kPaG)",
+      "输出力(N)",
+      "容量A(L)",
+      "重量不带手轮(kg)",
+      "重量侧面手轮(kg)"
+    ],
+    "rows": [
+      {
+        "type": "PC3130LA",
+        "size_mm": 300,
+        "max_stroke_mm": 210,
+        "air_supply_kPaG": 500,
+        "output_force_N": 7800,
+        "volume_A_L": 17,
+        "weight_kg": {
+          "without_handle": 180,
+          "top_side_handle": 240
+        }
+      },
+      {
+        "type": "PC3145LA",
+        "size_mm": 450,
+        "max_stroke_mm": 210,
+        "air_supply_kPaG": 500,
+        "output_force_N": 17600,
+        "volume_A_L": 71,
+        "weight_kg": {
+          "without_handle": 315,
+          "top_side_handle": 445
+        }
+      },
+      {
+        "type": "PC3160LA",
+        "size_mm": 600,
+        "max_stroke_mm": 210,
+        "air_supply_kPaG": 500,
+        "output_force_N": 31200,
+        "volume_A_L": 128,
+        "weight_kg": {
+          "without_handle": 990,
+          "top_side_handle": 1280
+        }
+      }
+    ]
+  },
+  "air_consumption": {
+    "source_page": "PDF p6 (印刷页4)",
+    "title": "执行机构耗气量 AIR CONSUMPTION",
+    "formula": "C=M·V(P+101.3)/101.3",
+    "legend": [
+      {
+        "symbol": "C",
+        "zh": "耗气量",
+        "en": "Air consumption",
+        "unit": "L/min"
+      },
+      {
+        "symbol": "M",
+        "zh": "动作次数/分钟",
+        "en": "Action cycle",
+        "unit": "/min"
+      },
+      {
+        "symbol": "V",
+        "zh": "容量-双作用为A+B(表1-1); -单作用为A(表1-2)",
+        "en": "Volume-Double acting: A+B(Table.1-1); -Spring return: A(Table.1-2)",
+        "unit": "L"
+      },
+      {
+        "symbol": "P",
+        "zh": "供气压力(表压)",
+        "en": "Air supply",
+        "unit": "kPa G"
+      },
+      {
+        "symbol": "101.3",
+        "zh": "一个标准大气压",
+        "en": "Standard atmospheric pressure",
+        "unit": "kPa"
+      }
+    ]
+  },
+  "body_structure": {
+    "source_page": "PDF p7 (印刷页5)",
+    "numbering_note": "原文档两图均编号图1-1、两表均编号表2-1(按惯例后者应为图1-2/表2-2),保留原样",
+    "double_acting": {
+      "figure": "图1-1. 双动作型(PC3200LA) Fig.1-1 DOUBLE ACTING TYPE(PC3200LA)",
+      "parts_table": "表2-1. 结构清单 PARTS LIST",
+      "parts": [
+        {
+          "no": 1,
+          "zh": "支架",
+          "en": "Yoke"
+        },
+        {
+          "no": 2,
+          "zh": "六角螺栓",
+          "en": "Hex bolt"
+        },
+        {
+          "no": 3,
+          "zh": "开合螺母",
+          "en": "Stopper"
+        },
+        {
+          "no": 4,
+          "zh": "下端盖",
+          "en": "Lower cover"
+        },
+        {
+          "no": 5,
+          "zh": "活塞密封圈",
+          "en": "Piston o-ring"
+        },
+        {
+          "no": 6,
+          "zh": "活塞导向",
+          "en": "Piston guide"
+        },
+        {
+          "no": 7,
+          "zh": "活塞",
+          "en": "Piston"
+        },
+        {
+          "no": 8,
+          "zh": "缸筒",
+          "en": "Cylinder"
+        },
+        {
+          "no": 9,
+          "zh": "上端盖",
+          "en": "Upper cover"
+        },
+        {
+          "no": 10,
+          "zh": "六角螺栓",
+          "en": "Hex bolt"
+        },
+        {
+          "no": 11,
+          "zh": "六角螺栓",
+          "en": "Hex bolt"
+        },
+        {
+          "no": 12,
+          "zh": "装配杆",
+          "en": "Assembly rod"
+        },
+        {
+          "no": 13,
+          "zh": "六角螺栓",
+          "en": "Hex bolt"
+        },
+        {
+          "no": 14,
+          "zh": "防尘圈",
+          "en": "Wiper"
+        },
+        {
+          "no": 15,
+          "zh": "六角螺栓",
+          "en": "Hex bolt"
+        },
+        {
+          "no": 16,
+          "zh": "活塞杆",
+          "en": "Piston rod"
+        },
+        {
+          "no": 17,
+          "zh": "刻度板",
+          "en": "Scale board"
+        },
+        {
+          "no": 18,
+          "zh": "连接器",
+          "en": "Connector"
+        }
+      ]
+    },
+    "spring_return": {
+      "figure": "图1-1. 单动作型(PC3100LA) Fig.1-1 SPRING RETURN TYPE(PC3100LA)",
+      "parts_table": "表2-1. 结构清单 PARTS LIST",
+      "parts": [
+        {
+          "no": 1,
+          "zh": "六角螺栓",
+          "en": "Hex bolt"
+        },
+        {
+          "no": 2,
+          "zh": "开合螺母",
+          "en": "Stopper"
+        },
+        {
+          "no": 3,
+          "zh": "下端盖",
+          "en": "Lower cover"
+        },
+        {
+          "no": 4,
+          "zh": "活塞密封圈",
+          "en": "Piston o-ring"
+        },
+        {
+          "no": 5,
+          "zh": "活塞导向",
+          "en": "Piston guide"
+        },
+        {
+          "no": 6,
+          "zh": "活塞",
+          "en": "Piston"
+        },
+        {
+          "no": 7,
+          "zh": "弹簧",
+          "en": "Spring"
+        },
+        {
+          "no": 8,
+          "zh": "弹簧组件",
+          "en": "Spring assembly"
+        },
+        {
+          "no": 9,
+          "zh": "上端盖",
+          "en": "Upper cover"
+        },
+        {
+          "no": 10,
+          "zh": "六角螺栓",
+          "en": "Hex bolt"
+        },
+        {
+          "no": 11,
+          "zh": "六角螺栓",
+          "en": "Hex bolt"
+        },
+        {
+          "no": 12,
+          "zh": "装配杆",
+          "en": "Assembly rod"
+        },
+        {
+          "no": 13,
+          "zh": "缸筒",
+          "en": "Cylinder"
+        },
+        {
+          "no": 14,
+          "zh": "防尘圈",
+          "en": "Wiper"
+        },
+        {
+          "no": 15,
+          "zh": "六角螺栓",
+          "en": "Hex bolt"
+        },
+        {
+          "no": 16,
+          "zh": "活塞杆",
+          "en": "Piston rod"
+        },
+        {
+          "no": 17,
+          "zh": "六角螺栓",
+          "en": "Hex bolt"
+        },
+        {
+          "no": 18,
+          "zh": "刻度板",
+          "en": "Scale board"
+        },
+        {
+          "no": 19,
+          "zh": "连接器",
+          "en": "Connector"
+        },
+        {
+          "no": 20,
+          "zh": "支架",
+          "en": "Yoke"
+        }
+      ]
+    }
+  },
+  "dimensions": {
+    "unit": "mm",
+    "double_acting_without_handle": {
+      "source_page": "PDF p8 (印刷页6)",
+      "title_zh": "双作用执行机构",
+      "title_en": "DOUBLE ACTING CYLINDER",
+      "model_code": "PC3200LA-W-N",
+      "columns": [
+        "型号",
+        "尺寸",
+        "行程(mm)",
+        "D",
+        "H",
+        "A",
+        "B",
+        "C",
+        "E",
+        "M",
+        "H1",
+        "F",
+        "G",
+        "R"
+      ],
+      "rows": [
+        {
+          "type": "PC3220LA",
+          "size": 200,
+          "stroke": "30~80",
+          "D": 272,
+          "H": 771,
+          "A": 125,
+          "B": 90,
+          "C": 80,
+          "E": 125,
+          "M": "M16×1.5",
+          "H1": 30,
+          "F": "—",
+          "G": "—",
+          "R": "RC3/8"
+        },
+        {
+          "type": "PC3230LA",
+          "size": 300,
+          "stroke": "30~90",
+          "D": 382,
+          "H": 1065,
+          "A": 185,
+          "B": 145,
+          "C": 100,
+          "E": 140,
+          "M": "M24×3",
+          "H1": 30,
+          "F": "—",
+          "G": "—",
+          "R": "RC1/2"
+        },
+        {
+          "type": "PC3245LA",
+          "size": 450,
+          "stroke": "30~160",
+          "D": 555,
+          "H": 1192,
+          "A": 265,
+          "B": 215,
+          "C": 140,
+          "E": 260,
+          "M": "M36×3",
+          "H1": 40,
+          "F": 200,
+          "G": 33,
+          "R": "RC1/2"
+        },
+        {
+          "type": "PC3260LA",
+          "size": 600,
+          "stroke": "30~110",
+          "D": 730,
+          "H": 1150,
+          "A": 290,
+          "B": 225,
+          "C": 160,
+          "E": 310,
+          "M": "M52×3",
+          "H1": 60,
+          "F": 240,
+          "G": 39,
+          "R": "RC3/4"
+        },
+        {
+          "type": "PC3260LA",
+          "size": 600,
+          "stroke": "130~210",
+          "D": 730,
+          "H": 1350,
+          "A": 290,
+          "B": 225,
+          "C": 160,
+          "E": 310,
+          "M": "M52×3",
+          "H1": 60,
+          "F": 240,
+          "G": 39,
+          "R": "RC3/4",
+          "note": "原表 D/A~R 与上行合并,仅 H 随行程分档"
+        }
+      ]
+    },
+    "spring_return_without_handle": {
+      "source_page": "PDF p9 (印刷页7)",
+      "title_zh": "单作用执行机构",
+      "title_en": "SPRING RETURN",
+      "model_code": "PC3100LA-D/R-N",
+      "columns": [
+        "型号",
+        "尺寸",
+        "行程(mm)",
+        "D",
+        "H",
+        "A",
+        "B",
+        "C",
+        "E",
+        "M",
+        "H1",
+        "F",
+        "G",
+        "R"
+      ],
+      "rows": [
+        {
+          "type": "PC3130LA",
+          "size": 300,
+          "stroke": "30~90",
+          "D": 382,
+          "H": 1330,
+          "A": 185,
+          "B": 145,
+          "C": 100,
+          "E": 140,
+          "M": "M24×3",
+          "H1": 30,
+          "F": "—",
+          "G": "—",
+          "R": "RC1/2"
+        },
+        {
+          "type": "PC3145LA",
+          "size": 450,
+          "stroke": "30~160",
+          "D": 555,
+          "H": 1377,
+          "A": 265,
+          "B": 215,
+          "C": 140,
+          "E": 260,
+          "M": "M36×3",
+          "H1": 40,
+          "F": 200,
+          "G": 33,
+          "R": "RC1/2"
+        },
+        {
+          "type": "PC3160LA",
+          "size": 600,
+          "stroke": "30~110",
+          "D": 730,
+          "H": 1385,
+          "A": 290,
+          "B": 225,
+          "C": 160,
+          "E": 310,
+          "M": "M52×3",
+          "H1": 60,
+          "F": 240,
+          "G": 39,
+          "R": "RC3/4"
+        },
+        {
+          "type": "PC3160LA",
+          "size": 600,
+          "stroke": "130~210",
+          "D": 730,
+          "H": 1735,
+          "A": 290,
+          "B": 225,
+          "C": 160,
+          "E": 310,
+          "M": "M52×3",
+          "H1": 60,
+          "F": 240,
+          "G": 39,
+          "R": "RC3/4",
+          "note": "原表 D/A~R 与上行合并,仅 H 随行程分档"
+        }
+      ]
+    },
+    "double_acting_top_handle": {
+      "source_page": "PDF p10 (印刷页8)",
+      "title_zh": "双作用执行机构",
+      "title_en": "DOUBLE ACTING CYLINDER",
+      "model_code": "PC3200LA-W-H",
+      "columns": [
+        "型号",
+        "尺寸",
+        "行程(mm)",
+        "D",
+        "H",
+        "H2",
+        "L",
+        "W",
+        "A",
+        "B",
+        "C",
+        "E",
+        "M",
+        "H1",
+        "F",
+        "G",
+        "R"
+      ],
+      "rows": [
+        {
+          "type": "PC3220LA",
+          "size": 200,
+          "stroke": "30~80",
+          "D": 272,
+          "H": 1007,
+          "H2": 851,
+          "L": 190,
+          "W": 200,
+          "A": 125,
+          "B": 90,
+          "C": 80,
+          "E": 125,
+          "M": "M16×1.5",
+          "H1": 30,
+          "F": "—",
+          "G": "—",
+          "R": "RC3/8"
+        },
+        {
+          "type": "PC3230LA",
+          "size": 300,
+          "stroke": "30~90",
+          "D": 382,
+          "H": 1406,
+          "H2": 1165,
+          "L": 233,
+          "W": 320,
+          "A": 185,
+          "B": 145,
+          "C": 100,
+          "E": 140,
+          "M": "M24×3",
+          "H1": 30,
+          "F": "—",
+          "G": "—",
+          "R": "RC1/2"
+        },
+        {
+          "type": "PC3245LA",
+          "size": 450,
+          "stroke": "30~160",
+          "D": 555,
+          "H": 1582,
+          "H2": 1317,
+          "L": 255,
+          "W": 320,
+          "A": 265,
+          "B": 215,
+          "C": 140,
+          "E": 260,
+          "M": "M36×3",
+          "H1": 40,
+          "F": 200,
+          "G": 33,
+          "R": "RC1/2"
+        },
+        {
+          "type": "PC3260LA",
+          "size": 600,
+          "stroke": "30~110",
+          "D": 730,
+          "H": 1955,
+          "H2": 1290,
+          "L": 445,
+          "W": 450,
+          "A": 290,
+          "B": 225,
+          "C": 160,
+          "E": 310,
+          "M": "M52×3",
+          "H1": 60,
+          "F": 240,
+          "G": 39,
+          "R": "RC3/4"
+        },
+        {
+          "type": "PC3260LA",
+          "size": 600,
+          "stroke": "130~210",
+          "D": 730,
+          "H": 2255,
+          "H2": 1490,
+          "L": 445,
+          "W": 450,
+          "A": 290,
+          "B": 225,
+          "C": 160,
+          "E": 310,
+          "M": "M52×3",
+          "H1": 60,
+          "F": 240,
+          "G": 39,
+          "R": "RC3/4",
+          "note": "原表 D/L~R 与上行合并,仅 H/H2 随行程分档"
+        }
+      ]
+    },
+    "spring_return_top_handle": {
+      "source_page": "PDF p11 (印刷页9)",
+      "title_zh": "单作用执行机构",
+      "title_en": "SPRING RETURN",
+      "model_code": "PC3100LA-D/R-H",
+      "columns": [
+        "型号",
+        "尺寸",
+        "行程(mm)",
+        "D",
+        "H",
+        "H2",
+        "L",
+        "W",
+        "A",
+        "B",
+        "C",
+        "E",
+        "M",
+        "H1",
+        "F",
+        "G",
+        "R"
+      ],
+      "rows": [
+        {
+          "type": "PC3130LA",
+          "size": 300,
+          "stroke": "30~90",
+          "D": 382,
+          "H": 1671,
+          "H2": 1430,
+          "L": 233,
+          "W": 320,
+          "A": 185,
+          "B": 145,
+          "C": 100,
+          "E": 140,
+          "M": "M24×3",
+          "H1": 30,
+          "F": "—",
+          "G": "—",
+          "R": "RC1/2"
+        },
+        {
+          "type": "PC3145LA",
+          "size": 450,
+          "stroke": "30~160",
+          "D": 555,
+          "H": 1767,
+          "H2": 1502,
+          "L": 255,
+          "W": 320,
+          "A": 265,
+          "B": 215,
+          "C": 140,
+          "E": 260,
+          "M": "M36×3",
+          "H1": 40,
+          "F": 200,
+          "G": 33,
+          "R": "RC1/2"
+        },
+        {
+          "type": "PC3160LA",
+          "size": 600,
+          "stroke": "30~110",
+          "D": 730,
+          "H": 2190,
+          "H2": 1525,
+          "L": 445,
+          "W": 450,
+          "A": 290,
+          "B": 225,
+          "C": 160,
+          "E": 310,
+          "M": "M52×3",
+          "H1": 60,
+          "F": 240,
+          "G": 39,
+          "R": "RC3/4"
+        },
+        {
+          "type": "PC3160LA",
+          "size": 600,
+          "stroke": "130~210",
+          "D": 730,
+          "H": 2645,
+          "H2": 1880,
+          "L": 445,
+          "W": 450,
+          "A": 290,
+          "B": 225,
+          "C": 160,
+          "E": 310,
+          "M": "M52×3",
+          "H1": 60,
+          "F": 240,
+          "G": 39,
+          "R": "RC3/4",
+          "note": "原表 D/L~R 与上行合并,仅 H/H2 随行程分档"
+        }
+      ]
+    }
+  },
+  "model_coding_rule": {
+    "source_page": "PDF p12 (印刷页10)",
+    "title": "附表一 执行机构型号编制说明 ACTUATOR MODEL CODING RULE",
+    "example": "PD3000LA-D-N",
+    "positions": [
+      {
+        "pos": 1,
+        "code": "P",
+        "meaning_zh": "执行机构"
+      },
+      {
+        "pos": 2,
+        "options": [
+          {
+            "code": "D",
+            "meaning_zh": "薄膜式执行机构"
+          },
+          {
+            "code": "C",
+            "meaning_zh": "气缸式执行机构"
+          }
+        ]
+      },
+      {
+        "pos": 3,
+        "options": [
+          {
+            "code": "3",
+            "meaning_zh": "薄膜式/气缸式直行程"
+          },
+          {
+            "code": "2",
+            "meaning_zh": "VT式角行程"
+          },
+          {
+            "code": "6",
+            "meaning_zh": "AT式角行程"
+          },
+          {
+            "code": "4",
+            "meaning_zh": "拨叉式角行程"
+          },
+          {
+            "code": "8",
+            "meaning_zh": "气缸式角行程"
+          }
+        ]
+      },
+      {
+        "pos": 4,
+        "options": [
+          {
+            "code": "1",
+            "meaning_zh": "单动作执行机构"
+          },
+          {
+            "code": "2",
+            "meaning_zh": "双动作执行机构"
+          }
+        ]
+      },
+      {
+        "pos": 5,
+        "code": "00/000",
+        "meaning_zh": "缸径型号"
+      },
+      {
+        "pos": 6,
+        "options": [
+          {
+            "code": "L",
+            "meaning_zh": "直行程执行机构"
+          },
+          {
+            "code": "R",
+            "meaning_zh": "角行程执行机构"
+          }
+        ]
+      },
+      {
+        "pos": 7,
+        "code": "A",
+        "meaning_zh": "版本号"
+      },
+      {
+        "pos": 8,
+        "options": [
+          {
+            "code": "D",
+            "meaning_zh": "正动作型"
+          },
+          {
+            "code": "R",
+            "meaning_zh": "反动作型"
+          },
+          {
+            "code": "W",
+            "meaning_zh": "双动作型"
+          }
+        ]
+      },
+      {
+        "pos": 9,
+        "options": [
+          {
+            "code": "N",
+            "meaning_zh": "无手轮"
+          },
+          {
+            "code": "S",
+            "meaning_zh": "旁式手轮"
+          },
+          {
+            "code": "H",
+            "meaning_zh": "顶部手轮"
+          }
+        ]
+      }
+    ]
+  },
+  "original_document_issues": [
+    "表1-1/表1-2 英文标题 STORKE 系 STROKE 拼写错误,PDF 原文如此,保留",
+    "p7 两张构造图均编号图1-1、两张清单均编号表2-1,原文档编号瑕疵,保留",
+    "标准规格输出力引用'表1',实际表号为表1-1/表1-2,原文引用不精确,保留"
+  ]
+}

@@ -1,0 +1,1493 @@
+{
+ "source": "GC320(压缩).pdf page 24 (附表一/二/三)",
+ "extraction_method": "pdf2docx -> python-docx (text-based, page 24 only)",
+ "body_pressure_temperature_ratings": {
+  "ansi": {
+   "ANSI-150": {
+    "A352-LCB": [
+     {
+      "temp_c": "-45~38",
+      "pressure_mpag": "1.84"
+     },
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "1.84"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "1.81"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "1.72"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "1.57"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "1.40"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "1.20"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "1.01"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "0.84"
+     }
+    ],
+    "A216-WCB": [
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "1.96"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "1.92"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "1.76"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "1.57"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "1.40"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "1.20"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "1.01"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "0.84"
+     },
+     {
+      "temp_c": "375",
+      "pressure_mpag": "0.73"
+     },
+     {
+      "temp_c": "400",
+      "pressure_mpag": "0.64"
+     },
+     {
+      "temp_c": "425",
+      "pressure_mpag": "0.55"
+     },
+     {
+      "temp_c": "450",
+      "pressure_mpag": "0.47"
+     },
+     {
+      "temp_c": "475",
+      "pressure_mpag": "0.37"
+     },
+     {
+      "temp_c": "500",
+      "pressure_mpag": "0.28"
+     },
+     {
+      "temp_c": "525",
+      "pressure_mpag": "0.18"
+     },
+     {
+      "temp_c": "538",
+      "pressure_mpag": "0.13"
+     }
+    ],
+    "A217-WC6": [
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "1.99"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "1.92"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "1.76"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "1.57"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "1.40"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "1.20"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "1.01"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "0.84"
+     },
+     {
+      "temp_c": "375",
+      "pressure_mpag": "0.73"
+     },
+     {
+      "temp_c": "400",
+      "pressure_mpag": "0.64"
+     },
+     {
+      "temp_c": "425",
+      "pressure_mpag": "0.55"
+     },
+     {
+      "temp_c": "450",
+      "pressure_mpag": "0.47"
+     },
+     {
+      "temp_c": "475",
+      "pressure_mpag": "0.37"
+     },
+     {
+      "temp_c": "500",
+      "pressure_mpag": "0.28"
+     },
+     {
+      "temp_c": "525",
+      "pressure_mpag": "0.18"
+     },
+     {
+      "temp_c": "538",
+      "pressure_mpag": "0.15"
+     }
+    ],
+    "A217-WC9": [
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "1.99"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "1.92"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "1.76"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "1.57"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "1.40"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "1.20"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "1.01"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "0.84"
+     },
+     {
+      "temp_c": "375",
+      "pressure_mpag": "0.73"
+     },
+     {
+      "temp_c": "400",
+      "pressure_mpag": "0.64"
+     },
+     {
+      "temp_c": "425",
+      "pressure_mpag": "0.55"
+     },
+     {
+      "temp_c": "450",
+      "pressure_mpag": "0.47"
+     },
+     {
+      "temp_c": "475",
+      "pressure_mpag": "0.37"
+     },
+     {
+      "temp_c": "500",
+      "pressure_mpag": "0.28"
+     },
+     {
+      "temp_c": "525",
+      "pressure_mpag": "0.18"
+     },
+     {
+      "temp_c": "538",
+      "pressure_mpag": "0.15"
+     }
+    ],
+    "A351-CF8": [
+     {
+      "temp_c": "-196~38",
+      "pressure_mpag": "1.90"
+     },
+     {
+      "temp_c": "-45~38",
+      "pressure_mpag": "1.90"
+     },
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "1.90"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "1.84"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "1.56"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "1.39"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "1.25"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "1.16"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "1.01"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "0.84"
+     },
+     {
+      "temp_c": "375",
+      "pressure_mpag": "0.73"
+     },
+     {
+      "temp_c": "400",
+      "pressure_mpag": "0.64"
+     },
+     {
+      "temp_c": "425",
+      "pressure_mpag": "0.55"
+     },
+     {
+      "temp_c": "450",
+      "pressure_mpag": "0.47"
+     },
+     {
+      "temp_c": "475",
+      "pressure_mpag": "0.37"
+     },
+     {
+      "temp_c": "500",
+      "pressure_mpag": "0.28"
+     },
+     {
+      "temp_c": "525",
+      "pressure_mpag": "0.18"
+     },
+     {
+      "temp_c": "538",
+      "pressure_mpag": "0.15"
+     }
+    ],
+    "A351-CF8M": [
+     {
+      "temp_c": "-196~38",
+      "pressure_mpag": "1.90"
+     },
+     {
+      "temp_c": "-45~38",
+      "pressure_mpag": "1.90"
+     },
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "1.90"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "1.84"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "1.61"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "1.47"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "1.37"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "1.20"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "1.01"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "0.84"
+     },
+     {
+      "temp_c": "375",
+      "pressure_mpag": "0.73"
+     },
+     {
+      "temp_c": "400",
+      "pressure_mpag": "0.64"
+     },
+     {
+      "temp_c": "425",
+      "pressure_mpag": "0.55"
+     },
+     {
+      "temp_c": "450",
+      "pressure_mpag": "0.47"
+     },
+     {
+      "temp_c": "475",
+      "pressure_mpag": "0.37"
+     },
+     {
+      "temp_c": "500",
+      "pressure_mpag": "0.28"
+     },
+     {
+      "temp_c": "525",
+      "pressure_mpag": "0.18"
+     },
+     {
+      "temp_c": "538",
+      "pressure_mpag": "0.15"
+     }
+    ]
+   },
+   "ANSI-300": {
+    "A352-LCB": [
+     {
+      "temp_c": "-45~38",
+      "pressure_mpag": "4.78"
+     },
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "4.78"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "4.72"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "4.51"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "4.40"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "4.26"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "4.05"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "3.76"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "3.59"
+     }
+    ],
+    "A216-WCB": [
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "5.10"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "5.00"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "4.63"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "4.51"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "4.38"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "4.16"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "3.87"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "3.69"
+     },
+     {
+      "temp_c": "375",
+      "pressure_mpag": "3.64"
+     },
+     {
+      "temp_c": "400",
+      "pressure_mpag": "3.44"
+     },
+     {
+      "temp_c": "425",
+      "pressure_mpag": "2.88"
+     },
+     {
+      "temp_c": "450",
+      "pressure_mpag": "1.99"
+     },
+     {
+      "temp_c": "475",
+      "pressure_mpag": "1.35"
+     },
+     {
+      "temp_c": "500",
+      "pressure_mpag": "0.88"
+     },
+     {
+      "temp_c": "525",
+      "pressure_mpag": "0.51"
+     },
+     {
+      "temp_c": "538",
+      "pressure_mpag": "0.34"
+     }
+    ],
+    "A217-WC6": [
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "5.16"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "5.10"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "4.88"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "4.63"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "4.54"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "4.44"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "4.23"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "4.01"
+     },
+     {
+      "temp_c": "375",
+      "pressure_mpag": "3.88"
+     },
+     {
+      "temp_c": "400",
+      "pressure_mpag": "3.65"
+     },
+     {
+      "temp_c": "425",
+      "pressure_mpag": "3.50"
+     },
+     {
+      "temp_c": "450",
+      "pressure_mpag": "3.38"
+     },
+     {
+      "temp_c": "475",
+      "pressure_mpag": "3.16"
+     },
+     {
+      "temp_c": "500",
+      "pressure_mpag": "2.77"
+     },
+     {
+      "temp_c": "525",
+      "pressure_mpag": "2.02"
+     },
+     {
+      "temp_c": "538",
+      "pressure_mpag": "1.63"
+     }
+    ],
+    "A217-WC9": [
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "5.16"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "5.11"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "4.89"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "4.65"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "4.47"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "4.41"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "4.23"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "4.01"
+     },
+     {
+      "temp_c": "375",
+      "pressure_mpag": "3.87"
+     },
+     {
+      "temp_c": "400",
+      "pressure_mpag": "3.65"
+     },
+     {
+      "temp_c": "425",
+      "pressure_mpag": "3.50"
+     },
+     {
+      "temp_c": "450",
+      "pressure_mpag": "3.37"
+     },
+     {
+      "temp_c": "475",
+      "pressure_mpag": "3.16"
+     },
+     {
+      "temp_c": "500",
+      "pressure_mpag": "2.77"
+     },
+     {
+      "temp_c": "525",
+      "pressure_mpag": "2.18"
+     },
+     {
+      "temp_c": "538",
+      "pressure_mpag": "1.63"
+     }
+    ],
+    "A351-CF8": [
+     {
+      "temp_c": "-196~38",
+      "pressure_mpag": "4.95"
+     },
+     {
+      "temp_c": "-45~38",
+      "pressure_mpag": "4.95"
+     },
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "4.95"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "4.77"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "4.08"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "3.62"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "3.27"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "3.04"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "2.91"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "2.81"
+     },
+     {
+      "temp_c": "375",
+      "pressure_mpag": "2.77"
+     },
+     {
+      "temp_c": "400",
+      "pressure_mpag": "2.74"
+     },
+     {
+      "temp_c": "425",
+      "pressure_mpag": "2.71"
+     },
+     {
+      "temp_c": "450",
+      "pressure_mpag": "2.68"
+     },
+     {
+      "temp_c": "475",
+      "pressure_mpag": "2.65"
+     },
+     {
+      "temp_c": "500",
+      "pressure_mpag": "2.60"
+     },
+     {
+      "temp_c": "525",
+      "pressure_mpag": "2.19"
+     },
+     {
+      "temp_c": "538",
+      "pressure_mpag": "2.18"
+     }
+    ],
+    "A351-CF8M": [
+     {
+      "temp_c": "-196~38",
+      "pressure_mpag": "4.95"
+     },
+     {
+      "temp_c": "-45~38",
+      "pressure_mpag": "4.95"
+     },
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "4.95"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "4.80"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "4.21"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "3.85"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "3.56"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "3.34"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "3.15"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "3.03"
+     },
+     {
+      "temp_c": "375",
+      "pressure_mpag": "2.96"
+     },
+     {
+      "temp_c": "400",
+      "pressure_mpag": "2.91"
+     },
+     {
+      "temp_c": "425",
+      "pressure_mpag": "2.87"
+     },
+     {
+      "temp_c": "450",
+      "pressure_mpag": "2.81"
+     },
+     {
+      "temp_c": "475",
+      "pressure_mpag": "2.73"
+     },
+     {
+      "temp_c": "500",
+      "pressure_mpag": "2.67"
+     },
+     {
+      "temp_c": "525",
+      "pressure_mpag": "2.57"
+     },
+     {
+      "temp_c": "538",
+      "pressure_mpag": "2.53"
+     }
+    ]
+   },
+   "ANSI-600": {
+    "A352-LCB": [
+     {
+      "temp_c": "-45~38",
+      "pressure_mpag": "9.57"
+     },
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "9.57"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "9.46"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "9.02"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "8.78"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "8.54"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "8.11"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "7.54"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "7.18"
+     }
+    ],
+    "A216-WCB": [
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "10.20"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "10.01"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "9.27"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "9.04"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "8.75"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "8.33"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "7.74"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "7.38"
+     },
+     {
+      "temp_c": "375",
+      "pressure_mpag": "7.28"
+     },
+     {
+      "temp_c": "400",
+      "pressure_mpag": "6.89"
+     },
+     {
+      "temp_c": "425",
+      "pressure_mpag": "5.74"
+     },
+     {
+      "temp_c": "450",
+      "pressure_mpag": "4.00"
+     },
+     {
+      "temp_c": "475",
+      "pressure_mpag": "2.70"
+     },
+     {
+      "temp_c": "500",
+      "pressure_mpag": "1.75"
+     },
+     {
+      "temp_c": "525",
+      "pressure_mpag": "1.03"
+     },
+     {
+      "temp_c": "538",
+      "pressure_mpag": "0.72"
+     }
+    ],
+    "A217-WC6": [
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "10.32"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "10.22"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "9.74"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "9.26"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "9.09"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "8.88"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "8.48"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "8.04"
+     },
+     {
+      "temp_c": "375",
+      "pressure_mpag": "7.75"
+     },
+     {
+      "temp_c": "400",
+      "pressure_mpag": "7.31"
+     },
+     {
+      "temp_c": "425",
+      "pressure_mpag": "7.01"
+     },
+     {
+      "temp_c": "450",
+      "pressure_mpag": "6.75"
+     },
+     {
+      "temp_c": "475",
+      "pressure_mpag": "6.32"
+     },
+     {
+      "temp_c": "500",
+      "pressure_mpag": "5.55"
+     },
+     {
+      "temp_c": "525",
+      "pressure_mpag": "4.04"
+     },
+     {
+      "temp_c": "538",
+      "pressure_mpag": "3.26"
+     }
+    ],
+    "A217-WC9": [
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "10.32"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "10.22"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "9.79"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "9.31"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "8.95"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "8.82"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "8.47"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "8.04"
+     },
+     {
+      "temp_c": "375",
+      "pressure_mpag": "7.75"
+     },
+     {
+      "temp_c": "400",
+      "pressure_mpag": "7.31"
+     },
+     {
+      "temp_c": "425",
+      "pressure_mpag": "7.01"
+     },
+     {
+      "temp_c": "450",
+      "pressure_mpag": "6.75"
+     },
+     {
+      "temp_c": "475",
+      "pressure_mpag": "6.32"
+     },
+     {
+      "temp_c": "500",
+      "pressure_mpag": "5.55"
+     },
+     {
+      "temp_c": "525",
+      "pressure_mpag": "4.36"
+     },
+     {
+      "temp_c": "538",
+      "pressure_mpag": "3.26"
+     }
+    ],
+    "A351-CF8": [
+     {
+      "temp_c": "-196~38",
+      "pressure_mpag": "9.91"
+     },
+     {
+      "temp_c": "-45~38",
+      "pressure_mpag": "9.91"
+     },
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "9.91"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "9.56"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "8.17"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "7.26"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "6.54"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "6.10"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "5.80"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "5.60"
+     },
+     {
+      "temp_c": "375",
+      "pressure_mpag": "5.54"
+     },
+     {
+      "temp_c": "400",
+      "pressure_mpag": "5.48"
+     },
+     {
+      "temp_c": "425",
+      "pressure_mpag": "5.42"
+     },
+     {
+      "temp_c": "450",
+      "pressure_mpag": "5.37"
+     },
+     {
+      "temp_c": "475",
+      "pressure_mpag": "5.30"
+     },
+     {
+      "temp_c": "500",
+      "pressure_mpag": "5.20"
+     },
+     {
+      "temp_c": "525",
+      "pressure_mpag": "4.77"
+     },
+     {
+      "temp_c": "538",
+      "pressure_mpag": "4.55"
+     }
+    ],
+    "A351-CF8M": [
+     {
+      "temp_c": "-196~38",
+      "pressure_mpag": "9.92"
+     },
+     {
+      "temp_c": "-45~38",
+      "pressure_mpag": "9.92"
+     },
+     {
+      "temp_c": "-5~38",
+      "pressure_mpag": "9.92"
+     },
+     {
+      "temp_c": "50",
+      "pressure_mpag": "9.62"
+     },
+     {
+      "temp_c": "100",
+      "pressure_mpag": "8.43"
+     },
+     {
+      "temp_c": "150",
+      "pressure_mpag": "7.69"
+     },
+     {
+      "temp_c": "200",
+      "pressure_mpag": "7.12"
+     },
+     {
+      "temp_c": "250",
+      "pressure_mpag": "6.67"
+     },
+     {
+      "temp_c": "300",
+      "pressure_mpag": "6.32"
+     },
+     {
+      "temp_c": "350",
+      "pressure_mpag": "6.07"
+     },
+     {
+      "temp_c": "375",
+      "pressure_mpag": "5.93"
+     },
+     {
+      "temp_c": "400",
+      "pressure_mpag": "5.81"
+     },
+     {
+      "temp_c": "425",
+      "pressure_mpag": "5.72"
+     },
+     {
+      "temp_c": "450",
+      "pressure_mpag": "5.61"
+     },
+     {
+      "temp_c": "475",
+      "pressure_mpag": "5.46"
+     },
+     {
+      "temp_c": "500",
+      "pressure_mpag": "5.37"
+     },
+     {
+      "temp_c": "525",
+      "pressure_mpag": "5.15"
+     },
+     {
+      "temp_c": "538",
+      "pressure_mpag": "5.06"
+     }
+    ]
+   }
+  },
+  "pn": {
+   "ZG230-450": {
+    "PN16": [
+     {
+      "temp_c": "-5~200",
+      "pressure_mpag": "1.60"
+     },
+     {
+      "temp_c": "~250",
+      "pressure_mpag": "1.40"
+     },
+     {
+      "temp_c": "~300",
+      "pressure_mpag": "1.20"
+     },
+     {
+      "temp_c": "~350",
+      "pressure_mpag": "1.10"
+     },
+     {
+      "temp_c": "~400",
+      "pressure_mpag": "0.90"
+     },
+     {
+      "temp_c": "~425",
+      "pressure_mpag": "0.80"
+     },
+     {
+      "temp_c": "~435",
+      "pressure_mpag": "0.70"
+     },
+     {
+      "temp_c": "~445",
+      "pressure_mpag": "0.62"
+     },
+     {
+      "temp_c": "~455",
+      "pressure_mpag": "0.57"
+     }
+    ],
+    "PN40": [
+     {
+      "temp_c": "1.60",
+      "pressure_mpag": "4.00"
+     },
+     {
+      "temp_c": "1.40",
+      "pressure_mpag": "3.50"
+     },
+     {
+      "temp_c": "1.20",
+      "pressure_mpag": "3.00"
+     },
+     {
+      "temp_c": "1.10",
+      "pressure_mpag": "2.60"
+     },
+     {
+      "temp_c": "0.90",
+      "pressure_mpag": "2.30"
+     },
+     {
+      "temp_c": "0.80",
+      "pressure_mpag": "2.00"
+     },
+     {
+      "temp_c": "0.70",
+      "pressure_mpag": "1.80"
+     },
+     {
+      "temp_c": "0.62",
+      "pressure_mpag": "1.60"
+     },
+     {
+      "temp_c": "0.57",
+      "pressure_mpag": "1.40"
+     }
+    ],
+    "PN63": [
+     {
+      "temp_c": "4.00",
+      "pressure_mpag": "6.30"
+     },
+     {
+      "temp_c": "3.50",
+      "pressure_mpag": "5.40"
+     },
+     {
+      "temp_c": "3.00",
+      "pressure_mpag": "4.80"
+     },
+     {
+      "temp_c": "2.60",
+      "pressure_mpag": "4.00"
+     },
+     {
+      "temp_c": "2.30",
+      "pressure_mpag": "3.70"
+     },
+     {
+      "temp_c": "2.00",
+      "pressure_mpag": "3.20"
+     },
+     {
+      "temp_c": "1.80",
+      "pressure_mpag": "2.80"
+     },
+     {
+      "temp_c": "1.60",
+      "pressure_mpag": "2.50"
+     },
+     {
+      "temp_c": "1.40",
+      "pressure_mpag": "2.30"
+     }
+    ],
+    "PN100": [
+     {
+      "temp_c": "6.30",
+      "pressure_mpag": "10.00"
+     },
+     {
+      "temp_c": "5.40",
+      "pressure_mpag": "9.00"
+     },
+     {
+      "temp_c": "4.80",
+      "pressure_mpag": "7.50"
+     },
+     {
+      "temp_c": "4.00",
+      "pressure_mpag": "6.60"
+     },
+     {
+      "temp_c": "3.70",
+      "pressure_mpag": "5.80"
+     },
+     {
+      "temp_c": "3.20",
+      "pressure_mpag": "5.00"
+     },
+     {
+      "temp_c": "2.80",
+      "pressure_mpag": "4.50"
+     },
+     {
+      "temp_c": "2.50",
+      "pressure_mpag": "4.20"
+     },
+     {
+      "temp_c": "2.30",
+      "pressure_mpag": "3.60"
+     }
+    ]
+   },
+   "ZG0Cr18Ni9": {
+    "PN16": [
+     {
+      "temp_c": "-45~200",
+      "pressure_mpag": "1.60"
+     },
+     {
+      "temp_c": "~300",
+      "pressure_mpag": "1.40"
+     },
+     {
+      "temp_c": "~400",
+      "pressure_mpag": "1.20"
+     },
+     {
+      "temp_c": "~480",
+      "pressure_mpag": "1.10"
+     },
+     {
+      "temp_c": "~520",
+      "pressure_mpag": "0.90"
+     },
+     {
+      "temp_c": "~560",
+      "pressure_mpag": "0.80"
+     },
+     {
+      "temp_c": "~560",
+      "pressure_mpag": "0.80"
+     },
+     {
+      "temp_c": "~560",
+      "pressure_mpag": "0.80"
+     },
+     {
+      "temp_c": "~560",
+      "pressure_mpag": "0.80"
+     }
+    ],
+    "PN40": [
+     {
+      "temp_c": "1.60",
+      "pressure_mpag": "4.00"
+     },
+     {
+      "temp_c": "1.40",
+      "pressure_mpag": "3.50"
+     },
+     {
+      "temp_c": "1.20",
+      "pressure_mpag": "3.00"
+     },
+     {
+      "temp_c": "1.10",
+      "pressure_mpag": "2.60"
+     },
+     {
+      "temp_c": "0.90",
+      "pressure_mpag": "2.30"
+     },
+     {
+      "temp_c": "0.80",
+      "pressure_mpag": "2.00"
+     },
+     {
+      "temp_c": "0.80",
+      "pressure_mpag": "2.00"
+     },
+     {
+      "temp_c": "0.80",
+      "pressure_mpag": "2.00"
+     },
+     {
+      "temp_c": "0.80",
+      "pressure_mpag": "2.00"
+     }
+    ],
+    "PN63": [
+     {
+      "temp_c": "4.00",
+      "pressure_mpag": "6.30"
+     },
+     {
+      "temp_c": "3.50",
+      "pressure_mpag": "5.40"
+     },
+     {
+      "temp_c": "3.00",
+      "pressure_mpag": "4.80"
+     },
+     {
+      "temp_c": "2.60",
+      "pressure_mpag": "4.00"
+     },
+     {
+      "temp_c": "2.30",
+      "pressure_mpag": "3.70"
+     },
+     {
+      "temp_c": "2.00",
+      "pressure_mpag": "3.20"
+     },
+     {
+      "temp_c": "2.00",
+      "pressure_mpag": "3.20"
+     },
+     {
+      "temp_c": "2.00",
+      "pressure_mpag": "3.20"
+     },
+     {
+      "temp_c": "2.00",
+      "pressure_mpag": "3.20"
+     }
+    ],
+    "PN100": [
+     {
+      "temp_c": "6.30",
+      "pressure_mpag": "10.00"
+     },
+     {
+      "temp_c": "5.40",
+      "pressure_mpag": "9.00"
+     },
+     {
+      "temp_c": "4.80",
+      "pressure_mpag": "7.50"
+     },
+     {
+      "temp_c": "4.00",
+      "pressure_mpag": "6.60"
+     },
+     {
+      "temp_c": "3.70",
+      "pressure_mpag": "5.80"
+     },
+     {
+      "temp_c": "3.20",
+      "pressure_mpag": "5.00"
+     },
+     {
+      "temp_c": "3.20",
+      "pressure_mpag": "5.00"
+     },
+     {
+      "temp_c": "3.20",
+      "pressure_mpag": "5.00"
+     },
+     {
+      "temp_c": "3.20",
+      "pressure_mpag": "5.00"
+     }
+    ]
+   }
+  }
+ },
+ "ansi_pn_mapping": {
+  "ANSI-150": "PN16",
+  "ANSI-300": "PN40",
+  "ANSI-600": "PN63, PN100",
+  "ANSI-900": "",
+  "ANSI-1500": "",
+  "ANSI-2500": ""
+ },
+ "us_china_material_mapping": {
+  "A216-WCB": "ZG230-450",
+  "A351-CF8": "ZG0Cr18Ni9",
+  "A351-CF8M": "ZG0Cr18Ni12Mo2Ti",
+  "A217-WC6": "ZG15CrMo",
+  "A217-WC9": "",
+  "A352-LCB": ""
+ },
+ "note": "Pages 3-23 of GC320 PDF are text-to-curve (vector paths, 0 extractable chars); only page 24 tables extractable via docx workflow. Other tables (Table 3 Cv, Table 4 pressure drops, Table 5 weight, dimension tables) require OCR or vision-based extraction from rendered PNG images."
+}

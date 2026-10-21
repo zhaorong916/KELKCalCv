@@ -1,0 +1,734 @@
+{
+  "label": "PC4000RA",
+  "docx": "PC4000RA(压缩).docx",
+  "n_tables": 10,
+  "tables": [
+    {
+      "table_index": 0,
+      "n_rows": 7,
+      "n_cols": 2,
+      "first_row": "型号\nType | PC4000RA",
+      "rows": [
+        [
+          "型号\nType",
+          "PC4000RA"
+        ],
+        [
+          "作用方式\nAction Type",
+          "双动作型：PC4200RA\nDouble acting type: PC4200RA\n单动作型：PC4100RA\nSpring return type: PC4 l OORA"
+        ],
+        [
+          "回转角度\nAngle Rotation",
+          "0~90°"
+        ],
+        [
+          "供气压力\nAir Supply",
+          "PC4200RA : 300~600kPa G（双动作型Double acting type)\nPC4100RA : 400、500kPa G（单动作型Spring return type)"
+        ],
+        [
+          "输出力矩\nOutputTorque",
+          "诮参见表1\nSee Table.I"
+        ],
+        [
+          "配管接口\nAir Connection",
+          "Gl/4~Gl/2"
+        ],
+        [
+          "标准涂层色\nPainting",
+          "银灰色\nGray"
+        ]
+      ]
+    },
+    {
+      "table_index": 1,
+      "n_rows": 3,
+      "n_cols": 2,
+      "first_row": "滞后\nHysteresis | 带定位器时1.5%FS以内。\nLess than 1.5% offull stroke with positioner",
+      "rows": [
+        [
+          "滞后\nHysteresis",
+          "带定位器时1.5%FS以内。\nLess than 1.5% offull stroke with positioner"
+        ],
+        [
+          "直线度\nLinearity",
+          "带定位器时士2.0¾FS以内。\nLess than士2.0% ofFull stroke with positioner."
+        ],
+        [
+          "环境温度\nAMBTemp",
+          "标准型Standard type -20-+90·c\n高温型High temperature service (option) -15~+150C\n低温型Low temperature service (option) -40~+80C"
+        ]
+      ]
+    },
+    {
+      "table_index": 2,
+      "n_rows": 6,
+      "n_cols": 2,
+      "first_row": "缸筒\nCylinder | 碳钢\nSteel pipe",
+      "rows": [
+        [
+          "缸筒\nCylinder",
+          "碳钢\nSteel pipe"
+        ],
+        [
+          "活塞\nPiston",
+          "铸铁\nCastiron"
+        ],
+        [
+          "活塞密封圈\nPiston-Ring",
+          "丁睛橡胶或娠橡胶\nNBR orViton"
+        ],
+        [
+          "输出轴\nDrive Shaft",
+          "碳钢\nCarbon steel"
+        ],
+        [
+          "曲柄\nTorque Lever",
+          "碳钢\nCarbon steel"
+        ],
+        [
+          "箱休\nCase",
+          "铸铁\nCastiron"
+        ]
+      ]
+    },
+    {
+      "table_index": 3,
+      "n_rows": 2,
+      "n_cols": 2,
+      "first_row": "控制附件\nControl Accessories | 电气气气、智能定位器，过滤减压阀，电磁阀，限位开关，调速器／增速器，锁止阀等等。\nE/P•P/P•Smart-Positioner, Air-set,Solenoid valve, L皿itswitch, Speed controller,\nLock valve, Lock-up valve, etc.",
+      "rows": [
+        [
+          "控制附件\nControl Accessories",
+          "电气气气、智能定位器，过滤减压阀，电磁阀，限位开关，调速器／增速器，锁止阀等等。\nE/P•P/P•Smart-Positioner, Air-set,Solenoid valve, L皿itswitch, Speed controller,\nLock valve, Lock-up valve, etc."
+        ],
+        [
+          "选购设备\nOption",
+          "手动操作机构、行程限位件、特殊空气配管及特殊气接头、低温环境用、高温环境用、防盐腐蚀型等。\nManual handle, Stroke stopper, Special air piping,Special air fitting,Low\ntemperature service, High temperature service, Salty environmentproof,etc."
+        ]
+      ]
+    },
+    {
+      "table_index": 4,
+      "n_rows": 12,
+      "n_cols": 10,
+      "first_row": "型号\nType | 尺寸 Size (mm) | 输出力矩Outputtorque (N·m) | 输出力矩Outputtorque (N·m) | 输出力矩Outputtorque (N·m) | 输出力矩Outputtorque (N·m) | 容量Volume (L) | 容量Volume (L) | 重量Weight\n(kg) | 重量Weight\n(kg)",
+      "rows": [
+        [
+          "型号\nType",
+          "尺寸 Size (mm)",
+          "输出力矩Outputtorque (N·m)",
+          "输出力矩Outputtorque (N·m)",
+          "输出力矩Outputtorque (N·m)",
+          "输出力矩Outputtorque (N·m)",
+          "容量Volume (L)",
+          "容量Volume (L)",
+          "重量Weight\n(kg)",
+          "重量Weight\n(kg)"
+        ],
+        [
+          "型号\nType",
+          "尺寸 Size (mm)",
+          "供气压力Air supply (kPa G)",
+          "供气压力Air supply (kPa G)",
+          "供气压力Air supply (kPa G)",
+          "供气压力Air supply (kPa G)",
+          "A",
+          "B",
+          "不带手轮\nWithouthandle",
+          "带手轮\nWith handle"
+        ],
+        [
+          "型号\nType",
+          "尺寸 Size (mm)",
+          "300",
+          "400",
+          "500",
+          "600",
+          "A",
+          "B",
+          "不带手轮\nWithouthandle",
+          "带手轮\nWith handle"
+        ],
+        [
+          "PC4213RA",
+          "中130",
+          "695",
+          "925",
+          "1160",
+          "1390",
+          "3.26",
+          "3.26",
+          "48",
+          "68"
+        ],
+        [
+          "PC4217RA",
+          "(1)170",
+          "1425",
+          "1900",
+          "2380",
+          "2855",
+          "7.03",
+          "7.03",
+          "82",
+          "102"
+        ],
+        [
+          "PC4220RA",
+          "中200",
+          "3225",
+          "4300",
+          "5380",
+          "6455",
+          "14.98",
+          "14.98",
+          "170",
+          "200"
+        ],
+        [
+          "PC4225RA",
+          "中250",
+          "5040",
+          "6725",
+          "8405",
+          "10085",
+          "23.63",
+          "23.63",
+          "195",
+          "225"
+        ],
+        [
+          "PC4228RA",
+          "中280",
+          "7680",
+          "10240",
+          "12800",
+          "15365",
+          "36.23",
+          "36.23",
+          "325",
+          "375"
+        ],
+        [
+          "PC4235RA",
+          "中350",
+          "15130",
+          "20170",
+          "25215",
+          "30260",
+          "69.00",
+          "69.00",
+          "600",
+          "700"
+        ],
+        [
+          "PC4240RA",
+          "(!)400",
+          "19760",
+          "26350",
+          "32935",
+          "39525",
+          "91.06",
+          "91.06",
+          "800",
+          "900"
+        ],
+        [
+          "PC4250RA",
+          "<1)500",
+          "37055",
+          "49405",
+          "61755",
+          "74110",
+          "173.45",
+          "173.45",
+          "1070",
+          "1270"
+        ],
+        [
+          "PC4260RA",
+          "([:)600",
+          "65215",
+          "86950",
+          "108690",
+          "130430",
+          "303.05",
+          "303.05",
+          "1580",
+          "1780"
+        ]
+      ]
+    },
+    {
+      "table_index": 5,
+      "n_rows": 9,
+      "n_cols": 2,
+      "first_row": "o N | 名称PartName",
+      "rows": [
+        [
+          "o N",
+          "名称PartName"
+        ],
+        [
+          "l",
+          "缸筒A Cylinder A"
+        ],
+        [
+          "2",
+          "活塞A Piston A"
+        ],
+        [
+          "3",
+          "活塞杆Piston rod"
+        ],
+        [
+          "4",
+          "输出轴Drive shaft"
+        ],
+        [
+          "5",
+          "拨叉Fork"
+        ],
+        [
+          "6",
+          "缸筒BCylinder B"
+        ],
+        [
+          "7",
+          "活塞BPiston B"
+        ],
+        [
+          "8",
+          "箱体Box"
+        ]
+      ]
+    },
+    {
+      "table_index": 6,
+      "n_rows": 10,
+      "n_cols": 2,
+      "first_row": "o | 名称PartName",
+      "rows": [
+        [
+          "o",
+          "名称PartName"
+        ],
+        [
+          "l",
+          "缸筒A Cylinder A"
+        ],
+        [
+          "2",
+          "活塞A Piston A"
+        ],
+        [
+          "3",
+          "活塞杆Piston rod"
+        ],
+        [
+          "4",
+          "输出轴Drive shaft"
+        ],
+        [
+          "5",
+          "拨叉Fork"
+        ],
+        [
+          "6",
+          "缸筒BCylinderB"
+        ],
+        [
+          "7",
+          "弹簧Spring"
+        ],
+        [
+          "8",
+          "活塞BPiston B"
+        ],
+        [
+          "9",
+          "箱体Box"
+        ]
+      ]
+    },
+    {
+      "table_index": 7,
+      "n_rows": 6,
+      "n_cols": 16,
+      "first_row": " |  |  |  |  |  |  |  |  |  |  |  |  |  |  | ",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "table_index": 8,
+      "n_rows": 5,
+      "n_cols": 15,
+      "first_row": " |  |  |  |  |  |  |  |  |  |  |  |  |  | ",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "table_index": 9,
+      "n_rows": 9,
+      "n_cols": 16,
+      "first_row": " |  |  |  |  |  |  |  |  |  |  |  |  |  |  | ",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    }
+  ]
+}

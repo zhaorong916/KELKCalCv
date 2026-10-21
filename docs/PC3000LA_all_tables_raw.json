@@ -1,0 +1,462 @@
+{
+  "label": "PC3000LA",
+  "docx": "PC3000LA(压缩).docx",
+  "n_tables": 8,
+  "tables": [
+    {
+      "table_index": 0,
+      "n_rows": 6,
+      "n_cols": 2,
+      "first_row": "型号\nType | PC3000LA",
+      "rows": [
+        [
+          "型号\nType",
+          "PC3000LA"
+        ],
+        [
+          "作用方式\nAction Type",
+          "双动作型：PC3200LA\nDouble acting type: PC3200LA\n单动作型：PC3100LA\nSpring return type: PC3 l OOLA"
+        ],
+        [
+          "供气压力\nAir Supply",
+          "双动作型：300~500kPa G\nDouble acting type: 300~500kPa G\n单动作型：500kPa G Spring return type: 500kPa G"
+        ],
+        [
+          "输出力\nOutputForce",
+          "请参见表1\nSee Table. I"
+        ],
+        [
+          "配管接口\nAir Connection",
+          "Rc3/8~Rc3/4"
+        ],
+        [
+          "标准涂层色\nPainting",
+          "银灰色\nGray"
+        ]
+      ]
+    },
+    {
+      "table_index": 1,
+      "n_rows": 3,
+      "n_cols": 2,
+      "first_row": "滞后\nHysteresis | 双动作带定位器时1.0¾FS以内。\nDouble acting type with positioner: Less than 1.0% ofFull stroke.\n单动作带定位器时1.5%FS以内。\nSpring return type with positioner: Less than 1.5% ofFull stroke.",
+      "rows": [
+        [
+          "滞后\nHysteresis",
+          "双动作带定位器时1.0¾FS以内。\nDouble acting type with positioner: Less than 1.0% ofFull stroke.\n单动作带定位器时1.5%FS以内。\nSpring return type with positioner: Less than 1.5% ofFull stroke."
+        ],
+        [
+          "直线度\nLinearity",
+          "带定位器时士2.0¾FS以内。\nLess than土2.0% ofFull stroke with positioner."
+        ],
+        [
+          "环境温度\nAMBTemp",
+          "标准型Standard type -20-t60·c\n高温型High temperature service (option) 0~+1oo·c\n低温型Low temperature service (option) -50~+60°C"
+        ]
+      ]
+    },
+    {
+      "table_index": 2,
+      "n_rows": 7,
+      "n_cols": 2,
+      "first_row": "缸简\nCylinder | 钢管\nSteel pipe",
+      "rows": [
+        [
+          "缸简\nCylinder",
+          "钢管\nSteel pipe"
+        ],
+        [
+          "活塞\nPiston",
+          "铝合金或碳钢\nAluminum or Steel"
+        ],
+        [
+          "活塞密封圈\nPiston-Ring",
+          "丁睛橡胶或辙橡胶\nNBR orViton"
+        ],
+        [
+          "输出轴\nDrive Shaft",
+          "不锈钢\nStainless steel"
+        ],
+        [
+          "气缸端盖\nCylinder Cover",
+          "碳钢\nSteel"
+        ],
+        [
+          "螺栓螺母\nBolts & Nuts",
+          "钢表面踱馅\nUni-chrome plated steel"
+        ],
+        [
+          "支架\nYoke",
+          "碳钢\nSteel"
+        ]
+      ]
+    },
+    {
+      "table_index": 3,
+      "n_rows": 2,
+      "n_cols": 2,
+      "first_row": "控制附件\nControl Accessories | 电气、气气、智能定位淄，过滤减压阀，电磁阀，限位开关，调速器／增速器，锁止阀等等。\nE/P•P/P•Smart-Positioner, Air-set,Solenoid valve, Limitswitch, Speed controller,\nLock valve, Lock-up valve, etc.",
+      "rows": [
+        [
+          "控制附件\nControl Accessories",
+          "电气、气气、智能定位淄，过滤减压阀，电磁阀，限位开关，调速器／增速器，锁止阀等等。\nE/P•P/P•Smart-Positioner, Air-set,Solenoid valve, Limitswitch, Speed controller,\nLock valve, Lock-up valve, etc."
+        ],
+        [
+          "选购设备\nOption",
+          "手动操作机构、行程限位件、特殊空气配管及特殊气接头、低温环境用、高温环境用、防盐腐蚀型等。\nManual handle, Stroke stopper, Special air piping,Special air fitting,Low\ntemperature service, High temperature service, Salty environmentproof,etc."
+        ]
+      ]
+    },
+    {
+      "table_index": 4,
+      "n_rows": 7,
+      "n_cols": 10,
+      "first_row": "型号\nType | 尺寸 Size (mm) | 最大行程 Max. Stroke (mm) | 输出力Outputforce\n(N) | 输出力Outputforce\n(N) | 输出力Outputforce\n(N) | 容量Volume (L) | 容量Volume (L) | 重量Weight\n(kg) | 重量Weight\n(kg)",
+      "rows": [
+        [
+          "型号\nType",
+          "尺寸 Size (mm)",
+          "最大行程 Max. Stroke (mm)",
+          "输出力Outputforce\n(N)",
+          "输出力Outputforce\n(N)",
+          "输出力Outputforce\n(N)",
+          "容量Volume (L)",
+          "容量Volume (L)",
+          "重量Weight\n(kg)",
+          "重量Weight\n(kg)"
+        ],
+        [
+          "型号\nType",
+          "尺寸 Size (mm)",
+          "最大行程 Max. Stroke (mm)",
+          "供气压力Air supply (kPa G)",
+          "供气压力Air supply (kPa G)",
+          "供气压力Air supply (kPa G)",
+          "A",
+          "B",
+          "不带手轮\nWithouthandle",
+          "侧面手轮\nTop-side handle"
+        ],
+        [
+          "型号\nType",
+          "尺寸 Size (mm)",
+          "最大行程 Max. Stroke (mm)",
+          "300",
+          "400",
+          "500",
+          "A",
+          "B",
+          "不带手轮\nWithouthandle",
+          "侧面手轮\nTop-side handle"
+        ],
+        [
+          "PC3220LA",
+          "<!>200",
+          "210",
+          "8700",
+          "11700",
+          "14600",
+          "0.9",
+          "7.2",
+          "35",
+          "70"
+        ],
+        [
+          "PC3230LA",
+          "©300",
+          "210",
+          "19700",
+          "26300",
+          "32900",
+          "2",
+          "16",
+          "85",
+          "145"
+        ],
+        [
+          "PC3245LA",
+          "(()450",
+          "410",
+          "44700",
+          "59600",
+          "74500",
+          "6",
+          "69",
+          "250",
+          "380"
+        ],
+        [
+          "PC3260LA",
+          "<1>600",
+          "410",
+          "79500",
+          "106000",
+          "132500",
+          "12",
+          "125",
+          "600",
+          "890"
+        ]
+      ]
+    },
+    {
+      "table_index": 5,
+      "n_rows": 6,
+      "n_cols": 8,
+      "first_row": "型号\nType | 尺寸 Size (mm) | 最大行程 Max. Stroke (mm) | 供气压力 Air supply (kPa G) | 输出力 Outputforce (N) | 容量Volume (L) | 重量Weight (kg) | 重量Weight (kg)",
+      "rows": [
+        [
+          "型号\nType",
+          "尺寸 Size (mm)",
+          "最大行程 Max. Stroke (mm)",
+          "供气压力 Air supply (kPa G)",
+          "输出力 Outputforce (N)",
+          "容量Volume (L)",
+          "重量Weight (kg)",
+          "重量Weight (kg)"
+        ],
+        [
+          "型号\nType",
+          "尺寸 Size (mm)",
+          "最大行程 Max. Stroke (mm)",
+          "供气压力 Air supply (kPa G)",
+          "输出力 Outputforce (N)",
+          "容量Volume (L)",
+          "不带手轮\nWithouthandle",
+          "侧而手轮\nTop-side handle"
+        ],
+        [
+          "型号\nType",
+          "尺寸 Size (mm)",
+          "最大行程 Max. Stroke (mm)",
+          "供气压力 Air supply (kPa G)",
+          "输出力 Outputforce (N)",
+          "A",
+          "不带手轮\nWithouthandle",
+          "侧而手轮\nTop-side handle"
+        ],
+        [
+          "PC3130LA",
+          "({)300",
+          "210",
+          "500",
+          "7800",
+          "17",
+          "180",
+          "240"
+        ],
+        [
+          "PC3145LA",
+          "<1>450",
+          "210",
+          "500",
+          "17600",
+          "71",
+          "315",
+          "445"
+        ],
+        [
+          "PC3160LA",
+          "<J)600",
+          "210",
+          "500",
+          "31200",
+          "128",
+          "990",
+          "1280"
+        ]
+      ]
+    },
+    {
+      "table_index": 6,
+      "n_rows": 5,
+      "n_cols": 14,
+      "first_row": "型号\nType | 尺寸\nSize | 行程\nStroke\n(mm) | D |  | A |  |  |  | M | Hl |  |  | ",
+      "rows": [
+        [
+          "型号\nType",
+          "尺寸\nSize",
+          "行程\nStroke\n(mm)",
+          "D",
+          "",
+          "A",
+          "",
+          "",
+          "",
+          "M",
+          "Hl",
+          "",
+          "",
+          ""
+        ],
+        [
+          "PC3130LA",
+          "300",
+          "30~90",
+          "382",
+          "1330",
+          "185",
+          "145",
+          "100",
+          "140",
+          "M24x3",
+          "30",
+          "",
+          "",
+          "RCl/2"
+        ],
+        [
+          "PC3145LA",
+          "450",
+          "30~160",
+          "555",
+          "1377",
+          "265",
+          "215",
+          "140",
+          "260",
+          "M36x3",
+          "40",
+          "200",
+          "33",
+          "RCl/2"
+        ],
+        [
+          "PC3160LA",
+          "600",
+          "30~110",
+          "730",
+          "1385",
+          "290",
+          "225",
+          "160",
+          "310",
+          "M52x3",
+          "60",
+          "240",
+          "39",
+          "RC3/4"
+        ],
+        [
+          "",
+          "",
+          "130~210",
+          "",
+          "1735",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "table_index": 7,
+      "n_rows": 5,
+      "n_cols": 17,
+      "first_row": " |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | ",
+      "rows": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    }
+  ]
+}

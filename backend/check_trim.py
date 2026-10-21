@@ -1,5 +1,14 @@
+import os
+
 import pyodbc
-conn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=192.168.1.112;DATABASE=KELKCalCv;UID=Sa;PWD=QraLBZngRU0PipBmIun4')
+from dotenv import load_dotenv
+
+load_dotenv()
+conn = pyodbc.connect(
+    f"DRIVER={{ODBC Driver 17 for SQL Server}};"
+    f"SERVER={os.environ['DB_HOST']},{os.environ.get('DB_PORT', '1433')};"
+    f"DATABASE={os.environ['DB_NAME']};UID={os.environ['DB_USER']};PWD={os.environ['DB_PASSWORD']}"
+)
 cur = conn.cursor()
 
 # 查看实际列

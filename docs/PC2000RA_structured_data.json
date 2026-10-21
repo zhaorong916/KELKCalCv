@@ -1,0 +1,1480 @@
+{
+  "label": "PC2000RA",
+  "series": "PC2000RA SERIES",
+  "product_name_cn": "气动角行程执行机构",
+  "product_name_en": "Rotary Stem Motion Type Pneumatic Cylinder Actuators",
+  "doc_code": "SD-PC2000RA-A",
+  "spec_header": "KELK FLOW PC Series Actuators / Specification Data PC2000RA 01/15",
+  "source": {
+    "authoritative": "参考文件/选型样本/PC2000RA(压缩).pdf",
+    "reference_ocr": "参考文件/选型样本/PC2000RA(压缩).docx",
+    "pdf_pages": 11,
+    "page_scan": "docs/PC2000RA_pdf_page_scan.json",
+    "docx_tables_raw": "docs/PC2000RA_all_tables_raw.json",
+    "compare_report": "docs/PC2000RA_pdf_docx_compare.md",
+    "note": "全部数值以 PDF 渲染图/文字层为准；docx 仅用于结构与定位，其数值未直接采信（核对后一致）。p8 尺寸表(1) docx 缺失，已按 PDF 渲染图裁剪放大重建。"
+  },
+  "application": {
+    "cn": "该系列是一种外形小、高性能的执行机构，分为双动作和单动作两种，与角行程调节阀组合，可用于调节和开关的场合。该系列也可用于其它回转装置的场合。",
+    "en": "This Series provides double-acting and spring return pneumatic torque cylinder actuators characterized by small size and high-performance. Combined with rotary stem motion type control valves, the actuators of this Series are suited for modulating and on-off services. Uses with other rotary motion devices are also good.",
+    "features": [
+      {
+        "cn": "一体式通用紧凑设计：同型号的双作用和弹簧复位执行机构，具有相同的缸体和端盖，可通过增加或者拆除弹簧来进行现场转换，减少产品备件型号，极大地方便了用户的现场应用。",
+        "en": "One universal and compact design: the same type of double acting and spring return actuators, with the same cylinder and end cover, can scene conversion by increasing or removing the spring. It reduces spare parts model, which greatly facilitates the application users."
+      },
+      {
+        "cn": "采用双活塞齿轮齿条的结构设计：具有结构紧凑、使用寿命长、动作迅速等优点。安装位置对称设计，可通过简单的活塞对调方式来简易的改变转向。",
+        "en": "The structure design of dual piston rack and pinion: has the advantages of compact structure, the use of the advantages of long service life, quick action. The design of symmetric mounting position, can be simple to change through simple piston on the way."
+      },
+      {
+        "cn": "齿条和活塞上的复合轴承以及导向环：可确保操作精确、低摩擦及长寿命，并可有效防止输出轴撕裂。",
+        "en": "Rack and piston on the composite bearing and the guide ring: can ensure accurate operation, with low friction and long life, and also can effectively prevent the output shaft tear."
+      },
+      {
+        "cn": "外部的两个独立行程调节螺钉：能够方便而精确地在两个方向上进行±4°的调节。从而使执行机构在全开和全关的位置与阀门位置保持一致。",
+        "en": "Two independent travel outside of the adjusting screw: can convenient and accurate to plus or minus 4 degree adjustment in two direction. So that the actuator is consistent with the valve position in the fully open and fully closed position."
+      }
+    ],
+    "pdf_page": 3
+  },
+  "general_data": {
+    "pdf_page": 4,
+    "specifications": {
+      "型号 Type": "PC2000RA",
+      "输出方式 Output Type": "角行程式（Rotary stem motion type）",
+      "作用方式 Action Type": "双动作型：PC2200RA（Double acting type: PC2200RA）；单动作型：PC2100RA（Spring return type: PC2100RA）",
+      "回转角度 Angle Rotation": "0~90°",
+      "供气压力 Air Supply": "300~600kPa G",
+      "输出力矩 Output Torque": "请参见表1（See Table.1）",
+      "配管接口 Air Connection": "G1/4~G1/2",
+      "标准涂层色 Painting": "银灰色（Gray）"
+    },
+    "performance": {
+      "滞后 Hysteresis": "带定位器时 1.5%FS 以内（Less than 1.5% of full stroke with positioner.）",
+      "直线度 Linearity": "带定位器时 ±2.0%FS 以内（Less than ±2.0% of Full stroke with positioner.）",
+      "环境温度 AMB Temp": {
+        "标准型 Standard type": "-15~+80℃",
+        "高温型 High temperature service (option)": "-15~+150℃",
+        "低温型 Low temperature service (option)": "-40~+80℃"
+      }
+    },
+    "materials": {
+      "缸筒 Cylinder": "铝合金（Aluminum alloy）",
+      "活塞 Piston": "铝合金（Aluminum alloy）",
+      "活塞密封圈 Piston-Ring": "丁腈橡胶、氟橡胶或硅橡胶（NBR, Viton, Silastic）",
+      "输出轴 Drive Shaft": "45钢（45# steel）",
+      "气缸端盖 Cylinder Cover": "铝合金（Aluminum alloy）",
+      "螺栓螺母 Bolts & Nuts": "不锈钢（Stainless steel）"
+    }
+  },
+  "accessories": {
+    "pdf_page": 5,
+    "控制附件 Control Accessories": "电气、气气、智能定位器，过滤减压阀，电磁阀，限位开关，调速器/增速器，锁止阀等等。（E/P·P/P·Smart-Positioner, Air-set, Solenoid valve, Limit switch, Speed controller, Lock valve, Lock-up valve, etc.）",
+    "选购设备 Option": "手动操作机构、行程限位件、特殊空气配管及特殊气接头、低温环境用、高温环境用、防盐腐蚀型等。（Manual handle, Stroke stopper, Special air piping, Special air fitting, Low temperature service, High temperature service, Salty environment proof, etc.）"
+  },
+  "table_1_1_double_acting": {
+    "title_cn": "表1-1. 行程、输出力矩、容量及重量（双动作型）",
+    "title_en": "Table 1-1 STORKE, OUTPUT TORQUE, VOLUME & WEIGHT (DOUBLE ACTING TYPE)",
+    "pdf_page": 5,
+    "torque_unit": "N·m",
+    "columns": [
+      "型号Type",
+      "尺寸Size(mm)",
+      "输出力矩300(kPa G)",
+      "输出力矩400(kPa G)",
+      "输出力矩500(kPa G)",
+      "输出力矩600(kPa G)",
+      "容量A(L)",
+      "容量B(L)",
+      "重量不带手轮(kg)",
+      "重量带手轮(kg)"
+    ],
+    "rows": [
+      {
+        "type": "PC2205RA",
+        "size_mm": "50",
+        "torque": {
+          "300": 10.4,
+          "400": 14.2,
+          "500": 17.9,
+          "600": 21.6
+        },
+        "volume_A_L": 0.09,
+        "volume_B_L": 0.15,
+        "weight_kg": {
+          "without_handle": 1.13,
+          "with_handle": 8.43
+        }
+      },
+      {
+        "type": "PC2206RA",
+        "size_mm": "65",
+        "torque": {
+          "300": 21.2,
+          "400": 28.7,
+          "500": 36.3,
+          "600": 43.9
+        },
+        "volume_A_L": 0.19,
+        "volume_B_L": 0.32,
+        "weight_kg": {
+          "without_handle": 1.97,
+          "with_handle": 9.27
+        }
+      },
+      {
+        "type": "PC2207RA",
+        "size_mm": "75",
+        "torque": {
+          "300": 32.9,
+          "400": 44.7,
+          "500": 56.4,
+          "600": 68.2
+        },
+        "volume_A_L": 0.3,
+        "volume_B_L": 0.5,
+        "weight_kg": {
+          "without_handle": 2.93,
+          "with_handle": 10.23
+        }
+      },
+      {
+        "type": "PC2208RA",
+        "size_mm": "85",
+        "torque": {
+          "300": 48.3,
+          "400": 65.6,
+          "500": 82.8,
+          "600": 100.1
+        },
+        "volume_A_L": 0.44,
+        "volume_B_L": 0.66,
+        "weight_kg": {
+          "without_handle": 3.78,
+          "with_handle": 15.58
+        }
+      },
+      {
+        "type": "PC2209RA",
+        "size_mm": "95",
+        "torque": {
+          "300": 67.9,
+          "400": 92.1,
+          "500": 116.4,
+          "600": 140.6
+        },
+        "volume_A_L": 0.88,
+        "volume_B_L": 1.17,
+        "weight_kg": {
+          "without_handle": 5.14,
+          "with_handle": 16.94
+        }
+      },
+      {
+        "type": "PC2211RA",
+        "size_mm": "110",
+        "torque": {
+          "300": 89.3,
+          "400": 120.6,
+          "500": 152,
+          "600": 183.3
+        },
+        "volume_A_L": 0.83,
+        "volume_B_L": 1.27,
+        "weight_kg": {
+          "without_handle": 6.09,
+          "with_handle": 17.89
+        }
+      },
+      {
+        "type": "PC2212RA",
+        "size_mm": "125",
+        "torque": {
+          "300": 159.5,
+          "400": 215.4,
+          "500": 271.4,
+          "600": 327.4
+        },
+        "volume_A_L": 1.41,
+        "volume_B_L": 2.13,
+        "weight_kg": {
+          "without_handle": 10.09,
+          "with_handle": 21.89
+        }
+      },
+      {
+        "type": "PC2214RA",
+        "size_mm": "140",
+        "torque": {
+          "300": 237,
+          "400": 319,
+          "500": 401,
+          "600": 483
+        },
+        "volume_A_L": 1.76,
+        "volume_B_L": 2.72,
+        "weight_kg": {
+          "without_handle": 13.8,
+          "with_handle": 31.1
+        }
+      },
+      {
+        "type": "PC2216RA",
+        "size_mm": "160",
+        "torque": {
+          "300": 326.6,
+          "400": 441.2,
+          "500": 555.8,
+          "600": 670.4
+        },
+        "volume_A_L": 2.85,
+        "volume_B_L": 4.08,
+        "weight_kg": {
+          "without_handle": 20.2,
+          "with_handle": 37.5
+        }
+      },
+      {
+        "type": "PC2219RA",
+        "size_mm": "190",
+        "torque": {
+          "300": 518.0,
+          "400": 696.6,
+          "500": 875.3,
+          "600": 1053.9
+        },
+        "volume_A_L": 4.75,
+        "volume_B_L": 7.2,
+        "weight_kg": {
+          "without_handle": 28.4,
+          "with_handle": 45.7
+        }
+      },
+      {
+        "type": "PC2221RA",
+        "size_mm": "210",
+        "torque": {
+          "300": 723.2,
+          "400": 972.6,
+          "500": 1222,
+          "600": 1471.3
+        },
+        "volume_A_L": 6.6,
+        "volume_B_L": 10.29,
+        "weight_kg": {
+          "without_handle": 40,
+          "with_handle": 75
+        }
+      },
+      {
+        "type": "PC2224RA",
+        "size_mm": "240",
+        "torque": {
+          "300": 1122,
+          "400": 1508,
+          "500": 1895,
+          "600": 2282
+        },
+        "volume_A_L": 11.4,
+        "volume_B_L": 15.1,
+        "weight_kg": {
+          "without_handle": 64.6,
+          "with_handle": 99.6
+        }
+      },
+      {
+        "type": "PC2227RA",
+        "size_mm": "270",
+        "torque": {
+          "300": 1577,
+          "400": 2121,
+          "500": 2665,
+          "600": 3209
+        },
+        "volume_A_L": 15.06,
+        "volume_B_L": 22.96,
+        "weight_kg": {
+          "without_handle": 79.1,
+          "with_handle": 127.3
+        }
+      },
+      {
+        "type": "PC2230RA",
+        "size_mm": "300",
+        "torque": {
+          "300": 2029.4,
+          "400": 2729.2,
+          "500": 3429,
+          "600": 4128.8
+        },
+        "volume_A_L": 19.09,
+        "volume_B_L": 28.23,
+        "weight_kg": {
+          "without_handle": 108,
+          "with_handle": 158
+        }
+      },
+      {
+        "type": "PC2235RA",
+        "size_mm": "350",
+        "torque": {
+          "300": 3011.8,
+          "400": 4050.4,
+          "500": 5088.9,
+          "600": 6127.5
+        },
+        "volume_A_L": 27.65,
+        "volume_B_L": 44.1,
+        "weight_kg": {
+          "without_handle": 147,
+          "with_handle": 200
+        }
+      },
+      {
+        "type": "PC2240RA",
+        "size_mm": "400",
+        "torque": {
+          "300": 4589.4,
+          "400": 6172,
+          "500": 7754.5,
+          "600": 9337.1
+        },
+        "volume_A_L": 42.81,
+        "volume_B_L": 62.05,
+        "weight_kg": {
+          "without_handle": 220,
+          "with_handle": 280
+        }
+      }
+    ]
+  },
+  "table_1_2_spring_return": {
+    "title_cn": "表1-2. 行程、输出力矩、容量及重量（单动作型）",
+    "title_en": "Table 1-2 STORKE, OUTPUT TORQUE, VOLUME & WEIGHT (SPRING RETURN TYPE)",
+    "pdf_page": 6,
+    "torque_unit": "N·m",
+    "columns": [
+      "型号Type",
+      "尺寸Size(mm)",
+      "输出力矩300(kPa G)",
+      "输出力矩400(kPa G)",
+      "输出力矩500(kPa G)",
+      "输出力矩600(kPa G)",
+      "容量A(L)",
+      "重量不带手轮(kg)",
+      "重量带手轮(kg)"
+    ],
+    "rows": [
+      {
+        "type": "PC2105RA",
+        "size_mm": "50",
+        "torque": {
+          "300": 4.2,
+          "400": 5.6,
+          "500": 7,
+          "600": 8.4
+        },
+        "volume_A_L": 0.09,
+        "weight_kg": {
+          "without_handle": 1.25,
+          "with_handle": 8.55
+        }
+      },
+      {
+        "type": "PC2106RA",
+        "size_mm": "65",
+        "torque": {
+          "300": 10.4,
+          "400": 13.9,
+          "500": 17.4,
+          "600": 20.9
+        },
+        "volume_A_L": 0.19,
+        "weight_kg": {
+          "without_handle": 2.21,
+          "with_handle": 9.51
+        }
+      },
+      {
+        "type": "PC2107RA",
+        "size_mm": "75",
+        "torque": {
+          "300": 12.8,
+          "400": 17.1,
+          "500": 21.4,
+          "600": 25.7
+        },
+        "volume_A_L": 0.3,
+        "weight_kg": {
+          "without_handle": 3.29,
+          "with_handle": 10.59
+        }
+      },
+      {
+        "type": "PC2108RA",
+        "size_mm": "85",
+        "torque": {
+          "300": 19.9,
+          "400": 26.5,
+          "500": 33.1,
+          "600": 39.7
+        },
+        "volume_A_L": 0.44,
+        "weight_kg": {
+          "without_handle": 4.26,
+          "with_handle": 16.06
+        }
+      },
+      {
+        "type": "PC2109RA",
+        "size_mm": "95",
+        "torque": {
+          "300": 26.5,
+          "400": 35.4,
+          "500": 44.2,
+          "600": 53.0
+        },
+        "volume_A_L": 0.88,
+        "weight_kg": {
+          "without_handle": 5.86,
+          "with_handle": 17.66
+        }
+      },
+      {
+        "type": "PC2111RA",
+        "size_mm": "110",
+        "torque": {
+          "300": 34.3,
+          "400": 45.8,
+          "500": 57.2,
+          "600": 68.6
+        },
+        "volume_A_L": 0.83,
+        "weight_kg": {
+          "without_handle": 7.17,
+          "with_handle": 18.97
+        }
+      },
+      {
+        "type": "PC2112RA",
+        "size_mm": "125",
+        "torque": {
+          "300": 61.2,
+          "400": 81.6,
+          "500": 102.0,
+          "600": 122.4
+        },
+        "volume_A_L": 1.41,
+        "weight_kg": {
+          "without_handle": 12.5,
+          "with_handle": 24.3
+        }
+      },
+      {
+        "type": "PC2114RA",
+        "size_mm": "140",
+        "torque": {
+          "300": 98.7,
+          "400": 131.6,
+          "500": 164.5,
+          "600": 197.4
+        },
+        "volume_A_L": 1.76,
+        "weight_kg": {
+          "without_handle": 15.9,
+          "with_handle": 33.2
+        }
+      },
+      {
+        "type": "PC2116RA",
+        "size_mm": "160",
+        "torque": {
+          "300": 132,
+          "400": 176,
+          "500": 220,
+          "600": 264
+        },
+        "volume_A_L": 2.85,
+        "weight_kg": {
+          "without_handle": 23.8,
+          "with_handle": 41.1
+        }
+      },
+      {
+        "type": "PC2119RA",
+        "size_mm": "190",
+        "torque": {
+          "300": 218.1,
+          "400": 290.8,
+          "500": 363.5,
+          "600": 436.8
+        },
+        "volume_A_L": 4.75,
+        "weight_kg": {
+          "without_handle": 33.8,
+          "with_handle": 51.1
+        }
+      },
+      {
+        "type": "PC2121RA",
+        "size_mm": "210",
+        "torque": {
+          "300": 294.5,
+          "400": 392.6,
+          "500": 490.8,
+          "600": 589.0
+        },
+        "volume_A_L": 6.6,
+        "weight_kg": {
+          "without_handle": 48.4,
+          "with_handle": 83.4
+        }
+      },
+      {
+        "type": "PC2124RA",
+        "size_mm": "240",
+        "torque": {
+          "300": 492.6,
+          "400": 656.8,
+          "500": 821.0,
+          "600": 985.2
+        },
+        "volume_A_L": 11.4,
+        "weight_kg": {
+          "without_handle": 77.8,
+          "with_handle": 112.8
+        }
+      },
+      {
+        "type": "PC2127RA",
+        "size_mm": "270",
+        "torque": {
+          "300": 671.4,
+          "400": 895.2,
+          "500": 1119.0,
+          "600": 1342.8
+        },
+        "volume_A_L": 15.06,
+        "weight_kg": {
+          "without_handle": 98.9,
+          "with_handle": 147.1
+        }
+      },
+      {
+        "type": "PC2130RA",
+        "size_mm": "300",
+        "torque": {
+          "300": 829.3,
+          "400": 1105.8,
+          "500": 1382.2,
+          "600": 1658.6
+        },
+        "volume_A_L": 19.09,
+        "weight_kg": {
+          "without_handle": 136,
+          "with_handle": 185
+        }
+      },
+      {
+        "type": "PC2135RA",
+        "size_mm": "350",
+        "torque": {
+          "300": 1193.2,
+          "400": 1590.9,
+          "500": 1988.6,
+          "600": 2386.3
+        },
+        "volume_A_L": 27.65,
+        "weight_kg": {
+          "without_handle": 188,
+          "with_handle": 240
+        }
+      },
+      {
+        "type": "PC2140RA",
+        "size_mm": "400",
+        "torque": {
+          "300": 1891,
+          "400": 2522,
+          "500": 3152,
+          "600": 3782
+        },
+        "volume_A_L": 42.81,
+        "weight_kg": {
+          "without_handle": 283,
+          "with_handle": 343
+        }
+      }
+    ]
+  },
+  "air_consumption": {
+    "title_cn": "执行机构耗气量 AIR CONSUMPTION",
+    "formula": "C=M·V(P+101.3)/101.3",
+    "symbols": {
+      "C": "耗气量 Air consumption，单位 L/min",
+      "M": "动作次数/分钟 Action cycle，单位 /min",
+      "V": "容量 Volume：双作用为 A+B（表1-1）；单作用为 A（表1-2），单位 L",
+      "P": "供气压力（表压）Air supply，单位 kPa G",
+      "101.3": "一个标准大气压 Standard atmospheric pressure，单位 kPa"
+    },
+    "pdf_page": 6
+  },
+  "parts_list": {
+    "table_2_1_double_acting": {
+      "title_cn": "表2-1. 结构清单 PARTS LIST（双动作型 PC2200RA，图1-1）",
+      "pdf_page": 7,
+      "items": [
+        {
+          "no": 1,
+          "name": "缸筒 Cylinder"
+        },
+        {
+          "no": 2,
+          "name": "内限位螺钉 Int.Stopper"
+        },
+        {
+          "no": 3,
+          "name": "活塞B Piston B"
+        },
+        {
+          "no": 4,
+          "name": "外限位螺钉 Ext.Stopper"
+        },
+        {
+          "no": 5,
+          "name": "输出轴 Drive shaft"
+        },
+        {
+          "no": 6,
+          "name": "活塞A Piston A"
+        },
+        {
+          "no": 7,
+          "name": "气缸端盖 End-cap"
+        }
+      ]
+    },
+    "table_2_2_spring_return": {
+      "title_cn": "表2-2. 结构清单 PARTS LIST（单动作型 PC2100RA，图1-2）",
+      "pdf_page": 7,
+      "items": [
+        {
+          "no": 1,
+          "name": "缸筒 Cylinder"
+        },
+        {
+          "no": 2,
+          "name": "活塞B Piston B"
+        },
+        {
+          "no": 3,
+          "name": "内限位螺钉 Int.Stopper"
+        },
+        {
+          "no": 4,
+          "name": "外限位螺钉 Ext.Stopper"
+        },
+        {
+          "no": 5,
+          "name": "气缸端盖 End-cap"
+        },
+        {
+          "no": 6,
+          "name": "活塞A Piston A"
+        },
+        {
+          "no": 7,
+          "name": "输出轴 Drive shaft"
+        },
+        {
+          "no": 8,
+          "name": "弹簧组件 Spring assembly"
+        }
+      ]
+    }
+  },
+  "dimensions": {
+    "unit": "mm",
+    "title_cn": "尺寸表 Dimensions（单/双作用共框架，型号记作 PC21/2xxRA）",
+    "pdf_pages": {
+      "part1_PC21_205_to_224": 8,
+      "part2_PC21_227_to_240": 9
+    },
+    "columns": [
+      "型号Type",
+      "B",
+      "B1",
+      "H1",
+      "H2",
+      "L1",
+      "L2",
+      "h1",
+      "d",
+      "m",
+      "k",
+      "d1",
+      "m1",
+      "k1",
+      "J",
+      "C",
+      "带手轮H3",
+      "带手轮H4",
+      "带手轮L3",
+      "带手轮h3",
+      "带手轮d2",
+      "带手轮m2",
+      "带手轮k2",
+      "带手轮J1",
+      "带手轮HL",
+      "W_PC21",
+      "W_PC22"
+    ],
+    "notes": [
+      "型号 PC21/2xxRA 表示单作用 PC21xxRA 与双作用 PC22xxRA 同缸径共框架尺寸；W 列分 PC21/PC22 两子列。",
+      "C 列为配管接口（图纸标注 2–G\"C\"）：PC21/224~240RA 为 1/2，其余为 1/4。",
+      "d1/m1/k1 为第二法兰孔组（4–m1 DEPTH k1，PCD d1）；PC21/221RA、PC21/224RA、PC21/227RA、PC21/230RA、PC21/240RA 原文档为 \"—\"。",
+      "法兰孔型式（p9 图纸）：PC21/227RA、PC21/230RA 为 4–M DEPTH k；PC21/235RA 为 8–m DEPTH k + 4–m1 DEPTH k1；PC21/240RA 为 8–m DEPTH k。p8 各型号为 4–m DEPTH k + 4–m1 DEPTH k1。",
+      "手轮侧法兰孔：4–m2 DEPTH k2（p8 各型号）；PC21/235、PC21/240RA 另有 8–m2 DEPTH k2（p9 图纸）。",
+      "输出轴端为方榫 J；回转角度图注 Angle rotation: 90 deg / 0~90 deg；DETAIL OF * 为 4–M6 DEPTH 10。",
+      "docx 缺 p8 尺寸表(1)（PC21/205RA~PC21/224RA 共 12 行），本表全部 16 行均按 PDF 渲染图裁剪放大逐格提取。"
+    ],
+    "rows": [
+      {
+        "type": "PC21/205RA",
+        "covers": [
+          "PC2105RA",
+          "PC2205RA"
+        ],
+        "B": 154,
+        "B1": 194,
+        "H1": 35,
+        "H2": 55,
+        "L1": 42,
+        "L2": 29,
+        "h1": 12,
+        "d": 50,
+        "m": "M6",
+        "k": 9,
+        "d1": 36,
+        "m1": "M5",
+        "k1": 8,
+        "J": 11,
+        "C": "1/4",
+        "with_handle": {
+          "H3": 119,
+          "H4": 60,
+          "L3": 190,
+          "h3": 30,
+          "d2": 70,
+          "m2": "M8",
+          "k2": 9,
+          "J1": 16,
+          "HL": 48
+        },
+        "W": {
+          "PC21": 200,
+          "PC22": 200
+        },
+        "pdf_page": 8
+      },
+      {
+        "type": "PC21/206RA",
+        "covers": [
+          "PC2106RA",
+          "PC2206RA"
+        ],
+        "B": 189,
+        "B1": 229,
+        "H1": 45,
+        "H2": 65,
+        "L1": 52,
+        "L2": 38,
+        "h1": 16,
+        "d": 70,
+        "m": "M8",
+        "k": 12,
+        "d1": 50,
+        "m1": "M6",
+        "k1": 9,
+        "J": 14,
+        "C": "1/4",
+        "with_handle": {
+          "H3": 129,
+          "H4": 60,
+          "L3": 190,
+          "h3": 30,
+          "d2": 70,
+          "m2": "M8",
+          "k2": 9,
+          "J1": 16,
+          "HL": 48
+        },
+        "W": {
+          "PC21": 200,
+          "PC22": 200
+        },
+        "pdf_page": 8
+      },
+      {
+        "type": "PC21/207RA",
+        "covers": [
+          "PC2107RA",
+          "PC2207RA"
+        ],
+        "B": 210,
+        "B1": 250,
+        "H1": 50,
+        "H2": 70,
+        "L1": 59,
+        "L2": 44,
+        "h1": 16,
+        "d": 70,
+        "m": "M8",
+        "k": 12,
+        "d1": 50,
+        "m1": "M6",
+        "k1": 9,
+        "J": 14,
+        "C": "1/4",
+        "with_handle": {
+          "H3": 134,
+          "H4": 60,
+          "L3": 190,
+          "h3": 30,
+          "d2": 70,
+          "m2": "M8",
+          "k2": 9,
+          "J1": 16,
+          "HL": 48
+        },
+        "W": {
+          "PC21": 200,
+          "PC22": 200
+        },
+        "pdf_page": 8
+      },
+      {
+        "type": "PC21/208RA",
+        "covers": [
+          "PC2108RA",
+          "PC2208RA"
+        ],
+        "B": 229,
+        "B1": 269,
+        "H1": 57,
+        "H2": 77,
+        "L1": 64,
+        "L2": 49,
+        "h1": 19,
+        "d": 70,
+        "m": "M8",
+        "k": 12,
+        "d1": 50,
+        "m1": "M6",
+        "k1": 9,
+        "J": 17,
+        "C": "1/4",
+        "with_handle": {
+          "H3": 141,
+          "H4": 60,
+          "L3": 190,
+          "h3": 30,
+          "d2": 70,
+          "m2": "M8",
+          "k2": 9,
+          "J1": 16,
+          "HL": 48
+        },
+        "W": {
+          "PC21": 200,
+          "PC22": 200
+        },
+        "pdf_page": 8
+      },
+      {
+        "type": "PC21/209RA",
+        "covers": [
+          "PC2109RA",
+          "PC2209RA"
+        ],
+        "B": 264,
+        "B1": 304,
+        "H1": 62,
+        "H2": 82,
+        "L1": 71,
+        "L2": 55,
+        "h1": 19,
+        "d": 70,
+        "m": "M8",
+        "k": 12,
+        "d1": 50,
+        "m1": "M6",
+        "k1": 9,
+        "J": 17,
+        "C": "1/4",
+        "with_handle": {
+          "H3": 146,
+          "H4": 60,
+          "L3": 190,
+          "h3": 30,
+          "d2": 70,
+          "m2": "M8",
+          "k2": 9,
+          "J1": 16,
+          "HL": 48
+        },
+        "W": {
+          "PC21": 200,
+          "PC22": 200
+        },
+        "pdf_page": 8
+      },
+      {
+        "type": "PC21/211RA",
+        "covers": [
+          "PC2111RA",
+          "PC2211RA"
+        ],
+        "B": 266,
+        "B1": 306,
+        "H1": 68,
+        "H2": 88,
+        "L1": 77,
+        "L2": 62,
+        "h1": 19,
+        "d": 102,
+        "m": "M10",
+        "k": 15,
+        "d1": 70,
+        "m1": "M8",
+        "k1": 12,
+        "J": 17,
+        "C": "1/4",
+        "with_handle": {
+          "H3": 147,
+          "H4": 60,
+          "L3": 195,
+          "h3": 30,
+          "d2": 102,
+          "m2": "M10",
+          "k2": 12,
+          "J1": 21,
+          "HL": 66
+        },
+        "W": {
+          "PC21": 200,
+          "PC22": 200
+        },
+        "pdf_page": 8
+      },
+      {
+        "type": "PC21/212RA",
+        "covers": [
+          "PC2112RA",
+          "PC2212RA"
+        ],
+        "B": 337,
+        "B1": 377,
+        "H1": 81,
+        "H2": 111,
+        "L1": 85,
+        "L2": 72,
+        "h1": 25,
+        "d": 102,
+        "m": "M10",
+        "k": 15,
+        "d1": 70,
+        "m1": "M8",
+        "k1": 12,
+        "J": 22,
+        "C": "1/4",
+        "with_handle": {
+          "H3": 160,
+          "H4": 60,
+          "L3": 195,
+          "h3": 30,
+          "d2": 102,
+          "m2": "M10",
+          "k2": 12,
+          "J1": 21,
+          "HL": 66
+        },
+        "W": {
+          "PC21": 200,
+          "PC22": 200
+        },
+        "pdf_page": 8
+      },
+      {
+        "type": "PC21/214RA",
+        "covers": [
+          "PC2114RA",
+          "PC2214RA"
+        ],
+        "B": 377,
+        "B1": 417,
+        "H1": 89,
+        "H2": 119,
+        "L1": 97,
+        "L2": 81,
+        "h1": 31,
+        "d": 125,
+        "m": "M12",
+        "k": 18,
+        "d1": 102,
+        "m1": "M10",
+        "k1": 15,
+        "J": 27,
+        "C": "1/4",
+        "with_handle": {
+          "H3": 181,
+          "H4": 68,
+          "L3": 233,
+          "h3": 30,
+          "d2": 125,
+          "m2": "M12",
+          "k2": 14,
+          "J1": 26,
+          "HL": 86
+        },
+        "W": {
+          "PC21": 250,
+          "PC22": 250
+        },
+        "pdf_page": 8
+      },
+      {
+        "type": "PC21/216RA",
+        "covers": [
+          "PC2116RA",
+          "PC2216RA"
+        ],
+        "B": 412,
+        "B1": 452,
+        "H1": 100,
+        "H2": 130,
+        "L1": 106,
+        "L2": 90,
+        "h1": 31,
+        "d": 125,
+        "m": "M12",
+        "k": 18,
+        "d1": 102,
+        "m1": "M10",
+        "k1": 15,
+        "J": 27,
+        "C": "1/4",
+        "with_handle": {
+          "H3": 192,
+          "H4": 68,
+          "L3": 233,
+          "h3": 30,
+          "d2": 125,
+          "m2": "M12",
+          "k2": 14,
+          "J1": 26,
+          "HL": 86
+        },
+        "W": {
+          "PC21": 250,
+          "PC22": 250
+        },
+        "pdf_page": 8
+      },
+      {
+        "type": "PC21/219RA",
+        "covers": [
+          "PC2119RA",
+          "PC2219RA"
+        ],
+        "B": 488,
+        "B1": 528,
+        "H1": 116,
+        "H2": 146,
+        "L1": 112,
+        "L2": 105,
+        "h1": 41,
+        "d": 140,
+        "m": "M16",
+        "k": 24,
+        "d1": 102,
+        "m1": "M10",
+        "k1": 15,
+        "J": 36,
+        "C": "1/4",
+        "with_handle": {
+          "H3": 230,
+          "H4": 85,
+          "L3": 277,
+          "h3": 50,
+          "d2": 140,
+          "m2": "M16",
+          "k2": 18,
+          "J1": 36,
+          "HL": 123
+        },
+        "W": {
+          "PC21": 350,
+          "PC22": 350
+        },
+        "pdf_page": 8
+      },
+      {
+        "type": "PC21/221RA",
+        "covers": [
+          "PC2121RA",
+          "PC2221RA"
+        ],
+        "B": 550,
+        "B1": 590,
+        "H1": 128,
+        "H2": 158,
+        "L1": 120,
+        "L2": 116,
+        "h1": 40,
+        "d": 140,
+        "m": "M16",
+        "k": 24,
+        "d1": "—",
+        "m1": "—",
+        "k1": "—",
+        "J": 36,
+        "C": "1/4",
+        "with_handle": {
+          "H3": 242,
+          "H4": 85,
+          "L3": 277,
+          "h3": 50,
+          "d2": 140,
+          "m2": "M16",
+          "k2": 18,
+          "J1": 36,
+          "HL": 123
+        },
+        "W": {
+          "PC21": 350,
+          "PC22": 350
+        },
+        "pdf_page": 8
+      },
+      {
+        "type": "PC21/224RA",
+        "covers": [
+          "PC2124RA",
+          "PC2224RA"
+        ],
+        "B": 602,
+        "B1": 642,
+        "H1": 146,
+        "H2": 176,
+        "L1": 131,
+        "L2": 131,
+        "h1": 50,
+        "d": 165,
+        "m": "M20",
+        "k": 28,
+        "d1": "—",
+        "m1": "—",
+        "k1": "—",
+        "J": 46,
+        "C": "1/2",
+        "with_handle": {
+          "H3": 263,
+          "H4": 100,
+          "L3": 323,
+          "h3": 55,
+          "d2": 165,
+          "m2": "M20",
+          "k2": 22,
+          "J1": 50,
+          "HL": 138
+        },
+        "W": {
+          "PC21": 600,
+          "PC22": 400
+        },
+        "pdf_page": 8
+      },
+      {
+        "type": "PC21/227RA",
+        "covers": [
+          "PC2127RA",
+          "PC2227RA"
+        ],
+        "B": 672,
+        "B1": 740,
+        "H1": 166,
+        "H2": 196,
+        "L1": 148,
+        "L2": 148,
+        "h1": 50,
+        "d": 165,
+        "m": "M20",
+        "k": 28,
+        "d1": "—",
+        "m1": "—",
+        "k1": "—",
+        "J": 46,
+        "C": "1/2",
+        "with_handle": {
+          "H3": 283,
+          "H4": 100,
+          "L3": 323,
+          "h3": 55,
+          "d2": 165,
+          "m2": "M20",
+          "k2": 22,
+          "J1": 50,
+          "HL": 138
+        },
+        "W": {
+          "PC21": 600,
+          "PC22": 400
+        },
+        "pdf_page": 9
+      },
+      {
+        "type": "PC21/230RA",
+        "covers": [
+          "PC2130RA",
+          "PC2230RA"
+        ],
+        "B": 784,
+        "B1": 854,
+        "H1": 177,
+        "H2": 207,
+        "L1": 173,
+        "L2": 162,
+        "h1": 50,
+        "d": 165,
+        "m": "M20",
+        "k": 28,
+        "d1": "—",
+        "m1": "—",
+        "k1": "—",
+        "J": 46,
+        "C": "1/2",
+        "with_handle": {
+          "H3": 294,
+          "H4": 100,
+          "L3": 323,
+          "h3": 50,
+          "d2": 165,
+          "m2": "M20",
+          "k2": 22,
+          "J1": 50,
+          "HL": 138
+        },
+        "W": {
+          "PC21": 600,
+          "PC22": 400
+        },
+        "pdf_page": 9
+      },
+      {
+        "type": "PC21/235RA",
+        "covers": [
+          "PC2135RA",
+          "PC2235RA"
+        ],
+        "B": 845,
+        "B1": 915,
+        "H1": 205,
+        "H2": 235,
+        "L1": 195,
+        "L2": 190,
+        "h1": 50,
+        "d": 254,
+        "m": "M16",
+        "k": 30,
+        "d1": 165,
+        "m1": "M20",
+        "k1": 28,
+        "J": 46,
+        "C": "1/2",
+        "with_handle": {
+          "H3": 449,
+          "H4": 130,
+          "L3": 463,
+          "h3": 80,
+          "d2": 254,
+          "m2": "M16",
+          "k2": 25,
+          "J1": 60,
+          "HL": 152
+        },
+        "W": {
+          "PC21": 500,
+          "PC22": 500
+        },
+        "pdf_page": 9
+      },
+      {
+        "type": "PC21/240RA",
+        "covers": [
+          "PC2140RA",
+          "PC2240RA"
+        ],
+        "B": 956,
+        "B1": 1026,
+        "H1": 233,
+        "H2": 263,
+        "L1": 260,
+        "L2": 260,
+        "h1": 60,
+        "d": 254,
+        "m": "M16",
+        "k": 30,
+        "d1": "—",
+        "m1": "—",
+        "k1": "—",
+        "J": 55,
+        "C": "1/2",
+        "with_handle": {
+          "H3": 477,
+          "H4": 130,
+          "L3": 463,
+          "h3": 80,
+          "d2": 254,
+          "m2": "M16",
+          "k2": 25,
+          "J1": 60,
+          "HL": 152
+        },
+        "W": {
+          "PC21": 500,
+          "PC22": 500
+        },
+        "pdf_page": 9
+      }
+    ]
+  },
+  "actuator_model_coding_rule": {
+    "title_cn": "附表一 执行机构型号编制说明",
+    "title_en": "ACTUATOR MODEL CODING RULE",
+    "pdf_page": 10,
+    "example_code": "P D 3 0 00 L A - D - N",
+    "positions": [
+      {
+        "pos": 1,
+        "code": "P",
+        "meaning": "执行机构"
+      },
+      {
+        "pos": 2,
+        "code": "D / C",
+        "meaning": "薄膜式执行机构 / 气缸式执行机构"
+      },
+      {
+        "pos": 3,
+        "code": "3 / 2 / 6 / 4 / 8",
+        "meaning": "薄膜式·气缸式直行程 / VT式角行程 / AT式角行程 / 拨叉式角行程 / 气缸式角行程"
+      },
+      {
+        "pos": 4,
+        "code": "1 / 2",
+        "meaning": "单动作执行机构 / 双动作执行机构（示例代码使用 0 作系列占位）"
+      },
+      {
+        "pos": 5,
+        "code": "00 / 000",
+        "meaning": "缸径型号"
+      },
+      {
+        "pos": 6,
+        "code": "L / R",
+        "meaning": "直行程执行机构 / 角行程执行机构"
+      },
+      {
+        "pos": 7,
+        "code": "A",
+        "meaning": "版本号"
+      },
+      {
+        "pos": 8,
+        "code": "D / R / W",
+        "meaning": "正动作型 / 反动作型 / 双动作型"
+      },
+      {
+        "pos": 9,
+        "code": "N / S / H",
+        "meaning": "无手轮 / 旁式手轮 / 顶部手轮"
+      }
+    ]
+  },
+  "covers_and_contacts": {
+    "cover": "PC2000RA SERIES 气动角行程执行机构 Rotary Stem Motion Type Pneumatic Cylinder Actuators",
+    "manufacturer": "无锡凯尔克仪表阀门有限公司",
+    "company_intro": "KELK 无锡公司是一家中国与加拿大合资的专业控制阀制造商，是专业生产各类电动、气动控制阀、控制装置，并集成工业控制系统的一家高科技企业。",
+    "contact_web": "www.kelkflow.com.cn",
+    "contact_email": "info@kelkflow.com.cn",
+    "head_office": "地址：无锡市新区鸿山镇后宅机光电集中区德育路6号 (214115)；电话：+86-510-85141699；传真：+86-510-85141819",
+    "branches": [
+      {
+        "name": "KELK 重庆分公司",
+        "address": "重庆市北部新区金渝大道68号新科国际5-706",
+        "zip": "401122",
+        "phone_fax": "023-67303323 / 023-67303870"
+      },
+      {
+        "name": "KELK 北京分公司",
+        "address": "北京市朝阳区北辰西路69号峻峰华亭D座2210室",
+        "zip": "100029",
+        "phone_fax": "010-58773822 / 010-58773818"
+      },
+      {
+        "name": "KELK 杭州分公司",
+        "address": "杭州市下城区三塘高层公寓3幢605室",
+        "zip": "310004",
+        "phone_fax": "0517-81953576 / 0517-81953576"
+      },
+      {
+        "name": "KELK 广州分公司",
+        "address": "广州市天河区天河北路705号东方之珠D栋1303房",
+        "zip": "510000",
+        "phone_fax": "020-38042159 / 020-38042387"
+      },
+      {
+        "name": "KELK 武汉分公司",
+        "address": "武汉市武昌区福星惠誉国际城芭莎公馆1-1-3603室",
+        "zip": "430060",
+        "phone_fax": "027-86708711 / 027-87453500"
+      },
+      {
+        "name": "KELK 西安分公司",
+        "address": "陕西省西安市西影路63号雁影华庭3-501",
+        "zip": "710054",
+        "phone_fax": "029-85537596 / 029-85519533"
+      },
+      {
+        "name": "KELK 成都分公司",
+        "address": "成都市高新区天府大道中段177号天鹅湖花园公寓北岛23栋2单元28楼7号",
+        "zip": "630031",
+        "phone_fax": "028-87359772 / 028-87359772"
+      }
+    ],
+    "footer_note": "规格数据可能因技术进步而改变"
+  },
+  "document_anomalies_preserved": [
+    {
+      "location": "表1-1/表1-2 英文标题（p5/p6）",
+      "issue": "STORKE 系原文档错字，应为 STROKE",
+      "action": "保留原样"
+    },
+    {
+      "location": "p5 控制附件中文",
+      "issue": "原文为“电气、气气、智能定位器”（无斜杠；PC4000RA 样本作“电气、气/气”）",
+      "action": "保留原样"
+    },
+    {
+      "location": "p3 英文应用介绍",
+      "issue": "中式英语表述（如 can scene conversion... / can be simple to change through simple piston on the way）",
+      "action": "保留原样"
+    },
+    {
+      "location": "p10 附表一 示例代码",
+      "issue": "示例 P D 3 0 00 L A - D - N 第 4 位为 0（系列占位），与说明行 1/2 取值不直接对应",
+      "action": "保留原样"
+    }
+  ]
+}
