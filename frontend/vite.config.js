@@ -9,6 +9,11 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+  // 直接构建到后端静态目录: 服务器 git pull 即可拿到最新页面
+  build: {
+    outDir: '../backend/static',
+    emptyOutDir: true
+  },
   server: {
     port: 5173,
     host: '0.0.0.0',
