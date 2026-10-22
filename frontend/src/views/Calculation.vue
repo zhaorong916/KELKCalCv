@@ -303,13 +303,6 @@
 
       <!-- 右栏：工艺工况 + 结果区 -->
       <div class="col-result">
-        <!-- Cv 曲线图 -->
-        <div class="section-card cv-curve-card">
-          <div class="section-title">Cv vs 行程曲线
-            <span class="muted" v-if="strokeModeInfo">{{ strokeModeInfo }}</span>
-          </div>
-          <v-chart class="cv-chart" :option="cvChartOption" autoresize />
-        </div>
 
         <!-- 工艺工况（列式布局 + 单位下拉框在第一列） -->
         <div class="section-card">
@@ -833,6 +826,22 @@
             </div>
           </div>
         </template>
+
+        <!-- 曲线图（置于底部）：Cv vs 行程 与 计算因数 并排 -->
+        <div class="charts-row">
+          <div class="section-card chart-card">
+            <div class="section-title">Cv vs 行程曲线
+              <span class="muted" v-if="strokeModeInfo">{{ strokeModeInfo }}</span>
+            </div>
+            <v-chart class="calc-chart" :option="cvChartOption" autoresize />
+          </div>
+          <div class="section-card chart-card">
+            <div class="section-title">计算因数曲线
+              <span class="muted">FL / xT / Kc / Fd vs % 额定 Cv</span>
+            </div>
+            <v-chart class="calc-chart" :option="factorChartOption" autoresize />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1268,7 +1277,7 @@ const strokeModeInfo = computed(() => {
 
 const cvChartOption = computed(() => {
   const pts = cvCurvePoints.value
-  const ratedCv = curveInfo.rated_cv || config.value.rated_cv || 1
+  const ratedCv = Number(curveInfo.rated_cv || config.value.rated_cv) || 1
   const activeCases = cases.value.filter(c => c.is_active !== false)
   const marks = []
   activeCases.forEach(c => {
@@ -1309,6 +1318,77 @@ const cvChartOption = computed(() => {
       symbolSize: 6,
       markPoint: marks.length ? { data: marks, symbolSize: 50, label: { formatter: (p) => p.value || '' } } : undefined,
     }],
+  }
+})
+
+// ---- 计算因数曲线 (FL / xT / Kc / Fd vs % 额定 Cv) ----
+const FACTOR_META = [
+  { key: 'fl', name: 'FL', color: '#2c3e50' },
+  { key: 'xt', name: 'xT', color: '#e74c3c' },
+  { key: 'kc', name: 'Kc', color: '#3498db' },
+  { key: 'fd', name: 'Fd', color: '#27ae60' },
+]
+
+// 多项式 f(phi) = p0 + p1*phi + ... + p4*phi^4, 并按 value_min/max 钳制
+function evalFactorPoly(c, phi) {
+  if (!c) return null
+  const p = [c.p0, c.p1, c.p2, c.p3, c.p4]
+  if (!p.some(v => Number(v))) return c.value_min ?? null
+  let v = 0
+  for (let i = p.length - 1; i >= 0; i--) v = v * phi + (Number(p[i]) || 0)
+  if (c.value_min != null) v = Math.max(v, c.value_min)
+  if (c.value_max != null) v = Math.min(v, c.value_max)
+  return v
+}
+
+const factorSeriesData = computed(() => {
+  const cc = config.value.curve_coeffs || {}
+  const scalar = k => {
+    const n = Number(config.value[k])
+    return Number.isFinite(n) ? n : null
+  }
+  const out = {}
+  for (const m of FACTOR_META) {
+    const c = m.key === 'xt' ? null : (cc[m.key] || null)
+    const data = []
+    for (let i = 0; i <= 100; i++) {
+      const phi = i / 100
+      let v
+      if (m.key === 'xt') {
+        // xT = 0.84 * FL^2
+        const flv = cc.fl ? evalFactorPoly(cc.fl, phi) : scalar('fl')
+        v = flv != null ? 0.84 * flv * flv : scalar('xt')
+      } else {
+        v = c ? evalFactorPoly(c, phi) : scalar(m.key)
+      }
+      if (v == null || !Number.isFinite(v)) continue
+      data.push([i, Math.max(0, Math.min(1, v))])
+    }
+    out[m.key] = data
+  }
+  return out
+})
+
+const factorChartOption = computed(() => {
+  const d = factorSeriesData.value
+  const series = FACTOR_META
+    .filter(m => d[m.key] && d[m.key].length)
+    .map(m => ({
+      name: m.name,
+      type: 'line',
+      smooth: true,
+      showSymbol: false,
+      data: d[m.key],
+      lineStyle: { width: 2, color: m.color },
+      itemStyle: { color: m.color },
+    }))
+  return {
+    tooltip: { trigger: 'axis', valueFormatter: v => Number(v).toFixed(3) },
+    legend: { bottom: 0, itemWidth: 14, itemHeight: 8, textStyle: { fontSize: 11 }, data: series.map(s => s.name) },
+    grid: { left: 70, right: 20, top: 30, bottom: 60, containLabel: false },
+    xAxis: { type: 'value', name: '% 额定 Cv', min: 0, max: 100, splitNumber: 10 },
+    yAxis: { type: 'value', name: 'Sizing Indices', min: 0, max: 1, splitNumber: 5 },
+    series,
   }
 })
 
@@ -1526,6 +1606,16 @@ async function loadCalc() {
     ...c,
   }))
   results.value = data.results || {}
+  // 已保存结果中的开度可能由后端按线性假设或旧曲线系数算出, 与当前曲线不一致,
+  // 加载时按当前 Cv vs 行程曲线重新插值, 保证图上开度点落在曲线上
+  const ratedCvLoad = Number(curveInfo.rated_cv ?? config.value.rated_cv) || 0
+  if (ratedCvLoad > 0) {
+    Object.values(results.value).forEach(r => {
+      if (r && r.cv_required != null) {
+        r.cv_opening = computeOpeningByCurve(r.cv_required, ratedCvLoad)
+      }
+    })
+  }
   // 从第一个 case 提取已保存的单位到 caseUnits
   if (cases.value.length > 0) {
     const c0 = cases.value[0]
@@ -1966,8 +2056,10 @@ onMounted(() => { loadPublicOptions(); init() })
 .col-form::-webkit-scrollbar-thumb, .col-result::-webkit-scrollbar-thumb { background: #dcdfe6; border-radius: 4px; }
 .col-form::-webkit-scrollbar-track, .col-result::-webkit-scrollbar-track { background: transparent; }
 
-/* Cv 曲线图 */
-.cv-curve-card .cv-chart { width: 340px; height: 340px; }
+/* 底部曲线图：Cv vs 行程 与 计算因数 并排 */
+.charts-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.charts-row .chart-card { padding: 14px 12px; }
+.chart-card .calc-chart { width: 100%; height: 320px; }
 
 /* ===== 设计数据 / 选型数据 分栏（阀前 | 阀后）样式 ===== */
 .pipe-header-row { margin-bottom: 2px; }
