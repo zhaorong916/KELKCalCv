@@ -80,17 +80,17 @@
           <!-- 设计压力 (不分前后) -->
           <div class="form-row">
             <label>设计压力</label>
-            <el-input-number v-model="config.design_pressure" :min="0" :precision="3" size="small" :controls="false" style="flex:1" /><span class="unit-inline">MPa(G)</span>
+            <el-input-number v-model="config.design_pressure" :min="0" :precision="3" size="small" :controls="false" /><span class="unit-inline unit-design">MPa(G)</span>
           </div>
           <!-- 设计温度 -->
           <div class="form-row">
             <label>设计温度</label>
-            <el-input-number v-model="config.design_temp" size="small" :controls="false" style="flex:1" /><span class="unit-inline">℃</span>
+            <el-input-number v-model="config.design_temp" size="small" :controls="false" /><span class="unit-inline unit-design">℃</span>
           </div>
           <!-- 关闭压差 -->
           <div class="form-row">
             <label>关闭压差</label>
-            <el-input-number v-model="config.close_dp" :min="0" :precision="3" size="small" :controls="false" style="flex:1" /><span class="unit-inline">MPa</span>
+            <el-input-number v-model="config.close_dp" :min="0" :precision="3" size="small" :controls="false" /><span class="unit-inline unit-design">MPa</span>
           </div>
         </div>
 
@@ -2006,6 +2006,8 @@ onMounted(() => { loadPublicOptions(); init() })
 .form-row label { min-width: 110px; font-size: 12px; color: #606266; text-align: right; flex-shrink: 0; }
 .form-row label sub { font-size: 10px; }
 .unit-inline { font-size: 12px; color: #909399; }
+/* 设计压力/温度/压差：单位占位使输入框宽度与上方"管道材质"阀前列对齐 */
+.unit-design { flex: 1; min-width: 0; text-align: left; padding-right: 42px; }
 
 .cases-table-wrapper { overflow-x: auto; }
 /* 列宽策略：所有列显式固定 width，两表保持一致；table-layout:fixed 保证严格按 colgroup 分配 */
@@ -2088,7 +2090,7 @@ onMounted(() => { loadPublicOptions(); init() })
 .pipe-col-sync { width: 32px; flex-shrink: 0; }
 
 /* 有分栏的 form-row：label + 阀前控件 + 阀后控件 + 同步按钮 */
-.form-row .el-select, .form-row .el-input { flex: 1; min-width: 0; }
+.form-row .el-select, .form-row .el-input, .form-row .el-input-number { flex: 1; min-width: 0; }
 .form-row .el-button.link { flex-shrink: 0; width: 32px; padding: 0; }
 
 /* 子分组（连接相关 / 阀体属性） */
