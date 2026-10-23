@@ -154,6 +154,15 @@ class TestGasOpeningCorrection(unittest.TestCase):
         # 常数曲线: 第 1 次迭代后 phi_new ≈ phi → 收敛
         self.assertLessEqual(corr["iterations"], 2)
 
+    def test_zero_fl_curve_skips_correction(self):
+        """FL 曲线恒为 0 (常数曲线只填 value_max) → 不抛异常, 跳过修正"""
+        fc = FactorCurves(fl=FactorCurve(p0=0.0, value_min=None, value_max=0.9))
+        vc = ValveCoeffs(rated_cv=50, fl=0.9, xt=0.72, fd=0.46, factor_curves=fc)
+        case = self._make_gas_case()
+        res = calculate_cv_gas(vc=vc, rated_cv_select=50, **case)
+        self.assertGreater(res.cv_required, 0)
+        self.assertNotIn("opening_corrected", res.detail)
+
 
 class TestLiquidOpeningCorrection(unittest.TestCase):
     """液体 Cv 计算开度修正"""
@@ -197,6 +206,15 @@ class TestLiquidOpeningCorrection(unittest.TestCase):
         res_corr = calculate_cv_liquid(vc=vc_corr, rated_cv_select=80, **case)
         # dp_choked 不同 (FL 不同)
         self.assertNotAlmostEqual(res_plain.dp_choked, res_corr.dp_choked, places=1)
+
+    def test_zero_fl_curve_skips_correction(self):
+        """FL 曲线恒为 0 (常数曲线只填 value_max) → 不抛异常, 跳过修正"""
+        fc = FactorCurves(fl=FactorCurve(p0=0.0, value_min=None, value_max=0.9))
+        vc = ValveCoeffs(rated_cv=50, fl=0.9, fd=0.46, factor_curves=fc)
+        case = self._make_liquid_case()
+        res = calculate_cv_liquid(vc=vc, rated_cv_select=50, **case)
+        self.assertGreater(res.cv_required, 0)
+        self.assertNotIn("opening_corrected", res.detail)
 
 
 class TestFdOpeningCorrection(unittest.TestCase):

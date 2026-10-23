@@ -104,7 +104,9 @@ def calculate_cv_gas(
     # ---- 开度二次修正: 用 FL(φ) 曲线迭代修正 xT/Cv ----
     rated = rated_cv_select or vc.rated_cv or cv_required
     fc = vc.factor_curves
+    _corrected = None
     if fc and fc.fl and rated > 0:
+        phi_new = None
         for _ in range(5):  # 最多迭代 5 次
             phi = max(min(cv_required / rated, 1.0), 0.0)
             fl_phi = fc.fl.eval(phi)
@@ -125,19 +127,21 @@ def calculate_cv_gas(
             cv_required = cv_new
             if abs(phi_new - phi) < 0.001:
                 break
-        # 用收敛值更新结果
-        xt = xt_phi
-        x_t_eff = x_t_eff_phi
-        choked = choked_phi
-        Y = Y_phi
-        res.cv_required = cv_required
-        res.x_t_eff = x_t_eff
-        res.y = Y
-        res.choked = choked
-        _corrected = {
-            "FL_phi": fl_phi, "xT_phi": xt_phi, "phi_final": phi_new,
-            "iterations": _ + 1,
-        }
+        # 曲线无效（如 FL 恒为 0）时首轮即 break，phi_new 保持 None：不做修正
+        if phi_new is not None:
+            # 用收敛值更新结果
+            xt = xt_phi
+            x_t_eff = x_t_eff_phi
+            choked = choked_phi
+            Y = Y_phi
+            res.cv_required = cv_required
+            res.x_t_eff = x_t_eff
+            res.y = Y
+            res.choked = choked
+            _corrected = {
+                "FL_phi": fl_phi, "xT_phi": xt_phi, "phi_final": phi_new,
+                "iterations": _ + 1,
+            }
 
     rev = reynolds_number(vc, density, viscosity_cp, mass_flow, cv_required)
     res.reynolds = rev  # 气体一般高雷诺数，不需粘度修正
@@ -154,7 +158,7 @@ def calculate_cv_gas(
         "γ": gamma, "ρ1": density, "ΔP_kPa": res.dp, "P1_kPa": p1,
         "cv_required": cv_required, "rated_cv": rated, "mass_flow_kgh": mass_flow,
     }
-    if fc and fc.fl:
+    if _corrected:
         res.detail["opening_corrected"] = _corrected
     if res.opening_pct > 100:
         res.warnings.append(f"所需Cv({cv_required:.1f})>额定Cv({rated:.1f})，阀门偏小")

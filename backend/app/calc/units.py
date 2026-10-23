@@ -218,16 +218,16 @@ def convert_process_case(raw_case: dict, db_session=None) -> dict:
         cat = "vol_flow_liquid" if out.get("flow_unit") == "vol_liquid" else "vol_flow_gas"
         q_val = out["flow_vol"]
         q_unit = out["flow_vol_unit"]
-        # 1) 先量纲换算到 m³/h (对 Nm3_h/Nm3_h_20/SCFM factor=1.0，值不变)
+        # 1) 先量纲换算到 m³/h
         q_op = _conv(q_val, q_unit, cat)
         # 2) 如果是气体标况/标准体积流量，按 P1/T1 修正到工况体积流量 m³/h
         #    V_op = V_std × (P_std / P_op) × (T_op_K / T_std_K)
         if out.get("flow_unit") == "vol" and cat == "vol_flow_gas":
-            T_std_K = 273.15   # 默认 0℃ 标况 (IEC 60534)
-            if "20" in q_unit:    # Nm3_h_20 等
-                T_std_K = 293.15
-            elif q_unit.upper().startswith("SCFM"):  # SCFM = 60°F ≈ 15.56℃
-                T_std_K = 288.71
+            # Nm3_h(factor=1.0) 与 Nm3_h_20(factor=0.9327≈273.15/293.15) 的换算系数
+            # 已把体积折算到 0℃ 标况，故参考温度统一取 273.15K；若再按 293.15K 折算
+            # 会把 20℃ 的温度修正重复计入（流量偏低约 6.7%）。
+            # SCFM 的 factor=1.699 只是 ft³→m³ 量纲换算，参考温度仍为 60℉(288.71K)。
+            T_std_K = 288.71 if q_unit.upper().startswith("SCFM") else 273.15
             if "Nm3" in q_unit or "nm3" in q_unit.lower() or "SCFM" in q_unit.upper():
                 P_kpa = out.get("p1", 0) or 0.0
                 T_c = out.get("t1", 0) or 0.0
