@@ -932,15 +932,19 @@ async function loadPipeData() {
   }
 }
 
-// 管道规格变更时, 自动填充管道尺寸 (nps_label)
+// 管道规格变更时, 自动填充管道尺寸 (nps_label)、管道 SCH、管道壁厚
 function onPipeSpecChange(side) {
   const specKey = side === 'front' ? 'pipe_spec_front' : 'pipe_spec_back'
   const sizeKey = side === 'front' ? 'pipe_size_front' : 'pipe_size_back'
+  const schKey = side === 'front' ? 'sch_front' : 'sch_back'
+  const wallKey = side === 'front' ? 'pipe_wall_front' : 'pipe_wall_back'
   const lookupKey = config.value[specKey]
   if (!lookupKey) return
   const found = pipeDataList.value.find(p => p.lookup_key === lookupKey)
-  if (found && found.nps_label) {
-    config.value[sizeKey] = found.nps_label
+  if (found) {
+    if (found.nps_label) config.value[sizeKey] = found.nps_label
+    if (found.schedule) config.value[schKey] = found.schedule
+    if (found.thk_mm != null) config.value[wallKey] = String(found.thk_mm)
   }
 }
 
@@ -1955,12 +1959,14 @@ function syncBackToFront(frontKey, backKey) {
   config.value[backKey] = config.value[frontKey]
 }
 
-// pipe_spec_back 被同步或手动变更时, 自动填充 pipe_size_back
+// pipe_spec_back 被同步或手动变更时, 自动填充 pipe_size_back / sch_back / pipe_wall_back
 watch(() => config.value.pipe_spec_back, (val) => {
   if (!val) return
   const found = pipeDataList.value.find(p => p.lookup_key === val)
-  if (found && found.nps_label) {
-    config.value.pipe_size_back = found.nps_label
+  if (found) {
+    if (found.nps_label) config.value.pipe_size_back = found.nps_label
+    if (found.schedule) config.value.sch_back = found.schedule
+    if (found.thk_mm != null) config.value.pipe_wall_back = String(found.thk_mm)
   }
 })
 
