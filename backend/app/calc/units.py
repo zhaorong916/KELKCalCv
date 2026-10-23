@@ -33,19 +33,19 @@ from typing import Optional
 BUILTIN_UNITS = [
     # ==================== 压力 (→ kPa abs) ====================
     # 公制 - 绝压
-    ("pressure", "kPaA", "kPa(绝压)", 1.0, 0.0, True, "metric", "absolute"),
-    ("pressure", "barA", "bar(绝压)", 100.0, 0.0, False, "metric", "absolute"),
-    ("pressure", "MPaA", "MPa(绝压)", 1000.0, 0.0, False, "metric", "absolute"),
-    ("pressure", "kgf_cm2A", "kgf/cm²(绝压)", 98.0665, 0.0, False, "metric", "absolute"),
+    ("pressure", "kPaA", "kPa(A)", 1.0, 0.0, True, "metric", "absolute"),
+    ("pressure", "barA", "bar(A)", 100.0, 0.0, False, "metric", "absolute"),
+    ("pressure", "MPaA", "MPa(A)", 1000.0, 0.0, False, "metric", "absolute"),
+    ("pressure", "kgf_cm2A", "kgf/cm²(A)", 98.0665, 0.0, False, "metric", "absolute"),
     ("pressure", "atm", "atm", 101.325, 0.0, False, "metric", "absolute"),
     # 公制 - 表压 (offset=101.325 kPa = 1 atm)
-    ("pressure", "kPaG", "kPa(表压)", 1.0, 101.325, False, "metric", "gauge"),
-    ("pressure", "barG", "bar(表压)", 100.0, 101.325, False, "metric", "gauge"),
-    ("pressure", "MPaG", "MPa(表压)", 1000.0, 101.325, False, "metric", "gauge"),
-    ("pressure", "kgf_cm2G", "kgf/cm²(表压)", 98.0665, 101.325, False, "metric", "gauge"),
+    ("pressure", "kPaG", "kPa(G)", 1.0, 101.325, False, "metric", "gauge"),
+    ("pressure", "barG", "bar(G)", 100.0, 101.325, False, "metric", "gauge"),
+    ("pressure", "MPaG", "MPa(G)", 1000.0, 101.325, False, "metric", "gauge"),
+    ("pressure", "kgf_cm2G", "kgf/cm²(G)", 98.0665, 101.325, False, "metric", "gauge"),
     # 英制
-    ("pressure", "psiA", "psi(绝压)", 6.894757, 0.0, False, "imperial", "absolute"),
-    ("pressure", "psiG", "psi(表压)", 6.894757, 101.325, False, "imperial", "gauge"),
+    ("pressure", "psiA", "psi(A)", 6.894757, 0.0, False, "imperial", "absolute"),
+    ("pressure", "psiG", "psi(G)", 6.894757, 101.325, False, "imperial", "gauge"),
 
     # ==================== 温度 (→ ℃) ====================
     ("temperature", "C", "℃", 1.0, 0.0, True, "metric", None),

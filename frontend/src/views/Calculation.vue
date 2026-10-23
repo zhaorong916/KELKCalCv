@@ -80,17 +80,17 @@
           <!-- 设计压力 (不分前后) -->
           <div class="form-row">
             <label>设计压力</label>
-            <el-input-number v-model="config.design_pressure" :min="0" :precision="3" size="small" controls-position="right" style="width:100%" /><span class="unit-inline">MPa(G)</span>
+            <el-input-number v-model="config.design_pressure" :min="0" :precision="3" size="small" :controls="false" /><span class="unit-inline">MPa(G)</span>
           </div>
           <!-- 设计温度 -->
           <div class="form-row">
             <label>设计温度</label>
-            <el-input-number v-model="config.design_temp" size="small" controls-position="right" style="width:100%" /><span class="unit-inline">℃</span>
+            <el-input-number v-model="config.design_temp" size="small" :controls="false" /><span class="unit-inline">℃</span>
           </div>
           <!-- 关闭压差 -->
           <div class="form-row">
             <label>关闭压差</label>
-            <el-input-number v-model="config.close_dp" :min="0" :precision="3" size="small" controls-position="right" style="width:100%" /><span class="unit-inline">MPa</span>
+            <el-input-number v-model="config.close_dp" :min="0" :precision="3" size="small" :controls="false" /><span class="unit-inline">MPa</span>
           </div>
         </div>
 
@@ -179,25 +179,14 @@
               </el-select>
               <el-input v-model="config.nominal_dn_back" size="small" placeholder="阀后 (同前)" clearable />
             </div>
-            <!-- 压力等级 + 阀座形式 (同行) -->
-            <div class="form-row">
-              <label>压力等级</label>
-              <el-select v-model="config.pressure_rating" size="small" placeholder="先选型号" style="width:100%" @change="onDnChange">
-                <el-option v-for="o in filterOptions.pressure_rating" :key="o.value" :label="o.label || o.value" :value="o.value" />
-              </el-select>
-              <label>阀座形式</label>
-              <el-select v-model="config.seat_type_front" size="small" placeholder="自动填充" clearable style="width:100%" @change="onTrimChange">
-                <el-option v-for="o in seatTypeOptions" :key="o" :label="o" :value="o" />
-              </el-select>
-            </div>
             <div class="form-row"><label>阀芯尺寸</label>
               <el-select v-model="config.nominal_trim" size="small" placeholder="先选口径" style="width:100%" @change="onTrimChange">
                 <el-option v-for="o in filterOptions.nominal_trim" :key="o.value" :label="o.label || o.value" :value="o.value" />
               </el-select>
             </div>
-            <div class="form-row"><label>流向</label>
-              <el-select v-model="config.flow_direction" size="small" placeholder="可选" style="width:100%" @change="onTrimChange">
-                <el-option v-for="o in filterOptions.flow_direction" :key="o.value" :label="o.label || o.value" :value="o.value" />
+            <div class="form-row"><label>阀座形式</label>
+              <el-select v-model="config.seat_type_front" size="small" placeholder="自动填充" clearable style="width:100%" @change="onTrimChange">
+                <el-option v-for="o in seatTypeOptions" :key="o" :label="o" :value="o" />
               </el-select>
             </div>
             <div class="form-row"><label>流量特性</label>
@@ -205,9 +194,19 @@
                 <el-option v-for="o in filterOptions.trim_characteristics" :key="o.value" :label="o.label || o.value" :value="o.value" />
               </el-select>
             </div>
+            <div class="form-row"><label>压力等级</label>
+              <el-select v-model="config.pressure_rating" size="small" placeholder="先选型号" style="width:100%" @change="onDnChange">
+                <el-option v-for="o in filterOptions.pressure_rating" :key="o.value" :label="o.label || o.value" :value="o.value" />
+              </el-select>
+            </div>
             <div class="form-row"><label>阀内件形式</label>
               <el-select v-model="config.trim_seat_type" size="small" placeholder="可选" style="width:100%" @change="onTrimChange">
                 <el-option v-for="o in filterOptions.trim_seat_type" :key="o.value" :label="o.label || o.value" :value="o.value" />
+              </el-select>
+            </div>
+            <div class="form-row"><label>流向</label>
+              <el-select v-model="config.flow_direction" size="small" placeholder="可选" style="width:100%" @change="onTrimChange">
+                <el-option v-for="o in filterOptions.flow_direction" :key="o.value" :label="o.label || o.value" :value="o.value" />
               </el-select>
             </div>
             <div class="form-row"><label>额定 Cv</label>
@@ -217,10 +216,10 @@
               <el-input v-model="config.stroke_value" size="small" placeholder="自动填充" /><span class="unit-inline">{{ config.stroke_unit || '' }}</span>
             </div>
             <div class="form-row"><label>降噪级数</label>
-              <el-input-number v-model="config.stages" :min="1" :max="12" :step="1" :precision="0" size="small" controls-position="right" style="width:100%" />
+              <el-input-number v-model="config.stages" :min="1" :max="12" :step="1" :precision="0" size="small" :controls="false" style="width:100%" />
             </div>
             <div class="form-row"><label>可调比</label>
-              <el-input-number v-model="config.rangeability" :min="1" :precision="0" size="small" controls-position="right" style="width:100%" />
+              <el-input-number v-model="config.rangeability" :min="1" :precision="0" size="small" :controls="false" style="width:100%" />
             </div>
           </div>
         </div>
@@ -229,10 +228,10 @@
         <div class="section-card">
           <div class="section-title">计算系数 <span class="muted">自动填充</span></div>
           <div class="form-grid">
-            <div class="form-row"><label>F<sub>L</sub> 压力恢复</label><el-input-number v-model="config.fl" :min="0" :max="1" :step="0.01" :precision="3" size="small" controls-position="right" style="width:100%" /></div>
-            <div class="form-row"><label>F<sub>D</sub> 类型修正</label><el-input-number v-model="config.fd" :min="0" :max="1" :step="0.01" :precision="3" size="small" controls-position="right" style="width:100%" /></div>
-            <div class="form-row"><label>x<sub>T</sub> 临界压差比</label><el-input-number v-model="config.xt" :min="0" :max="1" :step="0.01" :precision="3" size="small" controls-position="right" style="width:100%" /></div>
-            <div class="form-row"><label>K<sub>C</sub> 空化系数</label><el-input-number v-model="config.kc" :min="0" :precision="3" size="small" controls-position="right" style="width:100%" /></div>
+            <div class="form-row"><label>F<sub>L</sub> 压力恢复</label><el-input-number v-model="config.fl" :min="0" :max="1" :step="0.01" :precision="3" size="small" :controls="false" style="width:100%" /></div>
+            <div class="form-row"><label>F<sub>D</sub> 类型修正</label><el-input-number v-model="config.fd" :min="0" :max="1" :step="0.01" :precision="3" size="small" :controls="false" style="width:100%" /></div>
+            <div class="form-row"><label>x<sub>T</sub> 临界压差比</label><el-input-number v-model="config.xt" :min="0" :max="1" :step="0.01" :precision="3" size="small" :controls="false" style="width:100%" /></div>
+            <div class="form-row"><label>K<sub>C</sub> 空化系数</label><el-input-number v-model="config.kc" :min="0" :precision="3" size="small" :controls="false" style="width:100%" /></div>
           </div>
           <div class="section-footer">
             <span class="muted">可手工修改，修改后保存配置生效</span>
@@ -391,7 +390,7 @@
                     </div>
                   </td>
                   <td v-for="(c, i) in cases" :key="i">
-                    <el-input-number v-model="c.p1" :min="0" :precision="2" size="small" controls-position="right" />
+                    <el-input-number v-model="c.p1" :min="0" :precision="2" size="small" :controls="false" />
                   </td>
                   <td class="td-add" :class="{ 'td-add-disabled': cases.length>=MAX }"></td>
                 </tr>
@@ -411,7 +410,7 @@
                     </div>
                   </td>
                   <td v-for="(c, i) in cases" :key="i">
-                    <el-input-number v-model="c.p2" :min="0" :precision="2" size="small" controls-position="right" />
+                    <el-input-number v-model="c.p2" :min="0" :precision="2" size="small" :controls="false" />
                   </td>
                   <td class="td-add" :class="{ 'td-add-disabled': cases.length>=MAX }"></td>
                 </tr>
@@ -439,7 +438,7 @@
                     </div>
                   </td>
                   <td v-for="(c, i) in cases" :key="i">
-                    <el-input-number v-model="c.t1" :precision="1" size="small" controls-position="right" />
+                    <el-input-number v-model="c.t1" :precision="1" size="small" :controls="false" />
                   </td>
                   <td class="td-add" :class="{ 'td-add-disabled': cases.length>=MAX }"></td>
                 </tr>
@@ -459,7 +458,7 @@
                     </div>
                   </td>
                   <td v-for="(c, i) in cases" :key="i">
-                    <el-input-number v-model="c.flow_mass" :min="0" :precision="2" size="small" controls-position="right" />
+                    <el-input-number v-model="c.flow_mass" :min="0" :precision="2" size="small" :controls="false" />
                   </td>
                   <td class="td-add" :class="{ 'td-add-disabled': cases.length>=MAX }"></td>
                 </tr>
@@ -482,7 +481,7 @@
                     </div>
                   </td>
                   <td v-for="(c, i) in cases" :key="i">
-                    <el-input-number v-model="c.flow_vol" :min="0" :precision="2" size="small" controls-position="right" />
+                    <el-input-number v-model="c.flow_vol" :min="0" :precision="2" size="small" :controls="false" />
                   </td>
                   <td class="td-add" :class="{ 'td-add-disabled': cases.length>=MAX }"></td>
                 </tr>
@@ -502,7 +501,7 @@
                     </div>
                   </td>
                   <td v-for="(c, i) in cases" :key="i">
-                    <el-input-number v-model="c.pipe_diameter" :min="0" :precision="1" size="small" controls-position="right" />
+                    <el-input-number v-model="c.pipe_diameter" :min="0" :precision="1" size="small" :controls="false" />
                   </td>
                   <td class="td-add" :class="{ 'td-add-disabled': cases.length>=MAX }"></td>
                 </tr>
@@ -522,7 +521,7 @@
                     </div>
                   </td>
                   <td v-for="(c, i) in cases" :key="i">
-                    <el-input-number v-model="c.pipe_wall" :min="0" :precision="1" size="small" controls-position="right" />
+                    <el-input-number v-model="c.pipe_wall" :min="0" :precision="1" size="small" :controls="false" />
                   </td>
                   <td class="td-add" :class="{ 'td-add-disabled': cases.length>=MAX }"></td>
                 </tr>
@@ -542,7 +541,7 @@
                     </div>
                   </td>
                   <td v-for="(c, i) in cases" :key="i">
-                    <el-input-number v-model="c.distance" :min="0.1" :step="0.5" :precision="1" size="small" controls-position="right" />
+                    <el-input-number v-model="c.distance" :min="0.1" :step="0.5" :precision="1" size="small" :controls="false" />
                   </td>
                   <td class="td-add" :class="{ 'td-add-disabled': cases.length>=MAX }"></td>
                 </tr>
@@ -572,7 +571,7 @@
                     </div>
                   </td>
                   <td v-for="(c, i) in cases" :key="i">
-                    <el-input-number v-model="c.mass_flow_gas" :min="0" :precision="2" size="small" controls-position="right" />
+                    <el-input-number v-model="c.mass_flow_gas" :min="0" :precision="2" size="small" :controls="false" />
                   </td>
                   <td class="td-add" :class="{ 'td-add-disabled': cases.length>=MAX }"></td>
                 </tr>
@@ -591,7 +590,7 @@
                     </div>
                   </td>
                   <td v-for="(c, i) in cases" :key="i">
-                    <el-input-number v-model="c.mass_flow_liquid" :min="0" :precision="2" size="small" controls-position="right" />
+                    <el-input-number v-model="c.mass_flow_liquid" :min="0" :precision="2" size="small" :controls="false" />
                   </td>
                   <td class="td-add" :class="{ 'td-add-disabled': cases.length>=MAX }"></td>
                 </tr>
@@ -621,7 +620,7 @@
                     </div>
                   </td>
                   <td v-for="(c, i) in cases" :key="i">
-                    <el-input-number v-model="c.density_gas" :min="0" :precision="3" size="small" controls-position="right" />
+                    <el-input-number v-model="c.density_gas" :min="0" :precision="3" size="small" :controls="false" />
                   </td>
                   <td class="td-add" :class="{ 'td-add-disabled': cases.length>=MAX }"></td>
                 </tr>
@@ -640,7 +639,7 @@
                     </div>
                   </td>
                   <td v-for="(c, i) in cases" :key="i">
-                    <el-input-number v-model="c.density_liquid" :min="0" :precision="3" size="small" controls-position="right" />
+                    <el-input-number v-model="c.density_liquid" :min="0" :precision="3" size="small" :controls="false" />
                   </td>
                   <td class="td-add" :class="{ 'td-add-disabled': cases.length>=MAX }"></td>
                 </tr>
@@ -665,7 +664,7 @@
                     </div>
                   </td>
                   <td v-for="(c, i) in cases" :key="i">
-                    <el-input-number v-model="c.density_override" :min="0" :precision="3" size="small" controls-position="right" />
+                    <el-input-number v-model="c.density_override" :min="0" :precision="3" size="small" :controls="false" />
                   </td>
                   <td class="td-add" :class="{ 'td-add-disabled': cases.length>=MAX }"></td>
                 </tr>
@@ -684,7 +683,7 @@
                     </div>
                   </td>
                   <td v-for="(c, i) in cases" :key="i">
-                    <el-input-number v-model="c.viscosity_override" :min="0" :precision="4" size="small" controls-position="right" />
+                    <el-input-number v-model="c.viscosity_override" :min="0" :precision="4" size="small" :controls="false" />
                   </td>
                   <td class="td-add" :class="{ 'td-add-disabled': cases.length>=MAX }"></td>
                 </tr>
@@ -703,14 +702,14 @@
                     </div>
                   </td>
                   <td v-for="(c, i) in cases" :key="i">
-                    <el-input-number v-model="c.molecular_weight_override" :min="0" :precision="2" size="small" controls-position="right" />
+                    <el-input-number v-model="c.molecular_weight_override" :min="0" :precision="2" size="small" :controls="false" />
                   </td>
                   <td class="td-add" :class="{ 'td-add-disabled': cases.length>=MAX }"></td>
                 </tr>
                 <tr>
                   <td class="td-label"><span class="lbl">比热比 γ</span></td>
                   <td v-for="(c, i) in cases" :key="i">
-                    <el-input-number v-model="c.gamma_override" :min="0" :step="0.01" :precision="3" size="small" controls-position="right" style="width:100%" />
+                    <el-input-number v-model="c.gamma_override" :min="0" :step="0.01" :precision="3" size="small" :controls="false" style="width:100%" />
                   </td>
                   <td class="td-add" :class="{ 'td-add-disabled': cases.length>=MAX }"></td>
                 </tr>
@@ -2026,9 +2025,9 @@ onMounted(() => { loadPublicOptions(); init() })
 .case-name-input { margin-top: 4px; }
 
 /* 参数名 + 单位下拉框（同行水平排列，不超出列宽） */
-.label-with-unit { display: flex; flex-direction: row; align-items: center; gap: 4px; width: 100%; box-sizing: border-box; overflow: hidden; }
-.label-with-unit .lbl { font-size: 12px; flex: 0 0 auto; /* 不压缩 */ }
-.label-with-unit .unit-select { width: 72px !important; flex-shrink: 0; /* 提升优先级，覆盖下方 :deep(.el-select) 的 width:100% */ }
+.label-with-unit { display: flex; flex-direction: row; align-items: center; justify-content: flex-end; gap: 4px; width: 100%; box-sizing: border-box; overflow: hidden; }
+.label-with-unit .lbl { font-size: 12px; flex: 0 0 auto; margin-right: auto; /* 标签靠左，单位选择器靠右 */ }
+.label-with-unit .unit-select { width: 84px !important; flex-shrink: 0; /* 加宽以容纳 kg/kmol 等较长单位 */ }
 
 .unit-badge { font-size: 11px; color: #909399; margin-left: 4px; }
 
