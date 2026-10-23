@@ -80,17 +80,17 @@
           <!-- 设计压力 (不分前后) -->
           <div class="form-row">
             <label>设计压力</label>
-            <el-input-number v-model="config.design_pressure" :min="0" :precision="3" size="small" :controls="false" /><span class="unit-inline">MPa(G)</span>
+            <el-input-number v-model="config.design_pressure" :min="0" :precision="3" size="small" :controls="false" style="flex:1" /><span class="unit-inline">MPa(G)</span>
           </div>
           <!-- 设计温度 -->
           <div class="form-row">
             <label>设计温度</label>
-            <el-input-number v-model="config.design_temp" size="small" :controls="false" /><span class="unit-inline">℃</span>
+            <el-input-number v-model="config.design_temp" size="small" :controls="false" style="flex:1" /><span class="unit-inline">℃</span>
           </div>
           <!-- 关闭压差 -->
           <div class="form-row">
             <label>关闭压差</label>
-            <el-input-number v-model="config.close_dp" :min="0" :precision="3" size="small" :controls="false" /><span class="unit-inline">MPa</span>
+            <el-input-number v-model="config.close_dp" :min="0" :precision="3" size="small" :controls="false" style="flex:1" /><span class="unit-inline">MPa</span>
           </div>
         </div>
 
