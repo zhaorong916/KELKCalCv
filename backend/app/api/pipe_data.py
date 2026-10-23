@@ -28,8 +28,11 @@ def list_pipe_data(
             "nps_label": r.nps_label,
             "dn_mm": r.dn_mm,
             "schedule": r.schedule,
+            "od_in": r.od_in,
             "od_mm": r.od_mm,
+            "thk_in": r.thk_in,
             "thk_mm": r.thk_mm,
+            "id_in": r.id_in,
             "id_mm": r.id_mm,
         }
         for r in rows

@@ -932,6 +932,14 @@ async function loadPipeData() {
   }
 }
 
+// 格式化：英制 in (公制 mm)，如 "2 in (50 mm)"
+function fmtImperialMetric(inVal, mmVal) {
+  if (inVal == null && mmVal == null) return ''
+  const mmStr = mmVal != null ? `${Math.round(mmVal)} mm` : ''
+  if (inVal != null) return `${inVal} in (${mmStr})`
+  return mmStr
+}
+
 // 管道规格变更时, 自动填充管道尺寸 (nps_label)、管道 SCH、管道壁厚
 function onPipeSpecChange(side) {
   const specKey = side === 'front' ? 'pipe_spec_front' : 'pipe_spec_back'
@@ -942,9 +950,9 @@ function onPipeSpecChange(side) {
   if (!lookupKey) return
   const found = pipeDataList.value.find(p => p.lookup_key === lookupKey)
   if (found) {
-    if (found.nps_label) config.value[sizeKey] = found.nps_label
+    config.value[sizeKey] = fmtImperialMetric(found.nps_label, found.dn_mm)
     if (found.schedule) config.value[schKey] = found.schedule
-    if (found.thk_mm != null) config.value[wallKey] = String(found.thk_mm)
+    config.value[wallKey] = fmtImperialMetric(found.thk_in, found.thk_mm)
   }
 }
 
@@ -1964,9 +1972,9 @@ watch(() => config.value.pipe_spec_back, (val) => {
   if (!val) return
   const found = pipeDataList.value.find(p => p.lookup_key === val)
   if (found) {
-    if (found.nps_label) config.value.pipe_size_back = found.nps_label
+    config.value.pipe_size_back = fmtImperialMetric(found.nps_label, found.dn_mm)
     if (found.schedule) config.value.sch_back = found.schedule
-    if (found.thk_mm != null) config.value.pipe_wall_back = String(found.thk_mm)
+    config.value.pipe_wall_back = fmtImperialMetric(found.thk_in, found.thk_mm)
   }
 })
 
