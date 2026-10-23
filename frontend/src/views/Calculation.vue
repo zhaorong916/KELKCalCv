@@ -953,7 +953,28 @@ function onPipeSpecChange(side) {
     config.value[sizeKey] = fmtImperialMetric(found.nps_label, found.dn_mm)
     if (found.schedule) config.value[schKey] = found.schedule
     config.value[wallKey] = fmtImperialMetric(found.thk_in, found.thk_mm)
+    // 阀前管道规格选定后, 把内径/壁厚按工艺工况所选单位同步到所有 case
+    if (side === 'front') syncPipeDimsToCases(found)
   }
+}
+
+// 把管道规格的内径/壁厚 (mm) 按工艺工况当前所选单位填入所有 case
+function syncPipeDimsToCases(pipe) {
+  if (!pipe) return
+  cases.forEach(c => {
+    if (pipe.id_mm != null) c.pipe_diameter = convertMmTo(pipe.id_mm, caseUnits.pipe_diameter)
+    if (pipe.thk_mm != null) c.pipe_wall = convertMmTo(pipe.thk_mm, caseUnits.pipe_wall)
+  })
+}
+
+// mm → 目标单位 (根据 units 字典中的 factor, factor 表示 1 单位 = factor mm)
+function convertMmTo(mmVal, unitCode) {
+  if (mmVal == null) return null
+  const all = [...(units.diameter || []), ...(units.wall_thickness || []), ...(units.distance || [])]
+  const u = all.find(x => x.unit_code === unitCode)
+  const factor = u && u.factor ? Number(u.factor) : 1
+  if (factor === 0) return mmVal
+  return Number((mmVal / factor).toFixed(4))
 }
 
 // 管道 SCH 等级（硬编码，后端 pipe_data API 后续接入）
@@ -1545,12 +1566,22 @@ async function loadUnits() {
 
 // ---- 默认工况工厂 ----
 function defaultCase() {
+  // 若设计数据已选定阀前管道规格, 把内径/壁厚按当前所选单位预填到新 case
+  let pipeDiameter = null, pipeWall = null
+  const specKey = config.value?.pipe_spec_front
+  if (specKey) {
+    const found = pipeDataList.value.find(p => p.lookup_key === specKey)
+    if (found) {
+      if (found.id_mm != null) pipeDiameter = convertMmTo(found.id_mm, caseUnits.pipe_diameter)
+      if (found.thk_mm != null) pipeWall = convertMmTo(found.thk_mm, caseUnits.pipe_wall)
+    }
+  }
   return {
     case_no: 1, case_name: '', fluid_id: fluids.value[0]?.id ?? null, fluid_name_custom: '', fluid_formula_custom: '', fluid_state_override: '',
     p1: null, p2: null, t1: null,
     flow_mass: null, flow_vol: null, flow_unit: 'mass',
     density_override: null, viscosity_override: null, molecular_weight_override: null, gamma_override: null,
-    pipe_diameter: null, pipe_wall: null, distance: 1.0,
+    pipe_diameter: pipeDiameter, pipe_wall: pipeWall, distance: 1.0,
     mass_flow_gas: null, mass_flow_liquid: null, twophase_method: 'additive',
     density_gas: null, density_liquid: null,
     is_active: true,
