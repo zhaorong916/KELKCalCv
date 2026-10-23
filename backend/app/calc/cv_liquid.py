@@ -111,6 +111,7 @@ def calculate_cv_liquid(
     fc = vc.factor_curves
     _corrected = None
     if fc and fc.fl and rated > 0:
+        phi_new = None
         for _ in range(5):
             phi = max(min(cv_required / rated, 1.0), 0.0)
             fl_phi = fc.fl.eval(phi)
@@ -126,17 +127,19 @@ def calculate_cv_liquid(
             cv_required = cv_new
             if abs(phi_new - phi) < 0.001:
                 break
-        fl = fl_phi
-        dp_choked = dp_choked_phi
-        choked = choked_phi
-        res.cv_required = cv_required
-        res.fl_eff = fl
-        res.dp_choked = dp_choked
-        res.choked = choked
-        _corrected = {
-            "FL_phi": fl_phi, "phi_final": phi_new,
-            "iterations": _ + 1,
-        }
+        # 曲线无效（如 FL 恒为 0）时首轮即 break，phi_new 保持 None：不做修正
+        if phi_new is not None:
+            fl = fl_phi
+            dp_choked = dp_choked_phi
+            choked = choked_phi
+            res.cv_required = cv_required
+            res.fl_eff = fl
+            res.dp_choked = dp_choked
+            res.choked = choked
+            _corrected = {
+                "FL_phi": fl_phi, "phi_final": phi_new,
+                "iterations": _ + 1,
+            }
 
     # 雷诺数与粘度修正
     rev = reynolds_number(vc, density, viscosity_cp, mass_flow, cv_required)
