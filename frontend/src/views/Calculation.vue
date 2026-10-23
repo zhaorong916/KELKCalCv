@@ -63,6 +63,13 @@
             </el-select>
             <el-button link size="small" type="primary" title="同步阀后为阀前" @click="syncBackToFront('sch_front','sch_back')">⇄</el-button>
           </div>
+          <!-- 管道壁厚 -->
+          <div class="form-row">
+            <label>管道壁厚</label>
+            <el-input v-model="config.pipe_wall_front" size="small" placeholder="mm" />
+            <el-input v-model="config.pipe_wall_back" size="small" placeholder="同前" />
+            <el-button link size="small" type="primary" title="同步阀后为阀前" @click="syncBackToFront('pipe_wall_front','pipe_wall_back')">⇄</el-button>
+          </div>
           <!-- 管道材质 -->
           <div class="form-row">
             <label>管道材质</label>
@@ -78,7 +85,7 @@
           <!-- 设计温度 -->
           <div class="form-row">
             <label>设计温度</label>
-            <el-input-number v-model="config.design_temp" size="small" controls-position="right" style="width:100%" /><span class="unit-inline">°C</span>
+            <el-input-number v-model="config.design_temp" size="small" controls-position="right" style="width:100%" /><span class="unit-inline">℃</span>
           </div>
           <!-- 关闭压差 -->
           <div class="form-row">
@@ -87,9 +94,68 @@
           </div>
         </div>
 
-        <!-- 卡片 1：阀门计算数据 -->
+        <!-- 卡片 1：接管附件 -->
         <div class="section-card">
-          <div class="section-title">阀门计算数据</div>
+          <div class="section-title">接管附件 <span class="muted">手工选择</span></div>
+          <!-- 表头：阀前 | 阀后 -->
+          <div class="form-row pipe-header-row">
+            <label style="min-width:110px"></label>
+            <div class="pipe-col-label">阀前</div>
+            <div class="pipe-col-label">阀后</div>
+            <div class="pipe-col-sync"></div>
+          </div>
+          <!-- 连接形式 -->
+          <div class="form-row">
+            <label>连接形式</label>
+            <el-select v-model="config.connection_type_front" size="small" placeholder="选择" style="width:100%">
+              <el-option v-for="o in COMMON_DATA.connection_types" :key="o" :label="o" :value="o" />
+            </el-select>
+            <el-select v-model="config.connection_type_back" size="small" placeholder="同前" clearable style="width:100%">
+              <el-option v-for="o in COMMON_DATA.connection_types" :key="o" :label="o" :value="o" />
+            </el-select>
+            <el-button link size="small" type="primary" @click="syncBackToFront('connection_type_front','connection_type_back')">⇄</el-button>
+          </div>
+          <!-- 密封面形式 -->
+          <div class="form-row">
+            <label>密封面形式</label>
+            <el-select v-model="config.face_type_front" size="small" placeholder="选择" style="width:100%">
+              <el-option v-for="o in COMMON_DATA.face_types" :key="o" :label="o" :value="o" />
+            </el-select>
+            <el-select v-model="config.face_type_back" size="small" placeholder="同前" clearable style="width:100%">
+              <el-option v-for="o in COMMON_DATA.face_types" :key="o" :label="o" :value="o" />
+            </el-select>
+            <el-button link size="small" type="primary" @click="syncBackToFront('face_type_front','face_type_back')">⇄</el-button>
+          </div>
+          <!-- 法兰标准 -->
+          <div class="form-row">
+            <label>法兰标准</label>
+            <el-select v-model="config.flange_standard_front" size="small" placeholder="选择" style="width:100%">
+              <el-option v-for="o in COMMON_DATA.flange_standards" :key="o" :label="o" :value="o" />
+            </el-select>
+            <el-select v-model="config.flange_standard_back" size="small" placeholder="同前" clearable style="width:100%">
+              <el-option v-for="o in COMMON_DATA.flange_standards" :key="o" :label="o" :value="o" />
+            </el-select>
+            <el-button link size="small" type="primary" @click="syncBackToFront('flange_standard_front','flange_standard_back')">⇄</el-button>
+          </div>
+          <!-- 接管附件 -->
+          <div class="form-row">
+            <label>接管附件</label>
+            <el-input v-model="config.pipe_accessory_front" size="small" placeholder="如 弯管 / 直管段" />
+            <el-input v-model="config.pipe_accessory_back" size="small" placeholder="同前" />
+            <el-button link size="small" type="primary" @click="syncBackToFront('pipe_accessory_front','pipe_accessory_back')">⇄</el-button>
+          </div>
+          <!-- 接管材质 -->
+          <div class="form-row">
+            <label>接管材质</label>
+            <el-input v-model="config.pipe_material_2_front" size="small" placeholder="如 20# / 304" />
+            <el-input v-model="config.pipe_material_2_back" size="small" placeholder="同前" />
+            <el-button link size="small" type="primary" @click="syncBackToFront('pipe_material_2_front','pipe_material_2_back')">⇄</el-button>
+          </div>
+        </div>
+
+        <!-- 卡片 2：阀门计算数据 -->
+        <div class="section-card">
+          <div class="section-title">阀门计算数据 <span class="muted">手工选择</span></div>
           <div class="form-grid">
             <div class="form-row full-width">
               <label>阀门型号</label>
@@ -150,148 +216,90 @@
             <div class="form-row"><label>行程</label>
               <el-input v-model="config.stroke_value" size="small" placeholder="自动填充" /><span class="unit-inline">{{ config.stroke_unit || '' }}</span>
             </div>
+            <div class="form-row"><label>降噪级数</label>
+              <el-input-number v-model="config.stages" :min="1" :max="12" :step="1" :precision="0" size="small" controls-position="right" style="width:100%" />
+            </div>
             <div class="form-row"><label>可调比</label>
               <el-input-number v-model="config.rangeability" :min="1" :precision="0" size="small" controls-position="right" style="width:100%" />
             </div>
           </div>
         </div>
 
-        <!-- 卡片 2：计算因数 -->
+        <!-- 卡片 3：计算系数 -->
         <div class="section-card">
-          <div class="section-title">计算因数 <span class="muted">自动填充自 KELK CalcCv 数据库</span></div>
+          <div class="section-title">计算系数 <span class="muted">自动填充</span></div>
           <div class="form-grid">
             <div class="form-row"><label>F<sub>L</sub> 压力恢复</label><el-input-number v-model="config.fl" :min="0" :max="1" :step="0.01" :precision="3" size="small" controls-position="right" style="width:100%" /></div>
             <div class="form-row"><label>F<sub>D</sub> 类型修正</label><el-input-number v-model="config.fd" :min="0" :max="1" :step="0.01" :precision="3" size="small" controls-position="right" style="width:100%" /></div>
             <div class="form-row"><label>x<sub>T</sub> 临界压差比</label><el-input-number v-model="config.xt" :min="0" :max="1" :step="0.01" :precision="3" size="small" controls-position="right" style="width:100%" /></div>
             <div class="form-row"><label>K<sub>C</sub> 空化系数</label><el-input-number v-model="config.kc" :min="0" :precision="3" size="small" controls-position="right" style="width:100%" /></div>
-            <div class="form-row"><label>降噪级数</label><el-input-number v-model="config.stages" :min="1" :max="12" :step="1" :precision="0" size="small" controls-position="right" style="width:100%" /></div>
           </div>
           <div class="section-footer">
             <span class="muted">可手工修改，修改后保存配置生效</span>
           </div>
         </div>
 
-        <!-- 卡片 3：阀门选型数据 -->
+        <!-- 卡片 4：阀体参数 -->
         <div class="section-card">
-          <div class="section-title">阀门选型数据</div>
-
-          <!-- 连接相关（阀前/阀后分栏） -->
-          <div class="form-sub-group">
-            <div class="form-sub-title">连接相关 <span class="muted">（阀前/阀后可不同）</span></div>
-            <div class="form-row pipe-header-row">
-              <label style="min-width:110px"></label>
-              <div class="pipe-col-label">阀前</div>
-              <div class="pipe-col-label">阀后</div>
-              <div class="pipe-col-sync"></div>
-            </div>
-            <!-- 连接形式 -->
-            <div class="form-row">
-              <label>连接形式</label>
-              <el-select v-model="config.connection_type_front" size="small" placeholder="选择" style="width:100%">
-                <el-option v-for="o in COMMON_DATA.connection_types" :key="o" :label="o" :value="o" />
+          <div class="section-title">阀体参数 <span class="muted">手工选择</span></div>
+          <div class="form-grid">
+            <div class="form-row"><label>阀体材质</label>
+              <el-select v-model="config.body_material" size="small" filterable placeholder="选择" style="width:100%">
+                <el-option v-for="o in COMMON_DATA.body_materials" :key="o" :label="o" :value="o" />
               </el-select>
-              <el-select v-model="config.connection_type_back" size="small" placeholder="同前" clearable style="width:100%">
-                <el-option v-for="o in COMMON_DATA.connection_types" :key="o" :label="o" :value="o" />
-              </el-select>
-              <el-button link size="small" type="primary" @click="syncBackToFront('connection_type_front','connection_type_back')">⇄</el-button>
             </div>
-            <!-- 密封面形式 -->
-            <div class="form-row">
-              <label>密封面形式</label>
-              <el-select v-model="config.face_type_front" size="small" placeholder="选择" style="width:100%">
-                <el-option v-for="o in COMMON_DATA.face_types" :key="o" :label="o" :value="o" />
+            <div class="form-row"><label>阀盖形式</label>
+              <el-select v-model="config.bonnet_form" size="small" placeholder="选择" style="width:100%">
+                <el-option v-for="o in COMMON_DATA.bonnet_forms" :key="o" :label="o" :value="o" />
               </el-select>
-              <el-select v-model="config.face_type_back" size="small" placeholder="同前" clearable style="width:100%">
-                <el-option v-for="o in COMMON_DATA.face_types" :key="o" :label="o" :value="o" />
+            </div>
+            <div class="form-row"><label>阀盖材质</label>
+              <el-select v-model="config.bonnet_material" size="small" filterable placeholder="选择" style="width:100%">
+                <el-option v-for="o in COMMON_DATA.bonnet_materials" :key="o" :label="o" :value="o" />
               </el-select>
-              <el-button link size="small" type="primary" @click="syncBackToFront('face_type_front','face_type_back')">⇄</el-button>
             </div>
-            <!-- 法兰标准 -->
-            <div class="form-row">
-              <label>法兰标准</label>
-              <el-select v-model="config.flange_standard_front" size="small" placeholder="选择" style="width:100%">
-                <el-option v-for="o in COMMON_DATA.flange_standards" :key="o" :label="o" :value="o" />
+            <div class="form-row"><label>夹套连接</label>
+              <el-select v-model="config.jacket_connection" size="small" placeholder="选择" style="width:100%">
+                <el-option v-for="o in COMMON_DATA.jacket_connections" :key="o" :label="o" :value="o" />
               </el-select>
-              <el-select v-model="config.flange_standard_back" size="small" placeholder="同前" clearable style="width:100%">
-                <el-option v-for="o in COMMON_DATA.flange_standards" :key="o" :label="o" :value="o" />
+            </div>
+            <div class="form-row"><label>填料材质</label>
+              <el-select v-model="config.packing_material" size="small" placeholder="选择" style="width:100%">
+                <el-option v-for="o in COMMON_DATA.packing_materials" :key="o" :label="o" :value="o" />
               </el-select>
-              <el-button link size="small" type="primary" @click="syncBackToFront('flange_standard_front','flange_standard_back')">⇄</el-button>
             </div>
-            <!-- 接管附件 -->
-            <div class="form-row">
-              <label>接管附件</label>
-              <el-input v-model="config.pipe_accessory_front" size="small" placeholder="如 弯管 / 直管段" />
-              <el-input v-model="config.pipe_accessory_back" size="small" placeholder="同前" />
-              <el-button link size="small" type="primary" @click="syncBackToFront('pipe_accessory_front','pipe_accessory_back')">⇄</el-button>
+            <div class="form-row"><label>填料类型</label>
+              <el-select v-model="config.packing_type" size="small" placeholder="选择" style="width:100%">
+                <el-option v-for="o in COMMON_DATA.packing_types" :key="o" :label="o" :value="o" />
+              </el-select>
             </div>
-            <!-- 接管材质 -->
-            <div class="form-row">
-              <label>接管材质</label>
-              <el-input v-model="config.pipe_material_2_front" size="small" placeholder="如 20# / 304" />
-              <el-input v-model="config.pipe_material_2_back" size="small" placeholder="同前" />
-              <el-button link size="small" type="primary" @click="syncBackToFront('pipe_material_2_front','pipe_material_2_back')">⇄</el-button>
+            <div class="form-row"><label>阀芯材质</label>
+              <el-select v-model="config.trim_material" size="small" filterable placeholder="选择" style="width:100%">
+                <el-option v-for="o in COMMON_DATA.trim_materials" :key="o" :label="o" :value="o" />
+              </el-select>
             </div>
-          </div>
-
-          <!-- 阀体属性（不分栏） -->
-          <div class="form-sub-group">
-            <div class="form-sub-title">阀体属性 <span class="muted">（阀体本身，不分阀前/后）</span></div>
-            <div class="form-grid">
-              <div class="form-row"><label>阀体材质</label>
-                <el-select v-model="config.body_material" size="small" filterable placeholder="选择" style="width:100%">
-                  <el-option v-for="o in COMMON_DATA.body_materials" :key="o" :label="o" :value="o" />
-                </el-select>
-              </div>
-              <div class="form-row"><label>阀盖材质</label>
-                <el-select v-model="config.bonnet_material" size="small" filterable placeholder="选择" style="width:100%">
-                  <el-option v-for="o in COMMON_DATA.bonnet_materials" :key="o" :label="o" :value="o" />
-                </el-select>
-              </div>
-              <div class="form-row"><label>阀盖形式</label>
-                <el-select v-model="config.bonnet_form" size="small" placeholder="选择" style="width:100%">
-                  <el-option v-for="o in COMMON_DATA.bonnet_forms" :key="o" :label="o" :value="o" />
-                </el-select>
-              </div>
-              <div class="form-row"><label>夹套连接</label>
-                <el-select v-model="config.jacket_connection" size="small" placeholder="选择" style="width:100%">
-                  <el-option v-for="o in COMMON_DATA.jacket_connections" :key="o" :label="o" :value="o" />
-                </el-select>
-              </div>
-              <div class="form-row"><label>填料类型</label>
-                <el-select v-model="config.packing_type" size="small" placeholder="选择" style="width:100%">
-                  <el-option v-for="o in COMMON_DATA.packing_types" :key="o" :label="o" :value="o" />
-                </el-select>
-              </div>
-              <div class="form-row"><label>填料材质</label>
-                <el-select v-model="config.packing_material" size="small" placeholder="选择" style="width:100%">
-                  <el-option v-for="o in COMMON_DATA.packing_materials" :key="o" :label="o" :value="o" />
-                </el-select>
-              </div>
-              <div class="form-row"><label>阀芯材质</label>
-                <el-select v-model="config.trim_material" size="small" filterable placeholder="选择" style="width:100%">
-                  <el-option v-for="o in COMMON_DATA.trim_materials" :key="o" :label="o" :value="o" />
-                </el-select>
-              </div>
-              <div class="form-row"><label>阀座材质</label>
-                <el-select v-model="config.seat_material" size="small" filterable placeholder="选择" style="width:100%">
-                  <el-option v-for="o in COMMON_DATA.seat_materials" :key="o" :label="o" :value="o" />
-                </el-select>
-              </div>
-              <div class="form-row"><label>套筒材质</label>
-                <el-select v-model="config.sleeve_material" size="small" filterable placeholder="选择" style="width:100%">
-                  <el-option v-for="o in COMMON_DATA.sleeve_materials" :key="o" :label="o" :value="o" />
-                </el-select>
-              </div>
-              <div class="form-row"><label>阀杆材质</label>
-                <el-select v-model="config.stem_material" size="small" filterable placeholder="选择" style="width:100%">
-                  <el-option v-for="o in COMMON_DATA.stem_materials" :key="o" :label="o" :value="o" />
-                </el-select>
-              </div>
-              <div class="form-row"><label>平衡密封环</label>
-                <el-select v-model="config.balance_seal_ring" size="small" filterable placeholder="选择" style="width:100%">
-                  <el-option v-for="o in COMMON_DATA.balance_seal_rings" :key="o" :label="o" :value="o" />
-                </el-select>
-              </div>
+            <div class="form-row"><label>阀杆材质</label>
+              <el-select v-model="config.stem_material" size="small" filterable placeholder="选择" style="width:100%">
+                <el-option v-for="o in COMMON_DATA.stem_materials" :key="o" :label="o" :value="o" />
+              </el-select>
+            </div>
+            <div class="form-row"><label>阀座材质</label>
+              <el-select v-model="config.seat_material" size="small" filterable placeholder="选择" style="width:100%">
+                <el-option v-for="o in COMMON_DATA.seat_materials" :key="o" :label="o" :value="o" />
+              </el-select>
+            </div>
+            <div class="form-row"><label>平衡密封材料</label>
+              <el-select v-model="config.balance_seal_ring" size="small" filterable placeholder="选择" style="width:100%">
+                <el-option v-for="o in COMMON_DATA.balance_seal_rings" :key="o" :label="o" :value="o" />
+              </el-select>
+            </div>
+            <div class="form-row"><label>套筒材质</label>
+              <el-select v-model="config.sleeve_material" size="small" filterable placeholder="选择" style="width:100%">
+                <el-option v-for="o in COMMON_DATA.sleeve_materials" :key="o" :label="o" :value="o" />
+              </el-select>
+            </div>
+            <div class="form-row"><label>特殊处理</label>
+              <el-input v-model="config.special_treatment" size="small" placeholder="如 硬化 / 镀层" />
             </div>
           </div>
 
