@@ -103,6 +103,8 @@ class ValveConfigSchema(BaseModel):
     pipe_size_back: Optional[str] = None
     sch_front: Optional[str] = None
     sch_back: Optional[str] = None
+    pipe_wall_front: Optional[str] = None
+    pipe_wall_back: Optional[str] = None
     pipe_material_front: Optional[str] = None
     pipe_material_back: Optional[str] = None
     design_pressure: Optional[float] = None

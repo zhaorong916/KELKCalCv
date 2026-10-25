@@ -131,6 +131,8 @@ class ValveConfig(Base):
     pipe_size_back = Column(String(64), comment="管道尺寸(阀后)")
     sch_front = Column(String(16), comment="管道SCH(阀前)")
     sch_back = Column(String(16), comment="管道SCH(阀后)")
+    pipe_wall_front = Column(String(64), comment="管道壁厚(阀前, 显示用字符串)")
+    pipe_wall_back = Column(String(64), comment="管道壁厚(阀后, 显示用字符串)")
     pipe_material_front = Column(String(64), comment="管道材质(阀前)")
     pipe_material_back = Column(String(64), comment="管道材质(阀后)")
     design_pressure = Column(Float, comment="设计压力 MPa(G)")
