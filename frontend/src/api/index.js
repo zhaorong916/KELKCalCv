@@ -82,4 +82,7 @@ export const publicOptionsApi = {
 export const pipeDataApi = {
   list: (schedule) => http.get('/pipe-data', { params: schedule ? { schedule } : {} }),
   schedules: () => http.get('/pipe-data/schedules'),
+  materials: () => http.get('/pipe-data/materials'),
+  // ASME B31.3 推荐 SCH: { dn_mm, pressure_mpa, temp_c, material_code, weld_factor_e?, corrosion_allowance_mm?, mill_tolerance? }
+  suggestSch: (params) => http.get('/pipe-data/suggest-sch', { params }),
 }

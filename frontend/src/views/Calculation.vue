@@ -70,6 +70,11 @@
             <el-input v-model="config.pipe_wall_back" size="small" placeholder="同前" />
             <el-button link size="small" type="primary" title="同步阀后为阀前" @click="syncBackToFront('pipe_wall_front','pipe_wall_back')">⇄</el-button>
           </div>
+          <!-- 推荐 SCH (ASME B31.3) -->
+          <div class="form-row">
+            <label></label>
+            <el-button size="small" plain type="primary" :disabled="!config.pipe_spec_front" @click="openSchRecommend">推荐 SCH (ASME B31.3)</el-button>
+          </div>
           <!-- 管道材质 -->
           <div class="form-row">
             <label>管道材质</label>
@@ -852,6 +857,68 @@
       </div>
     </div>
   </div>
+
+  <!-- 推荐 SCH 对话框 (ASME B31.3) -->
+  <el-dialog v-model="schDialog.visible" title="推荐 SCH — ASME B31.3" width="640px" append-to-body>
+    <div class="sch-form">
+      <div class="sch-form-row"><span class="sch-label">管道规格</span><span>{{ schDialog.specLabel || '—' }}</span></div>
+      <div class="sch-form-row">
+        <span class="sch-label">设计压力</span>
+        <el-input-number v-model="schDialog.pressure_mpa" :min="0.001" :precision="3" size="small" :controls="false" style="width:140px" />
+        <span class="sch-unit">MPa(G)</span>
+      </div>
+      <div class="sch-form-row">
+        <span class="sch-label">设计温度</span>
+        <el-input-number v-model="schDialog.temp_c" :precision="1" size="small" :controls="false" style="width:140px" />
+        <span class="sch-unit">℃</span>
+      </div>
+      <div class="sch-form-row">
+        <span class="sch-label">管道材质</span>
+        <el-select v-model="schDialog.material_code" size="small" filterable style="width:280px">
+          <el-option v-for="m in schDialog.materials" :key="m.material_code" :value="m.material_code"
+            :label="`${m.material_code} — ${m.notes || m.material_group || ''}`" />
+        </el-select>
+      </div>
+      <div class="sch-form-row">
+        <span class="sch-label">焊缝系数 E</span>
+        <el-input-number v-model="schDialog.weld_factor_e" :min="0.1" :max="1" :step="0.05" :precision="2" size="small" :controls="false" style="width:140px" />
+        <span class="sch-unit">无缝管 1.0</span>
+      </div>
+      <div class="sch-form-row">
+        <span class="sch-label">腐蚀裕量 CA</span>
+        <el-input-number v-model="schDialog.corrosion_allowance_mm" :min="0" :precision="1" size="small" :controls="false" style="width:140px" />
+        <span class="sch-unit">mm</span>
+      </div>
+      <div class="sch-form-row">
+        <el-button type="primary" size="small" :loading="schDialog.loading" @click="runSchRecommend">计算推荐</el-button>
+      </div>
+    </div>
+
+    <template v-if="schDialog.result">
+      <el-alert :title="schDialog.result.note" type="info" :closable="false" show-icon style="margin:10px 0" />
+      <el-table :data="schDialog.result.candidates" size="small" border max-height="260">
+        <el-table-column prop="schedule" label="SCH" width="90">
+          <template #default="{ row }">
+            <span :style="row.schedule === schDialog.result.recommended_schedule ? 'color:#409eff;font-weight:700' : ''">{{ row.schedule }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="thk_mm" label="壁厚 mm" width="100" />
+        <el-table-column prop="margin_mm" label="裕量 mm" width="100" />
+        <el-table-column label="校核" width="90">
+          <template #default="{ row }">
+            <el-tag :type="row.ok ? 'success' : 'danger'" size="small">{{ row.ok ? '合格' : '不足' }}</el-tag>
+          </template>
+        </el-table-column>
+      </el-table>
+    </template>
+
+    <template #footer>
+      <el-button size="small" @click="schDialog.visible = false">关闭</el-button>
+      <el-button size="small" type="primary" :disabled="!schDialog.result?.recommended_schedule" @click="applySchRecommend">
+        应用推荐 SCH{{ schDialog.result?.recommended_schedule ? ` (${schDialog.result.recommended_schedule})` : '' }}
+      </el-button>
+    </template>
+  </el-dialog>
 </template>
 
 <script setup>
@@ -938,6 +1005,83 @@ function fmtImperialMetric(inVal, mmVal) {
   const mmStr = mmVal != null ? `${Math.round(mmVal)} mm` : ''
   if (inVal != null) return `${inVal} in (${mmStr})`
   return mmStr
+}
+
+// ---- 推荐 SCH (ASME B31.3) ----
+const schDialog = reactive({
+  visible: false, loading: false,
+  specLabel: '', dn_mm: null,
+  pressure_mpa: null, temp_c: null, material_code: 'A106-B',
+  weld_factor_e: 1.0, corrosion_allowance_mm: 1.5,
+  materials: [], result: null,
+})
+
+function openSchRecommend() {
+  const found = pipeDataList.value.find(p => p.lookup_key === config.value.pipe_spec_front)
+  if (!found) { ElMessage.warning('请先选择阀前管道规格'); return }
+  schDialog.specLabel = found.lookup_key
+  schDialog.dn_mm = found.dn_mm
+  schDialog.pressure_mpa = config.value.design_pressure ?? 1.0
+  schDialog.temp_c = config.value.design_temp ?? 38
+  schDialog.material_code = guessMaterialCode(config.value.pipe_material_front)
+  schDialog.result = null
+  schDialog.visible = true
+  if (!schDialog.materials.length) {
+    pipeDataApi.materials().then(d => { schDialog.materials = Array.isArray(d) ? d : [] }).catch(() => {})
+  }
+}
+
+// 从管道材质文本推断 ASME 材质代码
+function guessMaterialCode(text) {
+  const t = (text || '').toUpperCase().replace(/[\s-]/g, '')
+  if (!t) return 'A106-B'
+  if (t.includes('316L')) return 'TP316L'
+  if (t.includes('316')) return 'TP316'
+  if (t.includes('304L')) return 'TP304L'
+  if (t.includes('304') || t.includes('0CR18NI9')) return 'TP304'
+  if (t.includes('321')) return 'TP321'
+  if (t.includes('347')) return 'TP347'
+  if (t.includes('P22') || t.includes('2.25CR')) return 'A335-P22'
+  if (t.includes('P11') || t.includes('1.25CR')) return 'A335-P11'
+  if (t.includes('20#') || t.includes('Q235') || t.includes('A106')) return 'A106-B'
+  return 'A106-B'
+}
+
+async function runSchRecommend() {
+  if (!schDialog.dn_mm) return
+  if (!schDialog.pressure_mpa || schDialog.temp_c == null) { ElMessage.warning('请填写设计压力和设计温度'); return }
+  schDialog.loading = true
+  try {
+    schDialog.result = await pipeDataApi.suggestSch({
+      dn_mm: schDialog.dn_mm,
+      pressure_mpa: schDialog.pressure_mpa,
+      temp_c: schDialog.temp_c,
+      material_code: schDialog.material_code,
+      weld_factor_e: schDialog.weld_factor_e,
+      corrosion_allowance_mm: schDialog.corrosion_allowance_mm,
+    })
+  } catch (e) {
+    ElMessage.error(e?.response?.data?.detail || '推荐计算失败')
+    schDialog.result = null
+  } finally {
+    schDialog.loading = false
+  }
+}
+
+function applySchRecommend() {
+  const rec = schDialog.result?.recommended_schedule
+  if (!rec || schDialog.dn_mm == null) return
+  // 找到同 DN 且 schedule 匹配的管道规格, 切换阀前规格并联动填充
+  const target = pipeDataList.value.find(p => p.dn_mm === schDialog.dn_mm && p.schedule === rec)
+  if (target) {
+    config.value.pipe_spec_front = target.lookup_key
+    onPipeSpecChange('front')
+    // 阀后沿用「同步阀后为阀前」由用户决定, 这里不强制
+  } else {
+    config.value.sch_front = rec
+  }
+  schDialog.visible = false
+  ElMessage.success(`已应用推荐 SCH ${rec}`)
 }
 
 // 管道规格变更时, 自动填充管道尺寸 (nps_label)、管道 SCH、管道壁厚
@@ -2039,6 +2183,12 @@ onMounted(() => { loadPublicOptions(); init() })
 .unit-inline { font-size: 12px; color: #909399; }
 /* 设计压力/温度/压差：单位占位使输入框宽度与上方"管道材质"阀前列对齐 */
 .unit-design { flex: 1; min-width: 0; text-align: left; padding-right: 42px; }
+
+/* 推荐 SCH 对话框 */
+.sch-form { display: flex; flex-direction: column; gap: 8px; }
+.sch-form-row { display: flex; align-items: center; gap: 8px; }
+.sch-form-row .sch-label { min-width: 90px; font-size: 12px; color: #606266; text-align: right; }
+.sch-form-row .sch-unit { font-size: 12px; color: #909399; }
 
 .cases-table-wrapper { overflow-x: auto; }
 /* 列宽策略：所有列显式固定 width，两表保持一致；table-layout:fixed 保证严格按 colgroup 分配 */
