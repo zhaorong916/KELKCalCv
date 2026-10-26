@@ -1749,6 +1749,17 @@ function convertToKpaAbs(value, unitCode) {
   if (!u) return value
   return value * u.factor + u.offset
 }
+// ---- 内部单位 → 用户所选单位（load 时反算，避免保存时二次换算导致数据膨胀） ----
+function convertFromInternal(value, unitCode, category) {
+  if (value == null) return null
+  const list = units[category] || []
+  const u = list.find(x => x.unit_code === unitCode)
+  if (!u) return value
+  const factor = Number(u.factor) || 1
+  const offset = Number(u.offset) || 0
+  if (factor === 0) return value
+  return (value - offset) / factor
+}
 function calcDeltaP(c) {
   if (c.p1 == null || c.p2 == null) return null
   const p1 = convertToKpaAbs(c.p1, caseUnits.p1)
@@ -1795,10 +1806,42 @@ async function loadCalc() {
       await onTrimChange()
     }
   }
-  cases.value = (data.cases || []).map(c => ({
-    ...defaultCase(),
-    ...c,
-  }))
+  cases.value = (data.cases || []).map(c => {
+    const cc = { ...defaultCase(), ...c }
+    // 反算：内部单位 → 用户所选单位，避免保存时二次换算导致数据膨胀
+    // 气体标况体积流量需先逆转 P/T 修正（此时 p1/t1 仍为内部单位）
+    if (cc.flow_vol != null && cc.flow_vol_unit && cc.flow_unit === 'vol') {
+      const qUnit = cc.flow_vol_unit
+      if (/Nm3|nm3|SCFM/i.test(qUnit)) {
+        let T_std_K = 273.15
+        if (qUnit.includes('20')) T_std_K = 293.15
+        else if (qUnit.toUpperCase().startsWith('SCFM')) T_std_K = 288.71
+        const P_kpa = cc.p1 || 0
+        const T_K = (cc.t1 || 0) + 273.15
+        if (P_kpa > 0 && T_K > 0) {
+          cc.flow_vol = cc.flow_vol * (P_kpa / 101.325) * (T_std_K / T_K)
+        }
+      }
+    }
+    cc.p1 = convertFromInternal(cc.p1, cc.p1_unit, 'pressure')
+    cc.p2 = convertFromInternal(cc.p2, cc.p2_unit, 'pressure')
+    cc.t1 = convertFromInternal(cc.t1, cc.t1_unit, 'temperature')
+    cc.t2 = convertFromInternal(cc.t2, cc.t2_unit, 'temperature')
+    cc.flow_mass = convertFromInternal(cc.flow_mass, cc.flow_mass_unit, 'mass_flow')
+    const volCat = cc.flow_unit === 'vol_liquid' ? 'vol_flow_liquid' : 'vol_flow_gas'
+    cc.flow_vol = convertFromInternal(cc.flow_vol, cc.flow_vol_unit, volCat)
+    cc.mass_flow_gas = convertFromInternal(cc.mass_flow_gas, cc.mass_flow_gas_unit, 'mass_flow')
+    cc.mass_flow_liquid = convertFromInternal(cc.mass_flow_liquid, cc.mass_flow_liquid_unit, 'mass_flow')
+    cc.density_override = convertFromInternal(cc.density_override, cc.density_override_unit, 'density')
+    cc.viscosity_override = convertFromInternal(cc.viscosity_override, cc.viscosity_override_unit, 'viscosity')
+    cc.molecular_weight_override = convertFromInternal(cc.molecular_weight_override, cc.molecular_weight_override_unit, 'molecular_weight')
+    cc.density_gas = convertFromInternal(cc.density_gas, cc.density_gas_unit, 'density')
+    cc.density_liquid = convertFromInternal(cc.density_liquid, cc.density_liquid_unit, 'density')
+    cc.pipe_diameter = convertFromInternal(cc.pipe_diameter, cc.pipe_diameter_unit, 'diameter')
+    cc.pipe_wall = convertFromInternal(cc.pipe_wall, cc.pipe_wall_unit, 'wall_thickness')
+    cc.distance = convertFromInternal(cc.distance, cc.distance_unit, 'distance')
+    return cc
+  })
   results.value = data.results || {}
   // 已保存结果中的开度可能由后端按线性假设或旧曲线系数算出, 与当前曲线不一致,
   // 加载时按当前 Cv vs 行程曲线重新插值, 保证图上开度点落在曲线上

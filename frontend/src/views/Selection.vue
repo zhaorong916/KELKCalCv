@@ -494,6 +494,16 @@ function convUnit(val, code, cat) {
   const u = (unitsByGroup.value[cat]?.all || []).find(x => x.unit_code === code)
   return u ? val * u.factor + (u.offset || 0) : val
 }
+// 内部单位 → 用户所选单位（从计算页加载工况时反算，避免显示与保存二次换算）
+function convUnitFromInternal(val, code, cat) {
+  if (val == null) return null
+  const u = (unitsByGroup.value[cat]?.all || []).find(x => x.unit_code === code)
+  if (!u) return val
+  const factor = Number(u.factor) || 1
+  const offset = Number(u.offset) || 0
+  if (factor === 0) return val
+  return (val - offset) / factor
+}
 
 const deltaP = computed(() => {
   const c = curCase.value
@@ -540,22 +550,43 @@ async function loadValveCases() {
   } catch (e) { /* ignore */ }
 }
 
-// 计算工况 → 选型工况字段映射
+// 计算工况 → 选型工况字段映射（内部单位反算为用户所选单位，便于正确显示与编辑）
 function mapCaseFromCalc(c) {
-  const isVol = c.flow_unit === 'vol'
+  const isVol = c.flow_unit === 'vol' || c.flow_unit === 'vol_liquid'
   const fid = c.fluid_id ?? null
   const f = fid ? fluids.value.find(x => x.id === fid) : null
+  const p1Unit = c.p1_unit || null
+  const p2Unit = c.p2_unit || null
+  const t1Unit = c.t1_unit || null
+  const pipeUnit = c.pipe_diameter_unit || null
+
+  // 气体标况体积流量需先逆转 P/T 修正（此时 p1/t1 仍为内部单位）
+  let flowVal = isVol ? c.flow_vol : c.flow_mass
+  const flowUnit = isVol ? (c.flow_vol_unit || null) : (c.flow_mass_unit || null)
+  if (isVol && flowVal != null && flowUnit && /Nm3|nm3|SCFM/i.test(flowUnit)) {
+    let T_std_K = 273.15
+    if (flowUnit.includes('20')) T_std_K = 293.15
+    else if (flowUnit.toUpperCase().startsWith('SCFM')) T_std_K = 288.71
+    const P_kpa = c.p1 || 0
+    const T_K = (c.t1 || 0) + 273.15
+    if (P_kpa > 0 && T_K > 0) {
+      flowVal = flowVal * (P_kpa / 101.325) * (T_std_K / T_K)
+    }
+  }
+  const volCat = c.flow_unit === 'vol_liquid' ? 'vol_flow_liquid' : 'vol_flow_gas'
+  const flowCat = isVol ? volCat : 'mass_flow'
+
   return {
     fluid_id: fid,
     fluid_name: c.fluid_name_custom || f?.fluid_name || null,
     media: c.fluid_state_override || f?.default_state || 'liquid',
     flow_regime: null,
-    p1: c.p1 ?? null,
-    p2: c.p2 ?? null,
-    t1: c.t1 ?? null,
-    flow_rate: (isVol ? c.flow_vol : c.flow_mass) ?? null,
-    flow_rate_unit: isVol ? (c.flow_vol_unit || null) : (c.flow_mass_unit || null),
-    pipe_size: c.pipe_diameter ?? null,
+    p1: convUnitFromInternal(c.p1, p1Unit, 'pressure'),
+    p2: convUnitFromInternal(c.p2, p2Unit, 'pressure'),
+    t1: convUnitFromInternal(c.t1, t1Unit, 'temperature'),
+    flow_rate: convUnitFromInternal(flowVal, flowUnit, flowCat),
+    flow_rate_unit: flowUnit,
+    pipe_size: convUnitFromInternal(c.pipe_diameter, pipeUnit, 'diameter'),
   }
 }
 
@@ -618,20 +649,36 @@ async function runSelection() {
   try {
     const main = cases.value[0]
     const fluid = fluids.value.find(f => f.id === main.fluid_id)
+    // 将用户所选单位换算回内部单位（选型后端按内部单位接收）
+    const flowUnit = caseUnits.value.flow
+    const isVolFlow = /m3|nm3|l\/h|l\/min|scfm/i.test(flowUnit)
+    const flowCat = isVolFlow ? (/Nm3|nm3|SCFM/i.test(flowUnit) ? 'vol_flow_gas' : 'vol_flow_liquid') : 'mass_flow'
+    let flowRate = convUnit(main.flow_rate, flowUnit, flowCat)
+    // 气体标况体积流量 → 工况体积流量（P/T 修正）
+    if (isVolFlow && /Nm3|nm3|SCFM/i.test(flowUnit)) {
+      let T_std_K = 273.15
+      if (flowUnit.includes('20')) T_std_K = 293.15
+      else if (flowUnit.toUpperCase().startsWith('SCFM')) T_std_K = 288.71
+      const p1Kpa = convUnit(main.p1, caseUnits.value.p1, 'pressure') || 0
+      const t1K = (convUnit(main.t1, caseUnits.value.t1, 'temperature') || 0) + 273.15
+      if (p1Kpa > 0 && t1K > 0) {
+        flowRate = flowRate * (101.325 / p1Kpa) * (t1K / T_std_K)
+      }
+    }
+    const p1Kpa = convUnit(main.p1, caseUnits.value.p1, 'pressure')
+    const p2Kpa = convUnit(main.p2, caseUnits.value.p2, 'pressure')
     const input = {
       project_id: projectId.value,
       valve_id: valveId.value,
       media: main.media,
       fluid_name: fluid?.fluid_name || main.fluid_name || null,
-      flow_rate: main.flow_rate,
-      flow_rate_unit: caseUnits.value.flow,
-      p1: main.p1, p1_unit: caseUnits.value.p1,
-      p2: main.p2, p2_unit: caseUnits.value.p2,
-      dp: convUnit(main.p1, caseUnits.value.p1, 'pressure') != null
-        ? convUnit(main.p1, caseUnits.value.p1, 'pressure') - convUnit(main.p2, caseUnits.value.p2, 'pressure')
-        : null,
-      t1: main.t1, t1_unit: caseUnits.value.t1,
-      pipe_size: main.pipe_size, pipe_size_unit: caseUnits.value.pipe_size,
+      flow_rate: flowRate,
+      flow_rate_unit: flowUnit,
+      p1: p1Kpa, p1_unit: caseUnits.value.p1,
+      p2: p2Kpa, p2_unit: caseUnits.value.p2,
+      dp: (p1Kpa != null && p2Kpa != null) ? (p1Kpa - p2Kpa) : null,
+      t1: convUnit(main.t1, caseUnits.value.t1, 'temperature'), t1_unit: caseUnits.value.t1,
+      pipe_size: convUnit(main.pipe_size, caseUnits.value.pipe_size, 'diameter'), pipe_size_unit: caseUnits.value.pipe_size,
       leakage_class: form.value.leakage_class,
       valve_action: form.value.valve_action,
       rangeability_required: form.value.rangeability_required,
