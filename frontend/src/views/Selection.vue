@@ -40,7 +40,7 @@
           <el-tabs v-model="activeCaseIdx" type="card" class="case-tabs" closable @tab-remove="removeCase" @tab-click="onCaseTabClick">
             <el-tab-pane v-for="(c, i) in cases" :key="i" :name="i">
               <template #label>
-                <span v-if="i===0">★ 主工况</span>
+                <span v-if="i===mainCaseIdx">★ 主工况</span>
                 <span v-else>工况 {{ i+1 }}</span>
               </template>
             </el-tab-pane>
@@ -52,7 +52,13 @@
             <el-button size="small" text type="primary" :disabled="cases.length>=MAX_CASES" @click="addCase">
               <el-icon><Plus /></el-icon>添加工况 ({{ cases.length }}/{{ MAX_CASES }})
             </el-button>
-            <span class="muted">仅主工况参与选型，其余工况仅归档</span>
+            <div class="main-case-pick">
+              <span class="muted">主工况</span>
+              <el-select v-model="mainCaseIdx" size="small" style="width:110px">
+                <el-option v-for="(c, i) in cases" :key="i" :label="`工况 ${i+1}`" :value="i" />
+              </el-select>
+            </div>
+            <span class="muted">选型按 {{ cases.length }} 个工况综合判断</span>
           </div>
         </div>
 
@@ -258,6 +264,16 @@
                     <div class="value">{{ keyConstraints(row) }}</div>
                   </div>
                   <div class="metric">
+                    <div class="label">各工况开度</div>
+                    <div class="value">
+                      <div v-for="co in row.case_openings || []" :key="co.index" class="case-opening-line">
+                        <span :class="{ 'main-case-mark': co.is_main }">{{ co.is_main ? '★' : '' }}工况{{ co.case_no }}</span>
+                        <span>{{ co.opening != null ? co.opening.toFixed(1) + '%' : '—' }}</span>
+                      </div>
+                      <span v-if="!row.case_openings?.length" class="muted">单工况</span>
+                    </div>
+                  </div>
+                  <div class="metric">
                     <div class="label">物理量</div>
                     <div class="value physical">
                       <div v-if="row.flags?.fd_mode">fd_mode: {{ row.flags.fd_mode }}</div>
@@ -305,6 +321,9 @@
                   <span class="opening-text">{{ row.opening.toFixed(1) }}%</span>
                 </div>
                 <span v-else class="muted">—</span>
+                <div v-if="row.opening_max != null && row.opening_max !== row.opening" class="opening-worst">
+                  最不利 {{ row.opening_max.toFixed(1) }}%
+                </div>
               </template>
             </el-table-column>
             <el-table-column label="可调比" width="90" align="right">
@@ -461,6 +480,7 @@ const defaultCase = () => ({
 })
 const cases = ref([defaultCase()])
 const activeCaseIdx = ref(0)
+const mainCaseIdx = ref(0)
 const curCase = computed(() => cases.value[activeCaseIdx.value])
 
 const form = ref({
@@ -502,8 +522,8 @@ const deltaP = computed(() => {
 })
 
 const canRun = computed(() => {
-  const c = cases.value[0]
-  return !!(valveId.value && (c.fluid_id || c.fluid_name) && c.flow_rate > 0 && c.p1 != null && c.p2 != null && c.t1 != null && c.p1 > c.p2)
+  const c = cases.value[mainCaseIdx.value] || cases.value[0]
+  return !!(valveId.value && c && (c.fluid_id || c.fluid_name) && c.flow_rate > 0 && c.p1 != null && c.p2 != null && c.t1 != null && c.p1 > c.p2)
 })
 
 const mainFlowRegime = computed(() => candidates.value[0]?.flags?.flow_regime || null)
@@ -600,27 +620,58 @@ async function loadHistory() {
 function onProjectChange(pid) { valveId.value = null; loadValves(pid) }
 
 // ---- 工况 tab ----
-function addCase() { if (cases.value.length < MAX_CASES) { cases.value.push({ ...defaultCase(), ...cases.value[0] }); activeCaseIdx.value = cases.value.length - 1 } }
-function removeCase(idx) { if (idx === 0) { ElMessage.warning('主工况不可删除'); return } cases.value.splice(idx, 1); if (activeCaseIdx.value >= cases.value.length) activeCaseIdx.value = 0 }
+function addCase() {
+  if (cases.value.length >= MAX_CASES) return
+  cases.value.push({ ...defaultCase(), ...(cases.value[mainCaseIdx.value] || cases.value[0]) })
+  activeCaseIdx.value = cases.value.length - 1
+}
+function removeCase(idx) {
+  if (idx === mainCaseIdx.value) { ElMessage.warning('主工况不可删除，请先切换主工况'); return }
+  cases.value.splice(idx, 1)
+  if (mainCaseIdx.value >= cases.value.length) mainCaseIdx.value = 0
+  if (activeCaseIdx.value >= cases.value.length) activeCaseIdx.value = 0
+}
 function onCaseTabClick() { /* 切换时无需特殊处理, 字段已通过 computed 联动 */ }
 
-// ---- T1 联动 low_temp / high_temp ----
-watch(() => cases.value[0].t1, (t) => {
-  if (t == null) return
-  if (t < -45) form.value.special.low_temp = true
-  if (t > 230) form.value.special.high_temp = true
+// ---- T1 联动 low_temp / high_temp（任一工况超限即标记） ----
+watch(() => cases.value.map(c => c.t1), (list) => {
+  if (list.some(t => t != null && t < -45)) form.value.special.low_temp = true
+  if (list.some(t => t != null && t > 230)) form.value.special.high_temp = true
 })
 
 // ---- 运行选型 ----
+// 单个工况 → 选型输入片段（公共单位取 caseUnits, 各工况共享同一套单位）
+function caseToInput(c) {
+  const fluid = fluids.value.find(f => f.id === c.fluid_id)
+  const p1Conv = convUnit(c.p1, caseUnits.value.p1, 'pressure')
+  const p2Conv = convUnit(c.p2, caseUnits.value.p2, 'pressure')
+  return {
+    case_no: c.case_no ?? (cases.value.indexOf(c) + 1),
+    case_name: c.case_name || null,
+    media: c.media,
+    fluid_name: fluid?.fluid_name || c.fluid_name || null,
+    flow_rate: c.flow_rate,
+    flow_rate_unit: caseUnits.value.flow,
+    p1: c.p1, p1_unit: caseUnits.value.p1,
+    p2: c.p2, p2_unit: caseUnits.value.p2,
+    dp: p1Conv != null && p2Conv != null ? p1Conv - p2Conv : null,
+    t1: c.t1, t1_unit: caseUnits.value.t1,
+    pipe_size: c.pipe_size, pipe_size_unit: caseUnits.value.pipe_size,
+  }
+}
+
 async function runSelection() {
   if (!canRun.value) { ElMessage.warning('请完整填写主工况必填项（介质/流量/P1/P2/T1）'); return }
   running.value = true
   try {
-    const main = cases.value[0]
+    const mainIdx = mainCaseIdx.value
+    const main = cases.value[mainIdx]
     const fluid = fluids.value.find(f => f.id === main.fluid_id)
     const input = {
+      ...caseToInput(main),
       project_id: projectId.value,
       valve_id: valveId.value,
+      // 顶层字段与主工况保持一致（兼容旧接口/历史快照）
       media: main.media,
       fluid_name: fluid?.fluid_name || main.fluid_name || null,
       flow_rate: main.flow_rate,
@@ -637,6 +688,9 @@ async function runSelection() {
       rangeability_required: form.value.rangeability_required,
       cv_required: form.value.cv_required,
       special_req: { fluid_id: main.fluid_id, ...form.value.special },
+      // 全部工况 + 主工况下标：后端按综合判断
+      cases: cases.value.map(caseToInput),
+      main_case_index: mainIdx,
     }
     const result = await selectionApi.run(input)
     candidates.value = result.candidates || []
@@ -653,10 +707,10 @@ async function runSelection() {
 async function saveRecord() {
   if (!candidates.value.length) return
   try {
-    const main = cases.value[0]
+    const main = cases.value[mainCaseIdx.value] || cases.value[0]
     const payload = {
       valve_id: valveId.value, project_id: projectId.value,
-      input_snapshot: { main, cases: cases.value, form: form.value, units: caseUnits.value },
+      input_snapshot: { main, main_case_index: mainCaseIdx.value, cases: cases.value, form: form.value, units: caseUnits.value },
       candidates_json: candidates.value,
       applied_rule_ids: collectRuleIds(),
     }
@@ -685,7 +739,7 @@ async function applyCandidate(row) {
   try {
     const rec = await selectionApi.createRecord({
       valve_id: valveId.value, project_id: projectId.value,
-      input_snapshot: { main: cases.value[0], cases: cases.value, form: form.value, units: caseUnits.value },
+      input_snapshot: { main: cases.value[mainCaseIdx.value] || cases.value[0], main_case_index: mainCaseIdx.value, cases: cases.value, form: form.value, units: caseUnits.value },
       candidates_json: candidates.value,
       selected_series: row.series_code,
       selected_config: row,
@@ -702,11 +756,16 @@ function viewSnapshot(row) { currentSnapshot.value = row; snapshotDrawer.value =
 async function fillFromSnapshot(row) {
   try { await ElMessageBox.confirm('回填将覆盖当前录入的工艺条件，是否继续？', '确认回填', { type: 'warning' }) } catch { return }
   const snap = row.input_snapshot
+  if (snap?.cases?.length) {
+    cases.value = snap.cases.map(c => ({ ...defaultCase(), ...c }))
+  } else if (snap?.main) {
+    cases.value = [{ ...defaultCase(), ...snap.main }]
+  }
   if (snap?.main) {
-    cases.value[0] = { ...defaultCase(), ...snap.main }
-    if (snap.cases?.length) cases.value = snap.cases.map((c, i) => i === 0 ? cases.value[0] : { ...defaultCase(), ...c })
     if (snap.form) form.value = { ...form.value, ...snap.form }
     if (snap.units) caseUnits.value = { ...caseUnits.value, ...snap.units }
+    mainCaseIdx.value = snap.main_case_index ?? 0
+    if (mainCaseIdx.value >= cases.value.length) mainCaseIdx.value = 0
     activeCaseIdx.value = 0
   }
   historyDrawer.value = false
@@ -754,7 +813,7 @@ function formatTime(t) { if (!t) return '—'; try { return new Date(t).toLocale
 function reset() {
   cases.value = [defaultCase()]
   form.value = { valve_action: 'modulating', leakage_class: null, rangeability_required: null, cv_required: null, special: { nace: false, fire_safe: false, copper_free: false, low_temp: false, high_temp: false, body_material: null, pressure_class: null } }
-  candidates.value = []; warnings.value = []; ran.value = false; activeCaseIdx.value = 0; selectedRow.value = null
+  candidates.value = []; warnings.value = []; ran.value = false; activeCaseIdx.value = 0; mainCaseIdx.value = 0; selectedRow.value = null
 }
 
 // ---- 初始化 ----
@@ -813,6 +872,10 @@ watch(historyDrawer, (v) => { if (v) loadHistory() })
 .case-tabs :deep(.el-tabs__item) { font-size: 12px; }
 .case-tabs :deep(.el-tabs__item.is-active) { font-weight: 600; }
 .case-tab-footer { display: flex; align-items: center; gap: 10px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ebeef5; }
+.main-case-pick { display: flex; align-items: center; gap: 4px; }
+.case-opening-line { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; }
+.main-case-mark { color: #409eff; }
+.opening-worst { font-size: 11px; color: #e6a23c; margin-top: 2px; }
 
 .summary-bar { display: flex; align-items: center; gap: 12px; font-size: 13px; }
 .summary-badges { display: flex; gap: 8px; align-items: center; font-size: 12px; color: #606266; margin-left: auto; }

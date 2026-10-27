@@ -244,6 +244,68 @@ class PipeDataOut(PipeDataBase):
     id: int
 
 
+# ---------- 管道材料许用应力 (ASME B31.3 Table A-1) ----------
+class PipeMaterialStressBase(BaseModel):
+    material_code: str
+    material_group: Optional[str] = None
+    temp_c: float
+    s_mpa: float
+    min_use_temp_c: Optional[float] = None
+    max_use_temp_c: Optional[float] = None
+    notes: Optional[str] = None
+
+class PipeMaterialStressOut(PipeMaterialStressBase):
+    model_config = ConfigDict(from_attributes=True)
+    id: int
+
+class PipeMaterialSummaryOut(BaseModel):
+    """材质清单（用于前端下拉框）"""
+    material_code: str
+    material_group: Optional[str] = None
+    min_temp_c: Optional[float] = None
+    max_temp_c: Optional[float] = None
+    max_use_temp_c: Optional[float] = None
+    temp_points: int
+    notes: Optional[str] = None
+
+class AllowableStressOut(BaseModel):
+    """某一温度下的许用应力查询结果（含线性插值标记）"""
+    material_code: str
+    temp_c: float
+    s_mpa: float
+    interpolated: bool
+    lower_temp_c: float
+    upper_temp_c: float
+    max_use_temp_c: Optional[float] = None
+
+class SchCandidateOut(BaseModel):
+    """单个 SCH 候选的壁厚校核结果"""
+    schedule: str
+    thk_mm: float
+    id_mm: Optional[float] = None
+    margin_mm: float
+    ok: bool
+
+class SuggestSchOut(BaseModel):
+    """SCH 推荐结果（ASME B31.3 式 3a + 腐蚀裕 + 制造负偏差）"""
+    dn_mm: int
+    nps_label: Optional[str] = None
+    od_mm: float
+    material_code: str
+    design_pressure_mpa: float
+    design_temp_c: float
+    allowable_stress_mpa: float
+    weld_factor_e: float
+    temp_factor_y: float
+    corrosion_allowance_mm: float
+    mill_tolerance: float
+    pressure_thickness_mm: float
+    required_thk_mm: float
+    recommended_schedule: Optional[str] = None
+    candidates: List[SchCandidateOut]
+    note: str
+
+
 # ---------- 阀门计算系数 ----------
 class ValveSizingIndexBase(BaseModel):
     valve_type: str
@@ -561,6 +623,26 @@ class SelectionRuleOut(SelectionRuleBase):
 
 # ---------- 选型输入/输出 ----------
 
+class SelectionCaseIn(BaseModel):
+    """单个工况的工艺参数（多工况综合选型）"""
+    case_no: Optional[int] = None
+    case_name: Optional[str] = None
+    media: Optional[str] = None
+    fluid_name: Optional[str] = None
+    flow_rate: Optional[float] = None
+    flow_rate_unit: Optional[str] = None
+    p1: Optional[float] = None
+    p1_unit: Optional[str] = None
+    p2: Optional[float] = None
+    p2_unit: Optional[str] = None
+    t1: Optional[float] = None
+    t1_unit: Optional[str] = None
+    dp: Optional[float] = None
+    pipe_size: Optional[float] = None
+    pipe_size_unit: Optional[str] = None
+    cv_required: Optional[float] = None
+
+
 class SelectionInput(BaseModel):
     """选型输入（提交工艺条件）"""
     project_id: int
@@ -569,17 +651,23 @@ class SelectionInput(BaseModel):
     fluid_name: Optional[str] = None
     flow_rate: Optional[float] = Field(None, description="流量（按单位）")
     flow_rate_unit: Optional[str] = None
-    p1: Optional[float] = Field(None, description="阀前压力 kPa")
-    p2: Optional[float] = Field(None, description="阀后压力 kPa")
-    t1: Optional[float] = Field(None, description="温度 ℃")
+    p1: Optional[float] = Field(None, description="阀前压力（按 p1_unit）")
+    p1_unit: Optional[str] = Field(None, description="压力单位代码, 默认按 kPa(A)")
+    p2: Optional[float] = Field(None, description="阀后压力（按 p2_unit）")
+    p2_unit: Optional[str] = Field(None, description="压力单位代码, 默认按 kPa(A)")
+    t1: Optional[float] = Field(None, description="温度（按 t1_unit）")
+    t1_unit: Optional[str] = Field(None, description="温度单位代码, 默认按 ℃")
     t2: Optional[float] = None
     dp: Optional[float] = Field(None, description="压差 kPa")
-    pipe_size: Optional[float] = Field(None, description="管道尺寸 mm")
+    pipe_size: Optional[float] = Field(None, description="管道尺寸（按 pipe_size_unit）")
+    pipe_size_unit: Optional[str] = Field(None, description="管径单位代码, 默认按 mm")
     leakage_class: Optional[str] = Field(None, description="IV / V / VI")
     valve_action: Optional[str] = Field(None, description="modulating / on_off")
     special_req: Optional[dict] = Field(None, description="特殊要求: nace/fire_safe/low_temp/high_temp/copper_free 等")
     rangeability_required: Optional[float] = Field(None, description="可调比要求")
     cv_required: Optional[float] = Field(None, description="所需 Cv（可选，由流量反算）")
+    cases: Optional[List[SelectionCaseIn]] = Field(None, description="多工况（综合判断），为空则按顶层字段单工况")
+    main_case_index: Optional[int] = Field(0, description="主工况下标（0 起）")
 
     @field_validator("media")
     @classmethod
@@ -601,6 +689,9 @@ class CandidateOut(BaseModel):
     rated_cv: Optional[float] = None
     cv_min: Optional[float] = None
     opening: Optional[float] = None
+    opening_max: Optional[float] = Field(None, description="多工况最不利（最大）开度")
+    opening_min: Optional[float] = Field(None, description="多工况最小开度")
+    case_openings: Optional[List[dict]] = Field(None, description="各工况开度明细")
     rangeability: Optional[float] = None
     score: int = 0
     applied_rules: List[str] = Field(default_factory=list)
