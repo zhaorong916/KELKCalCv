@@ -554,6 +554,10 @@ class ValveSelector:
         from app.calc.cv_core import ValveCoeffs
         from app.calc.engine import calculate_case
 
+        # 多工况复用同一 selector 实例时, 必须在每次反算前重置流态,
+        # 避免上一工况的 flow_regime 在本次反算异常时泄漏到当前工况。
+        self._flow_regime = ""
+
         fluid = self._build_fluid(inp, special, warnings)
         p1 = _num(inp.p1)
         p2 = _num(inp.p2)

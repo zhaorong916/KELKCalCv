@@ -19,11 +19,12 @@ from unittest.mock import patch
 from app.calc.selector import (
     ValveSelector, match_condition, _cv_ratio_to_stk, _ParsedRule,
 )
+from app.api.selection import _case_input, _is_case_complete
 from app.models import (
     ValveType, ValveCvStk, SelectionRule,
     AllowablePressureDrop, BodyPtRating,
 )
-from app.schemas import SelectionInput
+from app.schemas import SelectionInput, SelectionCaseIn
 
 
 # ---------------------------------------------------------------------------
@@ -446,6 +447,95 @@ class TestSelectEntry(unittest.TestCase):
         self.assertEqual(res.candidates[0].series_code, "GC120")
         self.assertAlmostEqual(res.candidates[0].opening, 50.0)
         self.assertEqual(res.applied_rule_count, 1)
+
+
+# ---------------------------------------------------------------------------
+# 多工况: _case_input 参数继承 + _flow_regime 状态隔离
+# ---------------------------------------------------------------------------
+class TestCaseInputInheritance(unittest.TestCase):
+    """工况应继承 payload 公共参数, 缺失字段不应被置 None 导致工况被跳过。"""
+
+    def _payload(self, **kw):
+        base = dict(
+            project_id=1, valve_id=1, media="liquid",
+            flow_rate=100.0, flow_rate_unit="kg/h",
+            p1=1000.0, p1_unit="kPa", p2=500.0, p2_unit="kPa",
+            t1=20.0, t1_unit="C",
+            pipe_size=50.0, pipe_size_unit="mm",
+            dp=500.0,
+        )
+        base.update(kw)
+        return SelectionInput(**base)
+
+    def test_case_omits_p1_p2_inherits_from_payload(self):
+        """工况未提供 p1/p2 时应继承 payload 的 p1/p2, 而非被置 None。"""
+        payload = self._payload()
+        cs = SelectionCaseIn(case_no=1, flow_rate=200.0, t1=25.0)
+        sub = _case_input(payload, cs)
+        self.assertEqual(sub.p1, 1000.0)
+        self.assertEqual(sub.p2, 500.0)
+        self.assertEqual(sub.flow_rate, 200.0)
+        self.assertEqual(sub.t1, 25.0)
+        self.assertTrue(_is_case_complete(sub))
+
+    def test_case_omits_flow_rate_inherits_from_payload(self):
+        payload = self._payload()
+        cs = SelectionCaseIn(case_no=1, p1=1200.0, p2=400.0, t1=30.0)
+        sub = _case_input(payload, cs)
+        self.assertEqual(sub.flow_rate, 100.0)
+        self.assertEqual(sub.p1, 1200.0)
+        self.assertTrue(_is_case_complete(sub))
+
+    def test_case_omits_dp_pipe_size_inherits_from_payload(self):
+        payload = self._payload()
+        cs = SelectionCaseIn(case_no=1, flow_rate=100.0, p1=1000.0, p2=500.0, t1=20.0)
+        sub = _case_input(payload, cs)
+        self.assertEqual(sub.dp, 500.0)
+        self.assertEqual(sub.pipe_size, 50.0)
+
+    def test_case_zero_flow_rate_not_overridden(self):
+        """flow_rate=0 是有效值(虽然后续会被判不完整), 不应被 payload 覆盖。"""
+        payload = self._payload()
+        cs = SelectionCaseIn(case_no=1, flow_rate=0.0, p1=1000.0, p2=500.0, t1=20.0)
+        sub = _case_input(payload, cs)
+        self.assertEqual(sub.flow_rate, 0.0)
+
+
+class TestFlowRegimeIsolation(unittest.TestCase):
+    """多工况复用同一 selector 时, 反算异常不得泄漏上一工况的 flow_regime。"""
+
+    def test_flow_regime_reset_when_calculate_raises(self):
+        fdb = FakeDB(series=[series("GC120", "globe")], rules=[],
+                     cv_rows=[cv_row("GC120", rated_cv=100.0)])
+        sel = ValveSelector(fdb)
+
+        # 第一工况: 正常反算, 流态设为 空化
+        sel._flow_regime = "空化"
+
+        # 第二工况: calculate_case 抛异常 → _flow_regime 应被重置为空
+        with patch("app.calc.engine.calculate_case", side_effect=RuntimeError("boom")):
+            cv = sel._calc_cv_required(
+                _input(flow_rate=100.0, p1=1000.0, p2=500.0, t1=20.0),
+                {}, [],
+            )
+        self.assertIsNone(cv)
+        self.assertEqual(sel._flow_regime, "")
+
+    def test_flow_regime_persists_on_success(self):
+        fdb = FakeDB(series=[series("GC120", "globe")], rules=[],
+                     cv_rows=[cv_row("GC120", rated_cv=100.0)])
+        sel = ValveSelector(fdb)
+        sel._flow_regime = ""
+
+        fake_cv = SimpleNamespace(flow_regime="闪蒸", cv_required=50.0, warnings=[])
+        fake_cr = SimpleNamespace(cv=fake_cv, message="")
+        with patch("app.calc.engine.calculate_case", return_value=fake_cr):
+            cv = sel._calc_cv_required(
+                _input(flow_rate=100.0, p1=1000.0, p2=500.0, t1=20.0),
+                {}, [],
+            )
+        self.assertEqual(cv, 50.0)
+        self.assertEqual(sel._flow_regime, "闪蒸")
 
 
 if __name__ == "__main__":
