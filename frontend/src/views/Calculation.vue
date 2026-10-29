@@ -17,6 +17,7 @@
         <el-tag v-if="calc" size="small" :type="calc.status==='已计算'?'success':'info'">{{ calc.status }}</el-tag>
         <el-tag v-if="calc" size="small" type="warning" effect="plain">{{ calc.calc_standard }}</el-tag>
         <el-button type="success" size="small" @click="runCalc" :loading="running"><el-icon><VideoPlay /></el-icon>执行计算</el-button>
+        <el-button size="small" @click="goSelection" plain title="跳转选型页选择阀型"><el-icon><Aim /></el-icon>从选型载入</el-button>
       </div>
     </div>
 
@@ -894,6 +895,8 @@
       </div>
     </div>
 
+    <el-alert v-if="schDialog.error" :title="schDialog.error" type="error" :closable="false" show-icon style="margin:10px 0" />
+
     <template v-if="schDialog.result">
       <el-alert :title="schDialog.result.note" type="info" :closable="false" show-icon style="margin:10px 0" />
       <el-table :data="schDialog.result.candidates" size="small" border max-height="260">
@@ -923,7 +926,7 @@
 
 <script setup>
 import { ref, computed, onMounted, watch, reactive } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { valvesApi, calcApi, fluidsApi, unitsApi, valveTypesApi, publicOptionsApi, pipeDataApi } from '@/api'
 import VChart from 'vue-echarts'
@@ -1009,7 +1012,7 @@ function fmtImperialMetric(inVal, mmVal) {
 
 // ---- 推荐 SCH (ASME B31.3) ----
 const schDialog = reactive({
-  visible: false, loading: false,
+  visible: false, loading: false, error: '',
   specLabel: '', dn_mm: null,
   pressure_mpa: null, temp_c: null, material_code: 'A106-B',
   weld_factor_e: 1.0, corrosion_allowance_mm: 1.5,
@@ -1019,12 +1022,17 @@ const schDialog = reactive({
 function openSchRecommend() {
   const found = pipeDataList.value.find(p => p.lookup_key === config.value.pipe_spec_front)
   if (!found) { ElMessage.warning('请先选择阀前管道规格'); return }
+  if (found.dn_mm == null) {
+    ElMessage.warning(`管道规格 ${found.lookup_key} 缺少公称通径 DN 数据，无法推荐 SCH`)
+    return
+  }
   schDialog.specLabel = found.lookup_key
   schDialog.dn_mm = found.dn_mm
   schDialog.pressure_mpa = config.value.design_pressure ?? 1.0
   schDialog.temp_c = config.value.design_temp ?? 38
   schDialog.material_code = guessMaterialCode(config.value.pipe_material_front)
   schDialog.result = null
+  schDialog.error = ''
   schDialog.visible = true
   if (!schDialog.materials.length) {
     pipeDataApi.materials().then(d => { schDialog.materials = Array.isArray(d) ? d : [] }).catch(() => {})
@@ -1048,9 +1056,24 @@ function guessMaterialCode(text) {
 }
 
 async function runSchRecommend() {
-  if (!schDialog.dn_mm) return
-  if (!schDialog.pressure_mpa || schDialog.temp_c == null) { ElMessage.warning('请填写设计压力和设计温度'); return }
+  // 逐项校验, 明确指出缺哪个参数, 不要笼统提示"计算失败"
+  const missing = []
+  if (!schDialog.specLabel) missing.push('阀前管道规格')
+  if (schDialog.dn_mm == null) missing.push('公称通径 DN')
+  if (schDialog.pressure_mpa == null || schDialog.pressure_mpa <= 0) missing.push('设计压力 (MPa)')
+  if (schDialog.temp_c == null) missing.push('设计温度 (℃)')
+  if (!schDialog.material_code) missing.push('管道材质')
+  if (schDialog.weld_factor_e == null) missing.push('焊缝系数 E')
+  if (schDialog.corrosion_allowance_mm == null) missing.push('腐蚀裕量 CA')
+  if (missing.length) {
+    const msg = `缺少参数：${missing.join('、')}，请补全后再计算`
+    schDialog.error = msg
+    ElMessage.warning(msg)
+    return
+  }
+
   schDialog.loading = true
+  schDialog.error = ''
   try {
     schDialog.result = await pipeDataApi.suggestSch({
       dn_mm: schDialog.dn_mm,
@@ -1061,11 +1084,39 @@ async function runSchRecommend() {
       corrosion_allowance_mm: schDialog.corrosion_allowance_mm,
     })
   } catch (e) {
-    ElMessage.error(e?.response?.data?.detail || '推荐计算失败')
+    const msg = formatSchError(e)
+    schDialog.error = msg
+    ElMessage.error(msg)
     schDialog.result = null
   } finally {
     schDialog.loading = false
   }
+}
+
+// 把后端错误(Pydantic 422 数组 / HTTPException detail / 网络异常)统一转成可读中文
+function formatSchError(e) {
+  const SCH_FIELDS = {
+    dn_mm: '公称通径 DN', pressure_mpa: '设计压力', temp_c: '设计温度',
+    material_code: '管道材质', weld_factor_e: '焊缝系数 E',
+    corrosion_allowance_mm: '腐蚀裕量 CA', mill_tolerance: '制造负偏差',
+  }
+  const detail = e?.response?.data?.detail
+  if (Array.isArray(detail)) {
+    const items = detail.map(d => {
+      const key = (d.loc || []).filter(x => x !== 'query' && x !== 'body').pop()
+      return `${SCH_FIELDS[key] || key || '未知字段'}：${d.msg || '取值不合法'}`
+    })
+    return `参数校验未通过 — ${items.join('；')}`
+  }
+  if (typeof detail === 'string' && detail.trim()) return detail
+  if (e?.response?.status) {
+    return `推荐计算失败（HTTP ${e.response.status}）：${
+      e.response.status === 404 ? '后端缺少对应的管道/材质数据'
+        : e.response.status === 422 ? '参数校验未通过，请检查必填项'
+          : '后端服务处理异常'
+    }`
+  }
+  return `无法连接后端服务：${e?.message || '请确认服务已启动'}`
 }
 
 function applySchRecommend() {
@@ -1166,6 +1217,7 @@ function normalizeFilterConfigs(raw) {
 const STANDARD_STROKES = [0.05, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90, 0.95, 1.00]
 
 const route = useRoute()
+const router = useRouter()
 const pid = computed(() => route.params.pid)
 const vid = computed(() => route.params.vid)
 const MAX = 5
@@ -2154,7 +2206,24 @@ watch(() => config.value.pipe_spec_back, (val) => {
 })
 
 watch(() => route.params.vid, (v) => { if (v) init() })
-onMounted(() => { loadPublicOptions(); init() })
+
+// 跳转选型页
+function goSelection() {
+  router.push({
+    name: 'valve-selection',
+    params: { pid: pid.value, vid: vid.value },
+    query: { from: 'calc', cid: currentCid.value }
+  })
+}
+
+onMounted(async () => {
+  loadPublicOptions()
+  await init()
+  // 从选型页回填后的提示
+  if (route.query.from === 'selection' && route.query.record_id) {
+    ElMessage.success(`已从选型记录 #${route.query.record_id} 回填`)
+  }
+})
 </script>
 
 <style scoped>
