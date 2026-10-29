@@ -18,6 +18,12 @@
         <div class="ql-item" :class="{active: route.path.startsWith('/valve-types')}" @click="$router.push('/valve-types')">
           <el-icon><Operation /></el-icon><span>Cv计算因数</span>
         </div>
+        <div class="ql-item" :class="{active: route.path === '/selection' || route.name === 'valve-selection'}" @click="$router.push('/selection')">
+          <el-icon><Aim /></el-icon><span>阀门选型</span>
+        </div>
+        <div class="ql-item" :class="{active: route.path.startsWith('/selection-rules')}" @click="$router.push('/selection-rules')">
+          <el-icon><Reading /></el-icon><span>选型规则库</span>
+        </div>
         <div class="ql-item" :class="{active: route.path.startsWith('/about')}" @click="$router.push('/about')">
           <el-icon><InfoFilled /></el-icon><span>关于</span>
         </div>
@@ -69,6 +75,12 @@
         <div class="ql-item" :class="{active: route.path.startsWith('/valve-types')}" @click="$router.push('/valve-types')">
           <el-icon size="18"><Operation /></el-icon>
         </div>
+        <div class="ql-item" :class="{active: route.path === '/selection' || route.name === 'valve-selection'}" @click="$router.push('/selection')">
+          <el-icon size="18"><Aim /></el-icon>
+        </div>
+        <div class="ql-item" :class="{active: route.path.startsWith('/selection-rules')}" @click="$router.push('/selection-rules')">
+          <el-icon size="18"><Reading /></el-icon>
+        </div>
       </div>
     </el-aside>
 
@@ -119,7 +131,13 @@ const crumbs = computed(() => {
   } else if (route.name === 'valve-calc') {
     c.push({ text: '项目管理', to: { path: '/projects' } })
     c.push({ text: `位号 ${route.params.vid}` })
-  } else if (route.name === 'fluids') c.push({ text: '介质物性表' })
+  } else if (route.name === 'selection') c.push({ text: '阀门选型' })
+  else if (route.name === 'valve-selection') {
+    c.push({ text: '项目管理', to: { path: '/projects' } })
+    c.push({ text: `位号 ${route.params.vid}`, to: { path: `/projects/${route.params.pid}/valves/${route.params.vid}` } })
+    c.push({ text: '阀门选型' })
+  } else if (route.name === 'selection-rules') c.push({ text: '选型规则库' })
+  else if (route.name === 'fluids') c.push({ text: '介质物性表' })
   else if (route.name === 'valve-types') c.push({ text: 'Cv计算因数' })
   return c
 })

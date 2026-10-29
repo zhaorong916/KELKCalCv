@@ -10,6 +10,8 @@ http.interceptors.response.use(
   }
 )
 
+export { http }
+
 // 项目
 export const projectsApi = {
   list: (kw) => http.get('/projects', { params: { keyword: kw } }),

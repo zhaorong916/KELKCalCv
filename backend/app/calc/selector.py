@@ -35,6 +35,7 @@ from app.models import (
     AllowablePressureDrop,
 )
 from app.schemas import SelectionInput, CandidateOut, SelectionResultOut
+from app.calc.units import BUILTIN_UNITS, convert
 
 # ---------------------------------------------------------------------------
 # 条件表达式白名单与算子
@@ -99,6 +100,14 @@ def _num(v: Any) -> Optional[float]:
         return float(v)
     except (TypeError, ValueError):
         return None
+
+
+def _conv(val: Any, unit: Optional[str], category: str) -> Optional[float]:
+    """按单位代码换算为内部单位（未知单位代码时按内部单位原值处理）。"""
+    n = _num(val)
+    if n is None:
+        return None
+    return convert(n, unit, category)
 
 
 # ---------------------------------------------------------------------------
@@ -316,13 +325,14 @@ class ValveSelector:
 
     # -- 上下文构建 --------------------------------------------------------
     def _base_ctx(self, inp: SelectionInput, special: dict) -> dict:
-        temp = _num(getattr(inp, "t1", None))
-        p1 = _num(getattr(inp, "p1", None))
-        p2 = _num(getattr(inp, "p2", None))
-        dp = _num(getattr(inp, "dp", None))
-        if dp is None and p1 is not None and p2 is not None:
+        temp = _conv(getattr(inp, "t1", None), getattr(inp, "t1_unit", None), "temperature")
+        p1 = _conv(getattr(inp, "p1", None), getattr(inp, "p1_unit", None), "pressure")
+        p2 = _conv(getattr(inp, "p2", None), getattr(inp, "p2_unit", None), "pressure")
+        dp = _conv(getattr(inp, "dp", None), getattr(inp, "p1_unit", None), "pressure")
+        if p1 is not None and p2 is not None:
             dp = p1 - p2
         dp_ratio = (dp / p1) if (dp is not None and p1) else None
+        pipe_size = _conv(getattr(inp, "pipe_size", None), getattr(inp, "pipe_size_unit", None), "diameter")
         return {
             "media": getattr(inp, "media", None),
             "temp": temp, "temp_min": temp, "temp_max": temp,
@@ -331,9 +341,9 @@ class ValveSelector:
             "dp_ratio": dp_ratio, "dp_ratio_max": dp_ratio,
             "cv_required": _num(getattr(inp, "cv_required", None)),
             "leakage_class": getattr(inp, "leakage_class", None),
-            "pipe_size": _num(getattr(inp, "pipe_size", None)),
-            "pipe_size_min": _num(getattr(inp, "pipe_size", None)),
-            "pipe_size_max": _num(getattr(inp, "pipe_size", None)),
+            "pipe_size": pipe_size,
+            "pipe_size_min": pipe_size,
+            "pipe_size_max": pipe_size,
             "valve_action": getattr(inp, "valve_action", None) or "modulating",
             "rangeability_required": _num(getattr(inp, "rangeability_required", None)),
             "nace": bool(special.get("nace")),
@@ -393,6 +403,17 @@ class ValveSelector:
                 ctx.update(self._series_ctx(vt))
                 ctx["rated_cv"] = cand["rated_cv"]
                 ctx["cv_min"] = cand["cv_min"]
+
+                # 硬约束: 所需 Cv 已超过全开额定 Cv → 该口径/阀芯无法通过流量
+                if cv_required and cand["rated_cv"] and cv_required > cand["rated_cv"]:
+                    continue
+
+                # 硬约束: 阀门口径不得大于管道口径（缩径只缩阀内件, 不放大阀体）
+                pipe_size = base_ctx.get("pipe_size")
+                if pipe_size:
+                    dn_mm = self._dn_mm(cand.get("dn_label"))
+                    if dn_mm is not None and dn_mm > pipe_size:
+                        continue
 
                 # 曲线解析（缺失时跳过该候选）
                 try:
@@ -475,6 +496,19 @@ class ValveSelector:
         return out
 
     @staticmethod
+    def _dn_mm(dn_label: Optional[str]) -> Optional[float]:
+        """阀门口径标签 → mm（库中格式为 JIS A, 如 '100A' / '25A'）。"""
+        if not dn_label:
+            return None
+        s = str(dn_label).strip().upper()
+        if s.endswith("A"):
+            s = s[:-1]
+        try:
+            return float(s)
+        except ValueError:
+            return None
+
+    @staticmethod
     def _build_candidate(row: ValveCvStk) -> dict:
         return {
             "series_code": row.series_code,
@@ -555,10 +589,10 @@ class ValveSelector:
         from app.calc.engine import calculate_case
 
         fluid = self._build_fluid(inp, special, warnings)
-        p1 = _num(inp.p1)
-        p2 = _num(inp.p2)
-        dp = _num(inp.dp)
-        t1 = _num(inp.t1) or 20.0
+        p1 = _conv(inp.p1, getattr(inp, "p1_unit", None), "pressure")
+        p2 = _conv(inp.p2, getattr(inp, "p2_unit", None), "pressure")
+        dp = _conv(inp.dp, getattr(inp, "p1_unit", None), "pressure")
+        t1 = _conv(inp.t1, getattr(inp, "t1_unit", None), "temperature") or 20.0
         if p1 is None and dp is not None and p2 is not None:
             p1 = p2 + dp
         if p2 is None and p1 is not None and dp is not None:
@@ -568,13 +602,14 @@ class ValveSelector:
             return None
 
         flow_unit, mass_flow, vol_flow = self._parse_flow(inp)
+        pipe_diameter = _conv(inp.pipe_size, getattr(inp, "pipe_size_unit", None), "diameter") or 0.0
         try:
             cr = calculate_case(
                 case_no=1, case_name="selection", fluid=fluid,
                 valve_coeffs=ValveCoeffs(rated_cv=0.0, stages=self.stages),
                 p1=p1, p2=p2, t1=t1,
                 mass_flow=mass_flow, vol_flow=vol_flow, flow_unit=flow_unit,
-                pipe_diameter=_num(inp.pipe_size) or 0.0, pipe_wall=0.0, distance=1.0,
+                pipe_diameter=pipe_diameter, pipe_wall=0.0, distance=1.0,
             )
         except Exception as e:
             warnings.append(f"Cv 反算异常: {e}")
@@ -588,11 +623,21 @@ class ValveSelector:
 
     @staticmethod
     def _parse_flow(inp) -> tuple:
+        """解析流量并换算为内部单位（质量 kg/h / 体积 m³/h 或 Nm³/h）。
+
+        前端传的是单位字典中的 unit_code（如 kg_h / t_h / m3_h / Nm3_h），
+        必须换算后再送引擎，否则 t/h 会被当成 kg/h 导致 Cv 偏差 1000 倍。
+        """
         q = _num(getattr(inp, "flow_rate", None)) or 0.0
-        unit = (getattr(inp, "flow_rate_unit", None) or "").lower()
-        if any(t in unit for t in ("m3", "nm3", "m³", "l/h", "l/min")):
-            return "vol", 0.0, q
-        return "mass", q, 0.0
+        unit = (getattr(inp, "flow_rate_unit", None) or "").strip()
+        if q <= 0:
+            return "mass", 0.0, 0.0
+        vol_code = any(u[0].startswith("vol_flow") and u[1] == unit for u in BUILTIN_UNITS)
+        is_gas = (getattr(inp, "media", None) or "") in ("gas", "steam")
+        if vol_code or any(t in unit.lower() for t in ("m3", "m³", "nm3", "l/h", "l/min", "gpm", "bpd", "scfm")):
+            cat = "vol_flow_gas" if is_gas else "vol_flow_liquid"
+            return "vol", 0.0, convert(q, unit, cat)
+        return "mass", convert(q, unit, "mass_flow"), 0.0
 
     def _build_fluid(self, inp, special, warnings) -> dict:
         from app.models import Fluid

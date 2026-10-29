@@ -35,9 +35,10 @@
         </el-table-column>
         <el-table-column prop="calc_count" label="版本数" width="80" align="center" />
         <el-table-column prop="status" label="状态" width="90" />
-        <el-table-column label="操作" width="170" fixed="right">
+        <el-table-column label="操作" width="220" fixed="right">
           <template #default="{row}">
             <el-button link type="primary" @click.stop="rowClick(row)">计算</el-button>
+            <el-button link type="warning" @click.stop="goSelection(row)">选型</el-button>
             <el-button link type="primary" @click.stop="openDialog(row)">编辑</el-button>
             <el-button link type="danger" @click.stop="remove(row)">删除</el-button>
           </template>
@@ -123,6 +124,7 @@ async function remove(row) {
 }
 
 function rowClick(row) { router.push({ name:'valve-calc', params:{ pid: pid.value, vid: row.id } }) }
+function goSelection(row) { router.push({ name:'valve-selection', params:{ pid: pid.value, vid: row.id } }) }
 
 watch(() => route.params.pid, (v) => { if (v) { pid.value = v; load() } })
 onMounted(load)

@@ -464,6 +464,35 @@ class PipeData(Base):
 
 
 # ---------------------------------------------------------------------------
+# 管道材料许用应力表：来源于 ASME B31.3 Table A-1 / A-1M
+# ---------------------------------------------------------------------------
+class PipeMaterialAllowableStress(Base):
+    """管道材料基本许用应力 S(T)（ASME B31.3 Table A-1）
+
+    用于按 B31.3 式(3a) 反算最小壁厚，再由 pipe_data 推荐 SCH 等级。
+    数据粒度：材质 × 金属温度点，共 12 种常用材质、8~16 个温度点。
+    temperature 超出表内最高温度点时不外推，由接口报错提示。
+    """
+    __tablename__ = "pipe_material_allowable_stress"
+    __table_args__ = (
+        UniqueConstraint("material_code", "temp_c", name="uq_pipe_mat_temp"),
+        Index("ix_pipe_mat_temp", "material_code", "temp_c"),
+    )
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    material_code = Column(String(32), nullable=False, index=True,
+                           comment="材质代码, 如 A106-B / A216-WCB / TP304")
+    material_group = Column(String(32), comment="ASME B16.5 材质组, 如 Group 1.1 / Group 1.2 P22")
+    temp_c = Column(Float, nullable=False, comment="金属温度 °C")
+    s_mpa = Column(Float, nullable=False, comment="该温度下基本许用应力 S (MPa)")
+    min_use_temp_c = Column(Float, comment="最低使用温度 °C")
+    max_use_temp_c = Column(Float, comment="最高使用温度 °C (石墨化/蠕变限制)")
+    notes = Column(String(200), comment="备注, 如 A216-WCB 石墨化上限 427°C")
+    created_at = Column(DateTime, default=datetime.now)
+    updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
+
+
+# ---------------------------------------------------------------------------
 # 阀门计算系数表：来源于 Noise 2.3.xlsm / ValveData 页签
 # ---------------------------------------------------------------------------
 class ValveSizingIndex(Base):

@@ -7,14 +7,14 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
 from app.core.config import settings
-from app.api import projects, valves, calculations, fluids, units, valve_types, nominal_sizes, public_options, pipe_data
+from app.api import projects, valves, calculations, fluids, units, valve_types, nominal_sizes, public_options, pipe_data, selection
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # 启动：确保表结构存在并初始化介质库 / 单位字典
     from app.core.database import Base, engine
-    from app.models import Fluid, SelectionRule, BodyPtRating, AllowablePressureDrop, SelectionRecord
+    from app.models import Fluid, SelectionRule, BodyPtRating, AllowablePressureDrop, SelectionRecord, PipeMaterialAllowableStress
     from app.calc.properties import get_fluid_defaults
     from app.calc.units import seed_unit_definitions
     from app.core.database import SessionLocal
@@ -32,6 +32,8 @@ async def lifespan(app: FastAPI):
         valve_types.seed_valve_filter_config(db)
         # 公称尺寸对照表初始化
         nominal_sizes.seed_nominal_sizes(db)
+        # ASME B31.3 Table A-1 管道材料许用应力初始化
+        pipe_data.seed_pipe_material_stress(db)
     yield
 
 
@@ -59,6 +61,7 @@ app.include_router(valve_types.router, prefix=PREFIX)
 app.include_router(nominal_sizes.router, prefix=PREFIX)
 app.include_router(public_options.router, prefix=PREFIX)
 app.include_router(pipe_data.router, prefix=PREFIX)
+app.include_router(selection.router, prefix=PREFIX)
 
 
 @app.get("/")
