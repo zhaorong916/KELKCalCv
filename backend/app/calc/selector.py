@@ -301,6 +301,7 @@ class ValveSelector:
         self.db = db
         self.stages = max(1, int(stages or 1))
         self._rules_by_cat: dict[str, list] = {}
+        self._flow_regime: str = ""
 
     # -- 规则缓存 ----------------------------------------------------------
     def _rules(self, category: str) -> list:
@@ -587,6 +588,12 @@ class ValveSelector:
     def _calc_cv_required(self, inp, special, warnings) -> Optional[float]:
         from app.calc.cv_core import ValveCoeffs
         from app.calc.engine import calculate_case
+
+        # 每次反算前重置流态，避免多工况复用同一 ValveSelector 实例时
+        # 上一工况的 _flow_regime 泄漏到当前工况（_stage_constraint 在
+        # _calc_cv_required 之后读取该属性；若 calculate_case 抛异常，
+        # except 分支直接 return None 不会走到下方赋值）。
+        self._flow_regime = ""
 
         fluid = self._build_fluid(inp, special, warnings)
         p1 = _conv(inp.p1, getattr(inp, "p1_unit", None), "pressure")

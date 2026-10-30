@@ -448,5 +448,76 @@ class TestSelectEntry(unittest.TestCase):
         self.assertEqual(res.applied_rule_count, 1)
 
 
+class TestFlowRegimeStateIsolation(unittest.TestCase):
+    """多工况复用同一 ValveSelector 时，_flow_regime 不得跨工况泄漏。
+
+    回归用例：_calc_cv_required 内 calculate_case 抛异常时，except 分支
+    直接 return None，若不在入口处重置 self._flow_regime，上一工况的
+    流态会泄漏到当前工况的 constraint 上下文，导致规则误判。
+    """
+
+    def _make_input(self):
+        return SelectionInput(
+            project_id=1, valve_id=1, media="liquid",
+            flow_rate=10.0, flow_rate_unit="kg_h",
+            p1=500.0, p1_unit="kPaA",
+            p2=100.0, p2_unit="kPaA",
+            t1=20.0, t1_unit="C",
+        )
+
+    def test_flow_regime_reset_on_exception(self):
+        """calculate_case 抛异常时，_flow_regime 必须被重置为空串。"""
+        fdb = FakeDB()
+        sel = ValveSelector(fdb)
+        # 模拟上一工况已设置的流态
+        sel._flow_regime = "非阻塞(湍流)"
+
+        with patch("app.calc.engine.calculate_case", side_effect=RuntimeError("boom")):
+            cv = sel._calc_cv_required(self._make_input(), {}, [])
+
+        self.assertIsNone(cv)
+        self.assertEqual(sel._flow_regime, "")
+
+    def test_flow_regime_set_on_success(self):
+        """calculate_case 成功返回时，_flow_regime 取结果中的 flow_regime。"""
+        from app.calc.cv_core import CvResult
+
+        fdb = FakeDB()
+        sel = ValveSelector(fdb)
+        sel._flow_regime = "stale_from_previous_case"
+
+        fake_cv = CvResult(cv_required=12.3, flow_regime="临界(阻塞)")
+        fake_res = SimpleNamespace(cv=fake_cv, message="")
+        with patch("app.calc.engine.calculate_case", return_value=fake_res):
+            cv = sel._calc_cv_required(self._make_input(), {}, [])
+
+        self.assertEqual(cv, 12.3)
+        self.assertEqual(sel._flow_regime, "临界(阻塞)")
+
+    def test_no_leak_across_two_select_calls(self):
+        """连续两次 select() 调用，第二次即便 calculate_case 失败也不能
+        继承第一次的 _flow_regime（多工况场景的根因）。"""
+        rows = [cv_row("GC120", dn_label="40A", rated_cv=100.0, cv_min=10.0)]
+        fdb = FakeDB(series=[series("GC120", "globe")], rules=[], cv_rows=rows)
+        sel = ValveSelector(fdb)
+        inp = self._make_input()
+
+        # 第一次调用成功，_flow_regime 被设为 calculate_case 返回的流态
+        from app.calc.cv_core import CvResult
+        fake_cv = CvResult(cv_required=50.0, flow_regime="非阻塞(湍流)")
+        fake_res = SimpleNamespace(cv=fake_cv, message="")
+        with patch("app.calc.engine.calculate_case", return_value=fake_res), \
+             patch("app.calc.selector._load_curves", _fake_curves_linear):
+            sel.select(inp)
+        self.assertEqual(sel._flow_regime, "非阻塞(湍流)")
+
+        # 第二次调用：calculate_case 抛异常 → _flow_regime 必须被清空，
+        # 不能继承第一次的 "非阻塞(湍流)"
+        with patch("app.calc.engine.calculate_case", side_effect=RuntimeError("boom")), \
+             patch("app.calc.selector._load_curves", _fake_curves_linear):
+            sel.select(inp)
+        self.assertEqual(sel._flow_regime, "")
+
+
 if __name__ == "__main__":
     unittest.main()
