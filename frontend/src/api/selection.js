@@ -120,6 +120,15 @@ export const selectionApi = {
     }
     return http.get('/selection/rules', { params })
   },
+
+  /** 新增规则 */
+  createRule: async (d) => http.post('/selection/rules', d),
+
+  /** 修改规则(部分字段) */
+  updateRule: async (id, d) => http.put(`/selection/rules/${id}`, d),
+
+  /** 删除规则(被选型记录引用时会返回 409) */
+  deleteRule: async (id) => http.delete(`/selection/rules/${id}`),
 }
 
 // ---------------------------------------------------------------------------

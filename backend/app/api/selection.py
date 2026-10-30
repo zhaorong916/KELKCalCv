@@ -23,7 +23,9 @@ from app.models import SelectionRecord, SelectionRule
 from app.schemas import (
     SelectionInput,
     SelectionResultOut,
+    SelectionRuleCreate,
     SelectionRuleOut,
+    SelectionRuleUpdate,
     SelectionRecordCreate,
     SelectionRecordOut,
 )
@@ -348,6 +350,96 @@ def list_rules(
         ))
     rows = q.order_by(SelectionRule.priority, SelectionRule.rule_code).all()
     return [_rule_to_out(r) for r in rows]
+
+
+# ---------------------------------------------------------------------------
+# 规则库维护 (新增 / 修改 / 删除)
+# ---------------------------------------------------------------------------
+_RULE_CATEGORIES = {"scope", "constraint", "preference", "post_filter"}
+_RULE_ACTIONS = {"exclude", "require", "boost", "set_field", "flag", "penalty"}
+
+
+def _dump_json(v) -> Optional[str]:
+    return json.dumps(v, ensure_ascii=False) if v is not None else None
+
+
+@router.post("/rules", response_model=SelectionRuleOut, status_code=201)
+def create_rule(payload: SelectionRuleCreate, db: Session = Depends(get_db)):
+    """新增规则（rule_code 唯一）"""
+    code = (payload.rule_code or "").strip()
+    if not code:
+        raise HTTPException(422, "rule_code 不能为空")
+    if db.query(SelectionRule).filter(SelectionRule.rule_code == code).first():
+        raise HTTPException(409, f"规则编号 {code} 已存在，请换一个编号")
+    if not (payload.rule_name or "").strip():
+        raise HTTPException(422, "rule_name 不能为空")
+
+    rule = SelectionRule(
+        rule_code=code,
+        rule_name=payload.rule_name.strip(),
+        category=payload.category,
+        target_series=(payload.target_series or "*").strip() or "*",
+        condition_expr=_dump_json(payload.condition_expr),
+        condition_op=payload.condition_op or "and",
+        action=payload.action,
+        action_payload=_dump_json(payload.action_payload),
+        priority=payload.priority,
+        source_ref=payload.source_ref,
+        is_active=payload.is_active,
+    )
+    db.add(rule)
+    db.commit()
+    db.refresh(rule)
+    return _rule_to_out(rule)
+
+
+@router.put("/rules/{rid}", response_model=SelectionRuleOut)
+def update_rule(rid: int, payload: SelectionRuleUpdate, db: Session = Depends(get_db)):
+    """修改规则（按 rule_code 原地更新；rule_code 本身不可改，避免历史记录追溯断裂）"""
+    rule = db.get(SelectionRule, rid)
+    if not rule:
+        raise HTTPException(404, "规则不存在")
+
+    data = payload.model_dump(exclude_unset=True)
+    if "category" in data and data["category"] not in _RULE_CATEGORIES:
+        raise HTTPException(422, f"category 必须是 {sorted(_RULE_CATEGORIES)} 之一")
+    if "action" in data and data["action"] not in _RULE_ACTIONS:
+        raise HTTPException(422, f"action 必须是 {sorted(_RULE_ACTIONS)} 之一")
+    if "condition_op" in data and (data["condition_op"] or "and").lower() not in ("and", "or"):
+        raise HTTPException(422, "condition_op 只能是 and / or")
+    if "rule_name" in data and not (data["rule_name"] or "").strip():
+        raise HTTPException(422, "rule_name 不能为空")
+
+    for k, v in data.items():
+        if k in ("condition_expr", "action_payload"):
+            setattr(rule, k, _dump_json(v))
+        elif k == "target_series":
+            rule.target_series = (v or "*").strip() or "*"
+        else:
+            setattr(rule, k, v)
+    db.commit()
+    db.refresh(rule)
+    return _rule_to_out(rule)
+
+
+@router.delete("/rules/{rid}")
+def delete_rule(rid: int, db: Session = Depends(get_db)):
+    """删除规则；若已被选型记录引用则拒绝，建议改为停用"""
+    rule = db.get(SelectionRule, rid)
+    if not rule:
+        raise HTTPException(404, "规则不存在")
+
+    refs = 0
+    for (ids,) in (db.query(SelectionRecord.applied_rule_ids)
+                   .filter(SelectionRecord.applied_rule_ids.isnot(None)).all()):
+        if str(rid) in [t.strip() for t in ids.split(",") if t.strip()]:
+            refs += 1
+    if refs:
+        raise HTTPException(409, f"该规则已被 {refs} 条选型记录引用，无法删除；如需下线请改为停用")
+
+    db.delete(rule)
+    db.commit()
+    return {"ok": True, "id": rid}
 
 
 # ---------------------------------------------------------------------------
