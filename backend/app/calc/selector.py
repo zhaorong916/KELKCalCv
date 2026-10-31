@@ -707,6 +707,11 @@ class ValveSelector:
 
     # -- 主入口 -------------------------------------------------------------
     def select(self, inp: SelectionInput) -> SelectionResultOut:
+        # 重置逐工况状态：多工况选型复用同一 selector 实例，
+        # 若前一工况 _calc_cv_required 走早返回(p1/p2 缺失或 calculate_case 抛异常)
+        # 而未写入 _flow_regime，会导致前一工况流态泄漏到本工况的规则匹配。
+        self._flow_regime = ""
+
         warnings: list[str] = []
         special = dict(getattr(inp, "special_req", None) or {})
 

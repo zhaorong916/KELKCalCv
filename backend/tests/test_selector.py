@@ -447,6 +447,25 @@ class TestSelectEntry(unittest.TestCase):
         self.assertAlmostEqual(res.candidates[0].opening, 50.0)
         self.assertEqual(res.applied_rule_count, 1)
 
+    def test_flow_regime_reset_each_select_call(self):
+        """多工况复用同一 selector 时，每次 select() 必须重置 _flow_regime，
+        避免前一工况的流态泄漏到本工况规则匹配（约束排除/偏好加权）。"""
+        rows = [cv_row("GC120", dn_label="40A", rated_cv=100.0, cv_min=10.0)]
+        # 约束规则：flow_regime=空化 时排除 GC120
+        rules = [rule_row("R-CON-GC120-001", "constraint", target="GC120",
+                          expr={"flow_regime": {"_eq": "空化"}}, action="exclude")]
+        fdb = FakeDB(series=[series("GC120", "globe")], rules=rules, cv_rows=rows)
+
+        # 模拟前一工况遗留的流态（_TestSelector.__init__ 写入 _flow_regime）
+        sel = _TestSelector(fdb, cv_required=50.0, flow_regime="空化")
+        with patch("app.calc.selector._load_curves", _fake_curves_linear):
+            res = sel.select(_input(media="liquid"))
+
+        # select() 入口已重置 _flow_regime，空化排除规则不应生效，GC120 仍在候选中
+        self.assertEqual(sel._flow_regime, "")
+        self.assertEqual(len(res.candidates), 1)
+        self.assertEqual(res.candidates[0].series_code, "GC120")
+
 
 if __name__ == "__main__":
     unittest.main()
