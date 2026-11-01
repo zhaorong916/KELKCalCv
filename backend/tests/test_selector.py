@@ -317,9 +317,10 @@ class TestConstraintStage(unittest.TestCase):
         rows = [cv_row("GC120", dn_label="40A", rated_cv=100.0),
                 cv_row("GC120", dn_label="50A", rated_cv=20.0)]
         # rated_cv ≥ 50 视为过大 → 排除；仅保留 rated_cv=20 的 50A
+        # 注: cv_required 必须 ≤ 20, 否则 50A 会被"所需 Cv > 额定 Cv"硬约束提前滤除
         rules = [rule_row("R-CON-GC120-001", "constraint", target="GC120",
                           expr={"rated_cv": {"_min": 50}}, action="exclude")]
-        cands = self._run(rows, rules)
+        cands = self._run(rows, rules, cv_required=10.0)
         self.assertEqual([c["dn_label"] for c in cands], ["50A"])
 
     def test_opening_is_stk_percent(self):
