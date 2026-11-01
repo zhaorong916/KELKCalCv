@@ -15,7 +15,7 @@ const NUM_GROUPS = [
   { label: '设计温度', unit: '℃', low: 'temp_min', high: 'temp_max', eq: 'temp',
     aliases: ['设计温度', '操作温度', '工况温度', '温度', 'temp'] },
   { label: '阀前压力', unit: 'kPa', pressure: true, low: 'p1', high: 'p1_max', eq: 'p1',
-    aliases: ['阀前压力', '进口压力', '入口压力', '前压', 'p1'] },
+    aliases: ['阀前压力', '进口压力', '入口压力', '前压', '压力', 'p1'] },
   { label: '压差', unit: 'kPa', pressure: true, low: 'dp', high: 'dp_max', eq: 'dp',
     aliases: ['压差', '差压', '压降', 'dp'] },
   { label: '压差比', unit: '', low: 'dp_ratio', high: 'dp_ratio_max', eq: 'dp_ratio',
@@ -39,7 +39,7 @@ const ENUM_FIELDS = [
               steam: ['蒸汽', '水蒸汽', 'steam'], twophase: ['两相', '两相流'] } },
   { key: 'flow_regime', label: '流态', aliases: ['流动状态', '流态', 'flow_regime'],
     values: { 空化: ['空化', '气蚀'], 闪蒸: ['闪蒸'], 阻塞流: ['阻塞流', '阻塞'], 正常: ['正常'] } },
-  { key: 'leakage_class', label: '泄漏等级', aliases: ['泄漏等级', '泄漏级别', '密封等级', 'class等级', 'class'],
+  { key: 'leakage_class', label: '泄漏等级', aliases: ['泄漏等级', '泄漏级别', '密封等级', '泄漏等级class'],
     values: { IV: ['iv', 'iv级', '4级', '四级'], V: ['v', 'v级', '5级', '五级'],
               VI: ['vi', 'vi级', '6级', '六级'] } },
   { key: 'valve_action', label: '阀门作用', aliases: ['阀门作用', '故障位置', '作用方式', 'valve_action'],
@@ -90,14 +90,22 @@ for (const b of BOOL_FIELDS) KEY_SPECS[b.key] = { label: b.label, bool: true }
 // 条件行编辑器的下拉分组
 export const FIELD_OPTIONS = [
   { label: '数值', options: dedupe(NUM_GROUPS.flatMap(g => [g.low, g.high, g.eq]).filter(Boolean)) },
-  { label: '枚举', options: ENUM_FIELDS.map(f => f.key) },
-  { label: '布尔', options: BOOL_FIELDS.map(b => b.key) },
+  { label: '枚举', options: ENUM_FIELDS.map(f => ({ key: f.key, label: f.label })) },
+  { label: '布尔', options: BOOL_FIELDS.map(b => ({ key: b.key, label: b.label })) },
 ]
 
 function dedupe(keys) {
   const seen = new Set()
   return keys.filter(k => (seen.has(k) ? false : (seen.add(k), true)))
-    .map(k => ({ key: k, label: KEY_SPECS[k].label }))
+    .map(k => {
+      const label = KEY_SPECS[k].label
+      // 同一物理量的下限/上限/要求键共享 label，下拉框里加后缀区分
+      let suffix = ''
+      if (k.endsWith('_min')) suffix = '（下限）'
+      else if (k.endsWith('_max')) suffix = '（上限）'
+      else if (k.endsWith('_required')) suffix = '（要求）'
+      return { key: k, label: label + suffix }
+    })
 }
 
 // ---------------------------------------------------------------------------
@@ -112,18 +120,253 @@ function normalize(s) {
     .toLowerCase()
 }
 
-// 跳过的连接词（注意不能吞掉「为 / 是」，它们是等值算子）
-const SKIP = /^[\s在时时候达到的,、;:(]*/
+// ---------------------------------------------------------------------------
+// 括号与多分支逻辑解析
+// ---------------------------------------------------------------------------
+// 连接词模式（长优先扫描，避免「或」截断「或者」、「且」截断「并且」）
+const SEP_PATTERNS = [
+  { re: /或者|或是/, type: 'or' },
+  { re: /并且|而且|同时|以及/, type: 'and' },
+  { re: /或/, type: 'or' },
+  { re: /且/, type: 'and' },
+  { re: /[,，;；]/, type: 'and' },
+]
+
+/** 找出括号外的所有连接词位置：[{idx, len, type}] */
+function findTopLevelSeps(text) {
+  const seps = []
+  let depth = 0
+  let i = 0
+  while (i < text.length) {
+    const ch = text[i]
+    if (ch === '(') { depth++; i++; continue }
+    if (ch === ')') { if (depth > 0) depth--; i++; continue }
+    if (depth > 0) { i++; continue }
+    let matched = null
+    for (const p of SEP_PATTERNS) {
+      const m = text.slice(i).match(p.re)
+      if (m && m.index === 0) {
+        if (!matched || m[0].length > matched.len) matched = { idx: i, len: m[0].length, type: p.type }
+      }
+    }
+    if (matched) { seps.push(matched); i += matched.len }
+    else i++
+  }
+  return seps
+}
+
+function splitBySeps(text, seps) {
+  const parts = []
+  let last = 0
+  for (const s of seps) {
+    parts.push({ text: text.slice(last, s.idx), type: s.type })
+    last = s.idx + s.len
+  }
+  parts.push({ text: text.slice(last), type: null })
+  return parts
+}
+
+/** 去除最外层成对括号（支持多层嵌套） */
+function stripOuterParens(text) {
+  text = text.trim()
+  while (text.startsWith('(') && text.endsWith(')')) {
+    let depth = 0
+    let closedAt = -1
+    for (let i = 0; i < text.length; i++) {
+      if (text[i] === '(') depth++
+      else if (text[i] === ')') {
+        depth--
+        if (depth === 0) { closedAt = i; break }
+      }
+    }
+    if (closedAt === text.length - 1) text = text.slice(1, -1).trim()
+    else break
+  }
+  return text
+}
+
+/** 查找与 text[openIdx] 处 '(' 匹配的 ')' 下标，找不到返回 -1 */
+function findMatchingParen(text, openIdx) {
+  let depth = 0
+  for (let i = openIdx; i < text.length; i++) {
+    if (text[i] === '(') depth++
+    else if (text[i] === ')') {
+      depth--
+      if (depth === 0) return i
+    }
+  }
+  return -1
+}
+
+/** 单条子句（无顶层连接词）→ 扁平条件 dict；inheritKey 用于省略字段名时继承 */
+function parseLeaf(text, inheritKey = null) {
+  const enumHits = scanEnum(text)
+  const directHits = scanEnumDirect(text, new Set(enumHits.map(h => h.key)))
+  let numHits = scanNumeric(text)
+  const boolHits = scanBool(text)
+
+  // 继承字段：文本中无字段名时，用前一字段解析值
+  if (inheritKey && !numHits.length && !enumHits.length && !directHits.length && !boolHits.length) {
+    numHits = scanNumeric(text, KEY_TO_GROUP[inheritKey] || null)
+    const enumHit = scanEnumByKey(text, inheritKey)
+    if (enumHit) return enumHit
+    const boolHit = scanBoolByKey(text, inheritKey)
+    if (boolHit) return boolHit
+  }
+
+  const conditions = [...numHits, ...enumHits, ...directHits, ...boolHits]
+  const expr = {}
+  for (const c of conditions) {
+    expr[c.key] = expr[c.key] || {}
+    if (c.op === '_or') expr[c.key]._or = c.value
+    else expr[c.key][c.op] = c.value
+  }
+  return expr
+}
+
+/** 对指定枚举键，在文本中扫描其取值（不依赖字段名） */
+function scanEnumByKey(text, key) {
+  const f = ENUM_FIELDS.find(x => x.key === key)
+  if (!f || !f.values) return null
+  const found = []
+  for (const [val, words] of Object.entries(f.values)) {
+    for (const w of words) {
+      const p = findWord(text, w)
+      if (p >= 0) { found.push({ val, p }); break }
+    }
+  }
+  if (!found.length) return null
+  found.sort((a, b) => a.p - b.p)
+  const vals = found.map(x => x.val)
+  return { [key]: { [vals.length > 1 ? '_or' : '_eq']: vals.length > 1 ? vals : vals[0] } }
+}
+
+/** 对指定布尔键，在文本中扫描（不依赖字段名） */
+function scanBoolByKey(text, key) {
+  const b = BOOL_FIELDS.find(x => x.key === key)
+  if (!b) return null
+  const alias = b.aliases.map(a => a.toLowerCase()).find(a => text.includes(a))
+  if (!alias) return null
+  const idx = text.indexOf(alias)
+  const before = text.slice(Math.max(0, idx - 3), idx)
+  const neg = /(非|无|不|没有)/.test(before)
+  return { [key]: { _eq: !neg } }
+}
+
+/** 递归解析：括号分组 + 顶层 or/and 连接，产出 {$and/$or: [...]} 嵌套结构 */
+function parseLogic(text) {
+  text = text.trim()
+  if (!text) return {}
+
+  // 以括号组开头，且括号后无顶层连接词（只有动作词等）→ 解析括号内部
+  if (text.startsWith('(')) {
+    const closeIdx = findMatchingParen(text, 0)
+    if (closeIdx > 0) {
+      const after = text.slice(closeIdx + 1)
+      if (findTopLevelSeps(after).length === 0) {
+        return parseLogic(text.slice(1, closeIdx))
+      }
+    }
+  }
+
+  text = stripOuterParens(text)
+  if (!text.trim()) return {}
+  const seps = findTopLevelSeps(text)
+  if (!seps.length) return parseLeaf(text)
+
+  const orSeps = seps.filter(s => s.type === 'or')
+  if (orSeps.length) {
+    const parts = splitBySeps(text, orSeps)
+    const valid = resolveParts(parts)
+    if (valid.length <= 1) return valid[0] || parseLeaf(text)
+    return { $or: valid }
+  }
+  const andSeps = seps.filter(s => s.type === 'and')
+  if (andSeps.length) {
+    const parts = splitBySeps(text, andSeps)
+    const valid = resolveParts(parts)
+    if (valid.length <= 1) return valid[0] || parseLeaf(text)
+    return { $and: valid }
+  }
+  return parseLeaf(text)
+}
+
+/** 对拆分后的子句逐个解析；空子句尝试用前一个字段继承解析 */
+function resolveParts(parts) {
+  const valid = []
+  let prevKey = null
+  for (const p of parts) {
+    if (!p.text.trim()) continue
+    let sub = parseLogic(p.text)
+    if (!sub || !Object.keys(sub).length) {
+      if (prevKey) sub = parseLeaf(p.text, prevKey)
+    }
+    if (sub && Object.keys(sub).length) {
+      valid.push(sub)
+      const k = firstFieldKey(sub)
+      if (k) prevKey = k
+    }
+  }
+  return valid
+}
+
+/** 统计叶子条件数（用于「未识别到条件」提示） */
+function countConditions(expr) {
+  if (!expr) return 0
+  const ks = Object.keys(expr)
+  if (ks.length === 1 && (ks[0] === '$and' || ks[0] === '$or')) {
+    return expr[ks[0]].reduce((n, s) => n + countConditions(s), 0)
+  }
+  return ks.length
+}
+
+/** 收集所有出现的条件键（用于类别推断） */
+function collectKeys(expr) {
+  const keys = []
+  if (!expr) return keys
+  const ks = Object.keys(expr)
+  if (ks.length === 1 && (ks[0] === '$and' || ks[0] === '$or')) {
+    for (const s of expr[ks[0]]) keys.push(...collectKeys(s))
+    return keys
+  }
+  return ks
+}
+
+// 跳过的连接词（注意不能吞掉「为 / 是」，它们是等值算子；括号保留用于分组）
+const SKIP = /^[\s在时时候达到的,、;:]*/
 
 const NUM_ALIASES = NUM_GROUPS.flatMap(g => g.aliases.map(alias => ({ alias: alias.toLowerCase(), g })))
+
+// 条件键 → 所属数值组（用于省略字段名时继承前一字段）
+const KEY_TO_GROUP = {}
+for (const g of NUM_GROUPS) {
+  for (const k of [g.low, g.high, g.eq]) {
+    if (k) KEY_TO_GROUP[k] = g
+  }
+}
+
+/** 从条件表达式中提取第一个条件键（用于省略字段名时继承） */
+function firstFieldKey(expr) {
+  if (!expr) return null
+  const ks = Object.keys(expr)
+  if (ks.length === 1 && (ks[0] === '$and' || ks[0] === '$or')) {
+    for (const s of expr[ks[0]]) {
+      const k = firstFieldKey(s)
+      if (k) return k
+    }
+    return null
+  }
+  return ks[0] || null
+}
 
 /**
  * 扫描数值型条件：字段 + 算子 + 数值(+单位)
  * 返回 [{ key, op, value, group, consumedTo }]
  */
-function scanNumeric(text) {
+function scanNumeric(text, inheritGroup = null) {
   const hits = []
   let from = 0
+  let lastGroup = inheritGroup
   while (from < text.length) {
     // 找最靠前的字段别名（同位置取更长的，避免「压差」抢「压差比」）
     let best = null
@@ -134,44 +377,81 @@ function scanNumeric(text) {
         best = { idx, alias: item.alias, g: item.g }
       }
     }
-    if (!best) break
 
-    const afterAlias = text.slice(best.idx + best.alias.length)
-    const rest = afterAlias.replace(SKIP, '')
-    const basePos = text.length - afterAlias.length + (afterAlias.length - rest.length)
+    // 当前位置到下一个字段别名之间，若出现「算子+数值」则继承上一字段
+    let rest = '', basePos = from, group = lastGroup
+    if (best) {
+      const gap = text.slice(from, best.idx).replace(SKIP, '')
+      if (gap && lastGroup) {
+        const m1 = gap.match(new RegExp(`(${OP_PATTERN})\\s*(?:达|到)?\\s*([-+]?\\d+(?:\\.\\d+)?)\\s*(mpa|kpa|bar|℃|度|mm|dn|%|a)?`))
+        const m2 = gap.match(/([-+]?\d+(?:\.\d+)?)\s*(mpa|kpa|bar|℃|度|mm|dn|%|a)?\s*(及以上|以上|以下|以内)/)
+        const m3 = gap.match(/在?\s*([-+]?\d+(?:\.\d+)?)\s*(mpa|kpa|bar|℃|度|mm|dn|%|a)?\s*(?:到|至|~|-)\s*([-+]?\d+(?:\.\d+)?)\s*(mpa|kpa|bar|℃|度|mm|dn|%|a)?/)
+        if (applyNumericMatch(lastGroup, m1, m2, m3, hits)) {
+          from = best.idx
+          continue
+        }
+      }
+      const afterAlias = text.slice(best.idx + best.alias.length)
+      rest = afterAlias.replace(SKIP, '')
+      basePos = text.length - afterAlias.length + (afterAlias.length - rest.length)
+      group = best.g
+    } else {
+      // 没有更多字段别名，尝试用继承字段解析剩余文本（搜索式匹配）
+      if (!lastGroup) break
+      const tail = text.slice(from)
+      const m1 = tail.match(new RegExp(`(${OP_PATTERN})\\s*(?:达|到)?\\s*([-+]?\\d+(?:\\.\\d+)?)\\s*(mpa|kpa|bar|℃|度|mm|dn|%|a)?`))
+      const m2 = tail.match(/([-+]?\d+(?:\.\d+)?)\s*(mpa|kpa|bar|℃|度|mm|dn|%|a)?\s*(及以上|以上|以下|以内)/)
+      const m3 = tail.match(/在?\s*([-+]?\d+(?:\.\d+)?)\s*(mpa|kpa|bar|℃|度|mm|dn|%|a)?\s*(?:到|至|~|-)\s*([-+]?\d+(?:\.\d+)?)\s*(mpa|kpa|bar|℃|度|mm|dn|%|a)?/)
+      const consumed = applyNumericMatch(lastGroup, m1, m2, m3, hits)
+      if (consumed > 0) {
+        const matchIdx = (m1 || m2 || m3).index
+        from = from + matchIdx + consumed
+        lastGroup = lastGroup
+        continue
+      }
+      break
+    }
 
-    // 模式 1：字段 + 算子 + 数值
     const m1 = rest.match(new RegExp(`^(${OP_PATTERN})\\s*(?:达|到)?\\s*([-+]?\\d+(?:\\.\\d+)?)\\s*(mpa|kpa|bar|℃|度|mm|dn|%|a)?`))
-    // 模式 2：字段 + 数值 + 以上/以下/以内/及以上
     const m2 = rest.match(/^([-+]?\d+(?:\.\d+)?)\s*(mpa|kpa|bar|℃|度|mm|dn|%|a)?\s*(及以上|以上|以下|以内)/)
-    // 模式 3：字段 + 数值 到 数值（区间）
     const m3 = rest.match(/^在?\s*([-+]?\d+(?:\.\d+)?)\s*(mpa|kpa|bar|℃|度|mm|dn|%|a)?\s*(?:到|至|~|-)\s*([-+]?\d+(?:\.\d+)?)\s*(mpa|kpa|bar|℃|度|mm|dn|%|a)?/)
 
-    let added = false
-    if (m1) {
-      const op = OP_MAP[m1[1]]
-      const [num] = convertValue(best.g, m1[2], m1[3], hits)
-      hits.push({ group: best.g, key: keyFor(best.g, op), op, value: num, pos: best.idx })
-      from = basePos + m1[0].length
-      added = true
-    } else if (m3) {
-      const [lo] = convertValue(best.g, m3[1], m3[2], hits)
-      const [hi] = convertValue(best.g, m3[3], m3[4], hits)
-      hits.push({ group: best.g, key: best.g.low, op: '_min', value: lo, pos: best.idx })
-      hits.push({ group: best.g, key: best.g.high, op: '_max', value: hi, pos: best.idx })
-      from = basePos + m3[0].length
-      added = true
-    } else if (m2) {
-      const [num] = convertValue(best.g, m2[1], m2[2], hits)
-      const upper = ['及以上', '以上'].includes(m2[3])
-      const op = upper ? '_min' : '_max'
-      hits.push({ group: best.g, key: upper ? best.g.low : best.g.high, op, value: num, pos: best.idx })
-      from = basePos + m2[0].length
-      added = true
+    const consumed = applyNumericMatch(group, m1, m2, m3, hits)
+    if (consumed > 0) {
+      lastGroup = group
+      from = basePos + consumed
+    } else if (best) {
+      lastGroup = best.g
+      from = best.idx + best.alias.length
+    } else {
+      break
     }
-    if (!added) from = best.idx + best.alias.length
   }
   return hits
+}
+
+/** 把匹配到的数值模式写入 hits，返回消耗的字符数（0 表示未匹配） */
+function applyNumericMatch(g, m1, m2, m3, hits) {
+  if (m1) {
+    const op = OP_MAP[m1[1]]
+    const [num] = convertValue(g, m1[2], m1[3], hits)
+    hits.push({ group: g, key: keyFor(g, op), op, value: num })
+    return m1[0].length
+  }
+  if (m3) {
+    const [lo] = convertValue(g, m3[1], m3[2], hits)
+    const [hi] = convertValue(g, m3[3], m3[4], hits)
+    hits.push({ group: g, key: g.low, op: '_min', value: lo })
+    hits.push({ group: g, key: g.high, op: '_max', value: hi })
+    return m3[0].length
+  }
+  if (m2) {
+    const [num] = convertValue(g, m2[1], m2[2], hits)
+    const upper = ['及以上', '以上'].includes(m2[3])
+    hits.push({ group: g, key: upper ? g.low : g.high, op: upper ? '_min' : '_max', value: num })
+    return m2[0].length
+  }
+  return 0
 }
 
 /** 数值 + 单位 → 内部单位；压力类把 MPa/bar 折算为 kPa */
@@ -225,7 +505,7 @@ function scanEnum(text, skipKeys = new Set()) {
     const vals = found.map(x => x.val)
     let op = vals.length > 1 ? '_or' : '_eq'
     if (opm && OP_MAP[opm[1]] === '_ne') op = '_ne'
-    hits.push({ key: f.key, op, value: vals.length > 1 ? vals : vals[0], pos: idx })
+    hits.push({ key: f.key, op, value: vals.length > 1 ? vals : vals[0] })
   }
   return hits
 }
@@ -250,7 +530,7 @@ function scanEnumDirect(text, skipKeys) {
     if (!found.length) continue
     found.sort((a, b) => a.p - b.p)
     const vals = found.map(x => x.val)
-    hits.push({ key: f.key, op: vals.length > 1 ? '_or' : '_eq', value: vals.length > 1 ? vals : vals[0], pos: found[0].p })
+    hits.push({ key: f.key, op: vals.length > 1 ? '_or' : '_eq', value: vals.length > 1 ? vals : vals[0] })
   }
   return hits
 }
@@ -265,7 +545,7 @@ function scanBool(text) {
     const idx = text.indexOf(alias)
     const before = text.slice(Math.max(0, idx - 3), idx)
     const neg = /(非|无|不|没有)/.test(before)
-    hits.push({ key: b.key, op: '_eq', value: !neg, pos: idx })
+    hits.push({ key: b.key, op: '_eq', value: !neg })
   }
   return hits
 }
@@ -280,17 +560,14 @@ const ACTION_RULES = [
 ]
 
 function detectAction(text) {
-  const found = []
+  let best = null
   for (const r of ACTION_RULES) {
     const m = text.match(r.re)
     if (!m) continue
-    found.push({ idx: text.indexOf(m[0]), word: m[0], action: r.action })
+    const idx = text.indexOf(m[0])
+    if (!best || idx < best.idx) best = { idx, word: m[0], action: r.action }
   }
-  // 「必须排除 / 要求排除」中 require 只是修饰，真正动作是后面的动词：
-  // 动词类动作优先，require 仅在没有任何动词动作时兜底。
-  const verbs = found.filter(f => f.action !== 'require')
-  const pool = verbs.length ? verbs : found
-  return pool.sort((a, b) => a.idx - b.idx)[0] || null
+  return best
 }
 
 /** 目标系列：如 BT110 / GC210 / GV120H；「全局/所有/任意」→ * */
@@ -313,272 +590,69 @@ function guessCategory(action, keys) {
   return null
 }
 
-// ---------------------------------------------------------------------------
-// 括号提取 / 子句切分
-// ---------------------------------------------------------------------------
-
-/** 抽出括号内容（支持嵌套），返回等长文本（括号段置空格）+ 括号片段列表 */
-function extractParens(text) {
-  const chars = text.split('')
-  const groups = []
-  let depth = 0
-  let buf = ''
-  let start = -1
-  for (let i = 0; i < text.length; i++) {
-    const ch = text[i]
-    if (ch === '(') {
-      if (depth === 0) { start = i; buf = '' }
-      depth++
-      chars[i] = ' '
-    } else if (ch === ')') {
-      if (depth > 0) depth--
-      if (depth === 0 && start >= 0) { groups.push({ content: buf, start, end: i }); start = -1 }
-      chars[i] = ' '
-    } else if (depth > 0) {
-      buf += ch
-      chars[i] = ' '
-    }
-  }
-  if (start >= 0) groups.push({ content: buf, start, end: text.length })
-  return { text: chars.join(''), groups }
-}
-
-/** 按分号 / 句号 / 换行切分子句（括号已置空，不会误切） */
-function splitClauses(text) {
-  const out = []
-  let from = 0
-  for (let i = 0; i <= text.length; i++) {
-    const isEnd = i === text.length
-    if (isEnd || /[;。\n]/.test(text[i])) {
-      const seg = text.slice(from, i)
-      if (seg.trim()) out.push({ text: seg, start: from, end: i })
-      from = i + 1
-    }
-  }
-  return out
-}
-
-/** 相邻条件之间的连接词 → and / or */
-function opFromHits(text, hits) {
-  const ordered = [...hits].sort((a, b) => a.pos - b.pos)
-  let hasOr = false
-  let hasAnd = false
-  for (let i = 1; i < ordered.length; i++) {
-    const gap = text.slice(ordered[i - 1].pos, ordered[i].pos)
-    if (/(或者|或|任一|其中之一)/.test(gap)) hasOr = true
-    if (/(并且|且|同时|而且|以及)/.test(gap)) hasAnd = true
-  }
-  return { op: hasOr ? 'or' : 'and', conflict: hasOr && hasAnd }
-}
-
-/** 条件命中 → 表达式；同键同算子重复报错，_eq 与 _or 自动合并为集合 */
-function mergeHits(expr, hits, errors, origin = '') {
-  for (const c of hits) {
-    const spec = KEY_SPECS[c.key]
-    const slot = expr[c.key] || (expr[c.key] = {})
-    if (c.op === '_or') {
-      const list = Array.isArray(c.value) ? c.value : [c.value]
-      if (Array.isArray(slot._or)) {
-        for (const v of list) if (!slot._or.includes(v)) slot._or.push(v)
-      } else if (slot._eq !== undefined) {
-        slot._or = [slot._eq, ...list].filter((v, i, a) => a.indexOf(v) === i)
-        delete slot._eq
-      } else {
-        slot._or = list
-      }
-      continue
-    }
-    if (slot[c.op] !== undefined) {
-      if (String(slot[c.op]) !== String(c.value)) {
-        errors.push(`${origin}条件「${spec?.label || c.key}」重复出现，请合并为区间或去掉其一`)
-      }
-      continue
-    }
-    if (c.op === '_eq' && Array.isArray(slot._or)) {
-      if (!slot._or.includes(c.value)) slot._or.push(c.value)
-      continue
-    }
-    slot[c.op] = c.value
-  }
-}
-
-/** 表达式合并（多子句归入同一规则） */
-function mergeExpr(target, src, errors, origin = '') {
-  for (const [key, ops] of Object.entries(src || {})) {
-    const spec = KEY_SPECS[key]
-    const slot = target[key] || (target[key] = {})
-    for (const [op, val] of Object.entries(ops)) {
-      if (op === '_or' && Array.isArray(val)) {
-        slot._or = Array.isArray(slot._or) ? [...new Set([...slot._or, ...val])] : val.slice()
-        if (slot._eq !== undefined) { delete slot._eq }
-        continue
-      }
-      if (slot[op] === undefined) { slot[op] = val; continue }
-      if (String(slot[op]) !== String(val)) {
-        errors.push(`${origin}条件「${spec?.label || key}」重复出现，请合并为区间或去掉其一`)
-      }
-    }
-  }
-}
-
-/** 单个子句解析：条件 + 动作 */
-function parseClause(text) {
-  const errors = []
-  const enumHits = scanEnum(text)
-  const directHits = scanEnumDirect(text, new Set(enumHits.map(h => h.key)))
-  const hits = [...scanNumeric(text), ...enumHits, ...directHits, ...scanBool(text)]
-  const expr = {}
-  mergeHits(expr, hits, errors)
-  const { op, conflict } = opFromHits(text, hits)
-  return { expr, op, conflict, hits, actionHit: detectAction(text), errors }
-}
-
-/** 动作分值 */
-function scoreOf(action, text, actionHit) {
-  if (action !== 'boost' && action !== 'penalty') return null
-  const tail = actionHit ? text.slice(actionHit.idx, actionHit.idx + 24) : text
-  const m = tail.match(/(\d+(?:\.\d+)?)\s*分/) || text.match(/score\s*[:=]?\s*(\d+(?:\.\d+)?)/)
-  return m ? Number(m[1]) : null
-}
-
 /**
- * 解析中文规则描述（支持括号补充说明、分号多子句、多分支）
- * @returns {ok, errors, notes, target_series, action, action_payload, condition_expr,
- *           condition_op, categoryHint, desc, suggested_name, branches}
- *  branches[] 为每个「动作 + 目标系列」分支的形态，branches[0] 即上面的主字段
+ * 解析中文规则描述
+ * @returns {ok, errors, notes, target_series, action, action_payload,
+ *           condition_expr, condition_op, categoryHint, desc, suggested_name}
  */
 export function parseNaturalRule(raw, opts = {}) {
   const text = normalize(raw)
+  const errors = []
   const notes = []
   if (!text.trim()) {
-    return {
-      ok: false, errors: ['请输入规则描述'], notes: [], condition_expr: {}, condition_op: 'and',
-      action_payload: {}, branches: [],
-    }
+    return { ok: false, errors: ['请输入规则描述'], notes: [], condition_expr: {}, condition_op: 'and', action_payload: {} }
   }
 
-  const { text: flat, groups: parens } = extractParens(text)
-  const clauses = splitClauses(flat)
-  const globalAction = detectAction(flat)
-  const globalSeries = detectSeries(raw)
-
-  // 逐子句解析（括号按位置归属到子句）
-  const parsed = clauses.map(cl => {
-    const res = parseClause(cl.text)
-    const own = parens.filter(p => p.start >= cl.start && p.end <= cl.end)
-    const parenNotes = []
-    for (const p of own) {
-      const inner = parseClause(p.content)
-      const pText = p.content.trim()
-      if (inner.hits.length) {
-        mergeHits(res.expr, inner.hits, res.errors, '括号内')
-        parenNotes.push(`已并入括号内条件「${pText}」`)
-      } else if (/(仅|只|限|或|且|除非|但)/.test(pText)) {
-        parenNotes.push(`括号说明「${pText}」为补充描述，未参与条件生成`)
-      }
-    }
-    const series = detectSeries(raw.slice(cl.start, cl.end)).series
-    return {
-      ...res,
-      notes: parenNotes,
-      series: series || globalSeries.series,
-      action: res.actionHit?.action || globalAction?.action || null,
-      actionHit: res.actionHit || globalAction,
-      text: cl.text,
-    }
-  })
-
-  // 按「动作 + 系列」归组，不同组即不同分支
-  const groups = new Map()
-  for (const p of parsed) {
-    const key = `${p.action || '?'}|${p.series || '*'}`
-    if (!groups.has(key)) groups.set(key, [])
-    groups.get(key).push(p)
-  }
-
-  const branches = []
-  for (const [key, list] of groups) {
-    const [action, series] = key.split('|')
-    const expr = {}
-    const errors = []
-    const branchNotes = []
-    let op = list.length > 1 ? 'or' : list[0].op
-    for (const p of list) {
-      mergeExpr(expr, p.expr, errors, list.length > 1 ? '子句' : '')
-      errors.push(...p.errors)
-      branchNotes.push(...p.notes)
-      if (p.conflict) branchNotes.push('条件中同时出现「且」「或」，已按「或」处理，请核对')
-      if (list.length > 1 && !Object.keys(p.expr).length) {
-        branchNotes.push(`子句「${p.text.trim()}」未识别到条件，请补上字段（如「设计温度低于 -5℃」）`)
-      }
-    }
-    if (list.length > 1) branchNotes.push(`已将 ${list.length} 个子句按「或」合并为一条规则`)
-
-    const payload = {}
-    const score = scoreOf(action, list.map(p => p.text).join(' '), list.find(p => p.actionHit)?.actionHit)
-    if (score != null) payload.score = score
-    if ((action === 'boost' || action === 'penalty') && score == null) {
-      branchNotes.push('未识别加减分值，请在「动作参数」中补充 {"score": n}')
-    }
-
-    const seriesOut = series === '*' ? '*' : (series === 'null' ? null : series)
-    const categoryHint = guessCategory(action, Object.keys(expr))
-    const desc = describeCondition(expr, op)
-    branches.push({
-      target_series: seriesOut,
-      action: action === '?' ? null : action,
-      action_payload: payload,
-      condition_expr: expr,
-      condition_op: op,
-      categoryHint,
-      desc,
-      errors,
-      notes: branchNotes,
-      suggested_name: [seriesOut || '*', desc, action && action !== '?' ? ACTION_LABELS[action] : '']
-        .filter(Boolean).join(' '),
-    })
-  }
-
-  const primary = branches[0] || {
-    target_series: null, action: null, action_payload: {}, condition_expr: {},
-    condition_op: 'and', categoryHint: null, desc: '无条件（命中全部工况）', errors: [], notes: [],
-  }
-
-  // 全局校验与提示
-  const errors = [...(primary.errors || [])]
-  if (!Object.keys(primary.condition_expr || {}).length) {
+  // 条件解析：支持括号分组与多分支（递归产出 $and/$or 嵌套结构）
+  const expr = parseLogic(text)
+  if (countConditions(expr) === 0) {
     errors.push('未识别到条件，请改用「条件行」录入，或写成「字段 + 比较 + 值」，如「设计温度低于 -5℃」')
   }
-  if (!primary.action) errors.push('未识别到动作，请写明要做什么：排除 / 要求 / 加分 / 扣分 / 标记 / 回填')
 
-  const notesAll = [...(primary.notes || []), ...notes]
-  if (branches.length > 1) {
-    notesAll.push(`识别到 ${branches.length} 个分支（动作或目标系列不同），已采用第 1 个；可在预览中切换`)
+  const actionHit = detectAction(text)
+  if (!actionHit) errors.push('未识别到动作，请写明要做什么：排除 / 要求 / 加分 / 扣分 / 标记 / 回填')
+  const action = actionHit?.action || null
+
+  const actionPayload = {}
+  if (action === 'boost' || action === 'penalty') {
+    const tail = actionHit ? text.slice(actionHit.idx, actionHit.idx + 24) : text
+    const sm = tail.match(/(\d+(?:\.\d+)?)\s*分/) || text.match(/score\s*[:=]?\s*(\d+(?:\.\d+)?)/)
+    if (sm) actionPayload.score = Number(sm[1])
+    else notes.push('未识别加减分值，请在「动作参数」中补充 {"score": n}')
   }
-  if (!globalSeries.series && !parsed.some(p => p.series)) {
-    notesAll.push('未识别目标系列，请在「目标系列」中选择（* 表示全局）')
-  } else if (globalSeries.count > 1) {
-    notesAll.push(`识别到多个系列，已取 ${globalSeries.series}`)
+  if (action === 'flag') notes.push('请把标记名写进「动作参数」，如 {"flag": "steam_service"}')
+  if (action === 'set_field') notes.push('请把字段名写进「动作参数」，如 {"field": "fd_mode"}')
+
+  // 顶层连接关系：嵌套结构已由 $and/$or 表达，扁平结构默认 and
+  let conditionOp = opts.conditionOp
+  if (!conditionOp) {
+    conditionOp = expr.$or ? 'or' : 'and'
   }
-  if (['flag', 'set_field'].includes(primary.action)) {
-    notesAll.push(primary.action === 'flag'
-      ? '请把标记名写进「动作参数」，如 {"flag": "steam_service"}'
-      : '请把字段名写进「动作参数」，如 {"field": "fd_mode"}')
-  }
+
+  const series = detectSeries(raw)
+  if (series.count > 1) notes.push(`识别到多个系列（${series.series} 等），已取第一个；如需匹配多个系列请改用 JSON 直编`)
+  if (!series.series) notes.push('未识别目标系列，请在「目标系列」中选择（* 表示全局）')
+
+  const categoryHint = guessCategory(action, collectKeys(expr))
+  const desc = describeCondition(expr, conditionOp)
+  const suggestedName = [
+    series.series || '*',
+    desc,
+    action ? ACTION_LABELS[action] : '',
+  ].filter(Boolean).join(' ')
 
   return {
     ok: errors.length === 0,
     errors,
-    notes: [...new Set(notesAll)],
-    target_series: primary.target_series,
-    action: primary.action,
-    action_payload: primary.action_payload,
-    condition_expr: primary.condition_expr,
-    condition_op: primary.condition_op,
-    categoryHint: primary.categoryHint,
-    desc: primary.desc,
-    suggested_name: primary.suggested_name,
-    branches,
+    notes,
+    target_series: series.series,
+    action,
+    action_payload: actionPayload,
+    condition_expr: expr,
+    condition_op: conditionOp,
+    categoryHint,
+    desc,
+    suggested_name: suggestedName,
   }
 }
 
@@ -605,6 +679,19 @@ function formatVal(key, val) {
 /** 把条件表达式翻译成中文（用于编辑时回显预览） */
 export function describeCondition(expr, op = 'and') {
   if (!expr || !Object.keys(expr).length) return '无条件（命中全部工况）'
+  const ks = Object.keys(expr)
+  // 嵌套逻辑：$and / $or
+  if (ks.length === 1 && (ks[0] === '$and' || ks[0] === '$or')) {
+    const subOp = ks[0] === '$and' ? 'and' : 'or'
+    const parts = expr[ks[0]].map(s => {
+      const d = describeCondition(s, subOp)
+      // 子表达式含多个条件时加括号，增强可读性
+      const nested = s && Object.keys(s).length === 1 &&
+        (Object.keys(s)[0] === '$and' || Object.keys(s)[0] === '$or')
+      return nested ? `(${d})` : d
+    })
+    return parts.join(subOp === 'and' ? ' 且 ' : ' 或 ')
+  }
   const parts = []
   for (const [key, v] of Object.entries(expr)) {
     const spec = KEY_SPECS[key] || { label: key }
@@ -617,17 +704,26 @@ export function describeCondition(expr, op = 'and') {
   return parts.join(op === 'or' ? ' 或 ' : ' 且 ')
 }
 
-/** 规则结构 → 条件行（编辑时初始化） */
+/** 规则结构 → 条件行（编辑时初始化；嵌套结构打平，逻辑关系请在 JSON 中查看） */
 export function conditionToRows(expr, op = 'and') {
   const rows = []
-  if (!expr) return rows
+  collectRows(expr, rows)
+  return rows
+}
+
+function collectRows(expr, rows) {
+  if (!expr) return
+  const ks = Object.keys(expr)
+  if (ks.length === 1 && (ks[0] === '$and' || ks[0] === '$or')) {
+    for (const s of expr[ks[0]]) collectRows(s, rows)
+    return
+  }
   for (const [key, v] of Object.entries(expr)) {
     const ops = v && typeof v === 'object' && !Array.isArray(v) ? v : { _eq: v }
     for (const [o, val] of Object.entries(ops)) {
       rows.push({ key, op: o, value: Array.isArray(val) ? val.join('、') : String(val) })
     }
   }
-  return rows
 }
 
 /** 中文字面值 → 数据库取值 */

@@ -129,6 +129,9 @@ export const selectionApi = {
 
   /** 删除规则(被选型记录引用时会返回 409) */
   deleteRule: async (id) => http.delete(`/selection/rules/${id}`),
+
+  /** 自然语言 → 候选规则(大模型；只解析不写库，未配置时后端返回 503) */
+  parseRuleNl: async (text) => http.post('/selection/rules/parse-nl', { text }),
 }
 
 // ---------------------------------------------------------------------------

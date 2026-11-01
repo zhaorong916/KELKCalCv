@@ -60,6 +60,9 @@ CONDITION_WHITELIST = _NUMERIC_KEYS | _ENUM_KEYS | _BOOL_KEYS
 # 支持的算子: _eq/_ne(布尔·枚举·数值)  _min/_max(含端点)  _gt/_lt(严格)  _required  _or(候选集合)
 OPS = {"_eq", "_ne", "_min", "_max", "_gt", "_lt", "_required", "_or"}
 
+# 逻辑算子：$and / $or，值为子表达式数组，用于表达括号与多分支
+LOGIC_OPS = {"$and", "$or"}
+
 CATEGORY_PRIORITY = {"scope": 10, "constraint": 20, "preference": 30, "post_filter": 40}
 
 
@@ -131,6 +134,19 @@ def match_condition(expr: Any, ctx: dict, op: str = "and",
         return False
     if not expr:
         return True
+
+    # 逻辑算子：$and / $or，值为子表达式数组（支持括号与多分支嵌套）
+    if len(expr) == 1:
+        only_key = next(iter(expr))
+        if only_key in LOGIC_OPS:
+            sub = expr[only_key]
+            if not isinstance(sub, list):
+                if warnings is not None:
+                    warnings.append(f"逻辑算子 {only_key} 的值必须是数组")
+                return False
+            sub_op = "and" if only_key == "$and" else "or"
+            results = [match_condition(s, ctx, sub_op, warnings) for s in sub]
+            return all(results) if sub_op == "and" else any(results)
 
     results = []
     for key, cond in expr.items():

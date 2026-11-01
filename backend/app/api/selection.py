@@ -12,6 +12,7 @@
   POST /selection/records/{id}/apply 应用记录(标记选中项; ValveConfig/ProcessCase 回填由 P4.1 实现)
 """
 import json
+import re
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
@@ -23,12 +24,15 @@ from app.models import SelectionRecord, SelectionRule
 from app.schemas import (
     SelectionInput,
     SelectionResultOut,
+    RuleNlParseIn,
+    RuleNlParseOut,
     SelectionRuleCreate,
     SelectionRuleOut,
     SelectionRuleUpdate,
     SelectionRecordCreate,
     SelectionRecordOut,
 )
+from app.services import llm_rule_parser
 
 router = APIRouter(prefix="/selection", tags=["选型"])
 
@@ -358,6 +362,46 @@ def list_rules(
 _RULE_CATEGORIES = {"scope", "constraint", "preference", "post_filter"}
 _RULE_ACTIONS = {"exclude", "require", "boost", "set_field", "flag", "penalty"}
 
+# 规则编号前缀中的类别缩写（与现有种子数据 R-SCOPE-* / R-CON-* / R-PREF-* / R-POST-* 保持一致）
+_CATEGORY_ABBR = {
+    "scope": "SCOPE",
+    "constraint": "CON",
+    "preference": "PREF",
+    "post_filter": "POST",
+}
+
+
+def _generate_rule_code(db: Session, category: str, target_series: str) -> str:
+    """按 R-{类别缩写}-{系列}-{三位序号} 生成规则编号，序号按 (类别, 系列) 分组递增。"""
+    abbr = _CATEGORY_ABBR.get(category, category.upper())
+    series = (target_series or "*").strip() or "*"
+    series_part = "GLOBAL" if series == "*" else series.upper()
+    prefix = f"R-{abbr}-{series_part}-"
+    pattern = re.compile(rf"^{re.escape(prefix)}(\d{{3}})$")
+    rows = db.query(SelectionRule.rule_code).filter(
+        SelectionRule.rule_code.like(prefix + "%")
+    ).all()
+    max_seq = 0
+    for (code,) in rows:
+        m = pattern.match(code or "")
+        if m:
+            max_seq = max(max_seq, int(m.group(1)))
+    return f"{prefix}{max_seq + 1:03d}"
+
+
+@router.post("/rules/parse-nl", response_model=RuleNlParseOut)
+def parse_rule_nl(payload: RuleNlParseIn):
+    """自然语言 → 候选规则（只解析，不写库；前端预览确认后再走 /rules 增改）"""
+    try:
+        rule, warnings = llm_rule_parser.parse(payload.text)
+    except llm_rule_parser.LlmUnavailable as exc:
+        raise HTTPException(503, str(exc)) from exc
+    except llm_rule_parser.ModelRefused as exc:
+        return RuleNlParseOut(ok=False, error=str(exc))
+    except ValueError as exc:
+        raise HTTPException(422, f"大模型输出无法用于规则：{exc}") from exc
+    return RuleNlParseOut(ok=True, rule=rule, warnings=warnings)
+
 
 def _dump_json(v) -> Optional[str]:
     return json.dumps(v, ensure_ascii=False) if v is not None else None
@@ -365,15 +409,11 @@ def _dump_json(v) -> Optional[str]:
 
 @router.post("/rules", response_model=SelectionRuleOut, status_code=201)
 def create_rule(payload: SelectionRuleCreate, db: Session = Depends(get_db)):
-    """新增规则（rule_code 唯一）"""
-    code = (payload.rule_code or "").strip()
-    if not code:
-        raise HTTPException(422, "rule_code 不能为空")
-    if db.query(SelectionRule).filter(SelectionRule.rule_code == code).first():
-        raise HTTPException(409, f"规则编号 {code} 已存在，请换一个编号")
+    """新增规则（rule_code 由系统自动生成，不可手工指定）"""
     if not (payload.rule_name or "").strip():
         raise HTTPException(422, "rule_name 不能为空")
 
+    code = _generate_rule_code(db, payload.category, payload.target_series)
     rule = SelectionRule(
         rule_code=code,
         rule_name=payload.rule_name.strip(),

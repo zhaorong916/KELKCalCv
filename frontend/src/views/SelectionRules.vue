@@ -109,8 +109,8 @@
       <el-form label-width="110px" size="small" class="rule-form">
         <div class="form-grid-2">
           <el-form-item label="规则编号" required>
-            <el-input v-model="dialog.form.rule_code" :disabled="dialog.isEdit"
-                      maxlength="64" placeholder="如 R-GV120-001" />
+            <el-input v-model="dialog.form.rule_code" disabled
+                      :placeholder="ruleCodePreview" maxlength="64" />
           </el-form-item>
           <el-form-item label="规则名称" required>
             <el-input v-model="dialog.form.rule_name" maxlength="128" placeholder="一句话说明规则作用" />
@@ -172,10 +172,12 @@
             <el-input v-model="dialog.form.nl_text" type="textarea" :rows="3" spellcheck="false"
                       placeholder="例：BT110 在设计温度低于 -5℃ 时排除；空化或闪蒸时 GC210 加 30 分" />
             <div class="nl-bar">
-              <el-button size="small" type="primary" plain @click="applyNl">解析并填充</el-button>
+              <el-button size="small" type="primary" plain @click="applyNl()">本地解析</el-button>
+              <el-button size="small" type="primary" :loading="dialog.form.nl_loading"
+                         @click="applyNl(true)">AI 解析</el-button>
               <span class="json-hint">
                 支持：低于/高于/不低于/不高于/等于/不等于、区间「-20 到 200」、以上/以下；
-                介质/流态/泄漏等级等枚举；排除/要求/加分/扣分/标记/回填
+                介质/流态/泄漏等级等枚举；排除/要求/加分/扣分/标记/回填。AI 解析需后端配置 LLM_API_KEY，失败自动回退本地解析
               </span>
             </div>
             <el-alert v-if="dialog.form.nl_error" :title="dialog.form.nl_error" type="error"
@@ -183,7 +185,7 @@
             <el-alert v-for="(n, i) in dialog.form.nl_notes" :key="i" :title="n" type="warning"
                       :closable="false" show-icon style="margin-top:6px" />
             <div v-if="dialog.form.nl_preview" class="nl-preview">
-              <div class="nl-title">解析结果</div>
+              <div class="nl-title">解析结果（{{ dialog.form.nl_preview.source }}）</div>
               <div class="nl-line">
                 目标系列 <code>{{ dialog.form.nl_preview.series }}</code>
                 <el-divider direction="vertical" />
@@ -193,21 +195,6 @@
                 <span v-if="dialog.form.nl_preview.score != null">（分值 {{ dialog.form.nl_preview.score }}）</span>
               </div>
               <div class="nl-line">条件：{{ dialog.form.nl_preview.desc }}</div>
-              <el-alert v-for="(er, i) in dialog.form.nl_preview.errors" :key="'e' + i" :title="er"
-                        type="error" :closable="false" show-icon style="margin-top:6px" />
-              <div v-if="dialog.form.nl_preview.branches.length > 1" class="nl-branches">
-                <div class="nl-title">
-                  识别到 {{ dialog.form.nl_preview.branches.length }} 个分支（动作或目标系列不同），点击「采用」切换
-                </div>
-                <div v-for="(b, i) in dialog.form.nl_preview.branches" :key="'b' + i" class="nl-branch">
-                  <span class="nl-branch-idx">{{ i + 1 }}</span>
-                  <code>{{ b.target_series || '*' }}</code>
-                  <el-tag size="small" effect="plain">{{ b.action || '未识别动作' }}</el-tag>
-                  <span class="nl-branch-desc">{{ b.desc }}</span>
-                  <el-tag v-if="i === dialog.form.nl_preview.index" size="small" type="success">当前</el-tag>
-                  <el-button v-else link type="primary" size="small" @click="applyBranch(i)">采用</el-button>
-                </div>
-              </div>
             </div>
           </div>
         </el-form-item>
@@ -334,7 +321,18 @@ function resetFilters() { filters.value = { category: null, target_series: null,
 // 规则维护：新增 / 编辑 / 启用停用 / 删除
 // ---------------------------------------------------------------------------
 const CATEGORY_PRIORITY = { scope: 10, constraint: 20, preference: 30, post_filter: 40 }
+const CATEGORY_ABBR = { scope: 'SCOPE', constraint: 'CON', preference: 'PREF', post_filter: 'POST' }
 const toggleLoadingId = ref(null)
+
+// 规则编号预览（仅前缀，序号由后端生成）
+const ruleCodePreview = computed(() => {
+  const f = dialog.value.form
+  if (dialog.value.isEdit) return f.rule_code || '—'
+  const abbr = CATEGORY_ABBR[f.category] || f.category?.toUpperCase() || '?'
+  const series = (f.target_series || '*').trim() || '*'
+  const seriesPart = series === '*' ? 'GLOBAL' : series.toUpperCase()
+  return `R-${abbr}-${seriesPart}-***`
+})
 
 // 辅助录入（自然语言 / 条件行）可选项
 const fieldGroups = FIELD_OPTIONS
@@ -358,8 +356,7 @@ function emptyForm() {
     rule_code: '', rule_name: '', category: 'scope', target_series: '*',
     action: 'require', priority: 10, condition_op: 'and', source_ref: '',
     is_active: true, condition_expr_text: '{}', action_payload_text: '{}',
-    mode: 'nl', nl_text: '', nl_error: '', nl_notes: [], nl_preview: null, nl_result: null,
-    nl_auto_name: false,
+    mode: 'nl', nl_text: '', nl_error: '', nl_notes: [], nl_preview: null, nl_loading: false,
     rows: [{ key: '', op: '_eq', value: '' }], rows_error: '',
   }
 }
@@ -386,7 +383,7 @@ function openEdit(row) {
       // 编辑时把已有条件翻译成中文回显，可直接改写后再解析
       mode: 'nl',
       nl_text: describeCondition(row.condition_expr, row.condition_op),
-      nl_error: '', nl_notes: [], nl_preview: null, nl_result: null, nl_auto_name: false,
+      nl_error: '', nl_notes: [], nl_preview: null, nl_loading: false,
       rows: conditionToRows(row.condition_expr, row.condition_op),
       rows_error: '',
     },
@@ -428,51 +425,74 @@ function removeRow(i) {
   syncRows()
 }
 
-function applyNl() {
+/** 自然语言解析：默认本地解析；useLlm=true 先走后端大模型，失败自动回退本地 */
+async function applyNl(useLlm = false) {
   const f = dialog.value.form
   f.nl_error = ''
   f.nl_notes = []
   f.nl_preview = null
-  f.nl_result = null
-
-  const res = parseNaturalRule(f.nl_text)
-  f.nl_notes = res.notes || []
-  if (!res.ok) {
-    f.nl_error = res.errors.join('；')
+  if (!f.nl_text.trim()) {
+    f.nl_error = '请输入规则描述'
     return
   }
-  f.nl_result = res
-  f.nl_auto_name = !f.rule_name.trim()
-  applyBranch(0)
-}
 
-/** 采用第 i 个分支（多分支句式时用于切换） */
-function applyBranch(i) {
-  const f = dialog.value.form
-  const res = f.nl_result
-  const b = res?.branches?.[i]
-  if (!b) return
+  let rule = null
+  let source = '本地解析'
+  const notes = []
 
-  if (b.target_series) f.target_series = b.target_series
-  if (b.action) f.action = b.action
-  // 只在新建时采用推断类别，避免编辑时把原有类别改掉
-  if (b.categoryHint && !dialog.value.isEdit) {
-    f.category = b.categoryHint
-    f.priority = CATEGORY_PRIORITY[b.categoryHint] ?? f.priority
+  if (useLlm) {
+    f.nl_loading = true
+    try {
+      const out = await selectionApi.parseRuleNl(f.nl_text)
+      if (!out?.ok || !out.rule) throw new Error(out?.error || '大模型未返回可用规则')
+      rule = out.rule
+      notes.push(...(out.warnings || []))
+      source = 'AI 解析'
+    } catch (e) {
+      notes.push(`AI 解析不可用：${e.message || '调用失败'}；已回退本地解析`)
+    } finally {
+      f.nl_loading = false
+    }
   }
-  f.condition_op = b.condition_op
-  f.condition_expr_text = JSON.stringify(b.condition_expr, null, 2)
-  f.action_payload_text = JSON.stringify(b.action_payload || {}, null, 2)
-  if (f.nl_auto_name) f.rule_name = b.suggested_name
-  f.rows = conditionToRows(b.condition_expr, b.condition_op)
+
+  if (!rule) {
+    const local = parseNaturalRule(f.nl_text)
+    notes.push(...(local.notes || []))
+    if (!local.ok) {
+      f.nl_error = local.errors.join('；')
+      f.nl_notes = notes
+      return
+    }
+    rule = {
+      rule_name: local.suggested_name,
+      category: local.categoryHint,
+      target_series: local.target_series,
+      action: local.action,
+      action_payload: local.action_payload,
+      condition_expr: local.condition_expr,
+      condition_op: local.condition_op,
+    }
+  }
+
+  if (rule.target_series) f.target_series = rule.target_series
+  if (rule.action) f.action = rule.action
+  // 只在新建时采用推断类别，避免编辑时把原有类别改掉
+  if (rule.category && !dialog.value.isEdit) {
+    f.category = rule.category
+    f.priority = CATEGORY_PRIORITY[rule.category] ?? f.priority
+  }
+  f.condition_op = rule.condition_op || 'and'
+  f.condition_expr_text = JSON.stringify(rule.condition_expr || {}, null, 2)
+  f.action_payload_text = JSON.stringify(rule.action_payload || {}, null, 2)
+  if (!f.rule_name.trim() && rule.rule_name) f.rule_name = rule.rule_name
+  f.rows = conditionToRows(rule.condition_expr, f.condition_op)
   f.rows_error = ''
+  f.nl_notes = notes
   f.nl_preview = {
+    source,
     series: f.target_series,
-    desc: b.desc,
-    score: b.action_payload?.score ?? null,
-    errors: b.errors || [],
-    branches: res.branches,
-    index: i,
+    desc: describeCondition(rule.condition_expr, f.condition_op),
+    score: (rule.action_payload || {}).score ?? null,
   }
 }
 
@@ -503,7 +523,6 @@ async function saveRule() {
   const f = dialog.value.form
   dialog.value.error = ''
   const missing = []
-  if (!f.rule_code.trim()) missing.push('规则编号')
   if (!f.rule_name.trim()) missing.push('规则名称')
   if (!f.category) missing.push('类别')
   if (!f.action) missing.push('动作')
@@ -619,10 +638,5 @@ onMounted(loadRules)
 .nl-preview { margin-top: 8px; padding: 8px 12px; background: #f0f9eb; border-radius: 4px; font-size: 12px; color: #606266; }
 .nl-title { font-weight: 600; margin-bottom: 4px; }
 .nl-line { line-height: 1.9; }
-.nl-branches { margin-top: 8px; padding-top: 6px; border-top: 1px dashed #dcdfe6; }
-.nl-branch { display: flex; align-items: center; gap: 8px; line-height: 2.2; flex-wrap: wrap; }
-.nl-branch-idx { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px;
-  border-radius: 50%; background: #e1f3d8; color: #529b2e; font-size: 11px; flex: 0 0 auto; }
-.nl-branch-desc { flex: 1 1 160px; color: #606266; }
 .cond-row { display: flex; gap: 8px; align-items: center; margin-bottom: 6px; }
 </style>

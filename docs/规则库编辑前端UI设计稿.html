@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>选型规则库编辑 · 前端 UI 设计稿</title>
+<style>
+  :root{
+    --ink:#1f2733;
+    --text:#303133;
+    --text-2:#606266;
+    --muted:#909399;
+    --line:#ebeef5;
+    --line-strong:#dcdfe6;
+    --panel:#fafbfc;
+    --paper:#fff;
+    --app-bg:#f0f2f5;
+    --accent:#409eff;
+    --accent-weak:#ecf5ff;
+    --accent-line:#d9ecff;
+    --success:#67c23a;
+    --success-bg:#f0f9eb;
+    --success-line:#e1f3d8;
+    --warn:#e6a23c;
+    --warn-bg:#fdf6ec;
+    --warn-line:#faecd8;
+    --danger:#f56c6c;
+    --danger-bg:#fef0f0;
+    --danger-line:#fde2e2;
+    --info-bg:#f4f4f5;
+    --info-line:#e9e9eb;
+    --mono:Consolas,Monaco,"JetBrains Mono","Cascadia Mono",monospace;
+    --sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+    --rail:236px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--app-bg);color:var(--text);
+    font-family:var(--sans);font-size:14px;line-height:1.65;
+    letter-spacing:.1px;
+  }
+  a{color:var(--accent);text-decoration:none}
+
+  /* ---------- 外壳 ---------- */
+  .shell{display:flex;align-items:flex-start;max-width:1560px;margin:0 auto}
+
+  .rail{
+    position:sticky;top:0;flex:0 0 var(--rail);width:var(--rail);
+    height:100vh;overflow:auto;
+    padding:28px 20px 40px;
+    background:#fff;border-right:1px solid var(--line);
+  }
+  .rail .mark{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  .rail .mark i{
+    width:22px;height:22px;border-radius:5px;background:var(--accent);
+    display:inline-flex;align-items:center;justify-content:center;
+    color:#fff;font-style:normal;font-size:12px;font-weight:700
+  }
+  .rail h1{font-size:14px;margin:0;font-weight:600;letter-spacing:.2px}
+  .rail .sub{font-size:11px;color:var(--muted);margin:6px 0 20px;line-height:1.6}
+  .rail nav{display:flex;flex-direction:column;gap:1px}
+  .rail nav .grp{
+    font-size:10px;letter-spacing:1.2px;text-transform:uppercase;
+    color:#b4b9c4;margin:18px 0 6px;font-weight:600
+  }
+  .rail nav a{
+    display:flex;align-items:center;gap:8px;
+    padding:6px 8px;border-radius:4px;
+    font-size:12.5px;color:var(--text-2);
+  }
+  .rail nav a:hover{background:var(--panel);color:var(--ink)}
+  .rail nav a .no{
+    font-family:var(--mono);font-size:10px;color:#b9bec8;
+    min-width:16px
+  }
+  .rail .meta{
+    margin-top:24px;padding-top:16px;border-top:1px solid var(--line);
+    font-size:11px;color:var(--muted);line-height:1.9
+  }
+  .rail .meta b{color:var(--text-2);font-weight:600}
+
+  .main{flex:1 1 auto;min-width:0;padding:40px 44px 80px}
+
+  /* ---------- 文档头 ---------- */
+  .doc-head{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:32px}
+  .kicker{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:var(--mono);font-size:11px;letter-spacing:1px;
+    color:var(--accent);background:var(--accent-weak);
+    border:1px solid var(--accent-line);border-radius:3px;padding:2px 8px;
+  }
+  .doc-head h2{
+    font-size:30px;line-height:1.28;margin:14px 0 10px;
+    font-weight:600;letter-spacing:.4px;color:var(--ink);max-width:22em
+  }
+  .doc-head .lede{font-size:14px;color:var(--text-2);max-width:60em;margin:0}
+  .facts{display:flex;flex-wrap:wrap;gap:26px;margin-top:22px}
+  .facts div{font-size:12px;color:var(--muted)}
+  .facts strong{display:block;font-size:12.5px;color:var(--text);font-weight:600;margin-top:2px}
+  .facts .path{font-family:var(--mono);font-size:11px;color:var(--text-2)}
+
+  /* ---------- 章节 ---------- */
+  section{margin-bottom:64px;scroll-margin-top:24px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .sec-no{
+    font-family:var(--mono);font-size:11px;color:#fff;background:#c8ccd5;
+    border-radius:3px;padding:1px 6px;letter-spacing:.5px
+  }
+  .sec-head h3{font-size:20px;margin:0;font-weight:600;color:var(--ink);letter-spacing:.3px}
+  .sec-desc{color:var(--text-2);font-size:13px;margin:0 0 22px;max-width:66em}
+
+  /* ---------- 设计令牌 ---------- */
+  .token-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:6px;
+    padding:16px 18px;
+  }
+  .card h4{
+    font-size:12px;margin:0 0 12px;color:var(--muted);
+    font-weight:600;letter-spacing:1px;text-transform:uppercase
+  }
+  .swatches{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+  .sw{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--text-2)}
+  .sw .chip{width:22px;height:22px;border-radius:4px;border:1px solid rgba(0,0,0,.06);flex:0 0 auto}
+  .sw code{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+  .type-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:5px 0;border-bottom:1px dashed var(--line)}
+  .type-row:last-child{border-bottom:0}
+  .type-row span{font-size:11.5px;color:var(--muted);font-family:var(--mono)}
+  .scale{display:flex;align-items:flex-end;gap:10px;margin-top:4px}
+  .scale div{text-align:center;font-size:10.5px;color:var(--muted);font-family:var(--mono)}
+  .scale i{display:block;background:var(--accent);opacity:.16;border-radius:2px;margin-bottom:5px}
+
+  /* ---------- 画布与标注 ---------- */
+  .canvas{
+    background:#fff;border:1px solid var(--line);border-radius:8px;
+    padding:20px;overflow:visible
+  }
+  .stage{
+    background:var(--app-bg);border-radius:6px;padding:18px 20px;
+    overflow:visible
+  }
+  .stage.dim{padding:14px 20px}
+  .pin{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:15px;height:15px;border-radius:50%;
+    background:var(--ink);color:#fff;
+    font-family:var(--mono);font-size:9px;font-weight:700;
+    vertical-align:middle;margin-left:5px;flex:0 0 auto;
+  }
+  .legend{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:8px 22px;margin:14px 0 0;padding:0;list-style:none
+  }
+  .legend li{display:flex;gap:8px;font-size:12px;color:var(--text-2);line-height:1.6}
+  .legend li .pin{margin:1px 0 0;flex:0 0 auto}
+  .legend li b{font-weight:600;color:var(--text)}
+
+  /* ---------- 通用 UI 原子（稿内模拟） ---------- */
+  .ui-btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:5px;
+    height:32px;padding:0 14px;border-radius:4px;
+    font-size:13px;font-family:var(--sans);
+    border:1px solid var(--line-strong);background:#fff;color:var(--text-2);
+    white-space:nowrap;
+  }
+  .ui-btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:500}
+  .ui-btn.plain{background:var(--accent-weak);border-color:var(--accent-line);color:var(--accent)}
+  .ui-btn.sm{height:28px;padding:0 11px;font-size:12px}
+  .ui-btn.text{height:auto;padding:0;border:0;background:none;color:var(--accent);font-size:12px}
+  .ui-btn.text.danger{color:var(--danger)}
+  .ui-btn.disabled{background:#f5f7fa;color:#c0c4cc;border-color:#e4e7ed}
+
+  .ui-field{
+    display:flex;align-items:center;justify-content:space-between;gap:8px;
+    height:32px;padding:0 10px;border:1px solid var(--line-strong);
+    border-radius:4px;background:#fff;font-size:13px;color:var(--text);
+    white-space:nowrap;overflow:hidden
+  }
+  .ui-field .ph{color:#c0c4cc}
+  .ui-field .ph.mono{font-family:var(--mono);font-size:12px;letter-spacing:.3px}
+  .ui-field.disabled{background:#f5f7fa;border-color:#e4e7ed;color:#a8abb2}
+  .ui-field textarea{display:none}
+  .ui-field.multi{
+    height:auto;min-height:66px;align-items:flex-start;
+    padding:8px 10px;color:#c0c4cc;font-size:12.5px;line-height:1.6;white-space:normal
+  }
+  .ui-field.json{
+    height:auto;align-items:flex-start;padding:8px 10px;
+    font-family:var(--mono);font-size:11.5px;color:var(--text-2);
+    white-space:pre;overflow:auto
+  }
+  .caret{color:#c0c4cc;font-size:10px;flex:0 0 auto}
+
+  .ui-label{font-size:13px;color:var(--text-2);text-align:right;padding-right:12px;white-space:nowrap}
+  .req{color:var(--danger);margin-right:2px}
+
+  .ui-tag{
+    display:inline-flex;align-items:center;justify-content:center;
+    height:20px;padding:0 7px;border-radius:3px;
+    font-size:11px;line-height:1;border:1px solid;white-space:nowrap
+  }
+  .ui-tag.primary{background:var(--accent-weak);border-color:var(--accent-line);color:var(--accent)}
+  .ui-tag.success{background:var(--success-bg);border-color:var(--success-line);color:var(--success)}
+  .ui-tag.warning{background:var(--warn-bg);border-color:var(--warn-line);color:var(--warn)}
+  .ui-tag.danger{background:var(--danger-bg);border-color:var(--danger-line);color:var(--danger)}
+  .ui-tag.info{background:var(--info-bg);border-color:var(--info-line);color:var(--muted)}
+
+  .ui-switch{
+    position:relative;width:40px;height:20px;border-radius:10px;
+    background:var(--accent);display:inline-block;flex:0 0 auto
+  }
+  .ui-switch::after{
+    content:"";position:absolute;top:2px;left:22px;
+    width:16px;height:16px;border-radius:50%;background:#fff
+  }
+  .ui-switch.off{background:#dcdfe6}
+  .ui-switch.off::after{left:2px}
+
+  .mono{font-family:var(--mono);letter-spacing:.2px}
+  .code{font-family:var(--mono);font-size:12px;color:var(--accent)}
+
+  /* ---------- 列表页稿 ---------- */
+  .page-card{background:#fff;border-radius:6px;padding:18px 20px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+  .page-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .page-title{
+    display:flex;align-items:center;gap:8px;
+    font-size:18px;font-weight:600;color:var(--ink)
+  }
+  .page-title .ico{
+    width:20px;height:20px;border-radius:4px;background:var(--accent-weak);
+    border:1px solid var(--accent-line);
+    display:inline-flex;align-items:center;justify-content:center;
+    color:var(--accent);font-size:11px
+  }
+  .filter-bar{
+    display:flex;flex-wrap:wrap;align-items:center;gap:14px;
+    padding:8px 12px;background:var(--panel);border-radius:4px;margin-bottom:14px
+  }
+  .filter-item{display:flex;align-items:center;gap:8px}
+  .filter-item > span{font-size:12.5px;color:var(--text-2);white-space:nowrap}
+
+  .tbl{width:100%;border-collapse:collapse;table-layout:fixed;font-size:12px;min-width:960px}
+  .table-scroll{width:100%;overflow-x:auto;border-radius:4px}
+  .tbl th,.tbl td{border:1px solid var(--line);padding:0 10px;height:42px;text-align:left;vertical-align:middle}
+  .tbl th{
+    background:#f5f7fa;color:var(--text-2);font-weight:600;font-size:11.5px;
+    height:38px;letter-spacing:.3px;white-space:nowrap
+  }
+  .tbl td.center,.tbl th.center{text-align:center}
+  .tbl tr:hover td{background:#fafcff}
+  .tbl .exp{color:#c0c4cc;font-size:10px}
+  .tbl .muted-cell{color:var(--muted);font-size:11.5px}
+  .tbl .opcell{display:flex;align-items:center;justify-content:center;gap:10px}
+
+  .section-footer{
+    display:flex;align-items:center;flex-wrap:wrap;gap:6px;
+    margin-top:12px;padding-top:12px;border-top:1px solid var(--line);
+    font-size:12.5px;color:var(--text-2)
+  }
+  .section-footer b{font-weight:600;color:var(--ink)}
+  .section-footer .sep{color:var(--line-strong);margin:0 4px}
+
+  /* ---------- 弹窗稿 ---------- */
+  .dialog{
+    width:780px;max-width:100%;margin:0 auto;background:#fff;
+    border-radius:8px;box-shadow:0 12px 32px rgba(0,0,0,.18);
+    overflow:hidden
+  }
+  .dialog-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 20px 12px
+  }
+  .dialog-head h5{margin:0;font-size:16px;font-weight:600;color:var(--ink)}
+  .dialog-head .x{color:#c0c4cc;font-size:14px}
+  .dialog-body{padding:0 20px 8px;max-height:none}
+  .dialog-foot{
+    display:flex;justify-content:flex-end;gap:8px;
+    padding:12px 20px 16px
+  }
+  .alert{
+    display:flex;align-items:flex-start;gap:8px;
+    padding:8px 11px;border-radius:4px;font-size:12.5px;line-height:1.6;margin-bottom:12px
+  }
+  .alert .ai{font-weight:700;font-size:12px;margin-top:1px}
+  .alert.error{background:var(--danger-bg);border:1px solid var(--danger-line);color:#c45656}
+  .alert.warn{background:var(--warn-bg);border:1px solid var(--warn-line);color:#b88230}
+
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:12px}
+  .form-row{display:grid;grid-template-columns:110px 1fr;align-items:start;margin-bottom:14px}
+  .form-row .ctrl{min-width:0}
+  .form-row.full{grid-template-columns:110px 1fr}
+
+  .radio-group{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .radio{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-2)}
+  .dot{
+    width:14px;height:14px;border-radius:50%;border:1px solid var(--line-strong);
+    background:#fff;position:relative;flex:0 0 auto
+  }
+  .dot.on{border-color:var(--accent)}
+  .dot.on::after{
+    content:"";position:absolute;inset:3px;border-radius:50%;background:var(--accent)
+  }
+  .dot.sq{border-radius:2px}
+
+  .seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:4px;overflow:hidden}
+  .seg span{
+    padding:0 12px;height:28px;display:inline-flex;align-items:center;
+    font-size:12px;color:var(--text-2);border-right:1px solid var(--line-strong)
+  }
+  .seg span:last-child{border-right:0}
+  .seg span.on{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:500}
+
+  .hint{font-size:11.5px;color:var(--muted);line-height:1.7;margin-top:3px}
+  .json-field{position:relative}
+  .json-foot{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-top:3px}
+  .json-foot .hint{margin:0}
+  .msgbox{
+    width:420px;max-width:100%;background:#fff;border-radius:8px;
+    box-shadow:0 12px 32px rgba(0,0,0,.18);padding:18px 20px 14px;margin:0 auto
+  }
+  .msgbox h6{margin:0 0 10px;font-size:15px;font-weight:600;color:var(--ink)}
+  .msgbox p{margin:0;font-size:13px;color:var(--text-2);line-height:1.8}
+  .msgbox .ar{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+
+  /* ---------- 条件行 ---------- */
+  .cond-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;position:relative}
+  .cond-row .ui-field{flex:0 0 auto}
+  .nl-bar{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:6px}
+  .nl-bar .hint{margin:0;max-width:34em}
+
+  .dropdown{
+    position:absolute;top:36px;left:0;z-index:5;
+    width:300px;max-height:246px;overflow:auto;
+    background:#fff;border:1px solid #e4e7ed;border-radius:4px;
+    box-shadow:0 2px 12px rgba(0,0,0,.12);padding:6px 0
+  }
+  .dd-grp{
+    font-size:10.5px;color:#b4b9c4;font-weight:600;letter-spacing:.8px;
+    padding:6px 12px 4px
+  }
+  .dd-item{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    height:30px;padding:0 12px;font-size:12.5px;color:var(--text);cursor:default
+  }
+  .dd-item:hover{background:#f5f7fa}
+  .dd-item.sel{background:var(--accent-weak);color:var(--accent);font-weight:600}
+  .dd-item .k{font-family:var(--mono);font-size:10px;color:#c0c4cc}
+  .dd-fade{
+    position:absolute;left:1px;right:1px;bottom:1px;height:26px;
+    background:linear-gradient(rgba(255,255,255,0),#fff 70%);pointer-events:none;border-radius:0 0 4px 4px
+  }
+
+  /* ---------- 状态卡 ---------- */
+  .state-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+  .state-card{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .state-card .hd{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:10px 14px;border-bottom:1px solid var(--line);
+    font-size:12px;color:var(--text-2)
+  }
+  .state-card .hd b{font-size:12.5px;color:var(--ink);font-weight:600}
+  .state-card .bd{padding:14px;background:var(--panel)}
+  .preview-box{background:var(--success-bg);border-radius:4px;padding:9px 12px;font-size:12px;color:var(--text-2)}
+  .preview-box .t{font-weight:600;margin-bottom:3px;color:#529b2e}
+  .preview-box .l{line-height:1.9}
+  .preview-box .l strong{font-weight:600;color:var(--text)}
+  .empty-box{padding:26px 0;text-align:center;color:var(--muted);font-size:12.5px;background:#fff;border:1px solid var(--line);border-radius:4px}
+  .snippet{
+    font-family:var(--mono);font-size:11.5px;color:var(--text-2);
+    background:#fff;border:1px solid var(--line);border-radius:4px;
+    padding:9px 11px;white-space:pre-wrap;line-height:1.7
+  }
+
+  /* ---------- 表格型规范 ---------- */
+  .spec{width:100%;border-collapse:collapse;font-size:12.5px}
+  .spec th,.spec td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+  .spec th{font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--panel)}
+  .spec td:first-child{font-weight:500;color:var(--text);white-space:nowrap}
+  .spec code{font-family:var(--mono);font-size:11.5px;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:1px 5px}
+  .spec-table-wrap{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+
+  .note{
+    display:flex;gap:10px;padding:12px 14px;border-radius:6px;
+    background:#fff;border:1px solid var(--line);border-left:3px solid var(--accent);
+    font-size:12.5px;color:var(--text-2);line-height:1.75
+  }
+  .note b{color:var(--ink)}
+  .callout-list{margin:0;padding-left:20px;font-size:12.5px;color:var(--text-2)}
+  .callout-list li{margin-bottom:6px}
+
+  @media (max-width:1180px){
+    .shell{display:block}
+    .rail{position:static;width:auto;height:auto;border-right:0;border-bottom:1px solid var(--line)}
+    .rail nav{flex-direction:row;flex-wrap:wrap;gap:4px}
+    .rail nav .grp{display:none}
+    .main{padding:28px 20px 60px}
+    .doc-head h2{font-size:24px}
+    .canvas{padding:12px}
+    .stage{padding:12px}
+    .page-card{padding:14px 14px}
+    .dialog{width:100%}
+    .form-grid{grid-template-columns:1fr}
+    .form-row,.form-row.full{grid-template-columns:96px 1fr}
+    .form-row .ui-label{font-size:12px;padding-right:8px}
+    .cond-row{flex-wrap:wrap}
+    .filter-bar{gap:10px}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="rail">
+    <div class="mark"><i>R</i><h1>规则库编辑</h1></div>
+    <div class="sub">前端 UI 设计稿 · v1.1<br>KELK 调节阀选型系统</div>
+
+    <nav>
+      <div class="grp">基础</div>
+      <a href="#overview"><span class="no">00</span>设计基调</a>
+      <a href="#tokens"><span class="no">01</span>设计令牌</a>
+
+      <div class="grp">界面稿</div>
+      <a href="#list"><span class="no">02</span>规则列表 · 筛选区</a>
+      <a href="#dialog"><span class="no">03</span>新建 / 编辑表单</a>
+      <a href="#rows"><span class="no">04</span>条件行录入</a>
+      <a href="#states"><span class="no">05</span>反馈与状态</a>
+
+      <div class="grp">规范</div>
+      <a href="#interaction"><span class="no">06</span>交互与校验</a>
+      <a href="#a11y"><span class="no">07</span>无障碍与响应式</a>
+      <a href="#accept"><span class="no">08</span>验收清单</a>
+    </nav>
+
+    <div class="meta">
+      <b>路由</b> /selection-rules<br>
+      <b>实现</b> SelectionRules.vue<br>
+      <b>组件基座</b> Element Plus<br>
+      <b>关联文档</b> 选型模块前端界面设计.md §十七
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <header class="doc-head">
+      <span class="kicker">UI SPEC · P5 规则维护</span>
+      <h2>选型规则库编辑界面设计稿</h2>
+      <p class="lede">
+        面向规则维护人员的后台工作台：以「筛选—浏览—编辑」为主线，把规则的编号、类别、系列、动作与条件结构
+        暴露在同一视线高度，让每一次改动都能被追溯、被校验、被复用。
+      </p>
+      <div class="facts">
+        <div>版本<strong>v1.1 · 2026-11-01</strong></div>
+        <div>画板基准<strong>1440 × 900 桌面端</strong></div>
+        <div>弹窗宽度<strong>780 px</strong></div>
+        <div>设计体系<strong>Element Plus + styles.css</strong></div>
+      </div>
+    </header>
+
+    <!-- ================= 00 设计基调 ================= -->
+    <section id="overview">
+      <div class="sec-head"><span class="sec-no">00</span><h3>设计基调</h3></div>
+      <p class="sec-desc">
+        这是一套面向工程人员的规则维护界面，视觉优先级是「准确 &gt; 密度 &gt; 装饰」。整体沿用系统既有的
+        Element Plus 蓝与中性灰，不引入新品牌色；所有辨识度来自信息组织的秩序感，而不是额外的视觉噪音。
+      </p>
+
+      <div class="token-grid">
+        <div class="card">
+          <h4>三条设计主张</h4>
+          <ul class="callout-list">
+            <li><b>编号即身份</b>：规则编号全程等宽字体、蓝色高亮，出现在列表与弹窗同一位置，不可编辑。</li>
+            <li><b>结构先于文案</b>：条件用「字段 + 算子 + 值」三段式呈现，比任何一句自然语言都更容易核对。</li>
+            <li><b>校验前置</b>：错误出现在提交点上方，说明缺什么、改哪里，不关闭弹窗、不清空输入。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>信息密度</h4>
+          <ul class="callout-list">
+            <li>列表行高 42px，表头 38px，一屏可见 12–14 条规则。</li>
+            <li>弹窗一行两组字段，双列网格，减少纵向滚动。</li>
+            <li>辅助信息一律 11.5–12px 灰色，不与主数据争视线。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>与既有界面的关系</h4>
+          <ul class="callout-list">
+            <li>页面容器、筛选条、统计区完全复用 <code>page-card</code> / <code>section-footer</code> 语义。</li>
+            <li>不新增页面、不新增基础组件，仅在 <code>SelectionRules.vue</code> 内扩展 scoped 样式。</li>
+            <li>颜色语义沿用系统：蓝=操作、绿=通过、橙=提醒、红=阻断。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 01 设计令牌 ================= -->
+    <section id="tokens">
+      <div class="sec-head"><span class="sec-no">01</span><h3>设计令牌</h3></div>
+      <p class="sec-desc">以下取值全部来自现有实现，设计稿不得引入体系外的颜色与字号。</p>
+
+      <div class="token-grid">
+        <div class="card">
+          <h4>色彩</h4>
+          <div class="swatches">
+            <div class="sw"><span class="chip" style="background:#409eff"></span>主色<br><code>#409eff</code></div>
+            <div class="sw"><span class="chip" style="background:#ecf5ff;border-color:#d9ecff"></span>主色浅底<br><code>#ecf5ff</code></div>
+            <div class="sw"><span class="chip" style="background:#67c23a"></span>成功 / 通过<br><code>#67c23a</code></div>
+            <div class="sw"><span class="chip" style="background:#e6a23c"></span>提醒<br><code>#e6a23c</code></div>
+            <div class="sw"><span class="chip" style="background:#f56c6c"></span>阻断 / 删除<br><code>#f56c6c</code></div>
+            <div class="sw"><span class="chip" style="background:#303133"></span>主文本<br><code>#303133</code></div>
+            <div class="sw"><span class="chip" style="background:#909399"></span>次要文本<br><code>#909399</code></div>
+            <div class="sw"><span class="chip" style="background:#fafbfc;border-color:#ebeef5"></span>面板底<br><code>#fafbfc</code></div>
+            <div class="sw"><span class="chip" style="background:#f0f2f5"></span>页面底<br><code>#f0f2f5</code></div>
+            <div class="sw"><span class="chip" style="background:#f0f9eb;border-color:#e1f3d8"></span>预览底<br><code>#f0f9eb</code></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4>字体阶梯</h4>
+          <div class="type-row"><span>30 / 600</span><div style="font-size:24px;font-weight:600;color:var(--ink)">页面标题</div></div>
+          <div class="type-row"><span>20 / 600</span><div style="font-size:17px;font-weight:600;color:var(--ink)">章节标题</div></div>
+          <div class="type-row"><span>16 / 600</span><div style="font-size:15px;font-weight:600;color:var(--ink)">弹窗标题</div></div>
+          <div class="type-row"><span>13 / 400</span><div style="font-size:13px">表单与控制正文</div></div>
+          <div class="type-row"><span>12 / 400</span><div style="font-size:12px">表格正文</div></div>
+          <div class="type-row"><span>11.5 / 400</span><div style="font-size:11.5px;color:var(--muted)">提示、来源、时间</div></div>
+          <div class="type-row"><span>mono 12</span><div class="mono" style="font-size:12px;color:var(--accent)">R-SCOPE-GC120-001</div></div>
+        </div>
+
+        <div class="card">
+          <h4>间距与圆角</h4>
+          <div class="scale">
+            <div><i style="width:4px;height:4px"></i>4</div>
+            <div><i style="width:8px;height:8px"></i>8</div>
+            <div><i style="width:12px;height:12px"></i>12</div>
+            <div><i style="width:16px;height:16px"></i>16</div>
+            <div><i style="width:20px;height:20px"></i>20</div>
+            <div><i style="width:24px;height:24px"></i>24</div>
+          </div>
+          <div style="font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.9">
+            圆角：卡片 6 · 控件 4 · 标签 3 · 开关 10（全圆）<br>
+            行高：表格 42 · 表头 38 · 控件 32 · 小控件 28<br>
+            阴影：卡片 <code style="font-family:var(--mono);font-size:10.5px">0 1 3 rgba(0,0,0,.06)</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 02 列表页 ================= -->
+    <section id="list">
+      <div class="sec-head"><span class="sec-no">02</span><h3>规则列表 · 筛选区</h3></div>
+      <p class="sec-desc">
+        列表页承担「找得到、看得懂、改得动」。筛选条与表格共用一张卡片；每行左侧可展开查看原始 JSON，
+        右侧常驻编辑与删除，启用状态用行内开关直接管理，不打开弹窗。
+      </p>
+
+      <div class="canvas">
+        <div class="stage">
+          <div class="page-card">
+            <div class="page-head">
+              <div class="page-title"><span class="ico">▤</span>选型规则库<span class="pin">1</span></div>
+              <button class="ui-btn primary sm">＋ 新建规则<span class="pin">2</span></button>
+            </div>
+
+            <div class="filter-bar">
+              <div class="filter-item"><span>类别</span>
+                <div class="ui-field" style="width:140px">全部<span class="caret">▾</span></div>
+              </div>
+              <div class="filter-item"><span>目标系列</span>
+                <div class="ui-field" style="width:160px">全部<span class="caret">▾</span></div>
+              </div>
+              <div class="filter-item"><span>状态</span>
+                <div class="ui-field" style="width:100px">全部<span class="caret">▾</span></div>
+              </div>
+              <div class="filter-item"><span>关键词</span>
+                <div class="ui-field" style="width:200px"><span class="ph">rule_code / 名称 / 来源</span></div>
+              </div>
+              <button class="ui-btn sm">重置</button>
+              <span class="pin">3</span>
+            </div>
+
+            <div class="table-scroll">
+            <table class="tbl">
+              <colgroup>
+                <col style="width:40px"><col style="width:180px"><col><col style="width:100px">
+                <col style="width:110px"><col style="width:90px"><col style="width:70px">
+                <col style="width:180px"><col style="width:70px"><col style="width:110px">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="center"><span class="pin">4</span></th>
+                  <th>rule_code</th>
+                  <th>rule_name</th>
+                  <th class="center">类别 <span class="pin">5</span></th>
+                  <th class="center">目标系列</th>
+                  <th class="center">动作</th>
+                  <th class="center">优先级</th>
+                  <th>来源</th>
+                  <th class="center">启用 <span class="pin">6</span></th>
+                  <th class="center">操作 <span class="pin">7</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="center"><span class="exp">▸</span></td>
+                  <td><span class="code">R-SCOPE-GC120-001</span></td>
+                  <td>GC120 设计温度上限 200℃</td>
+                  <td class="center"><span class="ui-tag primary">适用范围</span></td>
+                  <td class="center mono" style="font-size:11.5px">GC120</td>
+                  <td class="center"><span class="ui-tag danger">exclude</span></td>
+                  <td class="center mono" style="font-size:11.5px">10</td>
+                  <td class="muted-cell">GC120_210:p12</td>
+                  <td class="center"><span class="ui-switch"></span></td>
+                  <td><div class="opcell"><span class="ui-btn text">编辑</span><span class="ui-btn text danger">删除</span></div></td>
+                </tr>
+                <tr>
+                  <td class="center"><span class="exp">▸</span></td>
+                  <td><span class="code">R-CON-GLOBAL-002</span></td>
+                  <td>空化工况下禁止选用 GZ 系列</td>
+                  <td class="center"><span class="ui-tag success">硬约束</span></td>
+                  <td class="center mono" style="font-size:11.5px">*</td>
+                  <td class="center"><span class="ui-tag warning">require</span></td>
+                  <td class="center mono" style="font-size:11.5px">20</td>
+                  <td class="muted-cell">—</td>
+                  <td class="center"><span class="ui-switch"></span></td>
+                  <td><div class="opcell"><span class="ui-btn text">编辑</span><span class="ui-btn text danger">删除</span></div></td>
+                </tr>
+                <tr>
+                  <td class="center"><span class="exp">▸</span></td>
+                  <td><span class="code">R-PREF-BT110-003</span></td>
+                  <td>蒸汽工况优先 BT 系列</td>
+                  <td class="center"><span class="ui-tag warning">工况偏好</span></td>
+                  <td class="center mono" style="font-size:11.5px">BT110</td>
+                  <td class="center"><span class="ui-tag success">boost</span></td>
+                  <td class="center mono" style="font-size:11.5px">30</td>
+                  <td class="muted-cell">BT110:p4</td>
+                  <td class="center"><span class="ui-switch off"></span></td>
+                  <td><div class="opcell"><span class="ui-btn text">编辑</span><span class="ui-btn text danger">删除</span></div></td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+
+            <div class="section-footer">
+              <span>共 <b>117</b> 条规则</span><span class="sep">·</span>
+              <span>scope <b>53</b></span><span class="sep">·</span>
+              <span>constraint <b>22</b></span><span class="sep">·</span>
+              <span>preference <b>24</b></span><span class="sep">·</span>
+              <span>post_filter <b>18</b></span><span class="sep">·</span>
+              <span class="muted">当前筛选匹配 <b>117</b> 条</span>
+              <span class="pin">8</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ul class="legend">
+        <li><span class="pin">1</span><div><b>页头</b>：标题 18px / 600，左侧 20px 图标块；主按钮贴右，距边 20px。</div></li>
+        <li><span class="pin">2</span><div><b>主操作</b>：唯一 primary 按钮，高 28px（small），文案「＋ 新建规则」。</div></li>
+        <li><span class="pin">3</span><div><b>筛选条</b>：底 <code>#fafbfc</code>、圆角 4、内边距 8×12；控件宽 140/160/100/200，间距 14。</div></li>
+        <li><span class="pin">4</span><div><b>展开列</b>：宽 40px，箭头居右；展开后展示 condition_expr / action_payload / 来源 / 时间。</div></li>
+        <li><span class="pin">5</span><div><b>类别标签</b>：scope=蓝、constraint=绿、preference=橙、post_filter=灰，色即语义。</div></li>
+        <li><span class="pin">6</span><div><b>启用开关</b>：40×20，开启为主色；切换中只该行 loading，失败保持原值。</div></li>
+        <li><span class="pin">7</span><div><b>操作列</b>：宽 110px 右固定；文字按钮 12px，删除用红色，二者间距 10px。</div></li>
+        <li><span class="pin">8</span><div><b>统计区</b>：上边框 1px <code>#ebeef5</code>，12.5px 文本，数字 600 加粗。</div></li>
+      </ul>
+    </section>
+
+    <!-- ================= 03 弹窗 ================= -->
+    <section id="dialog">
+      <div class="sec-head"><span class="sec-no">03</span><h3>新建 / 编辑表单</h3></div>
+      <p class="sec-desc">
+        780px 固定宽度弹窗：上半部分是规则的「身份证」（编号、名称、类别、系列、动作、优先级），
+        下半部分是「条件与参数」。双列网格把字段压到 4 行，避免维护人员在长表单里反复滚动。
+      </p>
+
+      <div class="canvas">
+        <div class="stage dim">
+          <div class="dialog">
+            <div class="dialog-head">
+              <h5>新建规则<span class="pin">1</span></h5>
+              <span class="x">✕</span>
+            </div>
+
+            <div class="dialog-body">
+              <!-- 基础字段 -->
+              <div class="form-grid">
+                <div class="form-row">
+                  <div class="ui-label">规则编号</div>
+                  <div class="ctrl">
+                    <div class="ui-field disabled">
+                      <span class="ph mono">R-SCOPE-GLOBAL-***</span>
+                    </div>
+                    <div class="hint">系统自动生成<span class="pin">2</span></div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="ui-label"><span class="req">*</span>规则名称</div>
+                  <div class="ctrl">
+                    <div class="ui-field"><span class="ph">一句话说明规则作用</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-row">
+                  <div class="ui-label"><span class="req">*</span>类别</div>
+                  <div class="ctrl">
+                    <div class="ui-field">适用范围 scope<span class="caret">▾</span></div>
+                    <div class="hint">切换类别自动写入默认优先级<span class="pin">3</span></div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="ui-label">目标系列</div>
+                  <div class="ctrl">
+                    <div class="ui-field"><span class="mono" style="font-size:12px">*（全局）</span><span class="caret">▾</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-row">
+                  <div class="ui-label"><span class="req">*</span>动作</div>
+                  <div class="ctrl"><div class="ui-field">require - 硬性要求<span class="caret">▾</span></div></div>
+                </div>
+                <div class="form-row">
+                  <div class="ui-label">优先级</div>
+                  <div class="ctrl"><div class="ui-field mono" style="font-size:12px">10</div></div>
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-row">
+                  <div class="ui-label">条件组合</div>
+                  <div class="ctrl">
+                    <div class="radio-group">
+                      <span class="radio"><span class="dot on"></span>and（全部满足）</span>
+                      <span class="radio"><span class="dot"></span>or（任一满足）</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="ui-label">启用</div>
+                  <div class="ctrl"><span class="ui-switch"></span></div>
+                </div>
+              </div>
+
+              <div class="form-row full">
+                <div class="ui-label">来源参考</div>
+                <div class="ctrl"><div class="ui-field"><span class="ph">如 GC120_210:p4</span></div></div>
+              </div>
+
+              <!-- 辅助录入 -->
+              <div class="form-row full">
+                <div class="ui-label">辅助录入</div>
+                <div class="ctrl">
+                  <div class="seg">
+                    <span class="on">自然语言</span><span>条件行</span><span>关闭辅助</span>
+                  </div>
+                  <span class="pin">4</span>
+                </div>
+              </div>
+
+              <div class="form-row full">
+                <div class="ui-label">规则描述</div>
+                <div class="ctrl">
+                  <div class="ui-field multi">
+                    BT110 在设计温度低于 -5℃ 时排除；空化或闪蒸时 GC210 加 30 分
+                  </div>
+                  <div class="nl-bar">
+                    <button class="ui-btn sm plain">本地解析</button>
+                    <button class="ui-btn sm primary">AI 解析</button>
+                    <span class="hint">支持低于/高于、区间「-20 到 200」、枚举与布尔条件<span class="pin">5</span></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- JSON -->
+              <div class="form-row full">
+                <div class="ui-label">条件表达式 JSON</div>
+                <div class="ctrl">
+                  <div class="ui-field json" style="min-height:96px">{
+  "temp_min": { "_lt": -5 },
+  "media":    { "_eq": "liquid" }
+}</div>
+                  <div class="json-foot">
+                    <span class="hint">可用键：media / temp / p1 / dp / dp_ratio / cv_required / rated_cv / opening …<br>
+                      算子：_eq _ne _min _max _gt _lt _required _or</span>
+                    <span class="ui-btn text">格式化<span class="pin">6</span></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row full">
+                <div class="ui-label">动作参数 JSON</div>
+                <div class="ctrl">
+                  <div class="ui-field json" style="min-height:66px">{
+  "score": 90
+}</div>
+                  <div class="json-foot">
+                    <span class="hint">boost / penalty 用 {"score": n}；set_field 用 {"field": "字段名"}；其余可留空 {}</span>
+                    <span class="ui-btn text">格式化</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dialog-foot">
+              <button class="ui-btn sm">取消</button>
+              <button class="ui-btn sm primary">保存<span class="pin">7</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ul class="legend">
+        <li><span class="pin">1</span><div><b>标题</b>：新建 / 编辑二态同构，仅标题与编号内容变化；遮罩点击不关闭。</div></li>
+        <li><span class="pin">2</span><div><b>编号</b>：始终 disabled，新建显示前缀预览 <code>R-{类别}-{系列}-***</code>，编辑显示真实编号。</div></li>
+        <li><span class="pin">3</span><div><b>优先级联动</b>：scope 10 / constraint 20 / preference 30 / post_filter 40，可手改。</div></li>
+        <li><span class="pin">4</span><div><b>三种录入</b>：同一时刻只显示一个录入区，结果都写入下方条件 JSON。</div></li>
+        <li><span class="pin">5</span><div><b>解析入口</b>：本地解析为浅蓝描边（plain），AI 解析为主色；AI 失败自动回退本地。</div></li>
+        <li><span class="pin">6</span><div><b>格式化</b>：文字按钮右对齐，与提示同行；失败时仅顶部提示，不改内容。</div></li>
+        <li><span class="pin">7</span><div><b>底部</b>：右对齐，间距 8；保存中仅该按钮 loading，取消保持可用。</div></li>
+      </ul>
+    </section>
+
+    <!-- ================= 04 条件行 ================= -->
+    <section id="rows">
+      <div class="sec-head"><span class="sec-no">04</span><h3>条件行录入</h3></div>
+      <p class="sec-desc">
+        条件行是「不用写 JSON 也能精确表达条件」的路径。每行三段：字段 → 算子 → 值。
+        字段下拉按数值 / 枚举 / 布尔分组；同一物理量的等值、下限、上限键用中文后缀区分，
+        既避免同名校验混淆，也让维护人员一眼看出比较方向。
+      </p>
+
+      <div class="canvas">
+        <div class="stage dim">
+          <div class="dialog">
+            <div class="dialog-head">
+              <h5>新建规则<span class="pin">1</span></h5>
+              <span class="x">✕</span>
+            </div>
+            <div class="dialog-body">
+              <div class="form-row full" style="margin-bottom:10px">
+                <div class="ui-label">辅助录入</div>
+                <div class="ctrl">
+                  <div class="seg">
+                    <span>自然语言</span><span class="on">条件行</span><span>关闭辅助</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row full">
+                <div class="ui-label">条件行</div>
+                <div class="ctrl">
+
+                  <!-- 第 1 行：字段下拉展开 -->
+                  <div class="cond-row" style="margin-bottom:56px">
+                    <div class="ui-field" style="width:180px">设计温度（上限）<span class="caret">▾</span><span class="pin">2</span>
+                      <div class="dropdown">
+                        <div class="dd-grp">数值</div>
+                        <div class="dd-item"><span>设计温度</span><span class="k">temp</span></div>
+                        <div class="dd-item"><span>设计温度（下限）</span><span class="k">temp_min</span></div>
+                        <div class="dd-item sel"><span>设计温度（上限）</span><span class="k">temp_max</span></div>
+                        <div class="dd-item"><span>设计压力</span><span class="k">p1</span></div>
+                        <div class="dd-item"><span>设计压力（上限）</span><span class="k">p1_max</span></div>
+                        <div class="dd-item"><span>压差</span><span class="k">dp</span></div>
+                        <div class="dd-item"><span>压差（上限）</span><span class="k">dp_max</span></div>
+                        <div class="dd-item"><span>压差比</span><span class="k">dp_ratio</span></div>
+                        <div class="dd-item"><span>公称通径</span><span class="k">pipe_size</span></div>
+                        <div class="dd-item"><span>公称通径（下限）</span><span class="k">pipe_size_min</span></div>
+                        <div class="dd-item"><span>公称通径（上限）</span><span class="k">pipe_size_max</span></div>
+                        <div class="dd-grp">枚举</div>
+                        <div class="dd-item"><span>介质</span><span class="k">media</span></div>
+                        <div class="dd-item"><span>流态</span><span class="k">flow_regime</span></div>
+                        <div class="dd-grp">布尔</div>
+                        <div class="dd-item"><span>NACE 要求</span><span class="k">nace</span></div>
+                        <div class="dd-fade"></div>
+                      </div>
+                    </div>
+                    <div class="ui-field" style="width:120px">≤ 不高于<span class="caret">▾</span><span class="pin">3</span></div>
+                    <div class="ui-field" style="width:200px"><span class="mono" style="font-size:12px">200</span></div>
+                    <span class="ui-btn text danger">删除</span>
+                  </div>
+
+                  <div class="cond-row">
+                    <div class="ui-field" style="width:180px">介质<span class="caret">▾</span></div>
+                    <div class="ui-field" style="width:120px">= 等于<span class="caret">▾</span></div>
+                    <div class="ui-field" style="width:200px"><span class="mono" style="font-size:12px">liquid</span></div>
+                    <span class="ui-btn text danger">删除</span>
+                  </div>
+
+                  <div class="cond-row">
+                    <div class="ui-field" style="width:180px">泄漏等级<span class="caret">▾</span></div>
+                    <div class="ui-field" style="width:120px">属于其一<span class="caret">▾</span></div>
+                    <div class="ui-field" style="width:200px"><span class="mono" style="font-size:12px">IV</span><span class="pin">4</span></div>
+                    <span class="ui-btn text danger">删除</span>
+                  </div>
+
+                  <div class="nl-bar" style="margin-top:10px">
+                    <button class="ui-btn sm">＋ 添加条件</button>
+                    <span class="hint">含等号用 ≥ / ≤，严格比较用 &gt; / &lt;；枚举填数据库取值<span class="pin">5</span></span>
+                    <span class="ui-btn text" style="margin-left:auto">同步到 JSON<span class="pin">6</span></span>
+                  </div>
+
+                  <div class="alert error" style="margin-top:10px">
+                    <span class="ai">!</span>
+                    <span>条件行有误：第 2 行「介质」需要填写取值，不能为空</span>
+                    <span class="pin">7</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row full">
+                <div class="ui-label">条件表达式 JSON</div>
+                <div class="ctrl">
+                  <div class="ui-field json" style="min-height:84px">{
+  "temp_max":   { "_max": 200 },
+  "media":      { "_eq": "liquid" },
+  "leakage_class": { "_or": ["IV"] }
+}</div>
+                  <div class="hint">条件行变更即时写入此处；手动改写亦可在切回条件行时反向解析<span class="pin">8</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="dialog-foot">
+              <button class="ui-btn sm">取消</button>
+              <button class="ui-btn sm primary">保存</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ul class="legend">
+        <li><span class="pin">2</span><div><b>字段下拉</b>：宽 180、可搜索；分组标题 10.5px 灰，选项右侧显示内部 key，便于与 JSON 对照。</div></li>
+        <li><span class="pin">3</span><div><b>算子下拉</b>：宽 120；等号语义（≥/≤）与严格语义（&gt;/&lt;）成对出现，中文在前、符号在前缀。</div></li>
+        <li><span class="pin">4</span><div><b>取值</b>：宽 200；数值填数字，枚举填数据库原值（liquid / IV），布尔填 true / false。</div></li>
+        <li><span class="pin">5</span><div><b>添加条件</b>：默认按钮；提示文案常驻，解释符号与取值规则。</div></li>
+        <li><span class="pin">6</span><div><b>同步到 JSON</b>：文字按钮右对齐，防止最后编辑未失焦导致漏写。</div></li>
+        <li><span class="pin">7</span><div><b>行内错误</b>：错误汇总在录入区底部，红底红边，指明行号与字段；不阻断继续编辑。</div></li>
+        <li><span class="pin">8</span><div><b>双向同步</b>：行 → JSON 即时；JSON → 行 在切换到条件行模式时解析一次，空则保留一条空行。</div></li>
+      </ul>
+
+      <div class="note" style="margin-top:18px">
+        <span class="pin" style="margin:2px 0 0">i</span>
+        <div>
+          <b>为什么必须加后缀。</b>后端用 <code>temp</code> / <code>temp_min</code> / <code>temp_max</code> 三个键表达
+          同一物理量的等值、下限、上限。若下拉只显示「设计温度」三次，维护人员无法判断自己选的是哪一个。
+          因此显示层追加「（下限）」「（上限）」「（要求）」，而 <code>label</code> 本身保持不变，
+          规则预览文案仍是干净的「设计温度」。
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 05 状态 ================= -->
+    <section id="states">
+      <div class="sec-head"><span class="sec-no">05</span><h3>反馈与状态</h3></div>
+      <p class="sec-desc">
+        所有反馈都发生在用户动作的同一位置：解析结果在按钮下方，校验错误在弹窗顶部，删除风险在确认框正文。
+      </p>
+
+      <div class="state-grid">
+        <div class="state-card">
+          <div class="hd"><b>解析成功预览</b><span>自然语言模式</span></div>
+          <div class="bd">
+            <div class="preview-box">
+              <div class="t">解析结果（本地解析）</div>
+              <div class="l">目标系列 <strong>BT110</strong> ｜ 类别 <strong>scope</strong> ｜ 动作 <strong>exclude</strong></div>
+              <div class="l">条件：设计温度低于 -5 ℃</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="state-card">
+          <div class="hd"><b>校验失败</b><span>弹窗顶部</span></div>
+          <div class="bd">
+            <div class="alert error" style="margin-bottom:0">
+              <span class="ai">!</span><span>缺少必填项：规则名称、动作</span>
+            </div>
+            <div class="hint" style="margin-top:8px">弹窗保持打开，已填内容不清空。</div>
+          </div>
+        </div>
+
+        <div class="state-card">
+          <div class="hd"><b>AI 回退</b><span>警告提示</span></div>
+          <div class="bd">
+            <div class="alert warn" style="margin-bottom:0">
+              <span class="ai">!</span><span>AI 解析不可用：未配置 LLM_API_KEY；已回退本地解析</span>
+            </div>
+            <div class="hint" style="margin-top:8px">结果仍可用，提示可多条堆叠。</div>
+          </div>
+        </div>
+
+        <div class="state-card">
+          <div class="hd"><b>删除确认</b><span>ElMessageBox</span></div>
+          <div class="bd" style="display:flex;justify-content:center">
+            <div class="msgbox" style="box-shadow:0 4px 16px rgba(0,0,0,.12)">
+              <h6>删除规则</h6>
+              <p>确定删除规则「R-SCOPE-GC120-001」？<br>已被选型记录引用的规则不允许删除，可改为停用。</p>
+              <div class="ar">
+                <button class="ui-btn sm">取消</button>
+                <button class="ui-btn sm" style="background:var(--danger);border-color:var(--danger);color:#fff">删除</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="state-card">
+          <div class="hd"><b>空态</b><span>筛选无结果</span></div>
+          <div class="bd">
+            <div class="empty-box">无匹配规则</div>
+            <div class="hint" style="margin-top:8px">提示文案 12.5px，居中；不显示插画，保持后台克制。</div>
+          </div>
+        </div>
+
+        <div class="state-card">
+          <div class="hd"><b>加载中</b><span>表格 v-loading</span></div>
+          <div class="bd">
+            <div class="empty-box" style="background:#fff;display:flex;align-items:center;justify-content:center;gap:8px;height:74px;padding:0">
+              <span style="width:14px;height:14px;border:2px solid var(--accent-line);border-top-color:var(--accent);border-radius:50%"></span>
+              <span style="color:var(--text-2)">加载中…</span>
+            </div>
+            <div class="hint" style="margin-top:8px">遮罩覆盖表格区，页头与筛选条保持可交互。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="token-grid" style="margin-top:16px">
+        <div class="card">
+          <h4>状态矩阵</h4>
+          <div class="spec-table-wrap" style="border:0">
+            <table class="spec">
+              <thead><tr><th>场景</th><th>表现</th></tr></thead>
+              <tbody>
+                <tr><td>列表加载</td><td>表格 loading 遮罩</td></tr>
+                <tr><td>列表为空</td><td>「无匹配规则」灰字空态</td></tr>
+                <tr><td>保存中</td><td>保存按钮 loading，取消可用</td></tr>
+                <tr><td>AI 解析中</td><td>AI 按钮 loading，本地解析可用</td></tr>
+                <tr><td>开关切换中</td><td>仅该行开关 loading</td></tr>
+                <tr><td>保存失败</td><td>弹窗不关闭，顶部错误</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4>校验顺序</h4>
+          <div class="snippet">① 必填项   规则名称 / 类别 / 动作
+   → 「缺少必填项：a、b」合并一条
+
+② 条件行   仅 rows 模式先强制同步
+   → rows_error 非空即阻断
+
+③ JSON     必须为对象，语法合法
+   → 「条件表达式 不是合法 JSON：…」
+
+④ 提交     create 全量 → 后端生成编号
+           edit 剔除 rule_code</div>
+        </div>
+
+        <div class="card">
+          <h4>文案规范</h4>
+          <ul class="callout-list">
+            <li>按钮用动词：新建规则 / 编辑 / 删除 / 保存 / 同步到 JSON。</li>
+            <li>错误说「哪里错 + 怎么改」，不只说「校验失败」。</li>
+            <li>成功提示带对象：规则已新增 / 规则已更新 / 规则已停用。</li>
+            <li>不使用感叹号与情绪词，保持工程口吻。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 06 交互 ================= -->
+    <section id="interaction">
+      <div class="sec-head"><span class="sec-no">06</span><h3>交互与校验规范</h3></div>
+      <p class="sec-desc">以下规则为验收依据，实现与设计如有冲突以本节为准。</p>
+
+      <div class="spec-table-wrap">
+        <table class="spec">
+          <thead>
+            <tr><th style="width:190px">对象</th><th style="width:220px">触发</th><th>结果</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>规则编号</td><td>新建 / 编辑</td><td>始终禁用。新建时 placeholder 随类别与系列实时变化；编辑时展示真实编号，不参与提交校验。</td></tr>
+            <tr><td>类别</td><td>变更</td><td>自动写入默认优先级 10 / 20 / 30 / 40；新建态下编号预览前缀同步切换。</td></tr>
+            <tr><td>辅助录入</td><td>切换模式</td><td>三选一互斥；切到条件行时从当前 JSON 反解析为行，失败则给一条空行。</td></tr>
+            <tr><td>自然语言</td><td>本地解析</td><td>零网络请求，回填系列、类别、动作、条件、条件行与预览；仅当名称为空才填建议名称。</td></tr>
+            <tr><td>自然语言</td><td>AI 解析</td><td>按钮 loading；失败自动回退本地并追加警告；编辑态不回写类别。</td></tr>
+            <tr><td>条件行</td><td>字段 / 算子 / 值变更</td><td>即时调用 rowsToCondition 写回 JSON；错误写入行内提示。</td></tr>
+            <tr><td>条件行</td><td>删除行</td><td>移除后立即重新同步 JSON；至少保留一行空行以便继续录入。</td></tr>
+            <tr><td>JSON 区</td><td>格式化</td><td>仅美化缩进；解析失败只提示，不修改原文本。</td></tr>
+            <tr><td>保存</td><td>点击</td><td>按 06 校验顺序执行；成功后关闭弹窗、刷新列表、提示；失败保持弹窗。</td></tr>
+            <tr><td>启用开关</td><td>切换</td><td>行内请求，成功后用返回对象回写该行；失败提示且视觉保持原值。</td></tr>
+            <tr><td>删除</td><td>点击</td><td>先确认；被引用返回 409 时提示改用停用，列表不变。</td></tr>
+            <tr><td>筛选</td><td>任一条件变化</td><td>纯前端即时过滤，统计区同步更新匹配数；重置清空全部条件。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================= 07 无障碍 ================= -->
+    <section id="a11y">
+      <div class="sec-head"><span class="sec-no">07</span><h3>无障碍与响应式</h3></div>
+      <p class="sec-desc">后台工具同样需要键盘可用与清晰焦点，尤其是在密集录入场景。</p>
+
+      <div class="token-grid">
+        <div class="card">
+          <h4>键盘与焦点</h4>
+          <ul class="callout-list">
+            <li>Tab 顺序：筛选条 → 表格操作 → 弹窗字段，弹窗打开后焦点进入首个可编辑字段。</li>
+            <li>焦点环：2px 主色描边 + 1px 外扩，任何控件在聚焦时都可见，不依赖颜色填充。</li>
+            <li>Esc 关闭弹窗；确认框 Esc 等价取消。</li>
+            <li>展开行可用 Enter 触发，避免只支持鼠标点击的小三角。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>对比与语义</h4>
+          <ul class="callout-list">
+            <li>正文 <code>#303133</code> 对白底 ≥ 12:1；次要 <code>#909399</code> 仅用于非关键信息，均 ≥ 4.5:1。</li>
+            <li>类别与动作不只靠颜色区分，标签内始终有文字。</li>
+            <li>错误提示带 <code>role="alert"</code>，切换时读屏可播报。</li>
+            <li>编号字段禁用但保留可读文本，便于读屏读取当前值。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>响应式</h4>
+          <ul class="callout-list">
+            <li>≥1440：完整 10 列表格，操作列右固定。</li>
+            <li>1280–1439：来源列收窄至 140，关键词输入 160。</li>
+            <li>≤1180：弹窗改为 <code>width: calc(100vw - 32px)</code>，双列表单退化为单列。</li>
+            <li>触屏：行高提升到 48，文字按钮点击区扩至 32×32。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 08 验收 ================= -->
+    <section id="accept">
+      <div class="sec-head"><span class="sec-no">08</span><h3>验收清单</h3></div>
+      <p class="sec-desc">按顺序逐项走查，全部通过方可视为设计落地。</p>
+
+      <div class="spec-table-wrap">
+        <table class="spec">
+          <thead><tr><th style="width:60px">序号</th><th style="width:230px">检查项</th><th>判定标准</th></tr></thead>
+          <tbody>
+            <tr><td>01</td><td>筛选区</td><td>四类条件可组合，重置后回到全量；统计区匹配数随筛选变化。</td></tr>
+            <tr><td>02</td><td>列表列宽</td><td>1440 宽下 10 列不换行、不横向滚动；操作列右固定。</td></tr>
+            <tr><td>03</td><td>编号表现</td><td>列表与弹窗同为等宽蓝字；新建禁用且显示 <code>R-{类别}-{系列}-***</code>。</td></tr>
+            <tr><td>04</td><td>优先级联动</td><td>切换类别后优先级变为 10/20/30/40，可手改。</td></tr>
+            <tr><td>05</td><td>三种录入</td><td>同时只显示一区；切到条件行能反解析既有 JSON。</td></tr>
+            <tr><td>06</td><td>条件行可辨识</td><td>同物理量的等值/下限/上限三项 label 不同，无重复项。</td></tr>
+            <tr><td>07</td><td>双向同步</td><td>行改则 JSON 改；JSON 手改后切模式可回显为行。</td></tr>
+            <tr><td>08</td><td>校验反馈</td><td>三类错误均在弹窗顶部可见，弹窗不关闭，输入不丢。</td></tr>
+            <tr><td>09</td><td>启停与删除</td><td>开关有 loading；删除有确认；409 有明确提示。</td></tr>
+            <tr><td>10</td><td>视觉一致</td><td>不出现体系外颜色与字号；弹窗 780px；长 JSON 框内滚动。</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note" style="margin-top:18px">
+        <span class="pin" style="margin:2px 0 0">i</span>
+        <div>
+          <b>落地边界。</b>本稿只描述界面与交互，不含代码。实现位置为
+          <code>frontend/src/views/SelectionRules.vue</code>（页面与弹窗）与
+          <code>frontend/src/utils/ruleNl.js</code>（字段分组、算子、双向转换）；
+          与后端契约见 <code>docs/选型模块前端界面设计.md</code> §十七。
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>

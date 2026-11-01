@@ -31,6 +31,12 @@ class Settings(BaseSettings):
     SECRET_KEY: str = ""
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440
 
+    # 大模型（OpenAI 兼容接口，用于自然语言→选型规则解析；留空则接口返回 503）
+    LLM_API_BASE: str = "https://api.deepseek.com/v1"
+    LLM_API_KEY: str = ""
+    LLM_MODEL: str = "deepseek-chat"
+    LLM_TIMEOUT: int = 30
+
     @field_validator("BACKEND_CORS_ORIGINS", mode="before")
     @classmethod
     def _split_cors(cls, v):

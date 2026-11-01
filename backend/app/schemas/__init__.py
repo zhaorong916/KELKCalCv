@@ -598,7 +598,8 @@ class SelectionRuleBase(BaseModel):
 
 
 class SelectionRuleCreate(SelectionRuleBase):
-    pass
+    # 规则编号由后端按 R-{类别缩写}-{系列}-{序号} 自动生成，前端无需传入
+    rule_code: Optional[str] = Field(None, max_length=64, description="规则编号（系统自动生成，无需填写）")
 
 
 class SelectionRuleUpdate(BaseModel):
@@ -619,6 +620,19 @@ class SelectionRuleOut(SelectionRuleBase):
     id: int
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
+
+
+class RuleNlParseIn(BaseModel):
+    """自然语言解析请求"""
+    text: str = Field(..., min_length=1, max_length=500, description="规则的中文描述")
+
+
+class RuleNlParseOut(BaseModel):
+    """自然语言解析结果（仅候选，落库需前端二次确认）"""
+    ok: bool = True
+    rule: Optional[dict] = Field(None, description="候选规则（rule_code 由前端填写）")
+    warnings: List[str] = Field(default_factory=list, description="需人工复核的提示")
+    error: Optional[str] = Field(None, description="模型明确表示无法解析时的原因")
 
 
 # ---------- 选型输入/输出 ----------
