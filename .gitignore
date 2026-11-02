@@ -29,5 +29,11 @@ Thumbs.db
 # Reference files (internal documents, not for repository)
 参考文件/
 
+# Local seed dry-run output (regenerate with backend/scripts/seed_rules.py)
+backend/_seed.out
+
+# HTML share package cache (regenerate from docs/选型模块实施计划.html)
+.trae-html-share-packages/
+
 # Deployment package artifact (regenerate from deploy/)
 KELKCalCv-部署包.zip
