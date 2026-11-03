@@ -176,6 +176,13 @@ def _validate_single(inp: SelectionInput) -> None:
 def _case_input(payload: SelectionInput, cs) -> SelectionInput:
     """把单个工况叠加到公共参数上, 构造独立的单工况选型输入"""
     data = payload.model_dump(exclude={"cases", "main_case_index"})
+    # 工况自带介质且与主工况不同时, 不能沿用 special_req 里的 fluid_id,
+    # 否则 _build_fluid 会优先命中主工况介质, 忽略本工况的 fluid_name,
+    # 导致该工况按主工况介质物性反算 Cv（多介质多工况时结果完全错误）。
+    if cs.fluid_name and cs.fluid_name != payload.fluid_name:
+        special = dict(data.get("special_req") or {})
+        special.pop("fluid_id", None)
+        data["special_req"] = special or None
     data.update({
         "media": cs.media or payload.media,
         "fluid_name": cs.fluid_name or payload.fluid_name,
