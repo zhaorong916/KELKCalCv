@@ -553,10 +553,12 @@ async function loadValveCases() {
     const cur = list.find(c => c.is_current) || list[0]
     const data = await calcApi.get(valveId.value, cur.id)
     const src = data?.cases || []
-    if (!src.length) return
-    cases.value = src.slice(0, MAX_CASES).map(mapCaseFromCalc)
+    // 只载入生效工况（停用工况不参与选型综合判断）
+    const active = src.filter(c => c.is_active !== false)
+    if (!active.length) return
+    cases.value = active.slice(0, MAX_CASES).map(mapCaseFromCalc)
     activeCaseIdx.value = 0
-    applyCaseUnits(src[0])
+    applyCaseUnits(active[0])
   } catch (e) { /* ignore */ }
 }
 
