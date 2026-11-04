@@ -275,10 +275,11 @@ def calculate_case(
         if fp.phase in ("gas", "steam", "saturated") and not is_twophase:
             fg = fp.gamma / 1.4
             # 5-Regime 增强参数: Flp/Fd/Aeta 可用时自动走 IEC 60534-8-3 五级模型
-            flp_eff = (
-                getattr(res.cv, "fl_eff", None)
-                or getattr(res.cv, "flp", None)
-                or valve_coeffs.flp
+            # 显式 None 检查避免 0.0 等合法值被 or 链跳过
+            _fl_eff = getattr(res.cv, "fl_eff", None)
+            _flp_attr = getattr(res.cv, "flp", None)
+            flp_eff = _fl_eff if _fl_eff is not None else (
+                _flp_attr if _flp_attr is not None else valve_coeffs.flp
             )
             aeta_db = fluid.get("aeta_db")
             enhanced = (flp_eff is not None and aeta_db is not None and flp_eff > 0)

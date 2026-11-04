@@ -104,6 +104,7 @@ def calculate_cv_gas(
     # ---- 开度二次修正: 用 FL(φ) 曲线迭代修正 xT/Cv ----
     rated = rated_cv_select or vc.rated_cv or cv_required
     fc = vc.factor_curves
+    _corrected = None
     if fc and fc.fl and rated > 0:
         for _ in range(5):  # 最多迭代 5 次
             phi = max(min(cv_required / rated, 1.0), 0.0)
@@ -154,7 +155,7 @@ def calculate_cv_gas(
         "γ": gamma, "ρ1": density, "ΔP_kPa": res.dp, "P1_kPa": p1,
         "cv_required": cv_required, "rated_cv": rated, "mass_flow_kgh": mass_flow,
     }
-    if fc and fc.fl:
+    if _corrected:
         res.detail["opening_corrected"] = _corrected
     if res.opening_pct > 100:
         res.warnings.append(f"所需Cv({cv_required:.1f})>额定Cv({rated:.1f})，阀门偏小")

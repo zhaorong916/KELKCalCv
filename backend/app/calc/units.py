@@ -215,25 +215,31 @@ def convert_process_case(raw_case: dict, db_session=None) -> dict:
     if out.get("flow_mass") is not None and out.get("flow_mass_unit"):
         out["flow_mass"] = _conv(out["flow_mass"], out["flow_mass_unit"], "mass_flow")
     if out.get("flow_vol") is not None and out.get("flow_vol_unit"):
-        cat = "vol_flow_liquid" if out.get("flow_unit") == "vol_liquid" else "vol_flow_gas"
         q_val = out["flow_vol"]
         q_unit = out["flow_vol_unit"]
-        # 1) 先量纲换算到 m³/h (对 Nm3_h/Nm3_h_20/SCFM factor=1.0，值不变)
-        q_op = _conv(q_val, q_unit, cat)
-        # 2) 如果是气体标况/标准体积流量，按 P1/T1 修正到工况体积流量 m³/h
-        #    V_op = V_std × (P_std / P_op) × (T_op_K / T_std_K)
-        if out.get("flow_unit") == "vol" and cat == "vol_flow_gas":
+        # 液体 / 气体体积流量单位表互斥，先查 liquid，再 fallback 到 gas
+        cat_liquid_hit = any(u[0] == "vol_flow_liquid" and u[1] == q_unit for u in BUILTIN_UNITS)
+        cat_gas_hit = any(u[0] == "vol_flow_gas" and u[1] == q_unit for u in BUILTIN_UNITS)
+        if cat_liquid_hit:
+            q_op = _conv(q_val, q_unit, "vol_flow_liquid")
+        elif cat_gas_hit:
+            q_op = _conv(q_val, q_unit, "vol_flow_gas")
+        else:
+            q_op = float(q_val)  # 未知单位 → 按内部单位原值处理
+        # 气体标况/标准体积流量 → 按 P1/T1 修正到工况体积流量 m³/h
+        # （液体体积流量不需要 P1/T1 修正）
+        is_gas_std_vol = cat_gas_hit or q_unit.upper().startswith("SCFM") or "nm3" in (q_unit or "").lower()
+        if is_gas_std_vol:
             T_std_K = 273.15   # 默认 0℃ 标况 (IEC 60534)
             if "20" in q_unit:    # Nm3_h_20 等
                 T_std_K = 293.15
             elif q_unit.upper().startswith("SCFM"):  # SCFM = 60°F ≈ 15.56℃
                 T_std_K = 288.71
-            if "Nm3" in q_unit or "nm3" in q_unit.lower() or "SCFM" in q_unit.upper():
-                P_kpa = out.get("p1", 0) or 0.0
-                T_c = out.get("t1", 0) or 0.0
-                T_K = T_c + 273.15
-                if P_kpa > 0 and T_K > 0:
-                    q_op = q_op * (101.325 / P_kpa) * (T_K / T_std_K)
+            P_kpa = out.get("p1", 0) or 0.0
+            T_c = out.get("t1", 0) or 0.0
+            T_K = T_c + 273.15
+            if P_kpa > 0 and T_K > 0:
+                q_op = q_op * (101.325 / P_kpa) * (T_K / T_std_K)
         out["flow_vol"] = q_op
     # 两相流量
     if out.get("mass_flow_gas") is not None and out.get("mass_flow_gas_unit"):
