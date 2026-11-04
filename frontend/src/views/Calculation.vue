@@ -57,10 +57,10 @@
           <div class="form-row">
             <label>管道 SCH</label>
             <el-select v-model="config.sch_front" size="small" placeholder="选择" style="width:100%">
-              <el-option v-for="o in PIPE_SCH_DATA" :key="o" :label="o" :value="o" />
+              <el-option v-for="o in pipeSchOptions" :key="o" :label="o" :value="o" />
             </el-select>
             <el-select v-model="config.sch_back" size="small" placeholder="同前" clearable style="width:100%">
-              <el-option v-for="o in PIPE_SCH_DATA" :key="o" :label="o" :value="o" />
+              <el-option v-for="o in pipeSchOptions" :key="o" :label="o" :value="o" />
             </el-select>
             <el-button link size="small" type="primary" title="同步阀后为阀前" @click="syncBackToFront('sch_front','sch_back')">⇄</el-button>
           </div>
@@ -74,7 +74,7 @@
           <!-- 推荐 SCH (ASME B31.3) -->
           <div class="form-row">
             <label></label>
-            <el-button size="small" plain type="primary" :disabled="!config.pipe_spec_front" @click="openSchRecommend">推荐 SCH (ASME B31.3)</el-button>
+            <el-button size="small" plain type="primary" @click="openSchRecommend">推荐 SCH (ASME B31.3)</el-button>
           </div>
           <!-- 管道材质 -->
           <div class="form-row">
@@ -862,7 +862,13 @@
   <!-- 推荐 SCH 对话框 (ASME B31.3) -->
   <el-dialog v-model="schDialog.visible" title="推荐 SCH — ASME B31.3" width="640px" append-to-body>
     <div class="sch-form">
-      <div class="sch-form-row"><span class="sch-label">管道规格</span><span>{{ schDialog.specLabel || '—' }}</span></div>
+      <div class="sch-form-row">
+        <span class="sch-label">公称通径</span>
+        <el-select v-model="schDialog.dn_mm" size="small" filterable style="width:200px" @change="onSchDnChange">
+          <el-option v-for="o in schDnOptions" :key="o.dn" :value="o.dn" :label="o.label" />
+        </el-select>
+        <span class="sch-unit">{{ schDialog.specLabel || '—' }}</span>
+      </div>
       <div class="sch-form-row">
         <span class="sch-label">设计压力</span>
         <el-input-number v-model="schDialog.pressure_mpa" :min="0.001" :precision="3" size="small" :controls="false" style="width:140px" />
@@ -900,6 +906,11 @@
     <template v-if="schDialog.result">
       <el-alert :title="schDialog.result.note" type="info" :closable="false" show-icon style="margin:10px 0" />
       <el-table :data="schDialog.result.candidates" size="small" border max-height="260">
+        <el-table-column label="选择" width="64" align="center">
+          <template #default="{ row }">
+            <el-radio v-model="schDialog.selected" :value="row.schedule" :disabled="!row.ok" size="small" />
+          </template>
+        </el-table-column>
         <el-table-column prop="schedule" label="SCH" width="90">
           <template #default="{ row }">
             <span :style="row.schedule === schDialog.result.recommended_schedule ? 'color:#409eff;font-weight:700' : ''">{{ row.schedule }}</span>
@@ -917,8 +928,8 @@
 
     <template #footer>
       <el-button size="small" @click="schDialog.visible = false">关闭</el-button>
-      <el-button size="small" type="primary" :disabled="!schDialog.result?.recommended_schedule" @click="applySchRecommend">
-        应用推荐 SCH{{ schDialog.result?.recommended_schedule ? ` (${schDialog.result.recommended_schedule})` : '' }}
+      <el-button size="small" type="primary" :disabled="!schSelectedRow" @click="applySchRecommend">
+        应用所选 SCH{{ schDialog.selected ? ` (${schDialog.selected})` : '' }}
       </el-button>
     </template>
   </el-dialog>
@@ -994,12 +1005,23 @@ async function loadPublicOptions() {
 
 // 加载管道规格数据 (pipe_data 表)
 async function loadPipeData() {
+  // 两个请求相互独立：/schedules 失败不能连带清空管道规格列表
   try {
     const data = await pipeDataApi.list()
     pipeDataList.value = Array.isArray(data) ? data : []
   } catch (e) {
     pipeDataList.value = []
   }
+  try {
+    const schedules = await pipeDataApi.schedules()
+    const list = Array.isArray(schedules) ? schedules.filter(Boolean) : []
+    if (list.length) pipeSchOptions.value = sortSchedules(list)
+  } catch (e) {
+    // 保留兜底 SCH 选项（含 STD/XS/XXS）
+  }
+  // ASME B31.3 常用壁厚等级：默认 STD
+  if (!config.value.sch_front) config.value.sch_front = 'STD'
+  if (!config.value.sch_back) config.value.sch_back = 'STD'
 }
 
 // 格式化：英制 in (公制 mm)，如 "2 in (50 mm)"
@@ -1016,22 +1038,60 @@ const schDialog = reactive({
   specLabel: '', dn_mm: null,
   pressure_mpa: null, temp_c: null, material_code: 'A106-B',
   weld_factor_e: 1.0, corrosion_allowance_mm: 1.5,
-  materials: [], result: null,
+  materials: [], result: null, selected: null,
 })
 
-function openSchRecommend() {
-  const found = pipeDataList.value.find(p => p.lookup_key === config.value.pipe_spec_front)
-  if (!found) { ElMessage.warning('请先选择阀前管道规格'); return }
-  if (found.dn_mm == null) {
-    ElMessage.warning(`管道规格 ${found.lookup_key} 缺少公称通径 DN 数据，无法推荐 SCH`)
-    return
+// 管道数据未加载时的通径兜底（[NPS 英寸, DN mm]，与 pipe_data 实际 DN 系列一致）
+const PIPE_DN_FALLBACK = [
+  [0.5, 12], [0.75, 19], [1, 25], [1.5, 38], [2, 50], [2.5, 63], [3, 80], [4, 100],
+  [5, 125], [6, 150], [8, 200], [10, 250], [12, 300], [14, 350], [16, 400], [18, 450],
+  [20, 500], [22, 550], [24, 600], [26, 650], [28, 700], [30, 750], [32, 800], [34, 850],
+  [36, 900], [42, 1050],
+]
+
+// 公称通径显示格式：英制优先 + 公制 mm 置括号，如 "1.5 in (38mm)"
+function fmtDnLabel(nps, dn) {
+  return nps ? `${nps} in (${dn}mm)` : `${dn}mm`
+}
+
+// 可选公称通径（来自 pipe_data，支持手动选择管道尺寸）
+const schDnOptions = computed(() => {
+  const seen = new Map()
+  for (const p of pipeDataList.value) {
+    if (p.dn_mm == null || seen.has(p.dn_mm)) continue
+    seen.set(p.dn_mm, fmtDnLabel(p.nps_label, p.dn_mm))
   }
-  schDialog.specLabel = found.lookup_key
-  schDialog.dn_mm = found.dn_mm
+  if (!seen.size) {
+    return PIPE_DN_FALLBACK.map(([nps, dn]) => ({ dn, label: fmtDnLabel(nps, dn) }))
+  }
+  return [...seen.entries()].map(([dn, label]) => ({ dn, label })).sort((a, b) => a.dn - b.dn)
+})
+
+// 当前选中的 SCH 行（仅合格项可应用）
+const schSelectedRow = computed(() =>
+  (schDialog.result?.candidates || []).find(c => c.schedule === schDialog.selected && c.ok) || null
+)
+
+function onSchDnChange() {
+  const hit = pipeDataList.value.find(p => p.dn_mm === schDialog.dn_mm)
+  const opt = schDnOptions.value.find(o => o.dn === schDialog.dn_mm)
+  schDialog.specLabel = hit?.lookup_key || opt?.label || ''
+  schDialog.result = null
+  schDialog.selected = null
+  schDialog.error = ''
+}
+
+function openSchRecommend() {
+  // 管道数据缺失时补拉一次，保证通径下拉有选项
+  if (!pipeDataList.value.length) loadPipeData()
+  const found = pipeDataList.value.find(p => p.lookup_key === config.value.pipe_spec_front)
+  schDialog.specLabel = found?.lookup_key || ''
+  schDialog.dn_mm = found?.dn_mm ?? null
   schDialog.pressure_mpa = config.value.design_pressure ?? 1.0
   schDialog.temp_c = config.value.design_temp ?? 38
   schDialog.material_code = guessMaterialCode(config.value.pipe_material_front)
   schDialog.result = null
+  schDialog.selected = null
   schDialog.error = ''
   schDialog.visible = true
   if (!schDialog.materials.length) {
@@ -1083,6 +1143,10 @@ async function runSchRecommend() {
       weld_factor_e: schDialog.weld_factor_e,
       corrosion_allowance_mm: schDialog.corrosion_allowance_mm,
     })
+    // 默认选中 STD（若 STD 合格），否则选推荐项
+    const okRows = (schDialog.result?.candidates || []).filter(c => c.ok)
+    const std = okRows.find(c => c.schedule === 'STD')
+    schDialog.selected = (std || okRows.find(c => c.schedule === schDialog.result?.recommended_schedule) || okRows[0])?.schedule || null
   } catch (e) {
     const msg = formatSchError(e)
     schDialog.error = msg
@@ -1120,8 +1184,12 @@ function formatSchError(e) {
 }
 
 function applySchRecommend() {
-  const rec = schDialog.result?.recommended_schedule
-  if (!rec || schDialog.dn_mm == null) return
+  const row = schSelectedRow.value
+  if (!row || schDialog.dn_mm == null) {
+    ElMessage.warning('请在合格项中选择一个 SCH')
+    return
+  }
+  const rec = row.schedule
   // 找到同 DN 且 schedule 匹配的管道规格, 切换阀前规格并联动填充
   const target = pipeDataList.value.find(p => p.dn_mm === schDialog.dn_mm && p.schedule === rec)
   if (target) {
@@ -1130,9 +1198,10 @@ function applySchRecommend() {
     // 阀后沿用「同步阀后为阀前」由用户决定, 这里不强制
   } else {
     config.value.sch_front = rec
+    ElMessage.warning(`管道数据中没有 DN${schDialog.dn_mm} ${rec} 的规格行，仅更新管道 SCH 字段`)
   }
   schDialog.visible = false
-  ElMessage.success(`已应用推荐 SCH ${rec}`)
+  ElMessage.success(`已应用所选 SCH ${rec}`)
 }
 
 // 管道规格变更时, 自动填充管道尺寸 (nps_label)、管道 SCH、管道壁厚
@@ -1172,8 +1241,17 @@ function convertMmTo(mmVal, unitCode) {
   return Number((mmVal / factor).toFixed(4))
 }
 
-// 管道 SCH 等级（硬编码，后端 pipe_data API 后续接入）
-const PIPE_SCH_DATA = ['5S', '10S', '20', '30', '40', '80', '100', '120', '140', '160']
+// 管道 SCH 等级：默认 STD，选项从 pipe_data 动态加载（兜底保留 STD/XS/XXS 等 ASME 等级）
+const PIPE_SCH_FALLBACK = ['STD', 'XS', 'XXS', '5S', '10S', '10', '20', '30', '40', '40S', '60', '80', '80S', '100', '120', '140', '160']
+const pipeSchOptions = ref([...PIPE_SCH_FALLBACK])
+const SCH_PRIORITY = ['STD', 'XS', 'XXS']
+function sortSchedules(list) {
+  return [...list].sort((a, b) => {
+    const ia = SCH_PRIORITY.indexOf(a), ib = SCH_PRIORITY.indexOf(b)
+    if (ia !== -1 || ib !== -1) return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib)
+    return (parseFloat(a) || 0) - (parseFloat(b) || 0)
+  })
+}
 
 // 把后端 curve-options 返回的 filter_configs 数组转为以 key 为索引的对象
 function normalizeFilterConfigs(raw) {
@@ -1907,8 +1985,8 @@ function defaultConfig() {
     pipe_spec_back: null,
     pipe_size_front: null,
     pipe_size_back: null,
-    sch_front: null,
-    sch_back: null,
+    sch_front: 'STD',
+    sch_back: 'STD',
     pipe_material_front: null,
     pipe_material_back: null,
     // === 阀门计算数据 - 阀后字段（默认同前） ===
@@ -2219,6 +2297,9 @@ function goSelection() {
 onMounted(async () => {
   loadPublicOptions()
   await init()
+  // 历史数据未记录 SCH 时，按 ASME B31.3 常用等级默认 STD
+  if (!config.value.sch_front) config.value.sch_front = 'STD'
+  if (!config.value.sch_back) config.value.sch_back = 'STD'
   // 从选型页回填后的提示
   if (route.query.from === 'selection' && route.query.record_id) {
     ElMessage.success(`已从选型记录 #${route.query.record_id} 回填`)
