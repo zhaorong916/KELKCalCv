@@ -316,10 +316,11 @@ class TestConstraintStage(unittest.TestCase):
     def test_exclude_by_rated_cv(self):
         rows = [cv_row("GC120", dn_label="40A", rated_cv=100.0),
                 cv_row("GC120", dn_label="50A", rated_cv=20.0)]
-        # rated_cv ≥ 50 视为过大 → 排除；仅保留 rated_cv=20 的 50A
+        # cv_required=10 保证两个候选都通过额定 Cv 硬约束；
+        # 再由规则将 rated_cv ≥ 50 视为过大排除，仅保留 rated_cv=20 的 50A
         rules = [rule_row("R-CON-GC120-001", "constraint", target="GC120",
                           expr={"rated_cv": {"_min": 50}}, action="exclude")]
-        cands = self._run(rows, rules)
+        cands = self._run(rows, rules, cv_required=10.0)
         self.assertEqual([c["dn_label"] for c in cands], ["50A"])
 
     def test_opening_is_stk_percent(self):
@@ -430,6 +431,51 @@ class TestButterflyAngleSwitch(unittest.TestCase):
         with patch("app.calc.selector._load_curves", _fake_curves_linear):
             cands = sel._stage_constraint(_input(), {}, [series("BT110", "butterfly", "BT系列蝶阀")], [])
         self.assertEqual(sorted(c["flow_char"] for c in cands), ["60deg", "90deg"])
+
+
+class TestParseFlow(unittest.TestCase):
+    def test_mass_flow_unit_converted(self):
+        flow_unit, mass, vol = ValveSelector._parse_flow(
+            _input(media="liquid", flow_rate=5, flow_rate_unit="t_h")
+        )
+        self.assertEqual(flow_unit, "mass")
+        self.assertAlmostEqual(mass, 5000.0)
+        self.assertEqual(vol, 0.0)
+
+    def test_liquid_volume_passthrough(self):
+        flow_unit, mass, vol = ValveSelector._parse_flow(
+            _input(media="liquid", flow_rate=12, flow_rate_unit="m3_h")
+        )
+        self.assertEqual(flow_unit, "vol")
+        self.assertAlmostEqual(vol, 12.0)
+
+    def test_gas_standard_volume_corrected_to_operating(self):
+        """Nm3_h 必须按 P1/T1 修正为工况 m³/h，否则 Cv 被放大 P_op/P_std 倍。"""
+        inp = _input(media="gas", flow_rate=100, flow_rate_unit="Nm3_h",
+                     p1=1000, p1_unit="kPaA", t1=20, t1_unit="C")
+        flow_unit, mass, vol = ValveSelector._parse_flow(inp)
+        self.assertEqual(flow_unit, "vol")
+        expected = 100 * (101.325 / 1000) * (293.15 / 273.15)
+        self.assertAlmostEqual(vol, expected, places=4)
+
+    def test_gas_mass_flow_not_affected(self):
+        flow_unit, mass, vol = ValveSelector._parse_flow(
+            _input(media="gas", flow_rate=100, flow_rate_unit="kg_h",
+                   p1=1000, p1_unit="kPaA", t1=20, t1_unit="C")
+        )
+        self.assertEqual(flow_unit, "mass")
+        self.assertAlmostEqual(mass, 100.0)
+
+
+class TestBuildFluid(unittest.TestCase):
+    def test_custom_media_text_does_not_raise(self):
+        """前端 allow-create 会传非数字 fluid_id，不能因 int() 抛 ValueError 而 500。"""
+        warnings = []
+        got = ValveSelector(FakeDB())._build_fluid(
+            _input(media="liquid"), {"fluid_id": "自定义介质"}, warnings
+        )
+        self.assertEqual(got["fluid_name"], "未知介质")
+        self.assertTrue(warnings)
 
 
 class TestSelectEntry(unittest.TestCase):

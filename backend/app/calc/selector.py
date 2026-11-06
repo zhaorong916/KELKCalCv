@@ -636,7 +636,18 @@ class ValveSelector:
         is_gas = (getattr(inp, "media", None) or "") in ("gas", "steam")
         if vol_code or any(t in unit.lower() for t in ("m3", "m³", "nm3", "l/h", "l/min", "gpm", "bpd", "scfm")):
             cat = "vol_flow_gas" if is_gas else "vol_flow_liquid"
-            return "vol", 0.0, convert(q, unit, cat)
+            q_vol = convert(q, unit, cat)
+            # 引擎 cv_gas 要求工况体积流量 (m³/h)，标况/标准体积流量须按 P1/T1 修正，
+            # 否则 Nm3_h/SCFM 会被当成工况流量，Cv 放大 P_op/P_std 倍。
+            if is_gas and ("nm3" in unit.lower() or unit.upper().startswith("SCFM")):
+                p1 = _conv(getattr(inp, "p1", None), getattr(inp, "p1_unit", None), "pressure")
+                t1 = _conv(getattr(inp, "t1", None), getattr(inp, "t1_unit", None), "temperature")
+                p1_kpa = p1 if p1 is not None else 0.0
+                t_k = (t1 if t1 is not None else 0.0) + 273.15
+                t_std = 293.15 if "20" in unit else (288.71 if unit.upper().startswith("SCFM") else 273.15)
+                if p1_kpa > 0 and t_k > 0:
+                    q_vol = q_vol * (101.325 / p1_kpa) * (t_k / t_std)
+            return "vol", 0.0, q_vol
         return "mass", convert(q, unit, "mass_flow"), 0.0
 
     def _build_fluid(self, inp, special, warnings) -> dict:
@@ -644,7 +655,12 @@ class ValveSelector:
         fluid = None
         fid = special.get("fluid_id")
         if fid:
-            fluid = self.db.get(Fluid, int(fid))
+            try:
+                fluid = self.db.get(Fluid, int(fid))
+            except (TypeError, ValueError):
+                # 前端 allow-create 自定义介质时 fluid_id 为文本，不能直接 int()，按名称兜底
+                rows = self.db.query(Fluid).filter(Fluid.fluid_name == str(fid)).all()
+                fluid = rows[0] if rows else None
         if fluid is None and getattr(inp, "fluid_name", None) is not None:
             fluid = self.db.query(Fluid).filter(Fluid.fluid_name == inp.fluid_name).first()
         if fluid is None:
