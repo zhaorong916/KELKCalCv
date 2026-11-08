@@ -601,7 +601,7 @@ class ValveSelector:
             warnings.append("缺少阀前/阀后压力，无法反算 Cv（仅保留候选）")
             return None
 
-        flow_unit, mass_flow, vol_flow = self._parse_flow(inp)
+        flow_unit, mass_flow, vol_flow = self._parse_flow(inp, p1, t1)
         pipe_diameter = _conv(inp.pipe_size, getattr(inp, "pipe_size_unit", None), "diameter") or 0.0
         try:
             cr = calculate_case(
@@ -622,11 +622,14 @@ class ValveSelector:
         return cr.cv.cv_required
 
     @staticmethod
-    def _parse_flow(inp) -> tuple:
-        """解析流量并换算为内部单位（质量 kg/h / 体积 m³/h 或 Nm³/h）。
+    def _parse_flow(inp, p1: Optional[float] = None, t1: Optional[float] = None) -> tuple:
+        """解析流量并换算为引擎内部单位（质量 kg/h / 体积 m³/h(工况)）。
 
         前端传的是单位字典中的 unit_code（如 kg_h / t_h / m3_h / Nm3_h），
         必须换算后再送引擎，否则 t/h 会被当成 kg/h 导致 Cv 偏差 1000 倍。
+        引擎 cv_gas 要求体积流量为阀前工况 m³/h，故气体标况流量
+        (Nm3_h / Nm3_h_20 / SCFM) 还需按 P1/T1 换算，否则 Cv 会被高估
+        ρ_工况/ρ_标况 倍。
         """
         q = _num(getattr(inp, "flow_rate", None)) or 0.0
         unit = (getattr(inp, "flow_rate_unit", None) or "").strip()
@@ -635,16 +638,53 @@ class ValveSelector:
         vol_code = any(u[0].startswith("vol_flow") and u[1] == unit for u in BUILTIN_UNITS)
         is_gas = (getattr(inp, "media", None) or "") in ("gas", "steam")
         if vol_code or any(t in unit.lower() for t in ("m3", "m³", "nm3", "l/h", "l/min", "gpm", "bpd", "scfm")):
-            cat = "vol_flow_gas" if is_gas else "vol_flow_liquid"
-            return "vol", 0.0, convert(q, unit, cat)
+            # 按单位自身所属类别换算（兼容气体工况 m³/h 与液体 GPM 等）
+            cat = ValveSelector._flow_unit_category(unit) or (
+                "vol_flow_gas" if is_gas else "vol_flow_liquid")
+            vol = convert(q, unit, cat)
+            if is_gas and cat == "vol_flow_gas" and vol is not None:
+                vol = ValveSelector._std_vol_to_operating(vol, unit, p1, t1)
+            return "vol", 0.0, vol
         return "mass", convert(q, unit, "mass_flow"), 0.0
+
+    @staticmethod
+    def _flow_unit_category(unit: str) -> Optional[str]:
+        for u in BUILTIN_UNITS:
+            if u[1] == unit and u[0] in ("vol_flow_liquid", "vol_flow_gas"):
+                return u[0]
+        return None
+
+    @staticmethod
+    def _std_vol_to_operating(q_std: float, unit: str,
+                              p1_kpa: Optional[float], t1_c: Optional[float]) -> float:
+        """标况体积流量 → 工况体积流量（与 units.convert_process_case 保持一致）。"""
+        u = (unit or "").strip()
+        u_upper = u.upper()
+        if "nm3" not in u.lower() and not u_upper.startswith("SCFM"):
+            return q_std  # 已是工况体积流量
+        if u_upper.startswith("SCFM"):
+            t_std = 288.71
+        elif "20" in u:
+            t_std = 293.15
+        else:
+            t_std = 273.15
+        if not p1_kpa or p1_kpa <= 0 or t1_c is None:
+            return q_std
+        t_k = t1_c + 273.15
+        if t_k <= 0:
+            return q_std
+        return q_std * (101.325 / p1_kpa) * (t_k / t_std)
 
     def _build_fluid(self, inp, special, warnings) -> dict:
         from app.models import Fluid
         fluid = None
         fid = special.get("fluid_id")
         if fid:
-            fluid = self.db.get(Fluid, int(fid))
+            try:
+                fluid = self.db.get(Fluid, int(fid))
+            except (TypeError, ValueError):
+                # 前端介质选择框支持 allow-create，自定义介质名会以字符串回传
+                fluid = None
         if fluid is None and getattr(inp, "fluid_name", None) is not None:
             fluid = self.db.query(Fluid).filter(Fluid.fluid_name == inp.fluid_name).first()
         if fluid is None:

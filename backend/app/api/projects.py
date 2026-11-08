@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session, selectinload
 from sqlalchemy import func
 
 from app.api.deps import get_db
-from app.models import Project, Valve
+from app.models import Project, Valve, SelectionRecord
 from app.schemas import ProjectCreate, ProjectUpdate, ProjectOut
 
 router = APIRouter(prefix="/projects", tags=["项目管理"])
@@ -70,6 +70,9 @@ def delete_project(pid: int, db: Session = Depends(get_db)):
     p = db.get(Project, pid)
     if not p:
         raise HTTPException(404, "项目不存在")
+    # SelectionRecord 外键未配置级联，需先清理该项目（含其位号）的选型历史，
+    # 否则 db.delete(p) 级联删除位号时会被外键约束拒绝
+    db.query(SelectionRecord).filter(SelectionRecord.project_id == pid).delete()
     db.delete(p)
     db.commit()
     return {"ok": True}

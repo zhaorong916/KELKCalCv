@@ -21,7 +21,7 @@ from app.calc.selector import (
 )
 from app.models import (
     ValveType, ValveCvStk, SelectionRule,
-    AllowablePressureDrop, BodyPtRating,
+    AllowablePressureDrop, BodyPtRating, Fluid,
 )
 from app.schemas import SelectionInput
 
@@ -42,17 +42,22 @@ class _FakeQuery:
     def all(self):
         return list(self._rows)
 
+    def first(self):
+        return self._rows[0] if self._rows else None
+
 
 class FakeDB:
     """按 model 返回内存行的最小 DB 替身。"""
 
-    def __init__(self, series=(), rules=(), cv_rows=(), allow=(), body_pt=(), fluids=None):
+    def __init__(self, series=(), rules=(), cv_rows=(), allow=(), body_pt=(),
+                 fluids=None, fluid_rows=()):
         self._map = {
             ValveType: series,
             SelectionRule: rules,
             ValveCvStk: cv_rows,
             AllowablePressureDrop: allow,
             BodyPtRating: body_pt,
+            Fluid: fluid_rows,
         }
         self.fluids = fluids or {}
 
@@ -316,11 +321,19 @@ class TestConstraintStage(unittest.TestCase):
     def test_exclude_by_rated_cv(self):
         rows = [cv_row("GC120", dn_label="40A", rated_cv=100.0),
                 cv_row("GC120", dn_label="50A", rated_cv=20.0)]
-        # rated_cv ≥ 50 视为过大 → 排除；仅保留 rated_cv=20 的 50A
+        # 规则命中 rated_cv ≥ 50 的 40A 并排除；50A 虽不被规则命中，
+        # 但 cv_required(50) > rated_cv(20)，硬约束判定其无法通过流量，一并剔除
         rules = [rule_row("R-CON-GC120-001", "constraint", target="GC120",
                           expr={"rated_cv": {"_min": 50}}, action="exclude")]
         cands = self._run(rows, rules)
-        self.assertEqual([c["dn_label"] for c in cands], ["50A"])
+        self.assertEqual(cands, [])
+
+    def test_keep_lower_dn_when_rated_cv_adequate(self):
+        rows = [cv_row("GC120", dn_label="40A", rated_cv=100.0),
+                cv_row("GC120", dn_label="50A", rated_cv=20.0)]
+        # 不命中规则时，仅 rated_cv 足够覆盖 cv_required 的 40A 保留
+        cands = self._run(rows, [])
+        self.assertEqual([c["dn_label"] for c in cands], ["40A"])
 
     def test_opening_is_stk_percent(self):
         """linear 模式下 opening = phi×100 (cv_required/rated_cv)。"""
@@ -446,6 +459,51 @@ class TestSelectEntry(unittest.TestCase):
         self.assertEqual(res.candidates[0].series_code, "GC120")
         self.assertAlmostEqual(res.candidates[0].opening, 50.0)
         self.assertEqual(res.applied_rule_count, 1)
+
+
+class TestParseFlow(unittest.TestCase):
+    """_parse_flow: 流量单位换算 + 气体标况→工况体积流量。"""
+
+    @staticmethod
+    def _inp(**kw):
+        base = dict(flow_rate=1000.0, flow_rate_unit="Nm3_h", media="gas",
+                    p1=600.0, p1_unit="kPaA", t1=20.0, t1_unit="C")
+        base.update(kw)
+        return SimpleNamespace(**base)
+
+    def test_gas_standard_volume_converted_to_operating(self):
+        flow_unit, mass, vol = ValveSelector._parse_flow(self._inp(), 600.0, 20.0)
+        self.assertEqual(flow_unit, "vol")
+        self.assertAlmostEqual(mass, 0.0)
+        self.assertAlmostEqual(
+            vol, 1000.0 * (101.325 / 600.0) * (293.15 / 273.15), places=4)
+
+    def test_gas_operating_volume_not_rescaled(self):
+        _, _, vol = ValveSelector._parse_flow(
+            self._inp(flow_rate_unit="m3_h"), 600.0, 20.0)
+        self.assertAlmostEqual(vol, 1000.0)
+
+    def test_liquid_mass_flow(self):
+        _, mass, vol = ValveSelector._parse_flow(
+            self._inp(flow_rate=2.0, flow_rate_unit="t_h", media="liquid"))
+        self.assertAlmostEqual(mass, 2000.0)
+        self.assertAlmostEqual(vol, 0.0)
+
+
+class TestBuildFluid(unittest.TestCase):
+    def test_custom_fluid_name_as_fluid_id_falls_back_to_name(self):
+        """前端 allow-create 会回传非数字 fluid_id，不应抛 ValueError 导致 500。"""
+        fluid = SimpleNamespace(
+            fluid_name="水", is_water=True, default_state="liquid",
+            density_liquid=997.0, density_gas=None, molecular_weight=18.015,
+            cp_cv_ratio=1.33, critical_pressure=22064.0, vapor_pressure=2.34,
+            viscosity=0.89)
+        db = FakeDB(fluid_rows=[fluid])
+        warnings = []
+        out = ValveSelector(db)._build_fluid(
+            _input(fluid_name="水"), {"fluid_id": "水(自定义)"}, warnings)
+        self.assertEqual(out["fluid_name"], "水")
+        self.assertEqual(warnings, [])
 
 
 if __name__ == "__main__":

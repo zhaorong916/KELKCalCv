@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func
 
 from app.api.deps import get_db
-from app.models import Project, Valve, Calculation
+from app.models import Project, Valve, Calculation, SelectionRecord
 from app.schemas import ValveCreate, ValveUpdate, ValveOut
 
 router = APIRouter(prefix="/projects/{pid}/valves", tags=["位号管理"])
@@ -77,6 +77,8 @@ def delete_valve(pid: int, vid: int, db: Session = Depends(get_db)):
     v = db.get(Valve, vid)
     if not v or v.project_id != pid:
         raise HTTPException(404, "位号不存在")
+    # SelectionRecord 外键未配置级联，需先清理其选型历史，否则删除会被外键约束拒绝
+    db.query(SelectionRecord).filter(SelectionRecord.valve_id == vid).delete()
     db.delete(v)
     db.commit()
     return {"ok": True}
