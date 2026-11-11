@@ -91,7 +91,10 @@ if os.path.isdir(_static_dir):
     async def spa_fallback(full_path: str, request: Request):
         if full_path.startswith("api/"):
             return {"detail": "Not Found"}
-        file_path = os.path.join(_static_dir, full_path)
-        if os.path.isfile(file_path):
+        # 解析真实路径并校验必须位于 static 目录内, 防止 ../ 路径穿越读取任意文件
+        static_root = os.path.realpath(_static_dir)
+        file_path = os.path.realpath(os.path.join(static_root, full_path))
+        if (file_path == static_root or file_path.startswith(static_root + os.sep)) \
+                and os.path.isfile(file_path):
             return FileResponse(file_path)
-        return FileResponse(os.path.join(_static_dir, "index.html"))
+        return FileResponse(os.path.join(static_root, "index.html"))
