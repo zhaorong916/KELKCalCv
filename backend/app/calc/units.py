@@ -215,10 +215,14 @@ def convert_process_case(raw_case: dict, db_session=None) -> dict:
     if out.get("flow_mass") is not None and out.get("flow_mass_unit"):
         out["flow_mass"] = _conv(out["flow_mass"], out["flow_mass_unit"], "mass_flow")
     if out.get("flow_vol") is not None and out.get("flow_vol_unit"):
-        cat = "vol_flow_liquid" if out.get("flow_unit") == "vol_liquid" else "vol_flow_gas"
         q_val = out["flow_vol"]
         q_unit = out["flow_vol_unit"]
-        # 1) 先量纲换算到 m³/h (对 Nm3_h/Nm3_h_20/SCFM factor=1.0，值不变)
+        # 类别按单位代码判定: 只有液体体积流量类别中的单位(m3_h/L_min/m3_s/GPM/BPD...)
+        # 才属于液体; 其余(Nm3_h/Nm3_h_20/SCFM 等)按气体标况处理。
+        # 注意 flow_unit 仅标记 mass/vol, 液体体积流量同样传 "vol", 不能用它区分液/气。
+        liquid_codes = {u[1] for u in BUILTIN_UNITS if u[0] == "vol_flow_liquid"}
+        cat = "vol_flow_liquid" if q_unit in liquid_codes else "vol_flow_gas"
+        # 1) 先量纲换算到 m³/h
         q_op = _conv(q_val, q_unit, cat)
         # 2) 如果是气体标况/标准体积流量，按 P1/T1 修正到工况体积流量 m³/h
         #    V_op = V_std × (P_std / P_op) × (T_op_K / T_std_K)
