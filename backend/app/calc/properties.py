@@ -18,6 +18,11 @@ try:
 except Exception:  # pragma: no cover - 依赖缺失时的兜底
     _HAS_IAPWS = False
 
+try:  # 冰面升华压力(0℃ 以下的水蒸汽压)，仅用于 Pv 兜底
+    from iapws._iapws import _Sublimation_Pressure
+except Exception:  # pragma: no cover
+    _Sublimation_Pressure = None
+
 
 WATER_CRITICAL_P_KPA = 22064.0   # 水的临界压力 kPa(abs)
 WATER_CRITICAL_T_C = 373.946      # 临界温度 ℃
@@ -55,6 +60,25 @@ def water_saturation_pressure_kpa(t_c: float) -> float:
         # 兜底近似(Antoine 扩展)，仅低压段
         return _water_psat_fallback(t_c)
     return float(_PSat_T(t_c + 273.15)) * 1000.0
+
+
+def water_vapor_pressure_kpa(t_c: float) -> float:
+    """水在该温度下的蒸汽压 (kPa abs) —— 介质库 Pv 缺失时的兜底值。
+
+    T >= 0.01℃: 液态水饱和蒸汽压 (IAPWS-IF97)；
+    T <  0.01℃: 固态冰的升华压力(水的稳定相)，极低温时数值趋近 0。
+    """
+    if t_c >= 0.01:
+        try:
+            return water_saturation_pressure_kpa(t_c)
+        except Exception:
+            return 0.0
+    if _Sublimation_Pressure is None:
+        return 0.0
+    try:
+        return float(_Sublimation_Pressure(t_c + 273.15)) * 1000.0
+    except Exception:
+        return 0.0
 
 
 def water_saturation_temperature_c(p_kpa: float) -> float:

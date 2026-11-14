@@ -106,10 +106,10 @@ def _resolve_fluid_properties(fluid: dict, t_c: float, p_kpa: float,
     phase = state_override or default_state
     mw = mw_override or fluid.get("molecular_weight", 0.0) or 28.97
     gamma = gamma_override or fluid.get("cp_cv_ratio", 0.0) or 1.4
-    pc = fluid.get("critical_pressure", 0.0)
-    pv = fluid.get("vapor_pressure", 0.0)
+    pc = fluid.get("critical_pressure") or 0.0
+    pv = fluid.get("vapor_pressure") or 0.0   # 介质库常为 NULL，先归零再兜底
     z_rk = 1.0
-    pc_kpa = pc or 0.0
+    pc_kpa = pc
 
     # P3-2: Antoine 蒸汽压温度修正 — 有系数时用工况温度重算 Pv，否则用库静态值
     a_a = fluid.get("antoine_a")
@@ -120,6 +120,11 @@ def _resolve_fluid_properties(fluid: dict, t_c: float, p_kpa: float,
         pv_antoine = prop.antoine_vapor_pressure_kpa(t_c, a_a, a_b, a_c, a_tmin)
         if pv_antoine > 0:
             pv = pv_antoine
+
+    # P3-4: Pv 兜底 — 库值/Antoine 均不可用时，按同温度下水的蒸汽压取值
+    # （0℃ 以上取水饱和蒸汽压；0℃ 以下取冰升华压力，低温介质时数值趋近 0）
+    if pv <= 0:
+        pv = prop.water_vapor_pressure_kpa(t_c)
 
     if phase == "gas":
         # 压缩因子 Z（Redlich-Kwong，对标 Excel GasPTPcTcZ）
