@@ -26,8 +26,8 @@
       <!-- 左栏：表单区 -->
       <div class="col-form">
         <!-- 卡片 0：设计数据（管道数据，阀前/阀后分栏） -->
-        <div class="section-card">
-          <div class="section-title">设计数据 <span class="muted">管道数据</span></div>
+        <div class="section-card" :class="{ 'is-collapsed': collapsed.design }">
+          <div class="section-title" @click="toggleSection('design')">设计数据 <span class="muted">管道数据</span><el-icon class="collapse-arrow"><ArrowDown /></el-icon></div>
           <!-- 表头：阀前 | 阀后 -->
           <div class="form-row pipe-header-row">
             <label style="min-width:110px"></label>
@@ -101,8 +101,8 @@
         </div>
 
         <!-- 卡片 1：接管附件 -->
-        <div class="section-card">
-          <div class="section-title">接管附件 <span class="muted">手工选择</span></div>
+        <div class="section-card" :class="{ 'is-collapsed': collapsed.accessories }">
+          <div class="section-title" @click="toggleSection('accessories')">接管附件 <span class="muted">手工选择</span><el-icon class="collapse-arrow"><ArrowDown /></el-icon></div>
           <!-- 表头：阀前 | 阀后 -->
           <div class="form-row pipe-header-row">
             <label style="min-width:110px"></label>
@@ -160,8 +160,8 @@
         </div>
 
         <!-- 卡片 2：阀门计算数据 -->
-        <div class="section-card">
-          <div class="section-title">阀门计算数据 <span class="muted">手工选择</span></div>
+        <div class="section-card" :class="{ 'is-collapsed': collapsed.calcData }">
+          <div class="section-title" @click="toggleSection('calcData')">阀门计算数据 <span class="muted">手工选择</span><el-icon class="collapse-arrow"><ArrowDown /></el-icon></div>
           <div class="form-grid">
             <div class="form-row full-width">
               <label>阀门型号</label>
@@ -231,8 +231,8 @@
         </div>
 
         <!-- 卡片 3：计算系数 -->
-        <div class="section-card">
-          <div class="section-title">计算系数 <span class="muted">自动填充</span></div>
+        <div class="section-card" :class="{ 'is-collapsed': collapsed.factors }">
+          <div class="section-title" @click="toggleSection('factors')">计算系数 <span class="muted">自动填充</span><el-icon class="collapse-arrow"><ArrowDown /></el-icon></div>
           <div class="form-grid">
             <div class="form-row"><label>F<sub>L</sub> 压力恢复</label><el-input-number v-model="config.fl" :min="0" :max="1" :step="0.01" :precision="3" size="small" :controls="false" style="width:100%" /></div>
             <div class="form-row"><label>F<sub>D</sub> 类型修正</label><el-input-number v-model="config.fd" :min="0" :max="1" :step="0.01" :precision="3" size="small" :controls="false" style="width:100%" /></div>
@@ -245,8 +245,8 @@
         </div>
 
         <!-- 卡片 4：阀体参数 -->
-        <div class="section-card">
-          <div class="section-title">阀体参数 <span class="muted">手工选择</span></div>
+        <div class="section-card" :class="{ 'is-collapsed': collapsed.bodyParams }">
+          <div class="section-title" @click="toggleSection('bodyParams')">阀体参数 <span class="muted">手工选择</span><el-icon class="collapse-arrow"><ArrowDown /></el-icon></div>
           <div class="form-grid">
             <div class="form-row"><label>阀体材质</label>
               <el-select v-model="config.body_material" size="small" filterable placeholder="选择" style="width:100%">
@@ -318,13 +318,14 @@
       <div class="col-result">
 
         <!-- 工艺工况（列式布局 + 单位下拉框在第一列） -->
-        <div class="section-card">
-          <div class="section-title">
+        <div class="section-card" :class="{ 'is-collapsed': collapsed.cases }">
+          <div class="section-title" @click="toggleSection('cases')">
             工艺工况 <span class="muted">(单台最多 {{ MAX }} 组，当前 {{ cases.length }} 组)</span>
-            <div class="title-actions">
+            <div class="title-actions" @click.stop>
               <el-button size="small" plain @click="addCase" :disabled="cases.length>=MAX" type="primary"><el-icon><Plus /></el-icon>添加</el-button>
               <el-button size="small" @click="saveCases">保存配置与工况</el-button>
             </div>
+            <el-icon class="collapse-arrow"><ArrowDown /></el-icon>
           </div>
 
           <div v-if="!cases.length" class="empty-hint">
@@ -724,8 +725,8 @@
           </div>
         </div>
 
-        <div class="section-card" v-if="!hasResults">
-          <div class="section-title">计算结果</div>
+        <div class="section-card" v-if="!hasResults" :class="{ 'is-collapsed': collapsed.resultsEmpty }">
+          <div class="section-title" @click="toggleSection('resultsEmpty')">计算结果<el-icon class="collapse-arrow"><ArrowDown /></el-icon></div>
           <div class="empty-hint">
             <el-icon :size="40"><Histogram /></el-icon>
             <div>尚未计算，请在上方录入工艺工况后点击「执行计算」</div>
@@ -733,8 +734,8 @@
         </div>
 
         <template v-else>
-          <div class="section-card">
-            <div class="section-title">计算结果汇总</div>
+          <div class="section-card" :class="{ 'is-collapsed': collapsed.resultsSummary }">
+            <div class="section-title" @click="toggleSection('resultsSummary')">计算结果汇总<el-icon class="collapse-arrow"><ArrowDown /></el-icon></div>
             <div class="result-table-wrapper">
               <table class="result-table">
                 <colgroup>
@@ -795,8 +796,8 @@
             </div>
           </div>
 
-          <div class="section-card">
-            <div class="section-title">介质物性快照（内部统一单位）</div>
+          <div class="section-card" :class="{ 'is-collapsed': collapsed.properties }">
+            <div class="section-title" @click="toggleSection('properties')">介质物性快照（内部统一单位）<el-icon class="collapse-arrow"><ArrowDown /></el-icon></div>
             <div class="result-table-wrapper">
               <table class="result-table">
                 <colgroup>
@@ -827,8 +828,8 @@
             </div>
           </div>
 
-          <div class="section-card" v-if="allWarnings.length">
-            <div class="section-title">提示与警告</div>
+          <div class="section-card" v-if="allWarnings.length" :class="{ 'is-collapsed': collapsed.warnings }">
+            <div class="section-title" @click="toggleSection('warnings')">提示与警告<el-icon class="collapse-arrow"><ArrowDown /></el-icon></div>
             <div class="warnings-list">
               <div v-for="(w, i) in allWarnings" :key="i" class="warning-item" :class="w.severity">
                 <el-icon v-if="w.severity==='danger'"><Warning /></el-icon>
@@ -842,15 +843,17 @@
 
         <!-- 曲线图（置于底部）：Cv vs 行程 与 计算因数 并排 -->
         <div class="charts-row">
-          <div class="section-card chart-card">
-            <div class="section-title">Cv vs 行程曲线
+          <div class="section-card chart-card" :class="{ 'is-collapsed': collapsed.chartCv }">
+            <div class="section-title" @click="toggleSection('chartCv')">Cv vs 行程曲线
               <span class="muted" v-if="strokeModeInfo">{{ strokeModeInfo }}</span>
+              <el-icon class="collapse-arrow"><ArrowDown /></el-icon>
             </div>
             <v-chart class="calc-chart" :option="cvChartOption" autoresize />
           </div>
-          <div class="section-card chart-card">
-            <div class="section-title">计算因数曲线
+          <div class="section-card chart-card" :class="{ 'is-collapsed': collapsed.chartFactors }">
+            <div class="section-title" @click="toggleSection('chartFactors')">计算因数曲线
               <span class="muted">FL / xT / Kc / Fd vs % 额定 Cv</span>
+              <el-icon class="collapse-arrow"><ArrowDown /></el-icon>
             </div>
             <v-chart class="calc-chart" :option="factorChartOption" autoresize />
           </div>
@@ -1301,6 +1304,25 @@ const vid = computed(() => route.params.vid)
 const MAX = 5
 const loading = ref(false)
 const running = ref(false)
+
+// 卡片折叠状态（默认全部展开）
+const collapsed = reactive({
+  design: false,        // 设计数据
+  accessories: false,   // 接管附件
+  calcData: false,      // 阀门计算数据
+  factors: false,       // 计算系数
+  bodyParams: false,    // 阀体参数
+  cases: false,         // 工艺工况
+  resultsEmpty: false,  // 计算结果（空态）
+  resultsSummary: false,// 计算结果汇总
+  properties: false,    // 介质物性快照
+  warnings: false,      // 提示与警告
+  chartCv: false,       // Cv vs 行程曲线
+  chartFactors: false,  // 计算因数曲线
+})
+function toggleSection(key) {
+  collapsed[key] = !collapsed[key]
+}
 // 两相流参数区域折叠（默认折叠）
 const twophaseCollapsed = ref(true)
 
@@ -2320,7 +2342,13 @@ onMounted(async () => {
 .col-form, .col-result { overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding-right: 4px; }
 
 .section-card { background: #fff; border-radius: 6px; padding: 14px 18px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
-.section-title { font-size: 14px; font-weight: 600; margin: 0 0 12px; color: #303133; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #ebeef5; padding-bottom: 8px; }
+.section-title { font-size: 14px; font-weight: 600; margin: 0 0 12px; color: #303133; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #ebeef5; padding-bottom: 8px; cursor: pointer; user-select: none; }
+/* 卡片折叠 */
+.collapse-arrow { margin-left: auto; font-size: 13px; color: #909399; transition: transform .2s; }
+.section-title .title-actions + .collapse-arrow { margin-left: 8px; }
+.section-card.is-collapsed > *:not(.section-title) { display: none; }
+.section-card.is-collapsed .section-title { margin-bottom: 0; padding-bottom: 0; border-bottom-color: transparent; }
+.section-card.is-collapsed .collapse-arrow { transform: rotate(-90deg); }
 .title-actions { margin-left: auto; display: flex; gap: 6px; }
 .section-footer { margin-top: 10px; display: flex; align-items: center; gap: 10px; }
 .empty-hint { text-align: center; padding: 30px 0; color: #909399; display: flex; flex-direction: column; gap: 10px; align-items: center; }
