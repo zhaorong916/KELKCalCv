@@ -799,16 +799,15 @@ def _get_curve_options_impl(series_code: str, db: Session):
     plugs = sorted(set([round(r[0], 1) for r in cvstk_plugs if r[0]]))
 
     # 从 valve_cv_stk 取 dn_label (BT/BC/BE 系列)
-    if series_code in DN_SIZE_TRIM_SERIES:
+    # 注意: 部分系列 (BT110/BT210) 同时有 plug_mm 和 dn_label 两套尺寸标识,
+    # 此时以 plug_mm 为准; 仅当 plug_mm 全为 NULL (BT120/BC110/BE120 等) 时才用 dn_label,
+    # 避免 str ("80A") 与 float (80.0) 混排导致 sort 抛 TypeError
+    if series_code in DN_SIZE_TRIM_SERIES and not plugs:
         cvstk_dns = db.query(ValveCvStk.dn_label).filter(
             ValveCvStk.series_code == series_code,
             ValveCvStk.dn_label.isnot(None),
         ).distinct().order_by(ValveCvStk.dn_label).all()
-        for r in cvstk_dns:
-            v = r[0]
-            if v not in plugs:
-                plugs.append(v)
-        plugs.sort()
+        plugs = [r[0] for r in cvstk_dns if r[0]]
 
     plug_sizes_by_pressure = {pres: list(plugs) for pres in pressure_ratings}
 
