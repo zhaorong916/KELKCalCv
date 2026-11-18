@@ -455,10 +455,11 @@ class ValveSelector:
                     opening = None if stk is None else round(stk * 100.0, 2)
                 ctx["opening"] = opening
 
-                rangeability = None
-                if cand["cv_min"]:
-                    rangeability = round(cand["rated_cv"] / cand["cv_min"], 2) if cand["rated_cv"] else None
-                else:
+                # 可调比：优先用库中存储值，缺失时由 rated_cv / cv_min 计算
+                rangeability = cand.get("rangeability")
+                if rangeability is None and cand.get("cv_min") and cand.get("rated_cv"):
+                    rangeability = round(cand["rated_cv"] / cand["cv_min"], 2)
+                if rangeability is None:
                     warnings.append(f"{sc} {cand['dn_label']}/{cand['trim_label']} 缺少 cv_min，可调比未知")
                 ctx["rangeability"] = rangeability
 
@@ -536,6 +537,7 @@ class ValveSelector:
             "pressure_rating": row.pressure_rating,
             "rated_cv": row.rated_cv,
             "cv_min": row.cv_min,
+            "rangeability": getattr(row, "rangeability", None),
             "stroke_value": row.stroke_value,
             "score": 0,
             "applied_rules": [],

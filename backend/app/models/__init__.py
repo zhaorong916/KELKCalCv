@@ -790,7 +790,8 @@ class ValveCvStk(Base):
     kfd = Column(Float, nullable=True, comment="GC210 Fd公式: KFd (型式修正系数)")
     kfo = Column(Float, nullable=True, comment="GC210 Fd公式: KFo (Flow-to-Open方向额定Cv)")
     kfb = Column(Float, nullable=True, comment="GC210 Fd公式: KFb (Flow-to-Close方向额定Cv)")
-    cv_min = Column(Float, nullable=True, comment="最小 Cv")
+    cv_min = Column(Float, nullable=True, comment="最小 Cv (最小可控 Cv)")
+    rangeability = Column(Float, nullable=True, comment="可调比 R = 额定Cv / 最小可控Cv")
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now, onupdate=datetime.now)
 

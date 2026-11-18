@@ -553,6 +553,7 @@ class ValveCvStkBase(BaseModel):
     kfo: Optional[float] = None
     kfb: Optional[float] = None
     cv_min: Optional[float] = None
+    rangeability: Optional[float] = None
 
 
 class ValveCvStkOut(ValveCvStkBase):

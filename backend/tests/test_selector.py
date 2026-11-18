@@ -319,7 +319,8 @@ class TestConstraintStage(unittest.TestCase):
         # rated_cv ≥ 50 视为过大 → 排除；仅保留 rated_cv=20 的 50A
         rules = [rule_row("R-CON-GC120-001", "constraint", target="GC120",
                           expr={"rated_cv": {"_min": 50}}, action="exclude")]
-        cands = self._run(rows, rules)
+        # cv_required 须 <= 50A 的 rated_cv(20)，否则被 cv_required>rated_cv 硬约束提前过滤
+        cands = self._run(rows, rules, cv_required=10.0)
         self.assertEqual([c["dn_label"] for c in cands], ["50A"])
 
     def test_opening_is_stk_percent(self):
