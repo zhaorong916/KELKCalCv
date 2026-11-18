@@ -71,7 +71,7 @@ BUILTIN_UNITS = [
 
     # ==================== 气体体积流量 (→ Nm³/h 标况0℃) ====================
     ("vol_flow_gas", "Nm3_h", "Nm³/h(0℃)", 1.0, 0.0, True, "metric", None),
-    ("vol_flow_gas", "Nm3_h_20", "Nm³/h(20℃)", 0.9327, 0.0, False, "metric", None),
+    ("vol_flow_gas", "Nm3_h_20", "Nm³/h(20℃)", 1.0, 0.0, False, "metric", None),
     ("vol_flow_gas", "SCFM", "SCFM", 1.699, 0.0, False, "imperial", None),
 
     # ==================== 密度 (→ kg/m³) ====================
