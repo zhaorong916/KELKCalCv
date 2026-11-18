@@ -22,6 +22,12 @@ from app.calc.noise import predict_gas_noise, predict_liquid_noise, NoiseResult
 from app.calc import properties as prop
 from app.calc.properties import water_saturation_phase_densities
 
+# ---- 物性兜底基准：气体用空气、液体用水（仅补齐介质库/override 缺失项）----
+AIR_MW = 28.97            # kg/kmol
+AIR_GAMMA = 1.40          # 比热比 cp/cv
+AIR_VISC_CP = 0.018       # cP (20℃ 空气 ≈ 1.8e-5 Pa·s)
+AIR_PC_KPA = 3786.0       # 空气临界压力 kPa(abs)
+
 
 @dataclass
 class CalcCaseResult:
@@ -101,12 +107,38 @@ def _resolve_fluid_properties(fluid: dict, t_c: float, p_kpa: float,
             fp.gamma = gamma_override
         return fp
 
-    # 非水介质
+    # 非水介质：物性缺失时不阻断计算 —— 气体按空气、液体按水补齐
     default_state = fluid.get("default_state", "liquid")
     phase = state_override or default_state
-    mw = mw_override or fluid.get("molecular_weight", 0.0) or 28.97
-    gamma = gamma_override or fluid.get("cp_cv_ratio", 0.0) or 1.4
+    is_gas = phase == "gas"
+    notes: list = []
+
+    def _fb(label: str, value: float, src: str) -> float:
+        notes.append(f"{label}缺失，按{src}取值 {value:g}")
+        return value
+
+    # 水物性仅在液体/两相时需要（气体不会用到），异常时退化为常量兜底
+    wfp = None
+    if not is_gas:
+        try:
+            wfp = prop.water_properties(t_c, p_kpa)
+        except Exception:
+            wfp = None
+
+    mw = mw_override or fluid.get("molecular_weight") or 0.0
+    if mw <= 0:
+        mw = _fb("分子量", AIR_MW if is_gas else 18.015, "空气" if is_gas else "水")
+    gamma = gamma_override or fluid.get("cp_cv_ratio") or 0.0
+    if gamma <= 0:
+        if is_gas:
+            gamma = _fb("比热比", AIR_GAMMA, "空气")
+        else:
+            gamma = wfp.gamma if (wfp and wfp.gamma > 0) else 1.3
+            notes.append(f"比热比缺失，按水取值 {gamma:g}")
     pc = fluid.get("critical_pressure") or 0.0
+    if pc <= 0:
+        pc = _fb("临界压力", AIR_PC_KPA if is_gas else prop.WATER_CRITICAL_P_KPA,
+                 "空气" if is_gas else "水")
     pv = fluid.get("vapor_pressure") or 0.0   # 介质库常为 NULL，先归零再兜底
     z_rk = 1.0
     pc_kpa = pc
@@ -121,47 +153,64 @@ def _resolve_fluid_properties(fluid: dict, t_c: float, p_kpa: float,
         if pv_antoine > 0:
             pv = pv_antoine
 
-    # P3-4: Pv 兜底 — 库值/Antoine 均不可用时，按同温度下水的蒸汽压取值
-    # （0℃ 以上取水饱和蒸汽压；0℃ 以下取冰升华压力，低温介质时数值趋近 0）
-    if pv <= 0:
-        pv = prop.water_vapor_pressure_kpa(t_c)
+    # P3-4: Pv 兜底 — 气体无饱和蒸汽压（按干空气取 0）；液体/两相按同温度水的蒸汽压
+    if pv <= 0 and not is_gas:
+        pv = prop.water_vapor_pressure_kpa(t_c) if wfp is None else wfp.vapor_pressure_kpa
+        if pv > 0:
+            notes.append(f"蒸汽压缺失，按水饱和蒸汽压取值 {pv:g} kPa")
 
-    if phase == "gas":
+    if is_gas:
         # 压缩因子 Z（Redlich-Kwong，对标 Excel GasPTPcTcZ）
-        tc_k = fluid.get("critical_temp", 0.0)
-        # 优先用调用方显式传的 Pc(介质库 critical_pressure)；若缺省则兜底
+        # 临界温度缺失不影响可计算性：RK 方程自动退化为理想气体 Z=1.0，
+        # 因此不套用空气临界温度，避免改变既有气体工况结果
+        tc_k = fluid.get("critical_temp") or 0.0
         if pc_kpa <= 0:
-            pc_kpa = fluid.get("critical_pressure", 0.0) or 0.0
+            pc_kpa = pc
         if not density_override or density_override <= 0:
             z_rk = prop.gas_compressibility_rk(p_kpa, t_c, pc_kpa, tc_k)
         if density_override and density_override > 0:
             rho = density_override
         else:
+            # 理想气体由 MW 算密度；MW 缺失时即为空气密度
             rho = prop.gas_density(p_kpa, t_c, mw, z=z_rk)
-        mu = viscosity_override or fluid.get("viscosity", 0.0) or 0.018
+        mu = viscosity_override or fluid.get("viscosity") or 0.0
+        if mu <= 0:
+            mu = _fb("粘度", AIR_VISC_CP, "空气")
         # 声速用 Newton-Laplace (与 Excel c1 一致，吸收 Z 影响)
         w = prop.gas_speed_of_sound_nl(t_c, gamma, p_kpa, rho)
-    else:  # liquid
+    else:  # liquid / 两相
         # P3-3: 液体密度温度修正 (Excel Gf 公式) — 无 override 时按工况温度修正
-        rho_base = density_override or fluid.get("density_liquid", 0.0) or 1000.0
+        rho_base = fluid.get("density_liquid") or 0.0
         if density_override and density_override > 0:
-            rho = rho_base
-        else:
-            tc_k = fluid.get("critical_temp", 0.0)
-            tb_k = fluid.get("boiling_point", 0.0)
+            rho = density_override
+        elif rho_base > 0:
+            tc_k = fluid.get("critical_temp") or 0.0
+            tb_k = fluid.get("boiling_point") or 0.0
             if tc_k > 0 and tb_k > 0:
                 rho = prop.liquid_density_temperature_corrected(rho_base, t_c, tc_k, tb_k)
             else:
                 rho = rho_base
-        mu = viscosity_override or fluid.get("viscosity", 0.0) or 1.0
+        elif wfp is not None and wfp.density and wfp.density > 0:
+            # 密度缺失 → 直接取水在工况温度下的密度（不再叠加温度修正）
+            rho = wfp.density
+            notes.append(f"密度缺失，按水在 {t_c:g}℃ 的密度取值 {rho:g} kg/m³")
+        else:
+            rho = _fb("密度", 1000.0, "水")
+        mu = viscosity_override or fluid.get("viscosity") or 0.0
+        if mu <= 0:
+            if wfp is not None and wfp.viscosity_cp > 0:
+                mu = wfp.viscosity_cp
+                notes.append(f"粘度缺失，按水在 {t_c:g}℃ 的粘度取值 {mu:g} cP")
+            else:
+                mu = _fb("粘度", 1.0, "水")
         w = 1400.0
 
     return prop.FluidProperties(
         name=name, phase=phase, density=rho, viscosity_cp=mu,
         vapor_pressure_kpa=pv, critical_pressure_kpa=pc_kpa if (pc_kpa and pc_kpa > 0) else pc,
         molecular_weight=mw, gamma=gamma, speed_of_sound=w,
-        compressibility=(z_rk if phase == "gas" else 1.0),
-        t_c=t_c, p_kpa=p_kpa,
+        compressibility=(z_rk if is_gas else 1.0),
+        t_c=t_c, p_kpa=p_kpa, fallback_notes=notes,
     )
 
 

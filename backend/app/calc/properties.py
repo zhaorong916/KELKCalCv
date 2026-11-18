@@ -8,7 +8,7 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, field
 from typing import Optional
 
 try:
@@ -44,6 +44,8 @@ class FluidProperties:
     compressibility: float = 1.0  # Z 压缩因子 (气体 Redlich-Kwong，液 1.0)
     t_c: float = 0.0
     p_kpa: float = 0.0
+    # 物性兜底说明：介质库/override 缺失时，气体按空气、液体按水补齐的字段
+    fallback_notes: list = field(default_factory=list)
 
     def to_dict(self) -> dict:
         return asdict(self)
