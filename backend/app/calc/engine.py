@@ -11,6 +11,7 @@
 from __future__ import annotations
 
 import json
+import math
 from dataclasses import dataclass, field, asdict
 from typing import Optional
 
@@ -28,6 +29,12 @@ AIR_GAMMA = 1.40          # 比热比 cp/cv
 AIR_VISC_CP = 0.018       # cP (20℃ 空气 ≈ 1.8e-5 Pa·s)
 AIR_PC_KPA = 3786.0       # 空气临界压力 kPa(abs)
 
+# Cv → 等效流通面积系数 (mm²/Cv)
+# 依据 Cv 定义(60°F 水、1 psi 压降、US gpm)反算:
+#   A = Q/V = 6.309e-5·Cv / 3.715 = 16.98·Cv (mm²)
+# 该面积对应缩流断面等效面积(含流量系数)，用于流速/冲刷/噪音评估。
+CV_AREA_MM2_PER_CV = 16.98
+
 
 @dataclass
 class CalcCaseResult:
@@ -38,6 +45,7 @@ class CalcCaseResult:
     phase: str = ""                # 实际计算相态 liquid/gas/twophase
     cv: Optional[CvResult] = None
     noise: Optional[NoiseResult] = None
+    velocities: dict = field(default_factory=dict)   # 阀内件/阀门出口/管道出口流速
     resolved_properties: dict = field(default_factory=dict)
     status: str = "成功"
     message: str = ""
@@ -75,6 +83,8 @@ class CalcCaseResult:
             detail["cv"] = self.cv.detail
         if self.noise and self.noise.detail:
             detail["noise"] = self.noise.detail
+        if self.velocities:
+            detail["velocities"] = self.velocities
         if detail:
             d["detail"] = detail
         return d
@@ -214,6 +224,57 @@ def _resolve_fluid_properties(fluid: dict, t_c: float, p_kpa: float,
     )
 
 
+def _estimate_velocities(*, fp, cv, mass_flow, p1, p2, t1,
+                         port_diameter, pipe_diameter) -> dict:
+    """估算三个特征流速 (m/s)。
+
+    阀内件流速: 用实际开度 Cv 反算缩流断面等效面积 A = 16.98·Cv (mm²)，
+                流量取阀前工况体积流量；
+    阀门出口流速: 按阀座口径(与阀体出口通径一致)；
+    管道出口流速: 按管道内径；
+    两者流量取阀后工况体积流量(气体用等熵阀后密度，液体密度不变)。
+    """
+    out = {
+        "vel_trim_m_s": None, "vel_valve_out_m_s": None, "vel_pipe_out_m_s": None,
+        "trim_eff_area_mm2": None, "trim_eff_dia_mm": None,
+        "rho_inlet": None, "rho_outlet": None,
+    }
+    if not cv or not cv.cv_required or cv.cv_required <= 0:
+        return out
+    mdot = (cv.mass_flow or mass_flow or 0.0) / 3600.0   # kg/s
+    rho1 = fp.density or 0.0
+    if mdot <= 0 or rho1 <= 0:
+        return out
+    out["rho_inlet"] = round(rho1, 4)
+
+    # 阀内件(缩流断面)
+    a_eff = CV_AREA_MM2_PER_CV * cv.cv_required
+    out["trim_eff_area_mm2"] = round(a_eff, 1)
+    out["trim_eff_dia_mm"] = round(math.sqrt(4.0 * a_eff / math.pi), 2)
+    out["vel_trim_m_s"] = round((mdot / rho1) / (a_eff * 1e-6), 2)
+
+    # 阀后密度: 气体按等熵温降 + 理想气体状态关系由阀前密度推算
+    rho2 = rho1
+    if fp.phase in ("gas", "steam", "saturated") and p1 > 0 and p2 > 0:
+        gamma = fp.gamma if (fp.gamma and fp.gamma > 1.0) else 1.4
+        t1k = t1 + 273.15
+        t2k = t1k * (max(p2 / p1, 1e-6) ** ((gamma - 1.0) / gamma))
+        if t2k > 0:
+            rho2 = rho1 * (p2 / p1) * (t1k / t2k)
+    if rho2 <= 0:
+        return out
+    out["rho_outlet"] = round(rho2, 4)
+    q2 = mdot / rho2
+
+    if port_diameter and port_diameter > 0:
+        a_out = math.pi * (port_diameter / 1000.0) ** 2 / 4.0
+        out["vel_valve_out_m_s"] = round(q2 / a_out, 2)
+    if pipe_diameter and pipe_diameter > 0:
+        a_pipe = math.pi * (pipe_diameter / 1000.0) ** 2 / 4.0
+        out["vel_pipe_out_m_s"] = round(q2 / a_pipe, 2)
+    return out
+
+
 def calculate_case(
     *,
     case_no: int,
@@ -316,6 +377,12 @@ def calculate_case(
         res.status = "失败"
         res.message = f"Cv计算异常: {e}"
         return res
+
+    # 流速估算（阀内件/阀门出口/管道出口）
+    res.velocities = _estimate_velocities(
+        fp=fp, cv=res.cv, mass_flow=mass_flow, p1=p1, p2=p2, t1=t1,
+        port_diameter=valve_coeffs.port_diameter, pipe_diameter=pipe_diameter,
+    )
 
     # 噪音预测
     try:

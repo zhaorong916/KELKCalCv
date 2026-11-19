@@ -776,8 +776,14 @@
                     <td v-for="r in resultRows" :key="r.case_no" :class="noiseClass(r.noise_dba)">{{ fmt(r.noise_dba) }}</td><td class="td-add-placeholder"></td></tr>
                   <tr><td class="td-label"><span class="lbl">峰值频率 Hz</span></td>
                     <td v-for="r in resultRows" :key="r.case_no">{{ fmt(r.noise_freq_peak) }}</td><td class="td-add-placeholder"></td></tr>
+                  <tr><td class="td-label"><span class="lbl">阀内件流速 m/s</span></td>
+                    <td v-for="r in resultRows" :key="r.case_no">{{ fmt((velDetail(r)||{}).vel_trim_m_s) }}</td><td class="td-add-placeholder"></td></tr>
+                  <tr><td class="td-label"><span class="lbl">阀门出口流速 m/s</span></td>
+                    <td v-for="r in resultRows" :key="r.case_no">{{ fmt((velDetail(r)||{}).vel_valve_out_m_s) }}</td><td class="td-add-placeholder"></td></tr>
+                  <tr><td class="td-label"><span class="lbl">管道出口流速 m/s</span></td>
+                    <td v-for="r in resultRows" :key="r.case_no">{{ fmt((velDetail(r)||{}).vel_pipe_out_m_s) }}</td><td class="td-add-placeholder"></td></tr>
                   <tr><td class="td-label"><span class="lbl">流态详情</span></td>
-                    <td v-for="r in resultRows" :key="r.case_no" class="regime-detail">{{ r.flow_regime }}</td><td class="td-add-placeholder"></td></tr>
+                    <td v-for="r in resultRows" :key="r.case_no" class="regime-detail">{{ regimeDetail(r) }}</td><td class="td-add-placeholder"></td></tr>
                   <template v-if="hasMultiStageResult">
                     <tr class="section-sep"><td colspan="99">多级降噪阀压降分配</td></tr>
                     <tr><td class="td-label"><span class="lbl">降噪级数 N</span></td>
@@ -1228,7 +1234,7 @@ function onPipeSpecChange(side) {
 // 把管道规格的内径/壁厚 (mm) 按工艺工况当前所选单位填入所有 case
 function syncPipeDimsToCases(pipe) {
   if (!pipe) return
-  cases.forEach(c => {
+  cases.value.forEach(c => {
     if (pipe.id_mm != null) c.pipe_diameter = convertMmTo(pipe.id_mm, caseUnits.pipe_diameter)
     if (pipe.thk_mm != null) c.pipe_wall = convertMmTo(pipe.thk_mm, caseUnits.pipe_wall)
   })
@@ -1419,6 +1425,13 @@ function noiseDetail(r) {
   let d = r.detail
   if (typeof d === 'string') { try { d = JSON.parse(d) } catch { return null } }
   return (d && d.noise) ? d.noise : null
+}
+// 提取 r.detail.velocities (阀内件/阀门出口/管道出口流速)
+function velDetail(r) {
+  if (!r || !r.detail) return null
+  let d = r.detail
+  if (typeof d === 'string') { try { d = JSON.parse(d) } catch { return null } }
+  return (d && d.velocities) ? d.velocities : null
 }
 
 // 两相流方法下拉仅在：任一结果为两相 或 任一case填写了气液双流量 时显示
@@ -1890,7 +1903,34 @@ function fmt4(v) { return v == null ? '—' : Number(v).toFixed(4) }
 function phaseText(p) { return ({liquid:'液态',gas:'气态',steam:'蒸汽',saturated:'饱和',twophase:'两相'}[p]) || p || '—' }
 function phaseTag(p) { return ({liquid:'primary',gas:'warning',steam:'warning',saturated:'success',twophase:'danger'}[p]) || 'info' }
 function regimeText(r) { return r || '—' }
-function regimeTag(r) { return r && r.includes('阻塞') ? 'danger' : (r && r.includes('临界') ? 'danger' : (r && r.includes('闪蒸') ? 'warning' : 'success')) }
+// 颜色判定: 先排除“非阻塞/亚临界”，避免被“阻塞”二字误命中
+function regimeTag(r) {
+  if (!r) return 'info'
+  if (r.includes('非阻塞') || r.includes('亚临界')) return 'success'
+  if (r.includes('临界') || r.includes('阻塞')) return 'danger'
+  if (r.includes('闪蒸') || r.includes('空化')) return 'warning'
+  return 'info'
+}
+// 流态判定依据: 气体比较 x 与 Fγ·xT，液体比较 ΔP 与 ΔPch
+function regimeDetail(r) {
+  if (!r || !r.flow_regime) return '—'
+  let d = r.detail
+  if (typeof d === 'string') { try { d = JSON.parse(d) } catch { d = null } }
+  const cv = d && d.cv ? d.cv : null
+  const f4 = v => (v == null ? '—' : Number(v).toFixed(4))
+  const f1 = v => (v == null ? '—' : Number(v).toFixed(1))
+  if (cv && cv['Fγ·xT'] != null) {
+    const xt = cv['Fγ·xT'], x = (cv.x != null ? cv.x : r.x)
+    const choked = (x != null && x >= xt)
+    return `x=${f4(x)} ${choked ? '≥' : '<'} Fγ·xT=${f4(xt)}｜${choked ? '达临界压差比，流量阻塞' : '亚临界流动，未阻塞'}；Y=${f4(r.y)}`
+  }
+  if (cv && cv['ΔPch_kPa'] != null) {
+    const dch = cv['ΔPch_kPa'], dp = (r.dp != null ? r.dp : cv['ΔP_kPa'])
+    const choked = (dp != null && dp >= dch)
+    return `ΔP=${f1(dp)} kPa ${choked ? '≥' : '<'} ΔPch=${f1(dch)} kPa｜${choked ? '阻塞流（' + (r.flow_regime || '') + '）' : '非阻塞流动'}`
+  }
+  return r.flow_regime
+}
 function openingClass(o) { if (o == null) return {}; if (o > 100) return {val:'val-warn'}; if (o > 90 || o < 10) return {val:'val-warn'}; return {} }
 function noiseClass(n) { if (n == null) return {}; if (n > 85) return {val:'val-danger'}; if (n > 75) return {val:'val-warn'}; return {} }
 
@@ -2424,7 +2464,7 @@ onMounted(async () => {
 .result-table .val-strong { font-weight: 700; color: #1a73e8; font-size: 13px; text-align: center; }
 .result-table .val-warn { color: #e6a23c; font-weight: 600; }
 .result-table .val-danger { color: #f56c6c; font-weight: 700; font-size: 13px; text-align: center; }
-.result-table .regime-detail { font-size: 11px; color: #909399; }
+.result-table .regime-detail { font-size: 11px; color: #909399; white-space: nowrap; }
 .result-table tr.section-sep td { text-align: center; padding: 4px; font-size: 11px; font-weight: 600; color: #409eff; border-top: 2px solid #e4e7ed; border-bottom: 1px solid #ebeef5; background: #f0f9ff; }
 .result-table tbody tr:hover td { background: #f5f7fa; }
 

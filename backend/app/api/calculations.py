@@ -407,5 +407,7 @@ def _upsert_result(db: Session, case_id: int, cv, nr, cr):
         detail["cv"] = cv.detail
     if nr and nr.detail:
         detail["noise"] = nr.detail
+    if cr and cr.velocities:
+        detail["velocities"] = cr.velocities
     r.detail = json.dumps(detail, ensure_ascii=False, default=str)
     r.calculated_at = datetime.now()
