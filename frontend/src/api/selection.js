@@ -94,6 +94,15 @@ export const selectionApi = {
     return http.get(`/selection/records/${id}`)
   },
 
+  /** 删除记录 */
+  deleteRecord: async (id) => {
+    if (USE_MOCK) {
+      await delay(200)
+      return { ok: true }
+    }
+    return http.delete(`/selection/records/${id}`)
+  },
+
   /** 创建记录(保存快照) */
   createRecord: async (d) => {
     if (USE_MOCK) {

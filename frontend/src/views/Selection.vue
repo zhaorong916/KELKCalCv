@@ -414,10 +414,11 @@
             <el-tag size="small" :type="row.selected_series ? 'success' : 'info'">{{ row.selected_series ? '已应用' : '未应用' }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="130" align="center">
+        <el-table-column label="操作" width="170" align="center">
           <template #default="{ row }">
             <el-button link size="small" type="primary" @click="viewSnapshot(row)">查看</el-button>
             <el-button link size="small" type="warning" @click="fillFromSnapshot(row)">回填</el-button>
+            <el-button link size="small" type="danger" @click="removeRecord(row)">删除</el-button>
           </template>
         </el-table-column>
         <template #empty><span class="muted">暂无选型历史</span></template>
@@ -617,6 +618,20 @@ async function loadHistory() {
   if (!valveId.value) return
   historyLoading.value = true
   try { historyRecords.value = await selectionApi.records(valveId.value) } catch (e) { historyRecords.value = [] } finally { historyLoading.value = false }
+}
+
+async function removeRecord(row) {
+  try {
+    await ElMessageBox.confirm(
+      `确认删除 ${formatTime(row.created_at)} 的选型记录?删除后不可恢复，已保存的计算结果不受影响。`,
+      '警告', { type: 'warning' },
+    )
+  } catch { return }
+  try {
+    await selectionApi.deleteRecord(row.id)
+    ElMessage.success('已删除')
+    loadHistory()
+  } catch (e) { ElMessage.error(e.message || '删除失败') }
 }
 
 function onProjectChange(pid) { valveId.value = null; loadValves(pid) }

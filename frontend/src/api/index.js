@@ -14,11 +14,11 @@ export { http }
 
 // 项目
 export const projectsApi = {
-  list: (kw) => http.get('/projects', { params: { keyword: kw } }),
+  list: (kw, includeDisabled = false) => http.get('/projects', { params: { keyword: kw, include_disabled: includeDisabled } }),
   get: (id) => http.get(`/projects/${id}`),
   create: (d) => http.post('/projects', d),
   update: (id, d) => http.put(`/projects/${id}`, d),
-  remove: (id) => http.delete(`/projects/${id}`),
+  remove: (id, force = false) => http.delete(`/projects/${id}`, { params: { force } }),
 }
 
 // 位号
