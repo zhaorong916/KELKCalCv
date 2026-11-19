@@ -93,6 +93,8 @@ class ValveConfigSchema(BaseModel):
     trim_seat_type: Optional[str] = None
     pressure_rating: Optional[str] = None
     stroke_mm: Optional[float] = None
+    stroke_value: Optional[float] = None
+    stroke_unit: Optional[str] = None
     rangeability: Optional[float] = None
     seat_type_front: Optional[str] = None
     seat_type_back: Optional[str] = None

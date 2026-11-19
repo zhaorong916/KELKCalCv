@@ -16,6 +16,7 @@ SERIES_CURVE_ALIAS = {
     'BC120': 'BC110',   # BC120 (法兰式) 使用 BC110 (对夹式) 的曲线映射
     'BE110': 'BE120',   # BE110 (对夹式) 使用 BE120 (法兰式) 的曲线映射
     'GV130': 'GV120',   # GV130 (平衡型) 使用 GV120 的曲线映射
+    'BT310Z': 'BT310',  # BT310Z 技术参数与 BT310 相同，共用曲线/CV 数据
 }
 
 
@@ -187,6 +188,8 @@ def _query_cv_stk_rated_cv(
       - stroke_value: opening_angle_val 过滤 (BT 系列 60/75/90 度对应不同 stroke_value)
     """
     mapped_tt = _map_trim_seat_to_cvstk_trim_type(trim_seat_type)
+    # 别名系列: CV/行程数据统一走源系列 (如 BT310Z → BT310)
+    series_code = _resolve_curve_alias(series_code)
     # GV120 等系列: trim_type 直接来自前端 (如 "Large Cv"), 与 valve_cv_stk.trim_type 一致
     if not mapped_tt and trim_type:
         mapped_tt = _map_trim_seat_to_cvstk_trim_type(trim_type) or trim_type
@@ -382,6 +385,8 @@ SEED_VALVE_TYPES = [
      "description": "双偏心结构，高性能密封，适用于一般工业工况调节。", "sort_order": 21},
     {"series_code": "BT310", "series_name": "低负载三偏心蝶阀", "valve_category": "butterfly", "product_line": "蝶阀",
      "description": "三偏心硬密封结构，越关越紧，适用于高温、高压工况。", "sort_order": 22},
+    {"series_code": "BT310Z", "series_name": "低负载三偏心蝶阀（BT310Z）", "valve_category": "butterfly", "product_line": "蝶阀",
+     "description": "BT310Z 型号，技术参数与 BT310 相同。", "sort_order": 23},
 ]
 
 
@@ -640,6 +645,10 @@ def _get_curve_options_impl(series_code: str, db: Session):
         raise HTTPException(status_code=404, detail=f"阀门系列 {series_code} 不存在")
 
     cfg = _get_cfg(series_code, "", db)
+
+    # 别名系列: 数据查询统一走源系列 (如 BT310Z → BT310)，响应保留原 series_code
+    orig_series_code = series_code
+    series_code = _resolve_curve_alias(series_code)
 
     # ========== 通用压力等级 ==========
     pim_src = _resolve_curve_alias(series_code)
@@ -955,7 +964,7 @@ def _get_curve_options_impl(series_code: str, db: Session):
         filter_configs.append(cfg_item)
 
     return {
-        "series_code": series_code,
+        "series_code": orig_series_code,
         "has_curve_data": has_curve_data,
         
         # 通用下拉
@@ -1063,6 +1072,10 @@ def _get_curves_by_selection_impl(
     cfg = _get_cfg(series_code, pressure_rating, db)
     if not cfg:
         raise HTTPException(status_code=404, detail=f"系列 {series_code} 无曲线配置")
+
+    # 别名系列: 数据查询统一走源系列 (如 BT310Z → BT310)，响应保留原 series_code
+    orig_series_code = series_code
+    series_code = _resolve_curve_alias(series_code)
 
     # 别名系列: PIM 查询同时搜索原系列和别名系列 (如 BC120 → 也查 BC110)
     pim_src = _resolve_curve_alias(series_code)
@@ -1569,7 +1582,7 @@ def _get_curves_by_selection_impl(
     xt_calculated = round(0.84 * fl_rated ** 2, 6) if fl_rated else None
     
     return {
-        "series_code": series_code,
+        "series_code": orig_series_code,
         "pressure_rating": pressure_rating,
         "plug_size": plug_size,
         "derived_plug_mm": derived_plug_mm,

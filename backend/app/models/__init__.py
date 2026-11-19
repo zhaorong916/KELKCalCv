@@ -120,6 +120,8 @@ class ValveConfig(Base):
     trim_seat_type = Column(String(64), comment="阀内件形式")
     pressure_rating = Column(String(32), comment="压力等级")
     stroke_mm = Column(Float, comment="行程 mm")
+    stroke_value = Column(Float, comment="额定行程数值 (mm 或 °)")
+    stroke_unit = Column(String(10), comment="额定行程单位: mm / °")
     rangeability = Column(Float, comment="可调比 R")
     seat_type_front = Column(String(64), comment="阀座形式(阀前)")
     seat_type_back = Column(String(64), comment="阀座形式(阀后)")
