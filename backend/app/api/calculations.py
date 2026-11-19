@@ -9,7 +9,8 @@ from sqlalchemy.orm import Session, selectinload
 
 from app.api.deps import get_db
 from app.models import (
-    Valve, Calculation, ValveConfig, ProcessCase, CalcResult, Fluid
+    Valve, Calculation, ValveConfig, ProcessCase, CalcResult, Fluid,
+    PipeData, UnitDefinition,
 )
 from app.schemas import (
     CalculationCreate, CalculationOut,
@@ -73,6 +74,31 @@ def _build_fluid_dict(db: Session, fluid_id: int | None, fluid_name_custom: str 
         "critical_pressure": None, "vapor_pressure": None,
         "viscosity": None,
     }
+
+
+# ---------- 管道规格 → 工况内径/壁厚 ----------
+def _mm_to_unit(db: Session, mm_val, unit_code: str):
+    """把 mm 值换算为指定单位（unit_definitions.factor 表示 1 单位 = factor mm）。"""
+    if mm_val is None:
+        return None
+    f = 1.0
+    if unit_code:
+        u = db.query(UnitDefinition).filter(
+            UnitDefinition.category == "diameter", UnitDefinition.unit_code == unit_code
+        ).first()
+        f = (u.factor if u and u.factor else 1.0)
+    return round(float(mm_val) / f, 4) if f else float(mm_val)
+
+
+def _pipe_spec_dims(db: Session, cfg, dia_unit: str, wall_unit: str):
+    """按设计数据中选定的管道规格取内径/壁厚；未选或查不到返回 (None, None)。"""
+    spec = getattr(cfg, "pipe_spec_front", None) or getattr(cfg, "pipe_spec_back", None) if cfg else None
+    if not spec:
+        return None, None
+    pipe = db.query(PipeData).filter(PipeData.lookup_key == spec).first()
+    if not pipe:
+        return None, None
+    return _mm_to_unit(db, pipe.id_mm, dia_unit), _mm_to_unit(db, pipe.thk_mm, wall_unit)
 
 
 # ---------- 版本管理 ----------
@@ -210,10 +236,20 @@ def save_cases(vid: int, cid: int, cases: list[ProcessCaseSchema], db: Session =
             raise HTTPException(400, f"介质 id={c.fluid_id} 不存在")
     # 清空旧工况
     db.query(ProcessCase).filter(ProcessCase.calculation_id == cid).delete()
+    cfg = db.query(ValveConfig).filter(ValveConfig.calculation_id == cid).first()
     out = []
     for c in cases:
         # 原值 + 原单位入库，数值保持用户录入（或导入文件）时的样子
         pc = ProcessCase(calculation_id=cid, **c.model_dump())
+        # 工况未填管道内径时，按设计数据中选定的管道规格补齐
+        if not pc.pipe_diameter or pc.pipe_diameter <= 0:
+            d, w = _pipe_spec_dims(db, cfg, pc.pipe_diameter_unit, pc.pipe_wall_unit)
+            if d:
+                pc.pipe_diameter = d
+                pc.pipe_diameter_unit = pc.pipe_diameter_unit or "mm"
+            if w and not pc.pipe_wall:
+                pc.pipe_wall = w
+                pc.pipe_wall_unit = pc.pipe_wall_unit or "mm"
         db.add(pc)
         db.flush()
         out.append(ProcessCaseOut.model_validate(pc))
@@ -259,6 +295,12 @@ def run_calculation(vid: int, cid: int, db: Session = Depends(get_db)):
     for pc in cases:
         # 库中存的是原始值+原始单位，先换算为内部单位再进引擎
         cv_in = _case_to_internal(pc, db)
+        # 管道内径缺失时，按设计数据选定的管道规格补齐（噪音计算必需）
+        if not cv_in.get("pipe_diameter"):
+            d, w = _pipe_spec_dims(db, cfg, "mm", "mm")
+            if d:
+                cv_in["pipe_diameter"] = d
+                cv_in["pipe_wall"] = cv_in.get("pipe_wall") or w
         fluid_dict = _build_fluid_dict(db, pc.fluid_id, pc.fluid_name_custom)
         cr = calculate_case(
             case_no=pc.case_no, case_name=pc.case_name or f"工况{pc.case_no}",
