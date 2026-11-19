@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session, selectinload
 from sqlalchemy import func
 
 from app.api.deps import get_db
-from app.models import Project, Valve
+from app.models import Project, Valve, SelectionRecord
 from app.schemas import ProjectCreate, ProjectUpdate, ProjectOut
 
 router = APIRouter(prefix="/projects", tags=["项目管理"])
@@ -70,6 +70,14 @@ def delete_project(pid: int, db: Session = Depends(get_db)):
     p = db.get(Project, pid)
     if not p:
         raise HTTPException(404, "项目不存在")
+    # 选型历史外键为 NO_ACTION：先拦住并给出明确提示，避免直接抛 500
+    valve_ids = db.query(Valve.id).filter(Valve.project_id == pid)
+    n_sel = db.query(func.count(SelectionRecord.id)).filter(
+        (SelectionRecord.project_id == pid) |
+        (SelectionRecord.valve_id.in_(valve_ids))
+    ).scalar() or 0
+    if n_sel:
+        raise HTTPException(409, f"该项目存在 {n_sel} 条选型记录，请先删除记录或停用项目")
     db.delete(p)
     db.commit()
     return {"ok": True}

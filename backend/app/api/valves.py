@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func
 
 from app.api.deps import get_db
-from app.models import Project, Valve, Calculation
+from app.models import Project, Valve, Calculation, SelectionRecord
 from app.schemas import ValveCreate, ValveUpdate, ValveOut
 
 router = APIRouter(prefix="/projects/{pid}/valves", tags=["位号管理"])
@@ -77,6 +77,12 @@ def delete_valve(pid: int, vid: int, db: Session = Depends(get_db)):
     v = db.get(Valve, vid)
     if not v or v.project_id != pid:
         raise HTTPException(404, "位号不存在")
+    # 选型历史外键为 NO_ACTION：先拦住并给出明确提示，避免直接抛 500
+    n_sel = db.query(func.count(SelectionRecord.id)).filter(
+        SelectionRecord.valve_id == vid
+    ).scalar() or 0
+    if n_sel:
+        raise HTTPException(409, f"该位号存在 {n_sel} 条选型记录，请先删除记录")
     db.delete(v)
     db.commit()
     return {"ok": True}
