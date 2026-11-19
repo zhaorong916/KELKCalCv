@@ -194,8 +194,8 @@ def save_config(vid: int, cid: int, payload: ValveConfigSchema, db: Session = De
 def save_cases(vid: int, cid: int, cases: list[ProcessCaseSchema], db: Session = Depends(get_db)):
     """保存(覆盖)该版本下的工艺工况(最多5组)。
 
-    保存前将所有录入参数按用户选择的单位转换为内部统一单位；
-    单位选择记录存入 *_unit 字段供界面反显。
+    工况按「原始值 + 原始单位」原样入库，不做任何换算；
+    计算时再由 convert_process_case 统一换算为内部单位。
     """
     calc = db.get(Calculation, cid)
     if not calc or calc.valve_id != vid:
@@ -212,10 +212,8 @@ def save_cases(vid: int, cid: int, cases: list[ProcessCaseSchema], db: Session =
     db.query(ProcessCase).filter(ProcessCase.calculation_id == cid).delete()
     out = []
     for c in cases:
-        raw = c.model_dump()
-        # 转换单位（优先使用数据库中配置的单位字典）
-        raw = convert_process_case(raw, db_session=db)
-        pc = ProcessCase(calculation_id=cid, **raw)
+        # 原值 + 原单位入库，数值保持用户录入（或导入文件）时的样子
+        pc = ProcessCase(calculation_id=cid, **c.model_dump())
         db.add(pc)
         db.flush()
         out.append(ProcessCaseOut.model_validate(pc))
@@ -224,6 +222,14 @@ def save_cases(vid: int, cid: int, cases: list[ProcessCaseSchema], db: Session =
 
 
 # ---------- 执行计算 ----------
+def _case_to_internal(pc: ProcessCase, db: Session) -> dict:
+    """把库中「原始值 + 原始单位」的工况换算为内部统一单位（仅内存态）。"""
+    raw = {c.name: getattr(pc, c.name) for c in ProcessCase.__table__.columns}
+    raw.pop("id", None)
+    raw.pop("calculation_id", None)
+    return convert_process_case(raw, db_session=db)
+
+
 @router.post("/{cid}/run", response_model=list[CaseResultOut])
 def run_calculation(vid: int, cid: int, db: Session = Depends(get_db)):
     """对已保存的配置与工况执行 Cv+噪音 计算，结果落库并返回。"""
@@ -251,20 +257,22 @@ def run_calculation(vid: int, cid: int, db: Session = Depends(get_db)):
 
     out: list[CaseResultOut] = []
     for pc in cases:
+        # 库中存的是原始值+原始单位，先换算为内部单位再进引擎
+        cv_in = _case_to_internal(pc, db)
         fluid_dict = _build_fluid_dict(db, pc.fluid_id, pc.fluid_name_custom)
         cr = calculate_case(
             case_no=pc.case_no, case_name=pc.case_name or f"工况{pc.case_no}",
             fluid=fluid_dict, valve_coeffs=vc,
-            p1=pc.p1 or 0, p2=pc.p2 or 0, t1=pc.t1 or 0,
-            mass_flow=pc.flow_mass or 0, vol_flow=pc.flow_vol or 0, flow_unit=pc.flow_unit,
+            p1=cv_in.get("p1") or 0, p2=cv_in.get("p2") or 0, t1=cv_in.get("t1") or 0,
+            mass_flow=cv_in.get("flow_mass") or 0, vol_flow=cv_in.get("flow_vol") or 0, flow_unit=pc.flow_unit,
             fluid_state_override=pc.fluid_state_override,
-            density_override=pc.density_override, viscosity_override=pc.viscosity_override,
-            mw_override=pc.molecular_weight_override, gamma_override=pc.gamma_override,
-            mass_flow_gas=pc.mass_flow_gas or 0, mass_flow_liquid=pc.mass_flow_liquid or 0,
-            twophase_method=pc.twophase_method, density_gas=pc.density_gas or 0,
-            density_liquid=pc.density_liquid or 0,
-            pipe_diameter=pc.pipe_diameter or 0, pipe_wall=pc.pipe_wall or 0,
-            distance=pc.distance or 1.0, rated_cv_select=rated_sel,
+            density_override=cv_in.get("density_override"), viscosity_override=cv_in.get("viscosity_override"),
+            mw_override=cv_in.get("molecular_weight_override"), gamma_override=pc.gamma_override,
+            mass_flow_gas=cv_in.get("mass_flow_gas") or 0, mass_flow_liquid=cv_in.get("mass_flow_liquid") or 0,
+            twophase_method=pc.twophase_method, density_gas=cv_in.get("density_gas") or 0,
+            density_liquid=cv_in.get("density_liquid") or 0,
+            pipe_diameter=cv_in.get("pipe_diameter") or 0, pipe_wall=cv_in.get("pipe_wall") or 0,
+            distance=cv_in.get("distance") or 1.0, rated_cv_select=rated_sel,
         )
         # 落库结果
         cv = cr.cv

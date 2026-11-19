@@ -258,16 +258,16 @@ class ProcessCase(Base):
     fluid_formula_custom = Column(String(64), comment="自定义介质分子式（可选）")
     fluid_state_override = Column(String(16), comment="相态覆盖 liquid/gas; 留空按介质自动判定")
 
-    # 流量（存储值已按录入单位转换为内部统一单位）
-    flow_mass = Column(Float, comment="质量流量 kg/h(内部单位)")
-    flow_vol = Column(Float, comment="体积流量 m³/h(液) 或 Nm³/h(气标况,内部单位)")
+    # 流量（存储原始录入值，单位见 flow_mass_unit / flow_vol_unit）
+    flow_mass = Column(Float, comment="质量流量 原始值(单位见 flow_mass_unit)")
+    flow_vol = Column(Float, comment="体积流量 原始录入值(单位见 flow_vol_unit)")
     flow_unit = Column(String(16), default="mass", comment="流量录入方式 mass/vol")
 
-    # 压力温度（存储值已按录入单位转换为内部统一单位）
-    p1 = Column(Float, comment="阀前绝压 kPa(abs,内部单位)")
-    p2 = Column(Float, comment="阀后绝压 kPa(abs,内部单位)")
-    t1 = Column(Float, comment="阀前温度 ℃(内部单位)")
-    t2 = Column(Float, comment="阀后温度 ℃(内部单位)")
+    # 压力温度（存储原始录入值，单位见对应 *_unit 字段；计算时换算为内部单位）
+    p1 = Column(Float, comment="阀前绝压 原始值(单位见 p1_unit)")
+    p2 = Column(Float, comment="阀后绝压 原始值(单位见 p2_unit)")
+    t1 = Column(Float, comment="阀前温度 原始值(单位见 t1_unit)")
+    t2 = Column(Float, comment="阀后温度 原始值(单位见 t2_unit)")
 
     # 单位选择（记录用户录入时选用的单位，用于界面反显）
     p1_unit = Column(String(32), default="kPa")
@@ -287,9 +287,9 @@ class ProcessCase(Base):
     density_gas_unit = Column(String(32), default="kg_m3")
     density_liquid_unit = Column(String(32), default="kg_m3")
 
-    # 工况密度/粘度(可选覆盖介质库默认值，存储值已转换)
-    density_override = Column(Float, comment="工况密度覆盖 kg/m³(内部单位)")
-    viscosity_override = Column(Float, comment="工况粘度覆盖 cP(内部单位)")
+    # 工况密度/粘度(可选覆盖介质库默认值；存储原始值，单位见 density_override_unit)
+    density_override = Column(Float, comment="密度覆盖 原始值(单位见 density_override_unit)")
+    viscosity_override = Column(Float, comment="粘度覆盖 原始值(单位见 viscosity_override_unit)")
     molecular_weight_override = Column(Float, comment="摩尔质量覆盖(内部单位 kg/kmol)")
     gamma_override = Column(Float, comment="比热比覆盖(无量纲)")
 
