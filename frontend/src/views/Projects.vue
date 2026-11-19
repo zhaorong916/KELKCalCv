@@ -92,10 +92,16 @@ async function save() {
 }
 
 async function remove(row) {
-  await ElMessageBox.confirm(`确认删除项目「${row.project_name}」及其所有位号与计算?`, '警告', { type: 'warning' })
-  await projectsApi.remove(row.id)
-  ElMessage.success('已删除')
-  load()
+  try {
+    await ElMessageBox.confirm(`确认删除项目「${row.project_name}」及其所有位号与计算?`, '警告', { type: 'warning' })
+  } catch { return }
+  try {
+    await projectsApi.remove(row.id)
+    ElMessage.success('已删除')
+    load()
+  } catch (e) {
+    ElMessage.error(e.message || '删除失败')
+  }
 }
 
 function rowClick(row) { router.push({ name: 'project-detail', params: { pid: row.id } }) }

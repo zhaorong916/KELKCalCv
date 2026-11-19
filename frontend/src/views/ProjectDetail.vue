@@ -117,10 +117,16 @@ async function save() {
 }
 
 async function remove(row) {
-  await ElMessageBox.confirm(`确认删除位号「${row.tag_no}」及其所有计算版本?`, '警告', { type:'warning' })
-  await valvesApi.remove(pid.value, row.id)
-  ElMessage.success('已删除')
-  load()
+  try {
+    await ElMessageBox.confirm(`确认删除位号「${row.tag_no}」及其所有计算版本?`, '警告', { type: 'warning' })
+  } catch { return }
+  try {
+    await valvesApi.remove(pid.value, row.id)
+    ElMessage.success('已删除')
+    load()
+  } catch (e) {
+    ElMessage.error(e.message || '删除失败')
+  }
 }
 
 function rowClick(row) { router.push({ name:'valve-calc', params:{ pid: pid.value, vid: row.id } }) }
