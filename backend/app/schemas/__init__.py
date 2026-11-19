@@ -31,6 +31,7 @@ class ProjectOut(ProjectBase):
     updated_at: Optional[datetime] = None
     created_by: Optional[str] = None
     valve_count: int = 0
+    selection_record_count: int = 0
 
 
 # ---------- 阀门(位号) ----------

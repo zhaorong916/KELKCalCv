@@ -505,6 +505,17 @@ def get_record(rid: int, db: Session = Depends(get_db)):
     return _record_to_out(rec)
 
 
+@router.delete("/records/{rid}")
+def delete_record(rid: int, db: Session = Depends(get_db)):
+    """删除单条选型记录(不可恢复)"""
+    rec = db.get(SelectionRecord, rid)
+    if not rec:
+        raise HTTPException(404, "选型记录不存在")
+    db.delete(rec)
+    db.commit()
+    return {"ok": True}
+
+
 @router.post("/records", response_model=SelectionRecordOut)
 def create_record(payload: SelectionRecordCreate, db: Session = Depends(get_db)):
     """创建选型记录(保存快照)
