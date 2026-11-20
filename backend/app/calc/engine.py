@@ -307,6 +307,12 @@ def calculate_case(
     """计算单组工况。"""
     res = CalcCaseResult(case_no=case_no, case_name=case_name, fluid_name=fluid.get("fluid_name", ""))
 
+    # 缩径判定：阀座口径 < 管道内径时启用 Fp/FLp/xTp 修正 (Cv/d² 参与计算)
+    # 每个工况的 pipe_diameter 可能不同，故在使用前逐次写入同一 ValveCoeffs 实例
+    if pipe_diameter and pipe_diameter > 0 and valve_coeffs.port_diameter:
+        valve_coeffs.pipe_diameter = pipe_diameter
+        valve_coeffs.reduced_port = valve_coeffs.port_diameter < pipe_diameter - 0.5
+
     # 物性解析
     fp = _resolve_fluid_properties(
         fluid, t1, p1, fluid_state_override,

@@ -88,15 +88,16 @@ def calculate_cv_liquid(
     cv_required = mass_flow / denom
     res.cv_required = cv_required
 
-    # Flp 精炼迭代：缩径且用户未提供 Flp 时，用 cv_operating=cv_required 重算 Flp (IEC Eq.30)
-    # 单次迭代，与 Excel 一致（不收敛到完全一致，避免隐式方程循环）
-    if vc.reduced_port and vc.flp is None:
-        fl_refined = fl_effective(vc, fp, cv_operating=cv_required)
-        if abs(fl_refined - fl) > 0.001:
-            fl = fl_refined
+    # 缩径精炼：用工作点 Cv 重算 Fp、FLp (IEC Eq.20/30)，单次迭代
+    # 额定 Cv 远大于工作 Cv（如蝶阀小开度）时，用额定值会严重高估缩径损失
+    if vc.reduced_port and (vc.fp is None or vc.flp is None):
+        fp_ref = compute_fp(vc, cv_operating=cv_required)
+        fl_ref = fl_effective(vc, fp_ref, cv_operating=cv_required)
+        if abs(fp_ref - fp) > 1e-4 or abs(fl_ref - fl) > 1e-4:
+            fp, fl = fp_ref, fl_ref
+            res.fp = fp
             res.fl_eff = fl
-            dp_choked = (fl ** 2) * (p1 - ff * pv)
-            dp_choked = max(dp_choked, 0.0)
+            dp_choked = max((fl ** 2) * (p1 - ff * pv), 0.0)
             res.dp_choked = dp_choked
             choked = res.dp >= dp_choked
             res.choked = choked
@@ -168,9 +169,11 @@ def calculate_cv_liquid(
     res.opening_pct = (cv_required / rated * 100.0) if rated > 0 else 0.0
 
     res.detail = {
-        "FF": ff, "Pv_kPa": pv, "Pc_kPa": pc, "FL": fl, "Fp": fp, "Fr": fr, "Cd": cd_port,
+        "FF": ff, "Pv_kPa": pv, "Pc_kPa": pc, "FL": fl, "FLp": fl, "Fp": fp, "Fr": fr, "Cd": cd_port,
         "ΔP_kPa": res.dp, "ΔPch_kPa": dp_choked,
         "cv_required": cv_required, "rated_cv": rated,
+        # 参考值：不按阻塞截断、直接用工艺 ΔP 算出的 Cv，供与厂商样本对照
+        "Cv_full_dp": round(cv_required * math.sqrt(min(res.dp, dp_choked) / res.dp), 4) if res.dp > 0 else None,
         "mass_flow_kgh": mass_flow, "vol_flow_m3h": res.vol_flow,
         "Rev": rev,
     }

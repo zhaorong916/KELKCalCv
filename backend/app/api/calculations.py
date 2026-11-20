@@ -18,6 +18,7 @@ from app.schemas import (
     CalculateRequest, CaseResultOut, CalcResultSave,
 )
 from app.calc.engine import calculate_case
+from app.calc.opening import compute_opening
 from app.calc.cv_core import ValveCoeffs, FactorCurves
 from app.calc.units import convert_process_case
 
@@ -318,6 +319,13 @@ def run_calculation(vid: int, cid: int, db: Session = Depends(get_db)):
         )
         # 落库结果
         cv = cr.cv
+        if cv:
+            cv.opening_pct = compute_opening(
+                cv.cv_required, cfg.rated_cv,
+                stroke_mode=cfg.stroke_mode, eqcv=cfg.eqcv, fstk=cfg.fstk,
+                characteristic=cfg.trim_characteristics or cfg.flow_characteristic,
+                rangeability=cfg.rangeability,
+            )
         nr = cr.noise
         _upsert_result(db, pc.id, cv, nr, cr)
         out.append(CaseResultOut(**cr.to_dict()))
@@ -375,6 +383,14 @@ def preview_calculation(vid: int, req: CalculateRequest, db: Session = Depends(g
             pipe_diameter=raw_c.get("pipe_diameter") or 0, pipe_wall=raw_c.get("pipe_wall") or 0,
             distance=raw_c.get("distance") or 1.0, rated_cv_select=rated_sel,
         )
+        if cr.cv:
+            cr.cv.opening_pct = compute_opening(
+                cr.cv.cv_required, cfg.rated_cv,
+                stroke_mode=getattr(cfg, "stroke_mode", None), eqcv=getattr(cfg, "eqcv", None),
+                fstk=getattr(cfg, "fstk", None),
+                characteristic=getattr(cfg, "trim_characteristics", None) or getattr(cfg, "flow_characteristic", None),
+                rangeability=getattr(cfg, "rangeability", None),
+            )
         out.append(CaseResultOut(**cr.to_dict()))
     return out
 

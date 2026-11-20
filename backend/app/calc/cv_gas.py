@@ -81,11 +81,13 @@ def calculate_cv_gas(
     cv_required = mass_flow / denom
     res.cv_required = cv_required
 
-    # xTP 精炼迭代：缩径且用户未提供 xTP 时，用 cv_operating=cv_required 重算 xTP (IEC Eq.33)
-    if vc.reduced_port and vc.xtp is None:
-        xt_refined = xt_effective(vc, fp, cv_operating=cv_required)
-        if abs(xt_refined - xt) > 0.001:
-            xt = xt_refined
+    # 缩径精炼：用工作点 Cv 重算 Fp、xTp (IEC Eq.20/33)，单次迭代
+    if vc.reduced_port and (vc.xtp is None or vc.fp is None):
+        fp_ref = compute_fp(vc, cv_operating=cv_required)
+        xt_refined = xt_effective(vc, fp_ref, cv_operating=cv_required)
+        if abs(xt_refined - xt) > 1e-4 or abs(fp_ref - fp) > 1e-4:
+            fp, xt = fp_ref, xt_refined
+            res.fp = fp
             x_t_eff = fgamma * xt
             res.x_t_eff = x_t_eff
             choked = x >= x_t_eff

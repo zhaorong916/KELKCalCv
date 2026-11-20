@@ -764,6 +764,8 @@
                     <td v-for="r in resultRows" :key="r.case_no" :class="openingClass(r.cv_opening)">{{ fmt(r.cv_opening) }}</td><td class="td-add-placeholder"></td></tr>
                   <tr><td class="td-label"><span class="lbl">流态</span></td>
                     <td v-for="r in resultRows" :key="r.case_no"><el-tag size="small" :type="regimeTag(r.flow_regime)">{{ regimeText(r.flow_regime) }}</el-tag></td><td class="td-add-placeholder"></td></tr>
+                  <tr><td class="td-label"><span class="lbl">全压差参考 Cv</span></td>
+                    <td v-for="r in resultRows" :key="r.case_no">{{ cvFullDpText(r) }}</td><td class="td-add-placeholder"></td></tr>
                   <tr><td class="td-label"><span class="lbl">ΔP kPa</span></td>
                     <td v-for="r in resultRows" :key="r.case_no">{{ fmt(r.dp) }}</td><td class="td-add-placeholder"></td></tr>
                   <tr v-if="hasGasResult"><td class="td-label"><span class="lbl">压差比 x</span></td>
@@ -784,6 +786,8 @@
                     <td v-for="r in resultRows" :key="r.case_no">{{ fmt((velDetail(r)||{}).vel_pipe_out_m_s) }}</td><td class="td-add-placeholder"></td></tr>
                   <tr><td class="td-label"><span class="lbl">流态详情</span></td>
                     <td v-for="r in resultRows" :key="r.case_no" class="regime-detail">{{ regimeDetail(r) }}</td><td class="td-add-placeholder"></td></tr>
+                  <tr><td class="td-label"><span class="lbl">管件修正</span></td>
+                    <td v-for="r in resultRows" :key="r.case_no" class="regime-detail">{{ pipeFactorText(r) }}</td><td class="td-add-placeholder"></td></tr>
                   <template v-if="hasMultiStageResult">
                     <tr class="section-sep"><td colspan="99">多级降噪阀压降分配</td></tr>
                     <tr><td class="td-label"><span class="lbl">降噪级数 N</span></td>
@@ -1930,6 +1934,35 @@ function regimeDetail(r) {
     return `ΔP=${f1(dp)} kPa ${choked ? '≥' : '<'} ΔPch=${f1(dch)} kPa｜${choked ? '阻塞流（' + (r.flow_regime || '') + '）' : '非阻塞流动'}`
   }
   return r.flow_regime
+}
+// 全压差参考 Cv：液体不做阻塞截断、直接用工艺 ΔP 求得的 Cv
+function cvFullDpText(r) {
+  if (!r) return '—'
+  let d = r.detail
+  if (typeof d === 'string') { try { d = JSON.parse(d) } catch { d = null } }
+  const v = d && d.cv ? d.cv['Cv_full_dp'] : null
+  if (v == null) return '—'
+  if (r.cv_required && Math.abs(v - r.cv_required) / r.cv_required < 0.005) return '同左（未阻塞）'
+  return `${fmt(v)}（未按阻塞截断）`
+}
+// 缩径管件修正: 液体显示 Fp/FLp，气体显示 Fp/xTp；未缩径时 Fp=1、FLp=FL
+function pipeFactorText(r) {
+  if (!r) return '—'
+  let d = r.detail
+  if (typeof d === 'string') { try { d = JSON.parse(d) } catch { d = null } }
+  const cv = d && d.cv ? d.cv : null
+  const isGas = ['gas', 'steam', 'saturated'].includes(r.phase)
+  const parts = []
+  if (r.fp != null) parts.push(`Fp ${Number(r.fp).toFixed(4)}`)
+  if (isGas) {
+    const xtp = cv && cv['xT'] != null ? cv['xT'] : null
+    if (xtp != null) parts.push(`xTp ${Number(xtp).toFixed(3)}`)
+  } else {
+    const flp = r.fl_eff != null ? r.fl_eff : (cv && cv['FLp'])
+    if (flp) parts.push(`FLp ${Number(flp).toFixed(3)}`)
+  }
+  if (parts.length < 2) return '—（未缩径）'
+  return parts.join('｜')
 }
 function openingClass(o) { if (o == null) return {}; if (o > 100) return {val:'val-warn'}; if (o > 90 || o < 10) return {val:'val-warn'}; return {} }
 function noiseClass(n) { if (n == null) return {}; if (n > 85) return {val:'val-danger'}; if (n > 75) return {val:'val-warn'}; return {} }
