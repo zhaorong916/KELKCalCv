@@ -37,3 +37,6 @@ backend/_seed.out
 
 # Deployment package artifact (regenerate from deploy/)
 KELKCalCv-部署包.zip
+
+# 回归导出物
+/output/

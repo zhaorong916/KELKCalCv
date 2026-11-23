@@ -835,12 +835,15 @@ class SelectionRule(Base):
     """
     __tablename__ = "selection_rules"
     __table_args__ = (
+        UniqueConstraint("rule_code", "version", name="uq_selection_rules_code_version"),
         Index("ix_selection_rule_category", "category", "target_series", "is_active"),
         Index("ix_selection_rule_priority", "priority"),
     )
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    rule_code = Column(String(64), unique=True, nullable=False, comment="规则编号 R-GV120-001")
+    rule_code = Column(String(64), nullable=False, comment="规则编号 R-GV120-001")
+    version = Column(Integer, nullable=False, default=1, comment="版本号；重写时旧版停用、同 code 插 version+1")
+    prev_rule_id = Column(Integer, nullable=True, comment="上一版本 id，便于追溯重写链路")
     rule_name = Column(String(128), nullable=False, comment="规则名称")
     category = Column(String(32), nullable=False, comment="scope / constraint / preference / post_filter")
     target_series = Column(String(32), nullable=False, default="*", comment="目标系列，* 表示全局规则")

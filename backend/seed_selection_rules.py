@@ -26,10 +26,11 @@ from app.models import SelectionRule
 from app.schemas import SelectionRuleBase
 from app.calc.selector import CONDITION_WHITELIST, CATEGORY_PRIORITY
 
-DATA_FILE = Path(__file__).resolve().parent.parent / "docs" / "selection_rules_v1.json"
+DATA_FILE = Path(__file__).resolve().parent.parent / "docs" / "selection_rules_v2.json"
 
 # 条件表达式允许的算子（与 selector.OPS 一致）
 ALLOWED_OPS = {"_eq", "_ne", "_min", "_max", "_gt", "_lt", "_required", "_or"}
+LOGIC_OPS = {"$and", "$or"}
 
 
 def _validate_condition(expr, rule_code: str) -> list[str]:
@@ -39,6 +40,13 @@ def _validate_condition(expr, rule_code: str) -> list[str]:
     if not isinstance(expr, dict):
         return [f"{rule_code}: condition_expr 必须为字典或 null"]
     for key, cond in expr.items():
+        if key in LOGIC_OPS:
+            if not isinstance(cond, list):
+                errs.append(f"{rule_code}: 逻辑算子 {key} 的值必须是数组")
+                continue
+            for i, sub in enumerate(cond):
+                errs.extend(_validate_condition(sub, f"{rule_code}[{key}[{i}]]"))
+            continue
         if key not in CONDITION_WHITELIST:
             errs.append(f"{rule_code}: 未知条件键 '{key}'")
             continue
@@ -80,57 +88,97 @@ def load_rules(path: Path = DATA_FILE) -> tuple[list[dict], list[str]]:
     return rules, errors
 
 
-def upsert(db, rules: list[dict]) -> tuple[int, int]:
-    """按 rule_code 原地 upsert。返回 (新增数, 更新数)。"""
-    inserted = updated = 0
-    existing = {
-        r.rule_code: r
-        for r in db.query(SelectionRule).filter(
-            SelectionRule.rule_code.in_([x["rule_code"] for x in rules])
-        ).all()
-    } if rules else {}
+def _same(row, rule: dict) -> bool:
+    """判断库中现有版本与待写入规则内容是否一致。"""
+    return (
+        row.rule_name == rule["rule_name"]
+        and row.category == rule["category"]
+        and row.target_series == rule["target_series"]
+        and _loads(row.condition_expr) == rule.get("condition_expr")
+        and row.condition_op == rule["condition_op"]
+        and row.action == rule["action"]
+        and _loads(row.action_payload) == rule.get("action_payload")
+        and row.priority == rule["priority"]
+        and row.source_ref == rule.get("source_ref")
+        and bool(row.is_active) == bool(rule["is_active"])
+    )
+
+
+def _loads(val):
+    if val is None or isinstance(val, (dict, list)):
+        return val
+    try:
+        return json.loads(val)
+    except (TypeError, ValueError):
+        return None
+
+
+def _new_row(rule: dict, version: int, prev_id) -> SelectionRule:
+    return SelectionRule(
+        rule_code=rule["rule_code"],
+        version=version,
+        prev_rule_id=prev_id,
+        rule_name=rule["rule_name"],
+        category=rule["category"],
+        target_series=rule["target_series"],
+        condition_expr=json.dumps(rule.get("condition_expr"), ensure_ascii=False)
+        if rule.get("condition_expr") is not None else None,
+        condition_op=rule["condition_op"],
+        action=rule["action"],
+        action_payload=json.dumps(rule.get("action_payload"), ensure_ascii=False)
+        if rule.get("action_payload") is not None else None,
+        priority=rule["priority"],
+        source_ref=rule.get("source_ref"),
+        is_active=rule["is_active"],
+    )
+
+
+def upsert(db, rules: list[dict], retire_missing: bool = False) -> dict:
+    """版本化 upsert: 内容变化时旧版停用并插入 version+1。
+
+    返回计数 {inserted, unchanged, versioned, retired, resurrected}。
+    """
+    stat = {"inserted": 0, "unchanged": 0, "versioned": 0, "retired": 0}
+    codes = [r["rule_code"] for r in rules]
+    rows = db.query(SelectionRule).filter(SelectionRule.rule_code.in_(codes)).all() if codes else []
+    by_code: dict[str, list] = {}
+    for r in rows:
+        by_code.setdefault(r.rule_code, []).append(r)
 
     for rule in rules:
         code = rule["rule_code"]
-        row = existing.get(code)
-        if row is None:
-            db.add(SelectionRule(
-                rule_code=code,
-                rule_name=rule["rule_name"],
-                category=rule["category"],
-                target_series=rule["target_series"],
-                condition_expr=json.dumps(rule.get("condition_expr"), ensure_ascii=False)
-                if rule.get("condition_expr") is not None else None,
-                condition_op=rule["condition_op"],
-                action=rule["action"],
-                action_payload=json.dumps(rule.get("action_payload"), ensure_ascii=False)
-                if rule.get("action_payload") is not None else None,
-                priority=rule["priority"],
-                source_ref=rule.get("source_ref"),
-                is_active=rule["is_active"],
-            ))
-            db.flush()
-            inserted += 1
+        versions = sorted(by_code.get(code, []), key=lambda x: x.version or 1)
+        active = [r for r in versions if r.is_active]
+        max_ver = max((r.version or 1) for r in versions) if versions else 0
+        if active and len(active) == 1 and _same(active[0], rule):
+            stat["unchanged"] += 1
+            continue
+        if active:
+            prev_id = active[0].id
+            for r in active:
+                r.is_active = False
+            version = max_ver + 1
+            stat["versioned"] += 1
         else:
-            row.rule_name = rule["rule_name"]
-            row.category = rule["category"]
-            row.target_series = rule["target_series"]
-            row.condition_expr = (json.dumps(rule.get("condition_expr"), ensure_ascii=False)
-                                  if rule.get("condition_expr") is not None else None)
-            row.condition_op = rule["condition_op"]
-            row.action = rule["action"]
-            row.action_payload = (json.dumps(rule.get("action_payload"), ensure_ascii=False)
-                                  if rule.get("action_payload") is not None else None)
-            row.priority = rule["priority"]
-            row.source_ref = rule.get("source_ref")
-            row.is_active = rule["is_active"]
-            updated += 1
-    return inserted, updated
+            prev_id = versions[-1].id if versions else None
+            version = max_ver + 1 if versions else 1
+            stat["inserted"] += 1
+        db.add(_new_row(rule, version, prev_id))
+        db.flush()
+
+    if retire_missing:
+        for r in db.query(SelectionRule).filter(SelectionRule.is_active == True).all():  # noqa: E712
+            if r.rule_code not in set(codes):
+                r.is_active = False
+                stat["retired"] += 1
+    return stat
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="选型规则库 seed（默认 dry-run）")
     ap.add_argument("--commit", action="store_true", help="实际写入数据库")
+    ap.add_argument("--retire-missing", action="store_true",
+                    help="把库中启用、但清单里已不存在的规则置为停用（不删除）")
     ap.add_argument("--file", type=Path, default=DATA_FILE, help="规则 JSON 路径")
     args = ap.parse_args()
 
@@ -151,10 +199,11 @@ def main() -> int:
         return 0
 
     with SessionLocal() as db:
-        inserted, updated = upsert(db, rules)
+        stat = upsert(db, rules, retire_missing=args.retire_missing)
         db.commit()
         total = db.query(SelectionRule).filter(SelectionRule.is_active == True).count()  # noqa: E712
-    print(f"\n[commit] 新增 {inserted} 条, 更新 {updated} 条; 库中启用规则合计 {total} 条。")
+    print(f"\n[commit] 新增 {stat['inserted']} 条, 新版本 {stat['versioned']} 条, "
+          f"未变 {stat['unchanged']} 条, 停用 {stat['retired']} 条; 库中启用规则合计 {total} 条。")
     return 0
 
 

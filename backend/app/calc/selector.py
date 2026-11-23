@@ -50,7 +50,8 @@ _NUMERIC_KEYS = {
 # 字符串/枚举型
 _ENUM_KEYS = {
     "media", "flow_regime", "leakage_class", "valve_action",
-    "series_category", "series_product_line",
+    "series_category", "series_product_line", "series_code",
+    "bonnet_form", "body_material", "body_material_group", "pressure_class",
 }
 # 布尔型
 _BOOL_KEYS = {"nace", "fire_safe", "copper_free", "low_temp", "high_temp"}
@@ -113,6 +114,23 @@ def _conv(val: Any, unit: Optional[str], category: str) -> Optional[float]:
     return convert(n, unit, category)
 
 
+def _material_group(material: Optional[str]) -> Optional[str]:
+    """阀体材质 → 材质组（用于规则里的材质分档条件）。"""
+    if not material:
+        return None
+    s = str(material).upper()
+    if any(k in s for k in ("LCB", "LCC", "LC1", "LC2", "LC3")):
+        return "low_temp_carbon"
+    if any(k in s for k in ("WC6", "WC9", "C5", "C12A", "C12", "铬钼", "合金钢")):
+        return "alloy"
+    if any(k in s for k in ("CF8", "CF3", "CF8M", "CF3M", "304", "316", "321", "347",
+                            "不锈钢", "18NI9")):
+        return "stainless"
+    if any(k in s for k in ("WCB", "WCC", "ZG230", "Q235", "A105", "A106", "碳钢")):
+        return "carbon"
+    return None
+
+
 # ---------------------------------------------------------------------------
 # 条件求值器（受限 JSON, 无 eval/exec）
 # ---------------------------------------------------------------------------
@@ -135,21 +153,20 @@ def match_condition(expr: Any, ctx: dict, op: str = "and",
     if not expr:
         return True
 
-    # 逻辑算子：$and / $or，值为子表达式数组（支持括号与多分支嵌套）
-    if len(expr) == 1:
-        only_key = next(iter(expr))
-        if only_key in LOGIC_OPS:
-            sub = expr[only_key]
-            if not isinstance(sub, list):
-                if warnings is not None:
-                    warnings.append(f"逻辑算子 {only_key} 的值必须是数组")
-                return False
-            sub_op = "and" if only_key == "$and" else "or"
-            results = [match_condition(s, ctx, sub_op, warnings) for s in sub]
-            return all(results) if sub_op == "and" else any(results)
-
+    # 逻辑算子：$and / $or，值为子表达式数组；可与普通键并列（同级参与组合）
     results = []
     for key, cond in expr.items():
+        if key in LOGIC_OPS:
+            if not isinstance(cond, list):
+                if warnings is not None:
+                    warnings.append(f"逻辑算子 {key} 的值必须是数组")
+                return False
+            sub_op = "and" if key == "$and" else "or"
+            # 每个子表达式内部按 and 组合；子表达式之间按 $and/$or 组合
+            sub_results = [match_condition(s, ctx, "and", warnings) for s in cond]
+            results.append(all(sub_results) if sub_op == "and" else any(sub_results))
+            continue
+
         if key not in CONDITION_WHITELIST:
             if warnings is not None:
                 warnings.append(f"规则条件含未知键 '{key}'，该规则视为不匹配")
@@ -367,11 +384,16 @@ class ValveSelector:
             "copper_free": bool(special.get("copper_free")),
             "low_temp": bool(special.get("low_temp")) or (temp is not None and temp < -45),
             "high_temp": bool(special.get("high_temp")) or (temp is not None and temp > 230),
+            "bonnet_form": special.get("bonnet_form"),
+            "body_material": special.get("body_material"),
+            "body_material_group": _material_group(special.get("body_material")),
+            "pressure_class": special.get("pressure_class"),
         }
 
     @staticmethod
     def _series_ctx(vt: ValveType) -> dict:
         return {
+            "series_code": vt.series_code,
             "series_category": vt.valve_category,
             "series_product_line": vt.product_line,
         }
@@ -570,6 +592,10 @@ class ValveSelector:
 
     # -- 阶段 4: post_filter（补字段 / 开度窗口扣分） -----------------------
     def _stage_post_filter(self, inp, special, candidates, warnings) -> None:
+        # 未选阀盖形式时不做温度排除，但超常规区间需提示确认
+        temp = self._base_ctx(inp, special).get("temp")
+        if temp is not None and not special.get("bonnet_form") and (temp > 230 or temp < -45):
+            warnings.append("未选阀盖形式且温度超出 -45~230℃，请确认是否需散热片型/加长型")
         rules = self._rules("post_filter")
         for cand in candidates:
             ctx = cand["ctx"]

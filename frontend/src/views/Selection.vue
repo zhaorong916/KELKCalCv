@@ -201,6 +201,12 @@
               <el-checkbox v-model="form.special.high_temp" size="small">高温 (&gt;230℃)</el-checkbox>
             </div>
             <div class="form-row">
+              <label>阀盖形式</label>
+              <el-select v-model="form.special.bonnet_form" size="small" filterable clearable placeholder="未选定则不按温度分档排除" style="width:100%">
+                <el-option v-for="b in BONNET_FORMS" :key="b" :label="b" :value="b" />
+              </el-select>
+            </div>
+            <div class="form-row">
               <label>阀体材质</label>
               <el-select v-model="form.special.body_material" size="small" filterable clearable placeholder="选择" style="width:100%">
                 <el-option v-for="m in BODY_MATERIALS" :key="m" :label="m" :value="m" />
@@ -465,6 +471,8 @@ const router = useRouter()
 const MAX_CASES = 5
 const BODY_MATERIALS = ['A216-WCB', 'A352-LCB', 'A351-CF8', 'A351-CF8M', 'ZG230-450', '304', '316', '316L']
 const PRESSURE_CLASSES = ['150#', '300#', '600#', '900#', '1500#', '2500#', 'PN16', 'PN25', 'PN40', 'PN63', 'PN100']
+// 阀盖形式：含轴承型式（BT 系列），「加长型」含低温型加冷箱；空值表示未选定，规则不按其分档排除
+const BONNET_FORMS = ['标准型', '散热片型', '加长型', '波纹管型', '蒸汽夹套型', '内部轴承型', '外部轴承型']
 
 // ---- 上下文 ----
 const isValveContext = computed(() => !!(route.params.pid && route.params.vid))
@@ -486,7 +494,7 @@ const curCase = computed(() => cases.value[activeCaseIdx.value])
 
 const form = ref({
   valve_action: 'modulating', leakage_class: null, rangeability_required: null, cv_required: null,
-  special: { nace: false, fire_safe: false, copper_free: false, low_temp: false, high_temp: false, body_material: null, pressure_class: null },
+  special: { nace: false, fire_safe: false, copper_free: false, low_temp: false, high_temp: false, bonnet_form: null, body_material: null, pressure_class: null },
 })
 
 const caseUnits = ref({ p1: 'kPa', p2: 'kPa', t1: '℃', flow: 'kg/h', pipe_size: 'mm' })
@@ -829,7 +837,7 @@ function formatTime(t) { if (!t) return '—'; try { return new Date(t).toLocale
 
 function reset() {
   cases.value = [defaultCase()]
-  form.value = { valve_action: 'modulating', leakage_class: null, rangeability_required: null, cv_required: null, special: { nace: false, fire_safe: false, copper_free: false, low_temp: false, high_temp: false, body_material: null, pressure_class: null } }
+  form.value = { valve_action: 'modulating', leakage_class: null, rangeability_required: null, cv_required: null, special: { nace: false, fire_safe: false, copper_free: false, low_temp: false, high_temp: false, bonnet_form: null, body_material: null, pressure_class: null } }
   candidates.value = []; warnings.value = []; ran.value = false; activeCaseIdx.value = 0; mainCaseIdx.value = 0; selectedRow.value = null
 }
 
