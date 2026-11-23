@@ -531,8 +531,8 @@ def predict_liquid_noise(
 
     dp = p1 - p2
     # 临界压差与空化判定 — Ff 三分支 (与 cv_liquid.py 一致)
-    pc = critical_pressure if critical_pressure > 0 else 22064.0
-    pv = vapor_pressure if vapor_pressure > 0 else 0.0
+    pc = critical_pressure if (critical_pressure or 0) > 0 else 22064.0
+    pv = max(vapor_pressure or 0.0, 0.0)
     if pv <= 0:
         ff = 0.96
     elif pc > 0 and pv < pc:

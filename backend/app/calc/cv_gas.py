@@ -110,7 +110,8 @@ def calculate_cv_gas(
         for _ in range(5):  # 最多迭代 5 次
             phi = max(min(cv_required / rated, 1.0), 0.0)
             fl_phi = fc.fl.eval(phi)
-            xt_phi = 0.84 * fl_phi * fl_phi           # xT = 0.84·FL² (与前端一致)
+            # 气体临界压差比由 xT 决定，FL 只适用于液体；无 xT 曲线时保持型号常数 xT
+            xt_phi = vc.xtp or vc.xt
             x_t_eff_phi = fgamma * xt_phi
             choked_phi = x >= x_t_eff_phi
             x_eff_phi = min(x, x_t_eff_phi)

@@ -61,8 +61,8 @@ def calculate_cv_liquid(
     res.fl_eff = fl
 
     # 临界压差(IEC Eq.3) — Ff 三分支（与 cv_twophase Annex C 一致）
-    pc = critical_pressure if critical_pressure > 0 else 22064.0
-    pv = vapor_pressure if vapor_pressure > 0 else 0.0
+    pc = critical_pressure if (critical_pressure or 0) > 0 else 22064.0
+    pv = max(vapor_pressure or 0.0, 0.0)
     if pv <= 0:
         ff = 0.96
     elif pc > 0 and pv < pc:
